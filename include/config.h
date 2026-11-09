@@ -13,7 +13,7 @@ namespace config {
 /** Identity of this smart object in AWS IoT Core. */
 namespace device {
 constexpr char THING_NAME_PREFIX[] = "monoambiente-";  // Thing name = prefix + LINK_CODE
-constexpr uint32_t LINK_CODE = 482731;  // Six digits, first digit not 0; spoken to Alexa
+constexpr uint32_t LINK_CODE = 739264;  // Six digits, first digit not 0; spoken to Alexa
 }  // namespace device
 
 /** ESP32 GPIO numbers. */

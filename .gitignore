@@ -10,3 +10,7 @@ certs/
 *.pem
 *.crt
 *.key
+
+# Lambda build output
+lambda/package/
+*.zip
