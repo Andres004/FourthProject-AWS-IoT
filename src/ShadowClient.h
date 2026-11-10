@@ -28,7 +28,7 @@ class ShadowClient : public ShadowTransport {
   uint32_t disconnections() const override;
 
  private:
-  void connect(uint32_t nowMs);
+  void connect();
   void onConnected(uint32_t nowMs);
   void markDisconnected();
   void requestShadowIfDue(uint32_t nowMs);

@@ -52,7 +52,7 @@ void ShadowClient::update(uint32_t nowMs) {
   markDisconnected();
   if (!attemptedConnection_ ||
       nowMs - lastAttemptMs_ >= config::network::MQTT_RETRY_INTERVAL_MS) {
-    connect(nowMs);
+    connect();
   }
 }
 
@@ -68,15 +68,19 @@ uint32_t ShadowClient::disconnections() const {
   return disconnections_;
 }
 
-void ShadowClient::connect(uint32_t nowMs) {
+void ShadowClient::connect() {
   attemptedConnection_ = true;
-  lastAttemptMs_ = nowMs;
 
   EventLog::recordf("MQTT_CONNECTING", "client_id=%s", thingName_.c_str());
   tlsClient_.stop();  // Releases any socket left by a previous session.
 
-  if (mqtt_.connect(thingName_.c_str())) {
-    onConnected(millis());
+  const bool connected = mqtt_.connect(thingName_.c_str());
+  // A failed DNS lookup or TLS handshake can block for several seconds, so
+  // the retry interval starts when the attempt ends. Otherwise the next
+  // attempt would start at once and loop() would stay blocked.
+  lastAttemptMs_ = millis();
+  if (connected) {
+    onConnected(lastAttemptMs_);
   } else {
     EventLog::recordf("MQTT_CONNECT_FAILED", "state=%d", mqtt_.state());
   }
