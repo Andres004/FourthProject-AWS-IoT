@@ -1629,73 +1629,292 @@ Cada requerimiento de §1 está implementado en los archivos y métodos que indi
 
 ## 4. Pruebas y validaciones
 
+El plan verifica cada requerimiento de §1 con al menos una prueba, según la matriz de §1.5. Cada criterio de éxito sale de un valor declarado en §1.4 o de una constante del código, así el veredicto no depende de una apreciación. El plan completo, con los pasos de cada prueba, está en [docs/PLAN_DE_PRUEBAS.md](docs/PLAN_DE_PRUEBAS.md). Las pruebas se dividen en dos categorías, según cómo se obtiene el veredicto:
+
+- **A. Físicas y de entorno.** Requieren actuar sobre el montaje, la red o la skill: hablar con el simulador, pasar frente al sensor, apagar el punto de acceso o desenchufar la placa. El veredicto sale de los logs del objeto y de la Lambda, analizados con [analyze_log.py](tools/analyze_log.py), y de las capturas y los videos.
+- **B. Automáticas.** El veredicto sale solo del software: las pruebas unitarias de la Lambda, la prueba del firmware por el puerto serie y la búsqueda de secretos.
+
 ### 4.1 Plan de pruebas
 
-_Pendiente (fase 7)._
+**A. Pruebas físicas y de entorno**
+
+| ID | Prueba | Qué se verifica | Requisitos | Duración aprox. |
+|---|---|---|---|---|
+| A01 | Vinculación, cambio y desvinculación por voz | 13 frases en orden: sin vincular, código inválido, Thing inexistente, vincular, repetir, cambiar, desvincular y persistencia en una sesión nueva | RF7, RF8, RF9 | 15 min |
+| A02 | Dos usuarios con Things distintos | Un segundo usuario vinculado a otro Thing solo modifica el Shadow de su Thing | RF8, RF9, RF11 | 10 min |
+| A03 | Consulta del sensor por voz | La respuesta coincide con el PIR, con y sin una persona frente al sensor | RF1, RF4, RNF4 | 10 min |
+| A04 | Comandos y estado de la puerta por voz | Abrir, cerrar, repetir una orden y consultar el estado, con sus variantes de frase | RF3, RF5, RF6, RF10 | 15 min |
+| A05 | Tiempo de respuesta extremo a extremo | 28 comandos medidos con el reloj de la Lambda y, cruzando por versión, con el del objeto | RNF3, RF10 | junto con A10 |
+| A06 | Exactitud del PIR y del servo | 15 cruces a 0.5, 1.0 y 2.0 m, 5 min sin personas y ángulo del servo con transportador | RNF2, RF1 | 20 min |
+| A07 | Caída de WiFi con orden pendiente | Aviso de desconexión, orden encolada y aplicación al volver la red | RNF5, RF11 | 15 min |
+| A08 | Corte de energía con orden pendiente | Orden dada con la placa desenchufada y aplicada al arrancar | RNF5, RF10 | 10 min |
+| A09 | Comandos inválidos desde AWS | Valores fuera de `open`/`closed` publicados en el Shadow no mueven el servo | RF12, RF3, RF6 | 10 min |
+| A10 | Estabilidad | Corrida continua de 27.3 min con comandos y eventos del PIR | RNF1, RF2, RF3, RNF4 | 30 min |
+
+**B. Pruebas automáticas**
+
+| ID | Prueba | Qué se verifica | Requisitos | Duración aprox. |
+|---|---|---|---|---|
+| B01 | Pruebas unitarias de la Lambda | 23 casos sobre dobles de DynamoDB, AWS IoT y el reloj | RF4 a RF11 | 1 min |
+| B02 | Firmware con transporte serie | 16 casos de `delta` válidos, inválidos, repetidos y atrasados, y la política de reporte | RF2, RF3, RF12, RNF4 | 3 min |
+| B03 | Secretos en el repositorio | Archivos publicados, historial de git y archivos ignorados | RNF6 | 1 min |
+
+**Orden de ejecución.** Primero B01 y B03, que no necesitan hardware; después B02, con el firmware `local_test`; por último, con el firmware real y la Lambda desplegada, A01 a A10. A05 y A10 se hicieron en la misma corrida, para medir el tiempo de respuesta con el sistema funcionando de forma continua. Todas las pruebas se hicieron entre el 9 y el 10 de noviembre de 2026.
+
+**Herramientas.**
+
+| Herramienta | Qué hace | Pruebas |
+|---|---|---|
+| [serial_logger.py](tools/serial_logger.py) | Graba el log de la placa sin reiniciarla y vuelve a abrir el puerto si se desenchufa | A01 a A10 |
+| CloudWatch Logs Insights | Exporta las líneas `SKILL_REQUEST` del intervalo de la prueba a CSV | A01, A03, A05 |
+| [analyze_log.py](tools/analyze_log.py) | Lee el log del objeto y el CSV de CloudWatch y calcula cada requerimiento; une los comandos de la Lambda con el objeto por la versión del Shadow | A01, A03, A04, A05, A07, A10 |
+| Simulador de la Alexa Developer Console | Frases de voz o texto; con **Skill I/O** muestra el JSON de entrada y de salida | A01 a A09 |
+| Consola de AWS IoT | Captura del Shadow; el cliente MQTT de prueba publica los valores inválidos | A02, A04, A07, A08, A09 |
+| `unittest` | Pruebas unitarias de la Lambda | B01 |
+| [serial_check.py](tools/serial_check.py) | Envía `delta` al firmware `local_test` y comprueba su respuesta en el log | B02 |
+| [check_secrets.py](tools/check_secrets.py) | Busca secretos en los archivos y en el historial | B03 |
+| Celular, cinta métrica y transportador | Videos, distancias del PIR y ángulo del servo | A03, A04, A06, A07, A08 |
+
+Cada línea de resultado de `analyze_log.py` empieza con el requisito que mide y termina en `PASS` (cumple), `FAIL` (no cumple), `NOT ENOUGH DATA` (el registro no alcanza para medirlo; por ejemplo, un tramo de 7 min para RNF1) o `INFO` (dato informativo, sin criterio).
+
+**Evidencia y veredicto.** La evidencia de cada prueba (logs, CSV, salida de los scripts, capturas y videos) está en `docs/evidencias/<ID>/`, con un `README.md` que describe cada archivo y la tabla de medidas. Una prueba se aprueba si cumple su criterio; cuando un resultado no es concluyente o falla, se anota el valor medido y se analiza en §4.5. Las capturas muestran la hora de Bolivia (UTC−4); los logs del objeto y de CloudWatch usan UTC.
 
 ### 4.2 A. Pruebas físicas y de entorno
 
+Todas las pruebas físicas se hicieron con el mismo montaje y la misma placa, conectada al hotspot de un celular, con el firmware real y la Lambda desplegada. El simulador de Alexa corrió en una PC con otra red, así un corte de la red del objeto no afecta a la skill.
+
 #### A01. Vinculación, cambio y desvinculación por voz
 
-_Pendiente (fase 7)._
+Recorre todos los caminos de `LinkThingHandler` y `UnlinkThingHandler` en una sola sesión, con la tabla de DynamoDB vacía al inicio.
+
+| Paso | Frase | Respuesta | `result` | Requisito |
+|---|---|---|---|---|
+| 1 | abre monoambiente inteligente | "Bienvenido. Todavía no tienes una casa vinculada…" | `LaunchRequest`, `thing=None` | RF8 |
+| 2 | hay alguien en la puerta | "Todavía no tienes una casa vinculada. Di: vincula mi casa…" | `not_linked` | RF8 |
+| 3 | vincula … uno dos tres | "El código debe tener seis dígitos y no empezar en cero." | `invalid_code` | RF9 |
+| 4 | vincula … nueve nueve nueve nueve nueve nueve | "No encontré ninguna casa con el código 999999…" | `thing_not_found` | RF9 |
+| 5 | vincula … siete tres nueve dos seis cuatro | "Listo, tu casa con el código 739264 quedó vinculada." | `linked` | RF7 |
+| 6 | vincula … siete tres nueve dos seis cuatro | "Tu casa ya estaba vinculada con el código 739264." | `already_linked` | RF9 |
+| 7 | cambia mi casa al código 518306 | "Listo, cambié tu vinculación al código 518306." | `changed` | RF9 |
+| 8 | vincula … 739264 | "Listo, cambié tu vinculación al código 739264." | `changed` | RF9 |
+| 9 | desvincula mi casa | "Tu casa quedó desvinculada." | `unlinked` | RF9 |
+| 10 | desvincula mi casa | "No tienes ninguna casa vinculada." | `not_linked` | RF9 |
+| 11 | vincula … 739264 | "Listo, tu casa … quedó vinculada." | `linked` | RF7 |
+| 12 | detener | "Hasta luego." | `AMAZON.StopIntent` | — |
+| 13 | abre monoambiente inteligente (sesión nueva) | "Bienvenido. Puedes abrir o cerrar la puerta…" | `LaunchRequest`, `thing=monoambiente-739264` | RF7 |
+
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| A01 | RF7, RF8, RF9 | 1. Vaciar la tabla `user_thing` y capturarla.<br>2. Decir en el simulador las 13 frases de la tabla anterior, en orden, capturando cada respuesta y la tabla después de cada cambio.<br>3. Exportar las líneas `SKILL_REQUEST` de CloudWatch y analizarlas. | Las 13 respuestas coinciden. DynamoDB muestra un solo ítem por usuario en cada captura, con el `thingName` correcto y `fechaVinculacion`. Los pasos 3 y 4 no escriben nada. 0 solicitudes con `error`. | 13 de 13 respuestas correctas. Un ítem por usuario en cada captura: el cambio reemplazó el ítem (`thingName` 739264 → 518306, `fechaVinculacion` 02:37 → 02:39 UTC). La tabla no cambió en los pasos 3 y 4. 0 de 14 solicitudes con `error`; tiempo de la Lambda: mediana 76 ms, máximo 486 ms. La vinculación persistió al abrir una sesión nueva (paso 13). | Aprobada | [A01/](docs/evidencias/A01/README.md): capturas A01_00 a A01_18, [A01_cloudwatch.csv](docs/evidencias/A01/A01_cloudwatch.csv), [A01_analisis.txt](docs/evidencias/A01/A01_analisis.txt) |
 
 #### A02. Dos usuarios con Things distintos
 
-_Pendiente (fase 7)._
+Comprueba que la skill no está atada a un único Thing: un segundo usuario, `test-user-2`, se vincula a `monoambiente-518306` con un evento de prueba de la Lambda, mientras el usuario del simulador sigue vinculado a `monoambiente-739264`.
+
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| A02 | RF8, RF9, RF11 | 1. Dejar el usuario del simulador vinculado a 739264.<br>2. Ejecutar en la Lambda el evento `vincular2` (`test-user-2` → 518306) y luego `abrir2` (`OpenDoor` del mismo usuario).<br>3. Capturar los dos Shadows y la tabla.<br>4. En el simulador, preguntar "cómo está la puerta". | Dos ítems en DynamoDB, uno por usuario. `abrir2` solo modifica el Shadow de `monoambiente-518306`; el de 739264 no cambia y la puerta real no se mueve. La respuesta de `abrir2` avisa que esa casa está desconectada, porque no tiene hardware. | Dos ítems: `test-user-2` → 518306 y el usuario del simulador → 739264. `abrir2` escribió `desired.door = open` solo en `monoambiente-518306` (versión 2) y respondió "Envié la orden, pero tu casa está desconectada…" (`queued_offline`). El Shadow de 739264 no cambió (sin `delta`) y la ESP32 no recibió ningún `DELTA_RX` en toda la prueba. El usuario del simulador siguió viendo su propia puerta ("La puerta está abierta."). | Aprobada | [A02/](docs/evidencias/A02/README.md): capturas A02_01 a A02_10, [A02_ESP32.log](docs/evidencias/A02/A02_ESP32.log) |
 
 #### A03. Consulta del sensor por voz
 
-_Pendiente (fase 7)._
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| A03 | RF1, RF4, RNF4, RF2 | 1. Con el PIR listo (`PIR_READY`), pararse frente al sensor y preguntar "hay alguien en la puerta".<br>2. Salir del campo del sensor, esperar `PRESENCE_OFF` (≥ 10 s) y preguntar "detectas a alguien en la entrada".<br>3. Repetir alternando las 4 frases de `GetPresence`.<br>4. Grabar un ciclo en video y analizar el log. | Cada respuesta coincide con `reported.presence` en ese momento. Cada `PRESENCE_ON`/`PRESENCE_OFF` tiene su `REPORT_TX` en ≤ 1.1 s, con los tres atributos. | 8 de 8 respuestas coinciden con el PIR (6 "sí" y 2 "no"), con datos de 0 a 35 s de antigüedad. 28 cambios de presencia reportados con una mediana de 5 ms y un máximo de 254 ms; los 28 reportes traen `door`, `servo_angle` y `presence`. Los 14 episodios de presencia duraron al menos 11.8 s, de acuerdo con la retención de 10 s. | Aprobada | [A03/](docs/evidencias/A03/README.md): capturas, [A03_video_consulta_presencia.mp4](docs/evidencias/A03/A03_video_consulta_presencia.mp4), [A03_ESP32.log](docs/evidencias/A03/A03_ESP32.log), [A03_analisis.txt](docs/evidencias/A03/A03_analisis.txt) |
 
 #### A04. Comandos y estado de la puerta
 
-_Pendiente (fase 7)._
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| A04 | RF3, RF5, RF6, RF10 | En el simulador, en orden: "cierra la puerta", "cuál es el estado de la puerta", "abre la puerta", "abre la puerta" otra vez y la variante "cerrar la puerta". Capturar el Shadow al final y grabar los movimientos. | Cada respuesta es la esperada; con la puerta ya abierta, "abre la puerta" no reescribe el Shadow ni mueve el servo. Cada `DELTA_RX` válido tiene `ACTUATOR_DONE` y un reporte con la nueva posición en ≤ 1.5 s. El Shadow final no tiene `delta`. | 6 de 6 respuestas correctas ("Listo, la puerta está cerrada.", "La puerta está cerrada.", "Listo, la puerta está abierta.", dos veces "La puerta ya está abierta." y "Listo, la puerta está cerrada."). Las órdenes repetidas no generaron ningún `DELTA_RX` (03:11:22 a 03:14:40 UTC). `DELTA_RX` → reporte con la nueva posición en 415, 415 y 416 ms: el servo arranca 11 ms después del `DELTA_RX` y tarda 400 ms. El Shadow final quedó sin `delta`. | Aprobada | [A04/](docs/evidencias/A04/README.md): capturas, videos [1](docs/evidencias/A04/A04_video_1.mp4), [2](docs/evidencias/A04/A04_video_2.mp4) y [3](docs/evidencias/A04/A04_video_3.mp4), [A04_ESP32.log](docs/evidencias/A04/A04_ESP32.log), [A04_analisis.txt](docs/evidencias/A04/A04_analisis.txt) |
 
 #### A05. Tiempo de respuesta extremo a extremo
 
-_Pendiente (fase 7)._
+RNF3 se midió de dos formas independientes, en la misma corrida que A10:
+
+1. **Un solo reloj (Lambda).** `confirm_ms` va desde que la Lambda recibe el intent hasta que lee `reported.door` con la nueva posición. Incluye `UpdateThingShadow`, la entrega del `delta`, los 400 ms del servo, el reporte y la espera entre consultas de la Lambda (250 ms), así que es una cota superior.
+2. **Dos relojes (Lambda y NTP del objeto).** Une cada comando con su `DELTA_RX` por la versión del Shadow y mide desde que la Lambda recibe el intent hasta `ACTUATOR_DONE`, el servo detenido.
+
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| A05 | RNF3, RF10 | 1. Con el objeto conectado y el log grabando, alternar "abre la puerta" y "cierra la puerta" cada 40 s, hasta 28 comandos.<br>2. Exportar CloudWatch del mismo intervalo.<br>3. Analizar el CSV junto con el log de A10. | ≥ 20 comandos; todos confirmados en ≤ 3000 ms por los dos métodos; respuesta "Listo, la puerta está …" en todos. | 28 de 28 comandos confirmados (`confirmed`). Ver Tabla 4. | Aprobada | [A05/](docs/evidencias/A05/README.md): [A05_cloudwatch.csv](docs/evidencias/A05/A05_cloudwatch.csv), [A05_analisis.txt](docs/evidencias/A05/A05_analisis.txt), capturas A05_captura_602 a 604 |
+
+**Tabla 4.** Tiempos de A05, de `A05_analisis.txt`
+
+| Medida | n | Mín. | Mediana | p95 | Máx. | Límite | Veredicto |
+|---|---|---|---|---|---|---|---|
+| `confirm_ms`: Lambda → puerta confirmada en `reported` | 28 | 876 ms | 919 ms | 1304 ms | 1691 ms | 3000 ms | PASS |
+| Lambda → servo detenido (dos relojes) | 28 | 537 ms | 616 ms | 872 ms | 984 ms | 3000 ms | PASS |
+| `UpdateThingShadow` → `DELTA_RX` (nube) | 28 | 18 ms | 96 ms | 308 ms | 391 ms | — | INFO |
+
+El peor caso de dos relojes (984 ms, versión 412) fue el primer comando después de 5 min sin comandos; desde el segundo, el tiempo quedó entre 537 y 872 ms (§4.5).
 
 #### A06. Exactitud del PIR y del servo
 
-_Pendiente (fase 7)._
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| A06-A | RNF2, RF1 | 1. Marcar en el piso 0.5, 1.0 y 2.0 m frente al sensor.<br>2. En cada distancia, cruzar 5 veces caminando de lado a lado, con 12 s quieto fuera del campo entre cruces (más que la retención de 10 s).<br>3. Contar un cruce solo si su `PRESENCE_ON` llega después de un `PRESENCE_OFF`. | 15 de 15 cruces detectados. | 15 de 15 cruces detectados (Tabla 5). | Aprobada | [A06_PIR_ESP32.log](docs/evidencias/A06/A06_PIR_ESP32.log), [A06/](docs/evidencias/A06/README.md) |
+| A06-B | RNF2 | Dejar el sensor apuntando a la entrada vacía durante 5 min, sin nadie en la habitación. | 0 `PRESENCE_ON`. | 0 `PRESENCE_ON` entre las 04:30:41 y las 04:35:41 UTC (5.0 min). | Aprobada | [A06_PIR_ESP32.log](docs/evidencias/A06/A06_PIR_ESP32.log) |
+| A06-C | RNF2 | Con un transportador centrado en el eje, 2 fotos en `closed` (0°) y 2 en `open` (90°), abriendo y cerrando por voz. | Las 4 posiciones dentro de ±5°. | Pendiente de medición. | Pendiente | — |
+
+**Tabla 5.** Cruces detectados por distancia (A06-A)
+
+| Distancia | Inicio del bloque (UTC) | `PRESENCE_ON` contados | Detectados |
+|---|---|---|---|
+| 0.5 m | 04:18:15 | 04:18:43, 04:19:04, 04:19:35, 04:20:04, 04:21:43 | 5 de 5 |
+| 1.0 m | 04:22:36 | 04:22:57, 04:23:30, 04:23:56, 04:24:25, 04:24:55 | 5 de 5 |
+| 2.0 m | 04:27:03 | 04:27:25, 04:28:03, 04:28:32, 04:29:04, 04:29:27 | 5 de 5 |
+
+En 0.5 m, el primer cruce se hizo con el sensor todavía activo por un movimiento anterior (`PRESENCE_OFF` a las 04:18:38), así que no se distinguía como un evento nuevo; se repitió a las 04:21:43 con el sensor en reposo.
 
 #### A07. Caída de WiFi con orden pendiente
 
-_Pendiente (fase 7)._
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| A07 | RNF5, RF11 | 1. Con la puerta en una posición conocida, apagar el hotspot y esperar más de 150 s.<br>2. Preguntar "hay alguien en la puerta" (aviso de RF11).<br>3. Dar la orden contraria y capturar el Shadow con el `delta`.<br>4. Encender el hotspot y grabar cómo la puerta se mueve sola.<br>5. Repetir con la orden contraria. | La consulta advierte la desconexión y el comando avisa que la orden se aplicará al reconectarse. El WiFi reintenta cada 10 000 ± 500 ms. La orden pendiente se aplica en ≤ 10 000 ms desde `WIFI_CONNECTED`, sin intervención. 0 reinicios. | Avisos "…tu casa no se reporta desde hace 2 minutos" y "…desde hace 3 minutos"; comando `queued_offline`, sin esperar los 3 s. Reintentos de WiFi cada 10 000 ms en 27 intervalos (9999 a 10 000 ms). Orden pendiente aplicada 3848 ms (intento 2) y 3297 ms (intento 3) después de `WIFI_CONNECTED` (Tabla 6). 0 reinicios. | Aprobada | [A07/](docs/evidencias/A07/README.md): capturas A07_01 a A07_05, [A07_video_reconexion_aplica_orden.mp4](docs/evidencias/A07/A07_video_reconexion_aplica_orden.mp4), [A07_ESP32.log](docs/evidencias/A07/A07_ESP32.log), [A07_ESP32_tras_correccion.log](docs/evidencias/A07/A07_ESP32_tras_correccion.log) |
+
+**Tabla 6.** Intentos de A07
+
+| Intento | Orden pendiente | Reintentos de WiFi | `WIFI_CONNECTED` → `MQTT_CONNECTED` | `WIFI_CONNECTED` → puerta movida | Veredicto |
+|---|---|---|---|---|---|
+| 1 | Ninguna: la orden se dio con la red ya de vuelta | 6 intervalos de 10 000 ms | 4117 ms | 4846 ms | Informativo |
+| 2 | `closed`, escrita con el objeto desconectado | 10 intervalos de 9999–10 000 ms | 3203 ms | 3848 ms | PASS |
+| 3 | `open`, escrita con el objeto desconectado | 11 intervalos de 10 000 ms | 2088 ms | 3297 ms | PASS |
+
+En el intento 2, AWS entregó el `delta` pendiente apenas el objeto se suscribió, antes de la respuesta a `/get`; en el intento 3 llegó primero la respuesta a `/get` (versión 577). Los dos caminos aplicaron la orden una sola vez. El intento 2 reveló un defecto, corregido antes del intento 3 (§4.4).
 
 #### A08. Corte de energía con orden pendiente
 
-_Pendiente (fase 7)._
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| A08 | RNF5, RF10 | 1. Desenchufar el USB, que alimenta la ESP32 y el servo.<br>2. Dar una orden por voz con la placa sin energía.<br>3. Enchufar la placa y grabar.<br>4. Repetir con la orden contraria. | Con el último reporte de menos de 150 s, la Lambda espera 3 s y responde que no recibió confirmación. Al arrancar, `GET_RX` trae el `desired` pendiente y la orden se aplica en ≤ 10 000 ms desde `WIFI_CONNECTED`, sin movimientos duplicados. | La Lambda respondió "Envié la orden…, pero todavía no recibo la confirmación…" en los dos intentos. Intento 1 (`closed`): no concluyente, porque el arranque ya deja la puerta cerrada (§4.5). Intento 2 (`open`): `WIFI_CONNECTED` a 587 ms del arranque, `MQTT_CONNECTED` a 2703 ms, `GET_RX` versión 592 con `desired.door = open`, `ACTUATOR_DONE` a 3903 ms: 3316 ms después de `WIFI_CONNECTED`. El `delta` versión 593, que llegó después con la misma orden, no generó otro movimiento. | Aprobada | [A08/](docs/evidencias/A08/README.md): capturas A08_01 a A08_04, [A08_video_arranque_aplica_orden.mp4](docs/evidencias/A08/A08_video_arranque_aplica_orden.mp4), [A08_ESP32.log](docs/evidencias/A08/A08_ESP32.log) |
 
 #### A09. Comandos inválidos desde AWS
 
-_Pendiente (fase 7)._
+La Lambda solo escribe `open` o `closed`, así que los valores inválidos se publicaron a mano desde el cliente MQTT de prueba de la consola de AWS IoT, en el tema `$aws/things/monoambiente-739264/shadow/update`.
+
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| A09 | RF12, RF3, RF6 | Publicar, uno por uno, `{"state":{"desired":{"door":X}}}` con X = `"medio"`, `5`, `"OPEN"`, `"open"` y `"closed"`. Después del primero, preguntar "cómo está la puerta". Capturar el Shadow. | Los 3 valores inválidos se registran como `INVALID_VALUE` y no mueven el servo; los 2 válidos se aplican. Alexa responde con `reported` y no anuncia el valor inválido como orden pendiente. | `"medio"` → `INVALID_VALUE door=medio`; `5` → `INVALID_VALUE door=<not a string>`; `"OPEN"` → `INVALID_VALUE door=OPEN`: 0 `ACTUATOR_START`. `"open"` y `"closed"` movieron el servo en 400 ms y se reportaron a los 404 ms; al final el `delta` desapareció. Alexa respondió "La puerta está cerrada." sin mencionar la orden inválida. | Aprobada | [A09/](docs/evidencias/A09/README.md): capturas A09_01 a A09_04, [A09_ESP32.log](docs/evidencias/A09/A09_ESP32.log) |
+
+Mientras el valor inválido sigue en `desired`, AWS publica un `delta` nuevo con cada actualización de `reported`: `INVALID_VALUE` aparece 13 veces para 3 publicaciones (§4.5).
 
 #### A10. Estabilidad
 
-_Pendiente (fase 7)._
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| A10 | RNF1, RF2, RF3, RNF4 | Dejar el objeto funcionando sin tocar la placa durante la corrida de A05: 28 comandos de voz, uno cada 40 s aproximadamente, y pasos frente al PIR cada pocos minutos. Analizar el log completo. | ≥ 15 min continuos; 0 reinicios; 0 caídas de WiFi y MQTT; `loop()` ≤ 500 ms; pérdida de heap ≤ 4096 bytes; ≤ 61 500 ms entre reportes; los 3 atributos en cada reporte; cambio de estado → reporte ≤ 1100 ms; `delta` → `reported` ≤ 1500 ms. | Ver Tabla 7. Todas las medidas cumplen. | Aprobada | [A10/](docs/evidencias/A10/README.md): [A10_ESP32.log](docs/evidencias/A10/A10_ESP32.log), [A10_analisis.txt](docs/evidencias/A10/A10_analisis.txt) |
+
+**Tabla 7.** Medidas de A10, de `A10_analisis.txt`
+
+| Medida | Valor | Criterio | Veredicto |
+|---|---|---|---|
+| Duración continua sin reinicio | 27.3 min (27 líneas `HEALTH`) | ≥ 15 min | PASS (RNF1) |
+| Reinicios (`BOOT`) | 0 | 0 | PASS (RNF1) |
+| Caídas de WiFi y de MQTT | 0 y 0 | 0 | PASS (RNF1) |
+| Vuelta más larga de `loop()` | 21 ms | ≤ 500 ms | PASS (RNF1) |
+| Heap libre, primera y última `HEALTH` | 196 960 → 196 960 bytes (mínimo histórico 182 532) | pérdida ≤ 4096 bytes | PASS (RNF1) |
+| Mayor intervalo entre reportes | 59 999 ms | ≤ 61 500 ms | PASS (RF2, RNF4) |
+| Reportes con los tres atributos | 115 de 115 (113 por evento y 2 por heartbeat) | todos | PASS (RF2) |
+| Cambio de estado → `REPORT_TX` | n = 113; mediana 5 ms, p95 6 ms, máximo 804 ms | ≤ 1100 ms | PASS (RNF4) |
+| `DELTA_RX` → `reported` con la nueva posición | n = 30; mediana 416 ms, p95 713 ms, máximo 1169 ms | ≤ 1500 ms | PASS (RF3) |
+| Episodios de presencia de menos de 10 s | 0 de 42 | 0 | PASS (RF1) |
+| Señal WiFi (RSSI) | −83 a −22 dBm | — | INFO |
+
+Fuera de la corrida, la placa se encendió a las 22:21 (hora de Bolivia) y a las 23:44 llevaba 83 min sin reiniciarse ni perder la conexión, pasando por A01 a A05, A09 y A10 (`HEALTH uptime_s=4980 … wifi_drops=0 mqtt_drops=0`). Los máximos de 804 ms y 1169 ms se explican en §4.5.
 
 ### 4.3 B. Pruebas automáticas
 
 #### B01. Pruebas unitarias de la Lambda
 
-_Pendiente (fase 7)._
+[test_lambda_function.py](lambda/tests/test_lambda_function.py) ejecuta la Lambda real con dobles de DynamoDB (`FakeTable`), de AWS IoT (`FakeIot`, `FakeIotData`) y del reloj (`FakeClock`), sin conexión a AWS. Cada prueba arma una solicitud de Alexa como la del simulador y comprueba la respuesta, lo que quedó en la tabla y en el Shadow, y la línea de log.
+
+**Tabla 8.** Casos de B01, por requisito
+
+| Requisito | Casos | Qué comprueban |
+|---|---|---|
+| RF4 | `test_rf4_presence_true_and_false`, `test_rf4_missing_attribute_or_shadow_says_no_data`, `test_rf4_reads_reported_not_desired` | La respuesta según `reported.presence`; sin dato o sin Shadow no falla; nunca lee `desired` |
+| RF5, RF10 | `test_rf5_rf10_open_and_close_are_confirmed_by_device`, `test_rf5_door_already_in_position_is_not_rewritten`, `test_rf5_cancels_pending_opposite_order`, `test_rf10_no_confirmation_within_3_s_is_reported` | Escribe `desired`, espera la confirmación, no reescribe si ya está en esa posición, cancela una orden contraria pendiente y avisa si no hay confirmación en 3 s (corta entre 3.00 y 3.25 s del reloj simulado) |
+| RF6 | `test_rf6_door_open_and_closed` | "abierta" o "cerrada" según `reported.door` |
+| RF7 | `test_rf7_link_valid_code_stores_link_with_date`, `test_rf7_link_persists_between_sessions` | Guarda `thingName` y `fechaVinculacion` en ISO 8601; la vinculación sirve en otra sesión |
+| RF8 | `test_rf8_unlinked_user_is_guided_to_link`, `test_rf8_each_user_reaches_only_their_own_thing`, `test_rf8_launch_greets_linked_and_unlinked_users` | Guía al usuario sin vincular en los 4 intents que usan el objeto; dos usuarios no se cruzan |
+| RF9 | `test_rf9_rejects_invalid_codes_without_saving`, `test_rf9_rejects_thing_that_does_not_exist`, `test_rf9_change_link_replaces_previous_thing`, `test_rf9_same_code_again_reports_already_linked`, `test_rf9_unlink_deletes_link` | 7 códigos inválidos (`?`, `abc`, 5 y 7 dígitos, cero inicial, con espacio y vacío) y un Thing inexistente no se guardan; cambiar y desvincular |
+| RF11 | `test_rf11_offline_threshold_is_150_seconds`, `test_rf11_offline_command_is_queued_in_desired` | Con 150 s todavía está conectado y con 151 s ya avisa; un comando con el objeto desconectado se encola sin esperar |
+| Robustez | `test_rf4_rf9_aws_error_is_spoken_and_logged`, `test_unknown_intent_is_answered`, `test_log_line_hides_user_id` | Un error de AWS se responde y se registra; un intent sin handler propio se responde; el log guarda un hash del usuario, no su `userId` |
+
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| B01 | RF4 a RF11 | Desde la raíz: `python -m unittest discover -s lambda/tests -v`. | Todos los casos `ok`; cada solicitud escribe exactamente una línea `SKILL_REQUEST`. | 23 de 23 casos `ok` (`Ran 23 tests in 0.034s`, `OK`): 9 de vinculación, 5 de consultas, 5 de comandos y 4 de robustez. Una línea `SKILL_REQUEST` por solicitud en todas las pruebas. | Aprobada | [B01_salida.txt](docs/evidencias/B01/B01_salida.txt) |
 
 #### B02. Firmware con transporte serie
 
-_Pendiente (fase 7)._
+Con el firmware `local_test`, [SerialShadowClient](src/SerialShadowClient.cpp) reemplaza a AWS: cada línea que llega por el puerto serie se procesa como un documento de `update/delta`, y cada reporte se imprime en el log. [serial_check.py](tools/serial_check.py) envía `delta` que AWS no permite producir a voluntad, como versiones repetidas o atrasadas, y comprueba la respuesta en el log. El PIR se tapa para que no genere eventos durante la prueba.
+
+**Tabla 9.** Casos de B02
+
+| Caso | Requisito | Envío | Esperado | Resultado |
+|---|---|---|---|---|
+| C01 | RF2 | — (arranque) | Primer reporte con `door=closed` y `servo_angle=0` | PASS |
+| C02 | RF3 | `door=open`, versión 1 | Movimiento de 400 ± 60 ms y reporte con `open` y 90° | PASS: 400 ms; reporte a los 801 ms, porque espera el mínimo de 1 s desde el reporte anterior |
+| C03 | RF12 | Versión 1 repetida | `STALE_IGNORED`, sin movimiento | PASS |
+| C04 | RF12 | Versión 0 (anterior) | `STALE_IGNORED`, sin movimiento | PASS |
+| C05 | RF3 | `open` con la puerta ya abierta | Sin movimiento y un reporte que borra el `delta` | PASS |
+| C06–C08 | RF12 | `"half"`, `1`, `"OPEN"` | `INVALID_VALUE`, sin movimiento | PASS, 3 de 3 |
+| C09 | RF12 | JSON cortado | `JSON_ERROR reason=IncompleteInput` | PASS |
+| C10 | RF12 | Documento sin `state` | `JSON_ERROR reason=missing_state` | PASS |
+| C11 | RF12 | Línea de 296 caracteres | `JSON_ERROR reason=line_too_long` | PASS |
+| C12 | RF12 | `delta` sin `door` | El actuador lo ignora | PASS |
+| C13 | RF3 | `door=closed` | 400 ± 60 ms, reporte con `closed` y 0° | PASS: 400 ms; reporte a los 400 ms |
+| C14 | RF3 | `open` y, 150 ms después, `closed` | Termina cerrada y nunca reporta `open` | PASS |
+| C15 | RNF4 | 3 órdenes cada 600 ms | Reportes separados por ≥ 1000 ms | PASS: 2 reportes a 1000 ms; el intermedio se agrupa y el último refleja el estado final |
+| C16 | RF2, RNF4 | — (espera) | Heartbeat a 60 000 ± 1500 ms del último reporte | PASS: 60 000 ms |
+
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| B02 | RF2, RF3, RF12, RNF4 | 1. Tapar el PIR.<br>2. Cargar el firmware de prueba: `pio run -e local_test -t upload`.<br>3. Con el monitor cerrado: `python tools/serial_check.py --port COM3 --log docs/evidencias/B02/B02_ESP32.log`. | `RESULT 16/16 cases PASS`. | Primera corrida: 13 de 16; C02 y C13 revelaron un defecto del firmware y C16, uno del script (§4.4). Tras las correcciones: 16 de 16. Los 6 movimientos completos duraron 400 ms; separación mínima entre reportes de 1000 ms; heartbeat a 60 000 ms. | Aprobada | [B02_salida.txt](docs/evidencias/B02/B02_salida.txt), [B02_ESP32.log](docs/evidencias/B02/B02_ESP32.log); corrida anterior a la corrección: [B02_salida_antes_correccion.txt](docs/evidencias/B02/B02_salida_antes_correccion.txt), [B02_ESP32_antes_correccion.log](docs/evidencias/B02/B02_ESP32_antes_correccion.log) |
 
 #### B03. Secretos en el repositorio
 
-_Pendiente (fase 7)._
+[check_secrets.py](tools/check_secrets.py) busca claves privadas, certificados, access keys de AWS, números de cuenta dentro de ARNs, endpoints reales de AWS IoT y contraseñas WiFi, en los archivos que git publica y en cada commit del historial, y comprueba que las rutas de secretos estén en `.gitignore`. Como control positivo analiza el `include/secrets.h` real, que existe en la PC pero no se publica: si no detectara ahí los cuatro tipos de secreto, un `PASS` no demostraría nada. El script solo imprime el tipo de secreto encontrado, nunca su valor.
+
+| ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
+|---|---|---|---|---|---|---|
+| B03 | RNF6 | Desde la raíz: `python tools/check_secrets.py -o docs/evidencias/B03/B03_salida.txt`. | 0 secretos en los archivos y en el historial; las rutas de secretos ignoradas; la plantilla publicada; el control detecta los 4 tipos de secreto en `secrets.h`. | 0 secretos en 149 archivos publicados y 0 en los 27 commits del historial; 5 de 5 rutas de secretos ignoradas por git; plantilla publicada; el control detectó clave privada, certificado, endpoint y contraseña WiFi. Se repitió el 10/11/2026 sobre el commit `9106bad`, después de subir toda la evidencia de A01 a A10. | Aprobada | [B03_salida.txt](docs/evidencias/B03/B03_salida.txt) |
 
 ### 4.4 Defectos encontrados y corregidos
 
-_Pendiente (fase 7)._
+Las pruebas encontraron dos defectos del firmware que no se notaban al usar el sistema normalmente, y uno de una herramienta de prueba. Los tres se corrigieron y la prueba que los encontró se repitió.
+
+| Defecto | Detectado en | Síntoma | Causa | Corrección | Verificación |
+|---|---|---|---|---|---|
+| D1. Confirmación prematura del servo | B02, casos C02 y C13 | `ACTUATOR_DONE` llegaba 0 y 10 ms después de `ACTUATOR_START`, en lugar de 400 ms: el Shadow confirmaba la nueva posición mientras el servo todavía se movía, y la Lambda habría dicho "Listo" antes de tiempo | `loop()` toma `nowMs` al principio de la vuelta, pero el `delta` llega en esa misma vuelta y `startMove()` guarda `moveStartMs_ = millis()`, unos milisegundos después. La resta sin signo `nowMs - moveStartMs_` era negativa y daba un número cercano a 2<sup>32</sup>, mayor que 400, así que el movimiento terminaba de inmediato | `DoorActuator::update()` calcula la diferencia con signo (`int32_t`) ([DoorActuator.cpp, líneas 16 a 27](src/DoorActuator.cpp#L16-L27); commit `4e3911d`). Se revisaron los demás usos de `millis()`: `ShadowClient` ya comparaba con signo, y los de `PresenceSensor` y `WifiManager` ocurren antes del primer `loop()` | B02 pasó de 13 de 16 a 16 de 16; los 6 movimientos completos duran 400 ms. En las pruebas físicas, `ACTUATOR_DONE` llega siempre 400 ms después de `ACTUATOR_START` (A04, A09, A10) |
+| D2. Bloqueo de `loop()` sin Internet | A07, intento 2 | Con el WiFi asociado pero sin Internet, las líneas `HEALTH` marcaron `max_loop_ms=7010` y `7032`: durante casi 2 minutos, `loop()` estuvo bloqueado la mayor parte del tiempo, sin leer el PIR ni actualizar el LED | Cada intento MQTT esperaba unos 7 s a que fallara la consulta DNS. Como el intervalo de 5 s entre intentos se contaba desde el **inicio** del intento, el siguiente empezaba de inmediato (03:57:55 → 03:58:02 → 03:58:09…) | `ShadowClient::connect()` toma la hora después de que el intento termina, así entre dos intentos quedan siempre 5 s libres ([ShadowClient.cpp, líneas 71 a 87](src/ShadowClient.cpp#L71-L87); commit `136b52f`) | Intento 3: intentos separados por 5000–5016 ms desde el fin del anterior y `max_loop_ms` de 23 y 17 ms durante el corte ([A07_ESP32_tras_correccion.log](docs/evidencias/A07/A07_ESP32_tras_correccion.log)) |
+| D3. Medición del heartbeat en el script de B02 | B02, caso C16 | C16 falló en la primera corrida: el script no encontraba el heartbeat | El PIR detectó movimiento dos veces durante la espera, y cada reporte por evento reinicia el período de 60 s, que es el comportamiento correcto del firmware. El script medía desde un reporte anterior | [serial_check.py](tools/serial_check.py) mide desde el último reporte anterior al heartbeat, y el plan indica tapar el PIR durante B02 | C16 → PASS: heartbeat a 60 000 ms |
+
+El watchdog de 30 s no llegó a actuar durante D2, porque ninguna vuelta superó ese tiempo; sin la corrección, sin embargo, el objeto habría reaccionado con hasta 7 s de retraso a cualquier evento mientras la red estuviera degradada.
 
 ### 4.5 Análisis de errores
 
-_Pendiente (fase 7)._
+Qué permiten afirmar los datos y qué no:
+
+- **Reporte por evento: 804 ms en A10 frente a 254 ms en A03.** Los dos valores son correctos y vienen del mismo mecanismo: el intervalo mínimo de 1 s entre reportes. En A10 ([A10_ESP32.log](docs/evidencias/A10/A10_ESP32.log), líneas 41 a 44), `PRESENCE_OFF` se reportó a los 3 868 092 ms y `PRESENCE_ON` llegó 196 ms después: su reporte esperó hasta completar el segundo (3 869 092 ms), 804 ms después del cambio. En A03, el reporte anterior había salido 745 ms antes, y la espera fue de 254 ms. Por diseño, la demora máxima es 1000 ms más una vuelta de `loop()`, y por eso el límite declarado es 1.1 s. La mediana, de 5 ms, es el caso normal.
+- **`DELTA_RX` → `reported`: 415 ms en A04 frente a 1169 ms en A10.** El mismo mecanismo: en A10 ([líneas 275 a 281](docs/evidencias/A10/A10_ESP32.log)), un `PRESENCE_ON` se reportó 240 ms antes de que el servo terminara, así que el reporte con la nueva posición esperó hasta completar el segundo. Sigue dentro del límite de 1.5 s de RF3 y del de 3 s de RNF3. Los valores de 684 y 713 ms son `delta` que pedían la posición actual y solo requerían confirmar.
+- **El tiempo de respuesta no incluye el reconocimiento de voz.** RNF3 se mide desde que la Lambda recibe el intent: el tiempo que el simulador tarda en convertir el texto en un intent no se puede medir desde la Lambda. `confirm_ms` es una cota superior del tiempo real, porque incluye hasta 250 ms de espera entre consultas de la Lambda.
+- **Peor caso de A05 (984 ms y `confirm_ms` de 1304 ms).** Fue el primer comando después de 5 min sin comandos. La causa más probable es que el contenedor de la Lambda o sus conexiones con AWS IoT estaban inactivos; el log no permite separarlo con más detalle. Desde el segundo comando, el tiempo quedó entre 537 y 872 ms.
+- **Medición con dos relojes.** Une el reloj de la Lambda con el NTP del objeto, cuyo error es del orden de decenas de milisegundos. Por eso el tiempo de la nube (mínimo 18 ms) es solo informativo; el veredicto de RNF3 se apoya en `confirm_ms`, que usa un solo reloj.
+- **Tamaño de la muestra del PIR.** 15 de 15 cruces detectados no prueban una tasa de detección del 95 % o más: con 15 de 15, la cota inferior de confianza del 95 % es 81.9 %. Los datos permiten afirmar que el sensor detectó todos los cruces probados a 0.5, 1.0 y 2.0 m, caminando a ritmo normal y de lado a lado; no dicen nada de personas que se acercan de frente o muy despacio, ni de otras distancias. El primer cruce a 0.5 m se repitió porque el sensor seguía activo por un movimiento anterior.
+- **Posición del servo.** `servo_angle` es el ángulo que se ordenó al servo, no un ángulo medido. La exactitud del servo (A06-C) quedó pendiente de medición, y el objeto no tiene un sensor que confirme la posición real de la puerta (§7).
+- **A08, intento 1.** No fue concluyente: la orden pendiente era `closed`, la misma posición en la que arranca la puerta por seguridad, así que no se distinguía si la orden se aplicó. Se repitió con `open`.
+- **A09, `delta` repetidos.** Mientras el valor inválido sigue en `desired`, AWS publica un `delta` nuevo con cada actualización de `reported`: 13 `INVALID_VALUE` para 3 publicaciones. El servo nunca se movió, pero cada repetición es un mensaje más. La Lambda nunca escribe valores inválidos, así que solo ocurre si alguien publica a mano en el Shadow (§7).
+- **Bloqueo de la conexión TLS.** Después de la corrección D2, la conexión MQTT exitosa todavía detiene `loop()` unos 2 s (`max_loop_ms=2111` en A07), porque PubSubClient conecta de forma sincrónica. Solo ocurre al reconectarse y no afecta al funcionamiento normal (21 ms en A10).
+- **Caída de la red con un hotspot.** Al apagar el hotspot, primero se cae MQTT y entre 35 y 120 s después el WiFi: durante ese tramo, el teléfono sigue asociado pero sin Internet, que es justo el caso que reveló D2.
+- **Segundo usuario.** En A02, el segundo usuario se simuló con un evento de prueba de la Lambda (`test-user-2`), no con otra cuenta de Alexa. Los datos demuestran que la Lambda separa a los usuarios por `userId`; no prueban el comportamiento con dos cuentas reales.
+- **Alcance de las pruebas.** Todas se hicieron entre la noche del 9 y la madrugada del 10 de noviembre de 2026, con una sola placa, una sola red (el hotspot de un celular, con una señal de −83 a −22 dBm) y un solo Thing con hardware. Los tiempos dependen de esa red: los resultados no permiten afirmar el mismo margen en otra red ni en otro día.
+
+Fuentes de error consideradas:
+
+- **PIR:** la velocidad y la dirección del movimiento, la distancia y el ángulo respecto del sensor, y las fuentes de calor o corrientes de aire en el campo del sensor.
+- **Tiempos:** la latencia de la red y de Internet hasta `us-east-2`, el arranque en frío de la Lambda, la espera entre consultas de la Lambda y el error del NTP del objeto.
+- **Servo:** la calibración de los pulsos de 500 a 2400 µs, que no se midió, y la carga mecánica de la maqueta.
 
 ---
 
