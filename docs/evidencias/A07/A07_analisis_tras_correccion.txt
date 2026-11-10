@@ -1,0 +1,65 @@
+   input docs/evidencias/A07/A07_ESP32_tras_correccion.log: device
+
+== FILE A07_ESP32_tras_correccion.log ==
+
+== ESP32 log ==
+   lines=90 span=4.9 min boots=0 reset_reasons=- utc_clock=yes
+   PIR_READY at t=30030 ms 
+   error/warning lines: 24
+     line 6 t=43459 MQTT_CONNECT_FAILED state=-2
+     line 8 t=48482 MQTT_CONNECT_FAILED state=-2
+     line 10 t=53504 MQTT_CONNECT_FAILED state=-2
+     line 12 t=58526 MQTT_CONNECT_FAILED state=-2
+     line 15 t=63548 MQTT_CONNECT_FAILED state=-2
+     line 17 t=68570 MQTT_CONNECT_FAILED state=-2
+     line 20 t=73592 MQTT_CONNECT_FAILED state=-2
+     line 22 t=78607 MQTT_CONNECT_FAILED state=-2
+     line 24 t=83623 MQTT_CONNECT_FAILED state=-2
+     line 26 t=88639 MQTT_CONNECT_FAILED state=-2
+     line 28 t=93655 MQTT_CONNECT_FAILED state=-2
+     line 30 t=98671 MQTT_CONNECT_FAILED state=-2
+     line 32 t=103688 MQTT_CONNECT_FAILED state=-2
+     line 34 t=108703 MQTT_CONNECT_FAILED state=-2
+     line 36 t=113720 MQTT_CONNECT_FAILED state=-2
+     line 38 t=118735 MQTT_CONNECT_FAILED state=-2
+     line 41 t=123752 MQTT_CONNECT_FAILED state=-2
+     line 43 t=128768 MQTT_CONNECT_FAILED state=-2
+     line 45 t=133784 MQTT_CONNECT_FAILED state=-2
+     line 47 t=138799 MQTT_CONNECT_FAILED state=-2
+     line 49 t=143816 MQTT_CONNECT_FAILED state=-2
+     line 51 t=148832 MQTT_CONNECT_FAILED state=-2
+     line 53 t=153848 MQTT_CONNECT_FAILED state=-2
+     line 55 t=158864 MQTT_CONNECT_FAILED state=-2
+
+== RNF1 stability ==
+RNF1 longest run without restart: 4.9 min (>= 15.0) -> FAIL
+RNF1 restarts inside the log: 0 (0) -> PASS
+   HEALTH lines=5 heap first/last=243036/199436 min_heap=182048 rssi -51..-51 dBm
+RNF1 longest loop iteration: 2407 ms (<= 500) -> FAIL
+RNF1 WiFi + MQTT drops: 2 (0) -> FAIL
+RNF1 free heap loss first->last HEALTH: 43600 bytes (<= 4096) -> FAIL
+
+== RF2 / RNF4 reporting ==
+   reports=6 {'reason=event': 6} gap ms: n=4 min=806 median=6796 p95=36275 max=36275
+RF2/RNF4 longest gap between reports while connected: 36275 ms (<= 61500) -> PASS
+RF2 reports missing an attribute: 0 (0) -> PASS
+   state change -> REPORT_TX ms: n=2 min=5 median=302 p95=600 max=600
+RNF4 event report delay: max 600 ms (<= 1100) -> PASS
+   published reports: 73/h -> 1749/day, 52468/month (heartbeat only: 1440/day)
+
+== RF3 actuation ==
+   line 83 version=578 door=open moved move=158 ms reported=758 ms
+   DELTA_RX -> reported door ms: n=1 min=758 median=758 p95=758 max=758
+RF3 valid deltas confirmed in reported within 1500 ms: 1/1 -> PASS
+
+== RF1 / RNF2 presence ==
+   PRESENCE_ON=4 PRESENCE_OFF=4
+RNF2 PIR_READY at 30030 ms; presence before warm-up: 0 (0) -> PASS
+   presence episodes ms: n=4 min=11800 median=12750 p95=32690 max=32690
+RNF2 episodes shorter than the 10000 ms hold: 0 (0) -> PASS
+
+== RNF5 reconnection ==
+   WIFI_LOST line 56 t=163419: WiFi attempts=12 retry gaps ms: n=11 min=10000 median=10000 p95=10000 max=10000
+     WIFI_CONNECTED t=273666, MQTT_CONNECTED +2088 ms, GET_RX +2897 ms (version=577)
+RNF5 WiFi retries every 10000 +/- 500 ms -> PASS
+RNF5 pending desired applied: door=open angle=90 3297 ms after WIFI_CONNECTED (<= 10000) -> PASS

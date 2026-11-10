@@ -1,0 +1,38 @@
+   input docs/evidencias/A04/A04_ESP32.log: device
+
+== FILE A04_ESP32.log ==
+
+== ESP32 log ==
+   lines=57 span=6.0 min boots=0 reset_reasons=- utc_clock=yes
+   error/warning lines: 0
+
+== RNF1 stability ==
+RNF1 longest run without restart: 6.0 min (>= 15.0) -> FAIL
+RNF1 restarts inside the log: 0 (0) -> PASS
+   HEALTH lines=6 heap first/last=197164/196960 min_heap=182532 rssi -45..-35 dBm
+RNF1 longest loop iteration: 17 ms (<= 500) -> PASS
+RNF1 WiFi + MQTT drops: 0 (0) -> PASS
+RNF1 free heap loss first->last HEALTH: 204 bytes (<= 4096) -> PASS
+
+== RF2 / RNF4 reporting ==
+   reports=22 {'reason=event': 22} gap ms: n=21 min=1000 median=11801 p95=46816 max=52384
+RF2/RNF4 longest gap between reports while connected: 52384 ms (<= 61500) -> PASS
+RF2 reports missing an attribute: 0 (0) -> PASS
+   state change -> REPORT_TX ms: n=22 min=4 median=5 p95=5 max=654
+RNF4 event report delay: max 654 ms (<= 1100) -> PASS
+   published reports: 222/h -> 5322/day, 159656/month (heartbeat only: 1440/day)
+
+== RF3 actuation ==
+   line 6 version=356 door=closed moved move=410 ms reported=415 ms
+   line 15 version=360 door=open moved move=410 ms reported=415 ms
+   line 50 version=376 door=closed moved move=411 ms reported=416 ms
+   DELTA_RX -> reported door ms: n=3 min=415 median=415 p95=416 max=416
+RF3 valid deltas confirmed in reported within 1500 ms: 3/3 -> PASS
+
+== RF1 / RNF2 presence ==
+   PRESENCE_ON=10 PRESENCE_OFF=10
+   presence episodes ms: n=9 min=11800 median=12500 p95=99200 max=99200
+RNF2 episodes shorter than the 10000 ms hold: 0 (0) -> PASS
+
+== RNF5 reconnection ==
+   no WIFI_LOST or BOOT in this log

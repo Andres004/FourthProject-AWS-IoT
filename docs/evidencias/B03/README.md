@@ -12,10 +12,10 @@ Como control positivo, analiza el `include/secrets.h` real, que existe en la PC 
 
 | Medida | Valor | Criterio | Veredicto |
 |---|---|---|---|
-| Secretos en archivos publicados | 0 de 38 archivos | 0 | PASS |
-| Secretos en el historial | 0 en 12 commits | 0 | PASS |
+| Secretos en archivos publicados | 0 de 149 archivos | 0 | PASS |
+| Secretos en el historial | 0 en 27 commits | 0 | PASS |
 | Rutas de secretos ignoradas por git | 5/5 | todas | PASS |
 | Plantilla `include/secrets.example.h` publicada | sí | sí | PASS |
 | Control: `secrets.h` real detectado | clave privada, certificado, endpoint, contraseña WiFi | los 4 | PASS |
 
-> Se repite antes de la entrega, sobre el último commit, para cubrir los archivos agregados después.
+> Repetida el 10/11/2026 sobre el commit 9106bad, después de subir toda la evidencia (capturas, logs y CSV de A01–A10).

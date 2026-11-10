@@ -1,0 +1,60 @@
+   input docs/evidencias/A10/A10_ESP32.log: device
+
+== FILE A10_ESP32.log ==
+
+== ESP32 log ==
+   lines=314 span=27.3 min boots=0 reset_reasons=- utc_clock=yes
+   error/warning lines: 0
+
+== RNF1 stability ==
+RNF1 longest run without restart: 27.3 min (>= 15.0) -> PASS
+RNF1 restarts inside the log: 0 (0) -> PASS
+   HEALTH lines=27 heap first/last=196960/196960 min_heap=182532 rssi -83..-22 dBm
+RNF1 longest loop iteration: 21 ms (<= 500) -> PASS
+RNF1 WiFi + MQTT drops: 0 (0) -> PASS
+RNF1 free heap loss first->last HEALTH: 0 bytes (<= 4096) -> PASS
+
+== RF2 / RNF4 reporting ==
+   reports=115 {'reason=event': 113, 'reason=heartbeat': 2} gap ms: n=114 min=998 median=11132 p95=42359 max=59999
+RF2/RNF4 longest gap between reports while connected: 59999 ms (<= 61500) -> PASS
+RF2 reports missing an attribute: 0 (0) -> PASS
+   state change -> REPORT_TX ms: n=113 min=4 median=5 p95=6 max=804
+RNF4 event report delay: max 804 ms (<= 1100) -> PASS
+   published reports: 253/h -> 6066/day, 181974/month (heartbeat only: 1440/day)
+
+== RF3 actuation ==
+   line 22 version=412 door=open moved move=411 ms reported=416 ms
+   line 32 version=417 door=closed moved move=410 ms reported=415 ms
+   line 54 version=427 door=open moved move=411 ms reported=416 ms
+   line 62 version=431 door=closed moved move=410 ms reported=415 ms
+   line 74 version=436 door=open moved move=410 ms reported=415 ms
+   line 82 version=440 door=closed moved move=411 ms reported=416 ms
+   line 111 version=453 door=open moved move=410 ms reported=415 ms
+   line 119 version=457 door=closed moved move=411 ms reported=416 ms
+   line 147 version=469 door=open moved move=411 ms reported=416 ms
+   line 155 version=473 door=closed moved move=411 ms reported=1150 ms
+   line 160 version=474 door=closed no_move move=None ms reported=713 ms
+   line 168 version=478 door=open moved move=410 ms reported=415 ms
+   line 176 version=482 door=closed moved move=411 ms reported=416 ms
+   line 181 version=484 door=open moved move=411 ms reported=417 ms
+   line 194 version=490 door=closed moved move=411 ms reported=416 ms
+   line 207 version=496 door=open moved move=410 ms reported=415 ms
+   line 211 version=498 door=closed moved move=411 ms reported=416 ms
+   line 252 version=516 door=open moved move=411 ms reported=416 ms
+   line 257 version=518 door=closed moved move=411 ms reported=416 ms
+   line 263 version=521 door=open moved move=411 ms reported=416 ms
+   line 267 version=523 door=closed moved move=410 ms reported=415 ms
+   line 271 version=525 door=open moved move=411 ms reported=416 ms
+   line 275 version=527 door=closed moved move=411 ms reported=1169 ms
+   line 280 version=528 door=closed no_move move=None ms reported=684 ms
+   line 282 version=530 door=open moved move=410 ms reported=415 ms
+   DELTA_RX -> reported door ms: n=30 min=415 median=416 p95=713 max=1169
+RF3 valid deltas confirmed in reported within 1500 ms: 30/30 -> PASS
+
+== RF1 / RNF2 presence ==
+   PRESENCE_ON=43 PRESENCE_OFF=43
+   presence episodes ms: n=42 min=11800 median=18855 p95=42360 max=51050
+RNF2 episodes shorter than the 10000 ms hold: 0 (0) -> PASS
+
+== RNF5 reconnection ==
+   no WIFI_LOST or BOOT in this log
