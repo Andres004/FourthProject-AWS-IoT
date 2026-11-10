@@ -196,7 +196,7 @@ flowchart LR
     AP{{"Punto de acceso WiFi<br/>IEEE 802.11 b/g/n · 2.4 GHz<br/>con salida a Internet"}}
     subgraph AMZ["Nube de Amazon"]
         ALX["Servicio de Alexa<br/>reconocimiento de voz<br/>y modelo de interacción"]
-        subgraph AWS["Cuenta de AWS · región us-east-2 (Ohio)"]
+        subgraph AWS["AWS · us-east-2"]
             IOT["AWS IoT Core<br/>registro de Things<br/>y Device Shadow"]
             L["AWS Lambda<br/>monoambiente-skill"]
             DB[("Amazon DynamoDB<br/>user_thing")]
@@ -308,13 +308,445 @@ _Pendiente: foto del montaje real del objeto inteligente y la maqueta de la puer
 
 ### 2.3 Diagramas de clases
 
+Hay dos diagramas por programa: uno con las clases que resuelven el caso de uso y otro con las de soporte. Notación: `+` es público, `#` protegido y `-` privado; los miembros subrayados son estáticos y los métodos en cursiva son abstractos (virtuales puros en C++). «main.cpp» es el archivo principal del firmware, «namespace» un espacio de nombres de C++, «module» un módulo de Python y «ASK SDK» una clase de la librería de Alexa. El triángulo indica herencia; el rombo lleno, que un objeto crea y contiene al otro; el rombo vacío, que lo recibe ya creado; la flecha punteada, que lo usa. En los tipos, `∗` es un puntero de C++.
+
 #### 2.3.1 Firmware del objeto inteligente (ESP32)
 
-_Pendiente (fase 3)._
+```mermaid
+classDiagram
+    direction TB
+    class FirmwareMain {
+        <<main.cpp>>
+        -DoorActuator door
+        -PresenceSensor presence
+        -ShadowClient shadow
+        -DeviceComponent∗ components[2]
+        -ShadowReporter reporter
+        +setup() void
+        +loop() void
+        -applyDesiredToComponents(desired: JsonObjectConst) void
+    }
+    class DeviceComponent {
+        <<abstract>>
+        -bool reportRequested_
+        +begin()* void
+        +update(nowMs: uint32_t)* void
+        +fillReported(reported: JsonObject)* void
+        +applyDesired(desired: JsonObjectConst) void
+        +consumeReportRequest() bool
+        #requestReport() void
+    }
+    class DoorActuator {
+        -Servo servo_
+        -Position position_
+        -Position target_
+        -bool moving_
+        -uint32_t moveStartMs_
+        +begin() void
+        +update(nowMs: uint32_t) void
+        +fillReported(reported: JsonObject) void
+        +applyDesired(desired: JsonObjectConst) void
+        -startMove(target: Position) void
+        -positionName(position: Position)$ const char∗
+        -positionAngle(position: Position)$ int
+    }
+    class Position {
+        <<enumeration>>
+        kClosed
+        kOpen
+    }
+    class PresenceSensor {
+        -bool warmedUp_
+        -bool presence_
+        -uint32_t startMs_
+        -uint32_t lastPollMs_
+        -uint32_t lastMotionMs_
+        +begin() void
+        +update(nowMs: uint32_t) void
+        +fillReported(reported: JsonObject) void
+        -setPresence(presence: bool) void
+    }
+    class ShadowReporter {
+        -ShadowTransport& transport_
+        -DeviceComponent∗ const∗ components_
+        -size_t componentCount_
+        -char payload_[PAYLOAD_BUFFER_SIZE]
+        -bool reportPending_
+        -uint32_t lastReportMs_
+        +ShadowReporter(transport: ShadowTransport&, components: DeviceComponent∗ const∗, componentCount: size_t)
+        +update(nowMs: uint32_t) void
+        +requestReport() void
+        -collectComponentRequests() void
+        -publish(nowMs: uint32_t, reason: const char∗) bool
+    }
+    class ShadowTransport {
+        <<abstract>>
+        -DesiredHandler desiredHandler_
+        -SyncHandler syncHandler_
+        -int64_t lastVersion_
+        +begin()* void
+        +update(nowMs: uint32_t)* void
+        +isConnected()* bool
+        +publishReported(payload: const char∗)* bool
+        +disconnections() uint32_t
+        +setHandlers(desiredHandler: DesiredHandler, syncHandler: SyncHandler) void
+        #handleDelta(payload: const uint8_t∗, length: size_t) void
+        #handleGetAccepted(payload: const uint8_t∗, length: size_t) void
+        #notifySynced() void
+        -acceptVersion(document: const JsonDocument&, source: const char∗) bool
+    }
+    class ShadowClient {
+        -const WifiManager& wifi_
+        -WiFiClientSecure tlsClient_
+        -PubSubClient mqtt_
+        -String thingName_
+        -String updateTopic_
+        -String deltaTopic_
+        -String updateRejectedTopic_
+        -String getTopic_
+        -String getAcceptedTopic_
+        -String getRejectedTopic_
+        -bool sessionActive_
+        -bool attemptedConnection_
+        -bool getPending_
+        -uint32_t disconnections_
+        -uint32_t lastAttemptMs_
+        -uint32_t nextGetMs_
+        +ShadowClient(wifi: const WifiManager&)
+        +begin() void
+        +update(nowMs: uint32_t) void
+        +isConnected() bool
+        +publishReported(payload: const char∗) bool
+        +disconnections() uint32_t
+        -connect() void
+        -onConnected(nowMs: uint32_t) void
+        -markDisconnected() void
+        -requestShadowIfDue(nowMs: uint32_t) void
+        -onMessage(topic: const char∗, payload: const uint8_t∗, length: size_t) void
+        -onGetRejected(payload: const uint8_t∗, length: size_t) void
+    }
+    class SerialShadowClient {
+        -char line_[MAX_LINE_LENGTH]
+        -size_t lineLength_
+        +begin() void
+        +update(nowMs: uint32_t) void
+        +isConnected() bool
+        +publishReported(payload: const char∗) bool
+    }
+    class WifiManager {
+        <<Figura 6b>>
+    }
+    DeviceComponent <|-- DoorActuator
+    DeviceComponent <|-- PresenceSensor
+    ShadowTransport <|-- ShadowClient
+    ShadowTransport <|-- SerialShadowClient
+    DoorActuator *-- Position
+    FirmwareMain *-- DoorActuator : door
+    FirmwareMain *-- PresenceSensor : presence
+    FirmwareMain *-- ShadowClient : shadow
+    FirmwareMain *-- SerialShadowClient : shadow, en local_test
+    FirmwareMain *-- ShadowReporter : reporter
+    ShadowReporter o-- ShadowTransport : transport_
+    ShadowReporter o-- "2" DeviceComponent : components_
+    ShadowClient o-- WifiManager : wifi_
+    FirmwareMain ..> ShadowTransport : setHandlers()
+```
+
+**Figura 6a.** Clases del caso de uso en el firmware ([src/](src/)). Hay dos jerarquías:
+
+- **`DeviceComponent`** es la interfaz de todo sensor o actuador. `DoorActuator` y `PresenceSensor` la implementan. Cada componente escribe sus atributos en `reported` (`fillReported()`), toma de `desired` los que le corresponden (`applyDesired()`; un sensor deja la implementación vacía) y pide un reporte cuando su estado cambia (`requestReport()`). `ShadowReporter` recorre el arreglo `components[]` sin conocer las clases concretas, así que **un sensor o actuador nuevo solo requiere escribir su clase y agregarlo al arreglo** de [main.cpp](src/main.cpp).
+- **`ShadowTransport`** es el enlace con el Shadow. Contiene la lógica común: interpreta el `delta` y la respuesta a `/get`, y descarta las versiones repetidas o anteriores (`acceptVersion()`). `ShadowClient` lo implementa con MQTT sobre TLS hacia AWS IoT Core; `SerialShadowClient`, con el monitor serie, en el entorno `local_test`. Como [main.cpp](src/main.cpp) y `ShadowReporter` solo usan la interfaz, el mismo firmware se prueba sin AWS en B02 (polimorfismo).
+
+`ShadowTransport` no conoce a los componentes: [main.cpp](src/main.cpp) le entrega con `setHandlers()` la función `applyDesiredToComponents()`, que reparte el estado deseado entre los componentes, y la función que pide un reporte cuando termina la sincronización inicial. El enum `Position` es privado de `DoorActuator`.
+
+```mermaid
+classDiagram
+    direction LR
+    class FirmwareMain {
+        <<main.cpp>>
+        -WifiManager wifi
+        -TimeSync timeSync
+        -HealthMonitor health
+        -StatusLed statusLed
+        +setup() void
+        +loop() void
+    }
+    class WifiManager {
+        -bool connected_
+        -uint32_t disconnections_
+        -uint32_t lastAttemptMs_
+        +begin() void
+        +update(nowMs: uint32_t) void
+        +isConnected() bool
+        +disconnections() uint32_t
+        -startConnection(nowMs: uint32_t) void
+    }
+    class TimeSync {
+        -bool started_
+        -bool synced_
+        +update(wifiConnected: bool) void
+        +nowUtcMs(epochMs: int64_t&)$ bool
+    }
+    class HealthMonitor {
+        -uint32_t lastLoopMs_
+        -uint32_t maxLoopMs_
+        -uint32_t lastLogMs_
+        -bool firstLoop_
+        +begin() void
+        +update(nowMs: uint32_t, wifiDrops: uint32_t, shadowDrops: uint32_t) void
+        -resetReasonName()$ const char∗
+    }
+    class StatusLed {
+        -bool on_
+        -uint32_t lastToggleMs_
+        +begin() void
+        +update(nowMs: uint32_t, wifiConnected: bool, shadowConnected: bool) void
+        -write(on: bool) void
+    }
+    class EventLog {
+        +begin()$ void
+        +record(event: const char∗)$ void
+        +recordf(event: const char∗, format: const char∗, ...)$ void
+    }
+    class config {
+        <<namespace>>
+        device
+        pins
+        serial_log
+        network
+        clock_sync
+        health
+        shadow_api
+        shadow_doc
+        door
+        pir
+        report
+        status_led
+        local_test
+    }
+    class secrets {
+        <<namespace>>
+        +char WIFI_SSID[]$
+        +char WIFI_PASSWORD[]$
+        +char AWS_IOT_ENDPOINT[]$
+        +char ROOT_CA[]$
+        +char DEVICE_CERTIFICATE[]$
+        +char DEVICE_PRIVATE_KEY[]$
+    }
+    FirmwareMain *-- WifiManager : wifi
+    FirmwareMain *-- TimeSync : timeSync
+    FirmwareMain *-- HealthMonitor : health
+    FirmwareMain *-- StatusLed : statusLed
+    FirmwareMain ..> EventLog
+    EventLog ..> TimeSync : nowUtcMs()
+    FirmwareMain ..> config
+    FirmwareMain ..> secrets : ShadowClient y WifiManager
+```
+
+**Figura 6b.** Clases de soporte del firmware. `WifiManager` conecta el WiFi y lo reintenta cada 10 s. `TimeSync` sincroniza la hora por NTP, y `EventLog` la usa para escribir cada línea de log con `t_ms` y hora UTC, comparable con CloudWatch. `HealthMonitor` registra el motivo del último reinicio, escribe una línea `HEALTH` cada 60 s y alimenta el watchdog de 30 s. `StatusLed` muestra el estado de la conexión en el LED. `EventLog` es una clase con solo métodos estáticos, que usan todas las demás. Todas las constantes están en el namespace `config` de [config.h](include/config.h) (Tabla 1), y todos los secretos, en el namespace `secrets` de `include/secrets.h`, que no se versiona ([plantilla](include/secrets.example.h)).
+
+**Tabla 1.** Namespaces de [config.h](include/config.h). Cada constante tiene nombre y unidad; el código no tiene números sueltos.
+
+| Namespace | Constantes | Usado por |
+|---|---|---|
+| `device` | `THING_NAME_PREFIX`, `LINK_CODE` | `ShadowClient`, `main.cpp` |
+| `pins` | `SERVO_SIGNAL = 13`, `STATUS_LED = 32`, `PIR_OUTPUT = 26` | `DoorActuator`, `StatusLed`, `PresenceSensor` |
+| `serial_log` | `BAUD_RATE = 115200`, `MAX_DETAILS_LENGTH = 256` | `EventLog` |
+| `network` | `WIFI_RETRY_INTERVAL_MS = 10000`, `MQTT_RETRY_INTERVAL_MS = 5000`, `MQTT_PORT = 8883`, `MQTT_BUFFER_SIZE = 2048`, `MQTT_KEEPALIVE_S = 60`, `MQTT_SOCKET_TIMEOUT_S = 5`, `TLS_CONNECT_TIMEOUT_S = 8`, `TLS_HANDSHAKE_TIMEOUT_S = 8`, `MQTT_SUBSCRIBE_QOS = 1`, `GET_AFTER_SUBSCRIBE_MS = 500`, `GET_RESPONSE_TIMEOUT_MS = 5000` | `WifiManager`, `ShadowClient` |
+| `clock_sync` | Servidores NTP, desfase UTC y `MIN_VALID_EPOCH_S` | `TimeSync` |
+| `health` | `LOG_PERIOD_MS = 60000`, `WATCHDOG_TIMEOUT_S = 30` | `HealthMonitor` |
+| `shadow_api` | Prefijo y sufijos de los temas del Shadow, `ERROR_CODE_NOT_FOUND = 404`, `KEY_VERSION` | `ShadowClient`, `ShadowTransport` |
+| `shadow_doc` | `KEY_DOOR`, `KEY_SERVO_ANGLE`, `KEY_PRESENCE`, `DOOR_OPEN`, `DOOR_CLOSED` | Componentes |
+| `door` | `PWM_FREQUENCY_HZ = 50`, `PULSE_MIN_US = 500`, `PULSE_MAX_US = 2400`, `CLOSED_ANGLE_DEG = 0`, `OPEN_ANGLE_DEG = 90`, `SETTLE_TIME_MS = 400` | `DoorActuator` |
+| `pir` | `POLL_PERIOD_MS = 50`, `WARMUP_MS = 30000`, `PRESENCE_HOLD_MS = 10000` | `PresenceSensor` |
+| `report` | `HEARTBEAT_PERIOD_MS = 60000`, `MIN_REPORT_INTERVAL_MS = 1000`, `PAYLOAD_BUFFER_SIZE = 512` | `ShadowReporter` |
+| `status_led` | `BLINK_WIFI_DOWN_MS = 200`, `BLINK_SHADOW_DOWN_MS = 1000` | `StatusLed` |
+| `local_test` | `MAX_LINE_LENGTH = 256` | `SerialShadowClient` |
 
 #### 2.3.2 Función Lambda (backend de la skill)
 
-_Pendiente (fase 3)._
+```mermaid
+classDiagram
+    direction LR
+    class lambda_function {
+        <<module>>
+        +links: LinkRepository$
+        +things: ThingGateway$
+        +lambda_handler$
+        +THING_NAME_PREFIX = monoambiente-$
+        +LINK_CODE_LENGTH = 6$
+        +OFFLINE_AFTER_S = 150$
+        +CONFIRM_TIMEOUT_S = 3.0$
+        +CONFIRM_POLL_S = 0.25$
+        +USER_HASH_LENGTH = 10$
+        +parse_link_code(raw_code: str | None)$ str | None
+        +get_user_id(handler_input)$ str
+        +say_digits(code: str)$ str
+        +describe_age(age_s: int)$ str
+        +respond(handler_input, speech: str)$ Response
+        +audit(handler_input)$ dict
+        +log_request(handler_input)$ None
+        +now_ms()$ int
+    }
+    class LinkRepository {
+        -_table: Table
+        +LinkRepository(table: Table)
+        +find_thing(user_id: str) str | None
+        +save(user_id: str, thing_name: str) None
+        +delete(user_id: str) None
+    }
+    class ThingGateway {
+        -_iot: IoT.Client
+        -_iot_data: IoTDataPlane.Client
+        -_clock: Callable
+        -_sleep: Callable
+        +ThingGateway(iot_client, iot_data_client, clock, sleep)
+        +exists(thing_name: str) bool
+        +get_state(thing_name: str) ShadowState | None
+        +set_desired_door(thing_name: str, door_state: str) int
+        +wait_for_door(thing_name: str, door_state: str) bool
+    }
+    class ShadowState {
+        +reported: dict
+        +desired: dict
+        +version: int
+        +age_s: int | None
+        +online: bool
+        +ShadowState(document: dict)
+        +offline_note() str
+        -_report_age(document: dict)$ int | None
+    }
+    class Table {
+        <<boto3 · DynamoDB>>
+    }
+    class IoT_Client {
+        <<boto3 · iot e iot-data>>
+    }
+    lambda_function *-- LinkRepository : links
+    lambda_function *-- ThingGateway : things
+    LinkRepository o-- Table : _table
+    ThingGateway o-- IoT_Client : _iot, _iot_data
+    ThingGateway ..> ShadowState : crea
+```
+
+**Figura 7a.** Acceso a los datos en la Lambda ([lambda_function.py](lambda/lambda_function.py)). Cada servicio de AWS queda detrás de una clase, y los handlers no llaman a boto3 directamente:
+
+- **`LinkRepository`** guarda y busca la vinculación de cada usuario en la tabla `user_thing`, siempre por clave (`GetItem`, `PutItem`, `DeleteItem`).
+- **`ThingGateway`** comprueba que un Thing exista (`DescribeThing`), lee su Shadow (`GetThingShadow`), escribe `desired.door` (`UpdateThingShadow`) y espera la confirmación en `reported`. El reloj y la espera se reciben en el constructor; las pruebas unitarias de B01 los reemplazan para comprobar el límite de 3 s sin esperar de verdad.
+- **`ShadowState`** es una vista de solo lectura del documento del Shadow: separa `reported` de `desired`, calcula la antigüedad del último reporte a partir de los `timestamp` de `metadata` y decide si el objeto está en línea (`online`, una propiedad: último reporte con 150 s o menos).
+
+`links` y `things` se crean una sola vez por contenedor de Lambda, al cargar el módulo, y las solicitudes siguientes los reutilizan. Las constantes del módulo reemplazan los números sueltos, y la configuración del despliegue (`IOT_ENDPOINT`, `IOT_REGION`, `TABLE_NAME`) se lee de las variables de entorno.
+
+```mermaid
+classDiagram
+    direction TB
+    class AbstractRequestHandler {
+        <<ASK SDK>>
+        +can_handle(handler_input)* bool
+        +handle(handler_input)* Response
+    }
+    class AbstractExceptionHandler {
+        <<ASK SDK>>
+    }
+    class AbstractRequestInterceptor {
+        <<ASK SDK>>
+    }
+    class AbstractResponseInterceptor {
+        <<ASK SDK>>
+    }
+    class LinkedThingHandler {
+        <<abstract>>
+        +handle(handler_input) Response
+        +handle_thing(thing_name: str, record: dict)* str
+    }
+    class DoorCommandHandler {
+        +intent_name: str$
+        +target: str$
+        +already_speech: str$
+        +done_speech: str$
+        +action_name: str$
+        +can_handle(handler_input) bool
+        +handle_thing(thing_name: str, record: dict) str
+    }
+    class OpenDoorHandler {
+        +intent_name = OpenDoor$
+        +target = open$
+    }
+    class CloseDoorHandler {
+        +intent_name = CloseDoor$
+        +target = closed$
+    }
+    class GetPresenceHandler {
+        +can_handle(handler_input) bool
+        +handle_thing(thing_name: str, record: dict) str
+    }
+    class GetDoorStateHandler {
+        +can_handle(handler_input) bool
+        +handle_thing(thing_name: str, record: dict) str
+    }
+    class LinkThingHandler {
+        +can_handle(handler_input) bool
+        +handle(handler_input) Response
+    }
+    class UnlinkThingHandler {
+        +can_handle(handler_input) bool
+        +handle(handler_input) Response
+    }
+    class LaunchRequestHandler {
+        +can_handle(handler_input) bool
+        +handle(handler_input) Response
+    }
+    class OtrosHandlers {
+        HelpIntentHandler
+        CancelOrStopIntentHandler
+        SessionEndedRequestHandler
+        UnhandledRequestHandler
+    }
+    class CatchAllExceptionHandler {
+        +can_handle(handler_input, exception) bool
+        +handle(handler_input, exception) Response
+    }
+    class RequestTimer {
+        +process(handler_input) None
+    }
+    class RequestLogger {
+        +process(handler_input, response) None
+    }
+    class LinkRepository {
+        <<Figura 7a>>
+    }
+    class ThingGateway {
+        <<Figura 7a>>
+    }
+    AbstractRequestHandler <|-- LinkedThingHandler
+    LinkedThingHandler <|-- DoorCommandHandler
+    DoorCommandHandler <|-- OpenDoorHandler
+    DoorCommandHandler <|-- CloseDoorHandler
+    LinkedThingHandler <|-- GetPresenceHandler
+    LinkedThingHandler <|-- GetDoorStateHandler
+    AbstractRequestHandler <|-- LinkThingHandler
+    AbstractRequestHandler <|-- UnlinkThingHandler
+    AbstractRequestHandler <|-- LaunchRequestHandler
+    AbstractRequestHandler <|-- OtrosHandlers
+    AbstractExceptionHandler <|-- CatchAllExceptionHandler
+    AbstractRequestInterceptor <|-- RequestTimer
+    AbstractResponseInterceptor <|-- RequestLogger
+    LinkedThingHandler ..> LinkRepository : find_thing()
+    LinkedThingHandler ..> ThingGateway
+    LinkThingHandler ..> LinkRepository
+    LinkThingHandler ..> ThingGateway : exists()
+    UnlinkThingHandler ..> LinkRepository
+    LaunchRequestHandler ..> LinkRepository
+```
+
+**Figura 7b.** Handlers e interceptores de la skill. `OtrosHandlers` agrupa cuatro clases que solo responden un texto fijo y no tocan AWS.
+
+- **Resolución del Thing (RF8) en un solo lugar.** `LinkedThingHandler.handle()` busca el Thing del usuario y, si no hay vinculación, responde la guía para vincular; si la hay, llama a `handle_thing()`, que cada subclase implementa (patrón *método plantilla*). Así, los intents que necesitan un Thing (`GetPresence`, `GetDoorState`, `OpenDoor` y `CloseDoor`) no repiten esa lógica.
+- **Un comando, dos intents.** `DoorCommandHandler` implementa la orden y la espera de la confirmación (RF5, RF10, RF11). `OpenDoorHandler` y `CloseDoorHandler` solo fijan sus atributos de clase: el intent que atienden, la posición objetivo y las frases.
+- **Vinculación.** `LinkThingHandler` y `UnlinkThingHandler` heredan directamente de `AbstractRequestHandler`, porque trabajan sin un Thing vinculado o justamente para crearlo o borrarlo (RF7, RF9).
+- **Registro.** `RequestTimer` guarda el instante en que llega la solicitud, y `RequestLogger` escribe al final una línea `SKILL_REQUEST` en CloudWatch con el resultado y los tiempos medidos (§3.10). Cuando ocurre una excepción, `CatchAllExceptionHandler` responde un mensaje de error y escribe esa misma línea, porque en ese caso el SDK no ejecuta el interceptor de respuesta.
+
+El orden en que los handlers se registran en el `SkillBuilder` importa: el SDK usa el primero cuyo `can_handle()` devuelve `True`. `UnhandledRequestHandler`, que acepta cualquier solicitud y atiende `AMAZON.FallbackIntent` y `AMAZON.NavigateHomeIntent`, se registra al final.
 
 ### 2.4 Diagramas de secuencia
 
