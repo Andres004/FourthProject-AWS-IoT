@@ -17,3 +17,6 @@ lambda/package/
 
 # Python caches
 __pycache__/
+
+# Raw Serial Monitor sessions; the ones used as evidence go to docs/evidencias/
+logs/

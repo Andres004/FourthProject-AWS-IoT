@@ -1,0 +1,89 @@
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13232
+load:0x40080400,len:3028
+entry 0x400805e4
+[27|-] BOOT
+[28|-] RESET_REASON reason=power_on
+[28|-] LINK_CODE 739264
+[126|-] WIFI_CONNECTING ssid=Andy’s Iphone
+[137|-] LOCAL_TEST_MODE send {"state":{"door":"open"}}
+[405|-] WIFI_CONNECTED ip=172.20.10.2
+[407|-] TIME_SYNC_START server=pool.ntp.org
+[1000|-] LOCAL_REPORT {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+[1000|-] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+[1186|2026-11-10T02:19:01.953Z] TIME_SYNCED
+# TX {"version": 1, "state": {"door": "open"}}
+[1199|2026-11-10T02:19:01.966Z] DELTA_RX version=1 {"version": 1, "state": {"door": "open"}}
+[1199|2026-11-10T02:19:01.967Z] ACTUATOR_START door=open
+[1599|2026-11-10T02:19:02.366Z] ACTUATOR_DONE door=open angle=90
+[2000|2026-11-10T02:19:02.767Z] LOCAL_REPORT {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[2000|2026-11-10T02:19:02.768Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+# TX {"version": 1, "state": {"door": "closed"}}
+[2211|2026-11-10T02:19:02.978Z] DELTA_RX version=1 {"version": 1, "state": {"door": "closed"}}
+[2211|2026-11-10T02:19:02.979Z] STALE_IGNORED source=delta version=1 last=1
+# TX {"version": 0, "state": {"door": "closed"}}
+[3892|2026-11-10T02:19:04.659Z] DELTA_RX version=0 {"version": 0, "state": {"door": "closed"}}
+[3892|2026-11-10T02:19:04.660Z] STALE_IGNORED source=delta version=0 last=1
+# TX {"version": 2, "state": {"door": "open"}}
+[5576|2026-11-10T02:19:06.343Z] DELTA_RX version=2 {"version": 2, "state": {"door": "open"}}
+[5576|2026-11-10T02:19:06.344Z] LOCAL_REPORT {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[5587|2026-11-10T02:19:06.354Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+# TX {"version": 3, "state": {"door": "half"}}
+[5763|2026-11-10T02:19:06.531Z] DELTA_RX version=3 {"version": 3, "state": {"door": "half"}}
+[5764|2026-11-10T02:19:06.531Z] INVALID_VALUE door=half
+# TX {"version": 4, "state": {"door": 1}}
+[7446|2026-11-10T02:19:08.213Z] DELTA_RX version=4 {"version": 4, "state": {"door": 1}}
+[7446|2026-11-10T02:19:08.213Z] INVALID_VALUE door=<not a string>
+# TX {"version": 5, "state": {"door": "OPEN"}}
+[9124|2026-11-10T02:19:09.891Z] DELTA_RX version=5 {"version": 5, "state": {"door": "OPEN"}}
+[9124|2026-11-10T02:19:09.892Z] INVALID_VALUE door=OPEN
+# TX {"version": 6, "state": {"door": 
+[10803|2026-11-10T02:19:11.571Z] JSON_ERROR reason=IncompleteInput
+# TX {"version": 7, "foo": 1}
+[12481|2026-11-10T02:19:13.249Z] DELTA_RX version=7 {"version": 7, "foo": 1}
+[12482|2026-11-10T02:19:13.249Z] JSON_ERROR reason=missing_state
+# TX xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+[14185|2026-11-10T02:19:14.952Z] JSON_ERROR reason=line_too_long
+# TX {"version": 8, "state": {"presence": true}}
+[15855|2026-11-10T02:19:16.623Z] DELTA_RX version=8 {"version": 8, "state": {"presence": true}}
+# TX {"version": 9, "state": {"door": "closed"}}
+[17538|2026-11-10T02:19:18.305Z] DELTA_RX version=9 {"version": 9, "state": {"door": "closed"}}
+[17538|2026-11-10T02:19:18.306Z] ACTUATOR_START door=closed
+[17938|2026-11-10T02:19:18.705Z] ACTUATOR_DONE door=closed angle=0
+[17938|2026-11-10T02:19:18.706Z] LOCAL_REPORT {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+[17949|2026-11-10T02:19:18.716Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+# TX {"version": 10, "state": {"door": "open"}}
+# TX {"version": 11, "state": {"door": "closed"}}
+[18165|2026-11-10T02:19:18.932Z] DELTA_RX version=10 {"version": 10, "state": {"door": "open"}}
+[18165|2026-11-10T02:19:18.933Z] ACTUATOR_START door=open
+[18316|2026-11-10T02:19:19.083Z] DELTA_RX version=11 {"version": 11, "state": {"door": "closed"}}
+[18316|2026-11-10T02:19:19.084Z] ACTUATOR_START door=closed
+[18716|2026-11-10T02:19:19.483Z] ACTUATOR_DONE door=closed angle=0
+[18938|2026-11-10T02:19:19.705Z] LOCAL_REPORT {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+[18938|2026-11-10T02:19:19.706Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+# TX {"version": 12, "state": {"door": "open"}}
+# TX {"version": 13, "state": {"door": "closed"}}
+# TX {"version": 14, "state": {"door": "open"}}
+[19128|2026-11-10T02:19:19.896Z] DELTA_RX version=12 {"version": 12, "state": {"door": "open"}}
+[19129|2026-11-10T02:19:19.896Z] ACTUATOR_START door=open
+[19529|2026-11-10T02:19:20.296Z] ACTUATOR_DONE door=open angle=90
+[19729|2026-11-10T02:19:20.496Z] DELTA_RX version=13 {"version": 13, "state": {"door": "closed"}}
+[19729|2026-11-10T02:19:20.497Z] ACTUATOR_START door=closed
+[19938|2026-11-10T02:19:20.705Z] LOCAL_REPORT {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[19938|2026-11-10T02:19:20.706Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[20129|2026-11-10T02:19:20.896Z] ACTUATOR_DONE door=closed angle=0
+[20329|2026-11-10T02:19:21.097Z] DELTA_RX version=14 {"version": 14, "state": {"door": "open"}}
+[20330|2026-11-10T02:19:21.097Z] ACTUATOR_START door=open
+[20730|2026-11-10T02:19:21.497Z] ACTUATOR_DONE door=open angle=90
+[20938|2026-11-10T02:19:21.705Z] LOCAL_REPORT {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[20938|2026-11-10T02:19:21.706Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[30030|2026-11-10T02:19:30.797Z] PIR_READY
+[60138|2026-11-10T02:20:00.906Z] HEALTH uptime_s=60 heap=248660 min_heap=243040 rssi=-54 wifi_drops=0 mqtt_drops=0 max_loop_ms=23
+[80938|2026-11-10T02:20:21.705Z] LOCAL_REPORT {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[80938|2026-11-10T02:20:21.706Z] REPORT_TX reason=heartbeat {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}

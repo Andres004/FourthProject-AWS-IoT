@@ -1,0 +1,28 @@
+test_rf10_no_confirmation_within_3_s_is_reported (test_lambda_function.CommandTests.test_rf10_no_confirmation_within_3_s_is_reported) ... ok
+test_rf11_offline_command_is_queued_in_desired (test_lambda_function.CommandTests.test_rf11_offline_command_is_queued_in_desired) ... ok
+test_rf5_cancels_pending_opposite_order (test_lambda_function.CommandTests.test_rf5_cancels_pending_opposite_order) ... ok
+test_rf5_door_already_in_position_is_not_rewritten (test_lambda_function.CommandTests.test_rf5_door_already_in_position_is_not_rewritten) ... ok
+test_rf5_rf10_open_and_close_are_confirmed_by_device (test_lambda_function.CommandTests.test_rf5_rf10_open_and_close_are_confirmed_by_device) ... ok
+test_rf7_link_persists_between_sessions (test_lambda_function.LinkingTests.test_rf7_link_persists_between_sessions) ... ok
+test_rf7_link_valid_code_stores_link_with_date (test_lambda_function.LinkingTests.test_rf7_link_valid_code_stores_link_with_date) ... ok
+test_rf8_each_user_reaches_only_their_own_thing (test_lambda_function.LinkingTests.test_rf8_each_user_reaches_only_their_own_thing) ... ok
+test_rf8_unlinked_user_is_guided_to_link (test_lambda_function.LinkingTests.test_rf8_unlinked_user_is_guided_to_link) ... ok
+test_rf9_change_link_replaces_previous_thing (test_lambda_function.LinkingTests.test_rf9_change_link_replaces_previous_thing) ... ok
+test_rf9_rejects_invalid_codes_without_saving (test_lambda_function.LinkingTests.test_rf9_rejects_invalid_codes_without_saving) ... ok
+test_rf9_rejects_thing_that_does_not_exist (test_lambda_function.LinkingTests.test_rf9_rejects_thing_that_does_not_exist) ... ok
+test_rf9_same_code_again_reports_already_linked (test_lambda_function.LinkingTests.test_rf9_same_code_again_reports_already_linked) ... ok
+test_rf9_unlink_deletes_link (test_lambda_function.LinkingTests.test_rf9_unlink_deletes_link) ... ok
+test_rf11_offline_threshold_is_150_seconds (test_lambda_function.QueryTests.test_rf11_offline_threshold_is_150_seconds) ... ok
+test_rf4_missing_attribute_or_shadow_says_no_data (test_lambda_function.QueryTests.test_rf4_missing_attribute_or_shadow_says_no_data) ... ok
+test_rf4_presence_true_and_false (test_lambda_function.QueryTests.test_rf4_presence_true_and_false) ... ok
+test_rf4_reads_reported_not_desired (test_lambda_function.QueryTests.test_rf4_reads_reported_not_desired) ... ok
+test_rf6_door_open_and_closed (test_lambda_function.QueryTests.test_rf6_door_open_and_closed) ... ok
+test_log_line_hides_user_id (test_lambda_function.RobustnessTests.test_log_line_hides_user_id) ... ok
+test_rf4_rf9_aws_error_is_spoken_and_logged (test_lambda_function.RobustnessTests.test_rf4_rf9_aws_error_is_spoken_and_logged) ... ok
+test_rf8_launch_greets_linked_and_unlinked_users (test_lambda_function.RobustnessTests.test_rf8_launch_greets_linked_and_unlinked_users) ... ok
+test_unknown_intent_is_answered (test_lambda_function.RobustnessTests.test_unknown_intent_is_answered) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.034s
+
+OK

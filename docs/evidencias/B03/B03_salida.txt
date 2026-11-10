@@ -1,0 +1,8 @@
+Tracked files scanned: 38
+RNF6 secrets in tracked files: 0 (0) -> PASS
+Commits scanned: 12
+RNF6 secrets in git history: 0 (0) -> PASS
+Secret paths checked against .gitignore: 5
+RNF6 secret files ignored by git: 5/5 -> PASS
+RNF6 template include/secrets.example.h published: yes -> PASS
+Control: include/secrets.h (not published) detected as ['private key', 'certificate', 'IoT endpoint', 'WiFi password'] -> PASS

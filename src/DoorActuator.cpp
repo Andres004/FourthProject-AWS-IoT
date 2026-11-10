@@ -14,7 +14,10 @@ void DoorActuator::begin() {
 }
 
 void DoorActuator::update(uint32_t nowMs) {
-  if (moving_ && nowMs - moveStartMs_ >= config::door::SETTLE_TIME_MS) {
+  // Signed difference: a move started during this loop iteration has
+  // moveStartMs_ later than nowMs, which must not look like a long wait.
+  const int32_t elapsedMs = static_cast<int32_t>(nowMs - moveStartMs_);
+  if (moving_ && elapsedMs >= static_cast<int32_t>(config::door::SETTLE_TIME_MS)) {
     moving_ = false;
     position_ = target_;
     EventLog::recordf("ACTUATOR_DONE", "door=%s angle=%d",

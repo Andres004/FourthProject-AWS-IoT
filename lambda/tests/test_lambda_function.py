@@ -326,7 +326,7 @@ class QueryTests(SkillTestCase):
                 self.assertIn(f"La puerta está {expected}.", speech)
                 self.assertNotIn("pendiente", speech)
 
-    def test_rnf_offline_threshold_is_150_seconds(self):
+    def test_rf11_offline_threshold_is_150_seconds(self):
         self.iot_data.put_shadow(THING_1, reported={"presence": False}, age_s=150)
         speech, _ = self.call(intent(USER_A, "GetPresence"))
         self.assertNotIn("Ojo", speech)
@@ -341,7 +341,7 @@ class CommandTests(SkillTestCase):
         super().setUp()
         self.link(USER_A, THING_1)
 
-    def test_rf5_rf3_open_and_close_are_confirmed_by_device(self):
+    def test_rf5_rf10_open_and_close_are_confirmed_by_device(self):
         self.iot_data.put_shadow(THING_1, reported={"door": "closed"})
         speech, record = self.call(intent(USER_A, "OpenDoor"))
         self.assertIn("Listo, la puerta está abierta", speech)
@@ -378,7 +378,7 @@ class CommandTests(SkillTestCase):
         self.assertIn("Listo, la puerta está cerrada", speech)
         self.assertEqual(len(self.iot_data.updates), 1)
 
-    def test_rf5_no_confirmation_within_3_s_is_reported(self):
+    def test_rf10_no_confirmation_within_3_s_is_reported(self):
         self.iot_data.put_shadow(THING_1, reported={"door": "closed"})
         self.iot_data.device_reads = None
         speech, record = self.call(intent(USER_A, "OpenDoor"))
@@ -390,7 +390,7 @@ class CommandTests(SkillTestCase):
             self.clock.now, skill.CONFIRM_TIMEOUT_S + skill.CONFIRM_POLL_S
         )
 
-    def test_rnf_offline_command_is_queued_in_desired(self):
+    def test_rf11_offline_command_is_queued_in_desired(self):
         self.iot_data.put_shadow(THING_1, reported={"door": "open"}, age_s=600)
         speech, record = self.call(intent(USER_A, "OpenDoor"))
         self.assertIn("tu casa está desconectada", speech)
@@ -400,7 +400,7 @@ class CommandTests(SkillTestCase):
 
 
 class RobustnessTests(SkillTestCase):
-    def test_launch_greets_linked_and_unlinked_users(self):
+    def test_rf8_launch_greets_linked_and_unlinked_users(self):
         speech, _ = self.call(envelope(USER_A, {"type": "LaunchRequest"}))
         self.assertIn("Todavía no tienes una casa vinculada", speech)
         self.link(USER_A, THING_1)
@@ -413,7 +413,7 @@ class RobustnessTests(SkillTestCase):
         speech, record = self.call(intent(USER_A, "AMAZON.NavigateHomeIntent"))
         self.assertEqual(record["result"], "not_understood")
 
-    def test_aws_error_is_spoken_and_logged(self):
+    def test_rf4_rf9_aws_error_is_spoken_and_logged(self):
         self.iot.failure = RuntimeError("throttled")
         speech, record = self.call(intent(USER_A, "LinkThing", CODE_1))
         self.assertIn("Hubo un problema", speech)

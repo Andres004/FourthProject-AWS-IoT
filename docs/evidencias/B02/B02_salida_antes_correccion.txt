@@ -1,0 +1,19 @@
+C01 [RF2] PASS: boot in local test mode and first report with door=closed angle=0
+C02 [RF3] FAIL: door=open: move 0 ms (expected 400 +/- 60), DELTA_RX -> report 852 ms, reported angle=90
+C03 [RF12] PASS: sent '{"version": 1, "state": {"door": "closed"}}': STALE_IGNORED logged (source=delta version=1 last=1), servo moves=0
+C04 [RF12] PASS: sent '{"version": 0, "state": {"door": "closed"}}': STALE_IGNORED logged (source=delta version=0 last=1), servo moves=0
+C05 [RF3] PASS: same position again: no movement, report sent to clear the delta
+C06 [RF12] PASS: sent '{"version": 3, "state": {"door": "half"}}': INVALID_VALUE logged (door=half), servo moves=0
+C07 [RF12] PASS: sent '{"version": 4, "state": {"door": 1}}': INVALID_VALUE logged (door=<not a string>), servo moves=0
+C08 [RF12] PASS: sent '{"version": 5, "state": {"door": "OPEN"}}': INVALID_VALUE logged (door=OPEN), servo moves=0
+C09 [RF12] PASS: sent '{"version": 6, "state": {"door": ': JSON_ERROR logged (reason=IncompleteInput), servo moves=0
+C10 [RF12] PASS: sent '{"version": 7, "foo": 1}': JSON_ERROR logged (reason=missing_state), servo moves=0
+C11 [RF12] PASS: sent 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx': JSON_ERROR logged (reason=line_too_long), servo moves=0
+C12 [RF12] PASS: delta without the door attribute is ignored by the actuator
+C13 [RF3] FAIL: door=closed: move 10 ms (expected 400 +/- 60), DELTA_RX -> report 12 ms, reported angle=0
+C14 [RF3] PASS: order reversed during the move: ends closed and never reports open
+C15 [RNF4] PASS: 3 orders 600 ms apart: 2 reports, minimum gap 1000 ms (>= 1000)
+C16 waiting for the heartbeat (about 60 s)...
+C16 [RF2/RNF4] FAIL: heartbeat None ms after the last report (expected 60000 +/- 1500)
+
+RESULT 13/16 cases PASS
