@@ -16,7 +16,38 @@
 ---
 ## Resumen ejecutivo
 
-_Pendiente (fase 9): arquitectura en pocas líneas, funcionamiento del sistema y tabla de cumplimiento de los requerimientos._
+**Qué es.** Un objeto inteligente para la puerta de un monoambiente: un ESP32 abre y cierra la puerta (una maqueta) con un servo SG90 y detecta con un sensor PIR AM312 si hay alguien en la entrada. El usuario lo maneja en español desde la skill de Alexa "monoambiente inteligente": pregunta si hay alguien en la puerta, la abre o la cierra y consulta su estado, sin estar en casa.
+
+**Arquitectura** (§2.1).
+
+- **Objeto inteligente:** ESP32 con firmware orientado a objetos, conectado por MQTT sobre TLS (puerto 8883, certificado X.509) al Device Shadow de su Thing en AWS IoT Core (`us-east-2`).
+- **Backend:** una función AWS Lambda en Python resuelve el Thing de cada usuario en DynamoDB y lee o escribe su Shadow.
+- **Alexa nunca habla con el objeto:** la Lambda solo escribe `desired` y lee `reported`; el objeto solo publica `reported` y recibe el `delta`.
+
+**Cómo funciona** (§2.4).
+
+- **Vinculación:** el usuario dice el código de 6 dígitos que muestra el objeto; la Lambda valida el formato, comprueba que el Thing exista y guarda `userId → thingName`. Cada usuario actúa solo sobre su objeto.
+- **Consulta:** la Lambda responde con el último `reported`; si el objeto no reporta hace más de 150 s, lo advierte.
+- **Comando:** la Lambda escribe `desired.door`, el objeto recibe el `delta`, mueve el servo y confirma en `reported`; la skill dice "Listo" solo cuando lee esa confirmación.
+- **Sin conexión:** la orden queda en el Shadow y el objeto la aplica sola al volver la red o la energía.
+
+**Cumplimiento** (§5.1).
+
+| Requisito | Declarado | Medido | Veredicto |
+|---|---|---|---|
+| RF1 a RF6: sensor, reporte, actuador y voz | Según §1.3 | 15 de 15 cruces detectados; 115 de 115 reportes completos; 8 de 8 consultas del sensor, 6 de 6 respuestas en A04 y 28 de 28 comandos en A05 correctos | Cumple |
+| RF7 a RF9: vinculación | Persistente, por usuario, validada | 13 de 13 respuestas; dos usuarios con Things distintos; 0 datos inválidos guardados | Cumple |
+| RF10 a RF12: confirmación, desconexión, inválidos | Propios del grupo | 28 de 28 confirmados; avisos de desconexión correctos; 0 movimientos por valores inválidos | Cumple |
+| RNF1 Estabilidad | ≥ 15 min, 0 reinicios, `loop()` ≤ 500 ms | 27.3 min, 0 reinicios, 0 caídas, `loop()` máx. 21 ms | Cumple |
+| RNF2 Exactitud | PIR 100 % y 0 falsos positivos; servo ±5° | PIR 15 de 15 y 0 en 5 min; servo pendiente de medición | Cumple el PIR |
+| RNF3 Tiempo de respuesta | ≤ 3 s | Mediana 919 ms, máx. 1691 ms (28 comandos) | Cumple |
+| RNF4 Frecuencia de reporte | Evento ≤ 1.1 s; heartbeat 60 s | Evento: mediana 5 ms, máx. 804 ms; heartbeat 60 000 ms | Cumple |
+| RNF5 Reconexión | Orden pendiente ≤ 10 s | 3.3 a 3.9 s | Cumple |
+| RNF6 Seguridad | 0 secretos | 0 en archivos e historial | Cumple |
+
+**Hallazgos.** Las pruebas encontraron y corrigieron dos defectos que el uso normal no mostraba: el servo se confirmaba antes de terminar de moverse (B02) y el firmware se bloqueaba hasta 7 s con WiFi sin Internet (A07) (§4.4). El tiempo de un comando lo domina el servo (411 ms de 919 ms); la nube aporta 96 ms (§5.1).
+
+**Pendiente.** La medición del ángulo del servo con transportador (A06-C) y la foto del montaje (§2.2.3).
 
 ---
 ## Contenido
@@ -1986,6 +2017,8 @@ Lo que los datos no permiten afirmar:
 - **Estabilidad por días.** Se midieron 27.3 min de corrida analizada y 83 min sin reiniciar; no se probaron horas ni días seguidos, ni el comportamiento al renovar la conexión TLS a largo plazo.
 - **La generalidad de los tiempos.** Todo se midió en una noche, con una red (el hotspot de un celular) y una placa.
 
+---
+
 ## 6. Conclusiones
 
 1. **Integración completa a través del Shadow.** El sistema cumple los requerimientos funcionales RF1 a RF12: el objeto reporta presencia y estado de la puerta en `reported`, aplica el `delta` en el servo y lo confirma, y la skill responde consultas y ejecuta comandos en español sobre el Thing de cada usuario, sin comunicarse nunca directamente con el objeto (§5.1).
@@ -1995,6 +2028,8 @@ Lo que los datos no permiten afirmar:
 5. **La vinculación por código permite varios usuarios con validación.** El código de 6 dígitos sin cero inicial, validado contra el registro de AWS IoT antes de guardarse, separa a cada usuario en su Thing (A01, A02) y es compatible con cómo Alexa entrega los números.
 6. **Un diseño modular se pudo probar sin AWS.** Las interfaces `DeviceComponent` y `ShadowTransport` permitieron probar el firmware por el puerto serie (B02), y la inyección del reloj en la Lambda, probar el límite de 3 s sin esperar (B01). Esas pruebas encontraron un defecto (D1) que el uso normal no mostraba.
 7. **Los logs con hora UTC hicieron medibles los requerimientos.** Un log de eventos en el objeto y una línea `SKILL_REQUEST` por solicitud, unidos por la versión del Shadow, permitieron medir cada requerimiento con números y no por observación, y descomponer el tiempo de un comando en sus partes (Figura 13).
+
+---
 
 ## 7. Recomendaciones
 
@@ -2025,18 +2060,38 @@ Limitaciones conocidas del diseño y cómo resolverlas:
 
 ---
 
-## 6. Conclusiones
-
-_Pendiente (fase 8)._
-
----
-
-## 7. Recomendaciones
-
-_Pendiente (fase 8)._
-
----
-
 ## 8. Anexos
 
-_Pendiente (fase 9)._
+Evidencias de las pruebas, una carpeta por prueba en [docs/evidencias/](docs/evidencias/README.md); cada carpeta tiene un `README.md` que describe sus archivos y su tabla de medidas.
+
+| Carpeta | Prueba | Archivos principales | Qué demuestra |
+|---|---|---|---|
+| [A01](docs/evidencias/A01/README.md) | Vinculación, cambio y desvinculación | 19 capturas del simulador y de DynamoDB, `A01_cloudwatch.csv`, `A01_analisis.txt` | 13 de 13 respuestas; un ítem por usuario; persistencia (RF7 a RF9) |
+| [A02](docs/evidencias/A02/README.md) | Dos usuarios | 11 capturas de los Shadows, de DynamoDB y de los logs, `A02_ESP32.log` | Cada usuario solo modifica su Thing (RF8) |
+| [A03](docs/evidencias/A03/README.md) | Consulta del sensor | 2 capturas, 1 video, `A03_ESP32.log`, `A03_cloudwatch.csv`, `A03_analisis.txt` | 8 de 8 respuestas; reporte en mediana 5 ms (RF4, RNF4) |
+| [A04](docs/evidencias/A04/README.md) | Comandos y estado | 7 capturas, 3 videos del servo, `A04_ESP32.log`, `A04_analisis.txt` | 6 de 6 respuestas; `delta` → `reported` en 415 ms (RF3, RF5, RF6, RF10) |
+| [A05](docs/evidencias/A05/README.md) | Tiempo de respuesta | 3 capturas, `A05_cloudwatch.csv`, `A05_analisis.txt` | 28 de 28; confirmación en mediana 919 ms y máx. 1691 ms (RNF3) |
+| [A06](docs/evidencias/A06/README.md) | Exactitud | `A06_PIR_ESP32.log` | 15 de 15 cruces y 0 falsos positivos (RNF2) |
+| [A07](docs/evidencias/A07/README.md) | Caída de WiFi | 5 capturas, 1 video, 2 logs y 2 análisis (antes y después de la corrección D2) | Orden pendiente aplicada a 3297–3848 ms (RNF5, RF11) |
+| [A08](docs/evidencias/A08/README.md) | Corte de energía | 4 capturas, 1 video, `A08_ESP32.log` | Orden pendiente aplicada 3.9 s después de enchufar (RNF5, RF10) |
+| [A09](docs/evidencias/A09/README.md) | Comandos inválidos | 4 capturas, `A09_ESP32.log` | 3 de 3 inválidos sin movimiento (RF12) |
+| [A10](docs/evidencias/A10/README.md) | Estabilidad | `A10_ESP32.log`, `A10_analisis.txt` | 27.3 min, 0 reinicios, `loop()` máx. 21 ms (RNF1, RF2, RNF4) |
+| [B01](docs/evidencias/B01/README.md) | Pruebas unitarias de la Lambda | `B01_salida.txt` | 23 de 23 `ok` |
+| [B02](docs/evidencias/B02/README.md) | Firmware con transporte serie | 2 salidas y 2 logs (antes y después de la corrección D1) | 16 de 16 casos |
+| [B03](docs/evidencias/B03/README.md) | Secretos | `B03_salida.txt` | 0 secretos en archivos e historial (RNF6) |
+
+| Anexo | Archivo | Contenido |
+|---|---|---|
+| Plan de pruebas | [docs/PLAN_DE_PRUEBAS.md](docs/PLAN_DE_PRUEBAS.md) | Requerimientos y procedimiento detallado de cada prueba |
+| Esquema eléctrico | [docs/img/circuito_objeto_inteligente.svg](docs/img/circuito_objeto_inteligente.svg) | Circuito del objeto inteligente (Figura 4) |
+| Modelo de interacción | [alexa/interaction-model.es-US.json](alexa/interaction-model.es-US.json) | Invocación, intents, slot y frases de la skill |
+| Política de AWS IoT usada | [aws/iot-policy-usada.json](aws/iot-policy-usada.json) | `Allow * *`, tal como está en AWS |
+| Política de AWS IoT mínima | [aws/iot-policy.json](aws/iot-policy.json) | Permisos mínimos del certificado para producción |
+| Política del rol de la Lambda | [aws/lambda-role-policy.json](aws/lambda-role-policy.json) | Permisos mínimos del rol para producción |
+| Tabla de vinculaciones | [aws/dynamodb-table.md](aws/dynamodb-table.md) | Definición de `user_thing` y operaciones |
+| Configuración de AWS | [aws/README.md](aws/README.md) | Permisos asignados, por qué y riesgos; datos de la configuración |
+| Plantilla de configuración del objeto | [include/secrets.example.h](include/secrets.example.h) | Credenciales y certificados del objeto, sin valores reales |
+| Constantes del firmware | [include/config.h](include/config.h) | Pines, tiempos, temas y contrato del Shadow |
+| Pruebas unitarias | [lambda/tests/](lambda/tests/test_lambda_function.py) | 23 casos de B01 |
+| Herramientas de prueba | [tools/](tools/) | `analyze_log.py`, `serial_check.py`, `serial_logger.py` y `check_secrets.py` |
+| Diagramas | Bloques `mermaid` de este informe | Fuentes editables de los diagramas de estados, arquitectura, clases y secuencia, y de las Figuras 12 y 13 |
