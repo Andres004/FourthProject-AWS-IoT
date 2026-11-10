@@ -1166,51 +1166,464 @@ Cada comando de voz agrega, además, la entrega del `delta` al objeto y las oper
 
 ### 3.1 Entorno de desarrollo
 
-_Pendiente (fase 6)._
+| Elemento | Firmware del objeto inteligente | Función Lambda | Herramientas de prueba |
+|---|---|---|---|
+| Herramienta | VS Code con PlatformIO IDE (PlatformIO Core 6.2.0) | VS Code para el código; consola de AWS Lambda para el despliegue | Python 3.13.7 en la PC; cualquier terminal |
+| Plataforma y framework | `espressif32` 7.1.3 con Arduino-ESP32 2.0.17 y compilador GCC 8.4.0 (`toolchain-xtensa-esp32`) | Runtime Python 3.14 de AWS Lambda, región `us-east-2` | Biblioteca estándar de Python, más `pyserial` para hablar con la placa |
+| Librerías | PubSubClient 2.8 (MQTT), ArduinoJson 7.4.3 (JSON), ESP32Servo 3.2.1 (servo) | `ask-sdk-core` ([requirements.txt](lambda/requirements.txt)), empaquetada con la función; `boto3`, incluida en el runtime | `unittest` para las pruebas de la Lambda |
+| Placa | ESP32 DOIT DevKit V1 (`board = esp32doit-devkit-v1`) | — | — |
+| Entornos | `esp32doit-devkit-v1`, el firmware real; `local_test`, el mismo firmware con el Shadow reemplazado por el puerto serie (`-D LOCAL_TEST_MODE`) | — | — |
+| Monitor y logs | Serie a 115200 baud con el filtro `log2file`; `monitor_dtr = 0` y `monitor_rts = 0`, para que abrir el monitor no reinicie la placa | CloudWatch Logs | Los scripts de [tools/](tools/) |
+
+Las versiones indicadas son las instaladas en el equipo con el que se compiló el firmware. [platformio.ini](platformio.ini) fija las librerías con versiones compatibles (`^2.8`, `^7.2.0` y `^3.0.5`), así una compilación nueva no toma una versión mayor incompatible.
 
 ### 3.2 Estructura del repositorio
 
-_Pendiente (fase 6)._
+```text
+ThirdProject-AWS-IoT/
+├── README.md                    Hardware, contrato del Shadow, compilación y eventos del log
+├── Informe.md                   Este informe
+├── platformio.ini               Entornos esp32doit-devkit-v1 (real) y local_test (sin AWS)
+├── .gitignore                   Excluye secretos, certificados, compilados, paquetes y logs crudos
+├── include/
+│   ├── config.h                 Todas las constantes del firmware (54, con nombre y unidad)
+│   └── secrets.example.h        Plantilla de secrets.h, sin valores reales; secrets.h no se versiona
+├── src/                         Firmware: una clase por par de archivos .h/.cpp
+│   ├── main.cpp                 Crea los objetos y los conecta; setup() y loop()
+│   ├── DeviceComponent.h        Interfaz de sensores y actuadores
+│   ├── DoorActuator.*           Servo de la puerta
+│   ├── PresenceSensor.*         PIR AM312
+│   ├── ShadowTransport.*        Lógica común del enlace con el Shadow
+│   ├── ShadowClient.*           MQTT sobre TLS con AWS IoT Core
+│   ├── SerialShadowClient.*     Enlace por el puerto serie, para local_test
+│   ├── ShadowReporter.*         Política de reporte
+│   ├── WifiManager.*            Conexión y reintentos de WiFi
+│   ├── TimeSync.*               Hora UTC por NTP
+│   ├── HealthMonitor.*          Motivo del reinicio, línea HEALTH y watchdog
+│   ├── StatusLed.*              LED de estado de la conexión
+│   └── EventLog.*               Log con t_ms y hora UTC
+├── lambda/
+│   ├── lambda_function.py       Backend de la skill
+│   ├── requirements.txt         Dependencias que se empaquetan con la función
+│   └── tests/                   23 pruebas unitarias (B01)
+├── alexa/
+│   └── interaction-model.es-US.json   Modelo de interacción exportado
+├── aws/                         Configuración exportada, sin secretos
+│   ├── README.md                Permisos asignados, por qué y mínimos
+│   ├── iot-policy-usada.json    Política de IoT tal como está en AWS
+│   ├── iot-policy.json          Política de IoT mínima
+│   ├── lambda-role-policy.json  Permisos mínimos del rol de la Lambda
+│   └── dynamodb-table.md        Definición de la tabla user_thing
+├── tools/                       Herramientas de prueba (Python)
+│   ├── analyze_log.py           Calcula los requerimientos desde los logs
+│   ├── serial_check.py          Prueba automática del firmware por el puerto serie (B02)
+│   ├── serial_logger.py         Guarda el log de la placa sin reiniciarla
+│   └── check_secrets.py         Busca secretos en los archivos y en el historial (B03)
+├── docs/
+│   ├── PLAN_DE_PRUEBAS.md       Requerimientos y plan de pruebas
+│   ├── img/                     Esquema eléctrico (SVG)
+│   ├── evidencias/              Evidencia de cada prueba: logs, CSV, capturas y videos
+│   └── GUIA_*.md                Guías internas del grupo (configuración de AWS y redacción)
+├── lib/, test/                  Carpetas estándar de PlatformIO, sin uso
+```
 
 ### 3.3 Módulos y clases
 
-_Pendiente (fase 6)._
+| Programa | Archivo | Clase o módulo | Responsabilidad |
+|---|---|---|---|
+| Firmware | [config.h](include/config.h) | `config` (namespace) | Todas las constantes: pines, tiempos, temas y claves del Shadow (Tabla 1) |
+| Firmware | [secrets.example.h](include/secrets.example.h) | `secrets` (namespace) | Plantilla de las credenciales WiFi, el endpoint y los certificados |
+| Firmware | [main.cpp](src/main.cpp) | Programa principal | Crea los objetos, registra los componentes y llama a `update()` de cada uno |
+| Firmware | [DeviceComponent.h](src/DeviceComponent.h) | `DeviceComponent` | Interfaz de un sensor o actuador frente al Shadow |
+| Firmware | [DoorActuator.h](src/DoorActuator.h), [DoorActuator.cpp](src/DoorActuator.cpp) | `DoorActuator` | Valida la orden, mueve el servo sin bloquear y confirma la posición al terminar |
+| Firmware | [PresenceSensor.h](src/PresenceSensor.h), [PresenceSensor.cpp](src/PresenceSensor.cpp) | `PresenceSensor` | Lee el PIR con calentamiento y retención de la presencia |
+| Firmware | [ShadowTransport.h](src/ShadowTransport.h), [ShadowTransport.cpp](src/ShadowTransport.cpp) | `ShadowTransport` | Interpreta el `delta` y el documento de `/get`; filtra versiones |
+| Firmware | [ShadowClient.h](src/ShadowClient.h), [ShadowClient.cpp](src/ShadowClient.cpp) | `ShadowClient` | Conexión MQTT sobre TLS, suscripciones, `/get` y reconexión |
+| Firmware | [SerialShadowClient.h](src/SerialShadowClient.h), [SerialShadowClient.cpp](src/SerialShadowClient.cpp) | `SerialShadowClient` | El mismo contrato por el puerto serie, para probar sin AWS |
+| Firmware | [ShadowReporter.h](src/ShadowReporter.h), [ShadowReporter.cpp](src/ShadowReporter.cpp) | `ShadowReporter` | Arma `reported` con todos los componentes y decide cuándo publicarlo |
+| Firmware | [WifiManager.h](src/WifiManager.h), [WifiManager.cpp](src/WifiManager.cpp) | `WifiManager` | Conecta el WiFi y lo reintenta cada 10 s |
+| Firmware | [TimeSync.h](src/TimeSync.h), [TimeSync.cpp](src/TimeSync.cpp) | `TimeSync` | Sincroniza la hora UTC por NTP |
+| Firmware | [HealthMonitor.h](src/HealthMonitor.h), [HealthMonitor.cpp](src/HealthMonitor.cpp) | `HealthMonitor` | Motivo del reinicio, línea `HEALTH` cada 60 s y watchdog de 30 s |
+| Firmware | [StatusLed.h](src/StatusLed.h), [StatusLed.cpp](src/StatusLed.cpp) | `StatusLed` | Indica el estado de la conexión |
+| Firmware | [EventLog.h](src/EventLog.h), [EventLog.cpp](src/EventLog.cpp) | `EventLog` | Una línea de log por evento, con `t_ms` y hora UTC |
+| Lambda | [lambda_function.py](lambda/lambda_function.py) | `LinkRepository` | Vinculaciones en DynamoDB |
+| Lambda | [lambda_function.py](lambda/lambda_function.py) | `ThingGateway`, `ShadowState` | Registro de Things y Shadow; lectura del documento |
+| Lambda | [lambda_function.py](lambda/lambda_function.py) | Handlers e interceptores | Un handler por intent; resolución del Thing en `LinkedThingHandler`; una línea de log por solicitud |
+| Prueba | [test_lambda_function.py](lambda/tests/test_lambda_function.py) | 4 clases de prueba con 23 casos, sobre dobles de DynamoDB, AWS IoT y el reloj | Pruebas unitarias de la Lambda sin AWS (B01) |
+| Herramienta | [analyze_log.py](tools/analyze_log.py) | Script | Calcula cada requerimiento a partir del log del objeto y de la exportación de CloudWatch |
+| Herramienta | [serial_check.py](tools/serial_check.py) | Script | Envía `delta` válidos, inválidos, repetidos y atrasados al firmware `local_test` y comprueba su respuesta (B02) |
+| Herramienta | [serial_logger.py](tools/serial_logger.py) | Script | Guarda el log de la placa sin reiniciarla y sigue grabando si se desenchufa (A08) |
+| Herramienta | [check_secrets.py](tools/check_secrets.py) | Script | Busca claves, certificados, access keys, números de cuenta, endpoints y contraseñas en los archivos y en el historial (B03) |
+
+`main.cpp` y el módulo de la Lambda solo crean los objetos y los coordinan: la lógica de cada responsabilidad está en su propia clase (§2.3).
 
 ### 3.4 Configuración en AWS
 
-_Pendiente (fase 6): Thing, certificados, política de AWS IoT, función Lambda, tabla de DynamoDB y rol IAM, con la justificación de los permisos asignados y los permisos mínimos._
+Todos los recursos están en la región `us-east-2` (Ohio). La configuración exportada, sin secretos y con el número de cuenta reemplazado por `<account-id>`, está en [aws/](aws/README.md).
+
+#### 3.4.1 AWS IoT Core
+
+| Recurso | Configuración |
+|---|---|
+| Política de IoT | `monoambiente-policy` ([iot-policy-usada.json](aws/iot-policy-usada.json)), asociada al certificado del Thing |
+| Thing principal | `monoambiente-739264`, con el objeto inteligente. Shadow clásico (sin nombre), creado con el estado inicial `{"state":{"desired":{"door":"closed"},"reported":{"door":"closed"}}}` |
+| Thing de prueba | `monoambiente-518306`, sin hardware, para probar varios usuarios (A02) |
+| Certificado | Generado por AWS al crear el Thing (RSA 2048), activo y asociado al Thing y a la política. El certificado, la clave privada y la CA raíz de Amazon (Amazon Root CA 1) se copian en `include/secrets.h`; la clave privada solo se puede descargar una vez |
+| Endpoint | Dominio `iot:Data-ATS` de la cuenta (`xxxxxxxx-ats.iot.us-east-2.amazonaws.com`), usado por el objeto (`AWS_IOT_ENDPOINT`) y por la Lambda (`IOT_ENDPOINT`) |
+
+Capturas del Shadow durante las pruebas: [A02_06](docs/evidencias/A02/A02_06_shadow_518306_delta.png) (Shadow con un `delta` pendiente) y [A04_06](docs/evidencias/A04/A04_06_shadow_sin_delta.png) (Shadow sincronizado, sin `delta`).
+
+#### 3.4.2 Amazon DynamoDB
+
+Tabla `user_thing`, clave de partición `userId` (String), sin clave de ordenamiento y con la capacidad por defecto de la consola. `thingName` y `fechaVinculacion` no se declaran: los crea la Lambda al guardar el ítem ([definición](aws/dynamodb-table.md), §2.6.2). Capturas: [A01_07](docs/evidencias/A01/A01_07_dynamodb_vinculado.png) (un ítem vinculado) y [A02_08](docs/evidencias/A02/A02_08_dynamodb_dos_usuarios.png) (dos usuarios con Things distintos).
+
+#### 3.4.3 AWS Lambda
+
+| Parámetro | Valor | Motivo |
+|---|---|---|
+| Nombre | `monoambiente-skill` | — |
+| Runtime y handler | Python 3.14; `lambda_function.lambda_handler` | El handler lo crea el `SkillBuilder` del ASK SDK |
+| Código | Paquete `.zip` con `lambda_function.py` y `ask-sdk-core` (§3.7) | `boto3` ya viene en el runtime |
+| Variables de entorno | `IOT_ENDPOINT` (dominio ATS de la cuenta), `IOT_REGION` = `us-east-2`, `TABLE_NAME` = `user_thing` | El código no tiene direcciones ni nombres de recursos fijos |
+| Tiempo máximo | 7 s | La espera de la confirmación dura hasta 3 s, más las llamadas a DynamoDB y al Shadow; 7 s deja margen y queda por debajo de los 8 s que Alexa espera una respuesta |
+| Disparador | Alexa Skills Kit, con verificación del Skill ID | Solo esta skill puede invocar la función |
+| Logs | Grupo `/aws/lambda/monoambiente-skill` de CloudWatch | Una línea `SKILL_REQUEST` por solicitud (§3.10) |
+
+#### 3.4.4 Permisos asignados y permisos mínimos
+
+La consigna acepta permisos amplios si se documenta qué se asignó, por qué y qué sería necesario en producción.
+
+| Recurso | Permisos asignados | Por qué | Permisos mínimos para producción |
+|---|---|---|---|
+| Política de IoT del certificado | `Allow` `*` sobre `*` ([iot-policy-usada.json](aws/iot-policy-usada.json)) | Simplificó la configuración inicial y las pruebas con el cliente MQTT de la consola | `iot:Connect` solo con el client ID `monoambiente-739264`; `iot:Publish`, `iot:Receive` e `iot:Subscribe` solo en `$aws/things/monoambiente-739264/shadow/*` ([iot-policy.json](aws/iot-policy.json)) |
+| Rol de ejecución de la Lambda | Políticas administradas `AWSIoTFullAccess` y `AmazonDynamoDBFullAccess`, más `AWSLambdaBasicExecutionRole`, que crea la consola | Evitó errores de permisos durante el desarrollo | `iot:GetThingShadow`, `iot:UpdateThingShadow` e `iot:DescribeThing` sobre `thing/monoambiente-*`; `dynamodb:GetItem`, `dynamodb:PutItem` y `dynamodb:DeleteItem` sobre `table/user_thing`; escritura de logs solo en su grupo de CloudWatch ([lambda-role-policy.json](aws/lambda-role-policy.json)) |
+
+**Riesgo de los permisos amplios.** Con `Allow * *`, quien obtenga el certificado y la clave privada del objeto puede publicar en cualquier tema y modificar el Shadow de cualquier Thing de la cuenta; con la política mínima, solo opera sobre su propio Thing. Del mismo modo, `AmazonDynamoDBFullAccess` permite que un error en la Lambda borre cualquier tabla de la cuenta; el rol mínimo solo toca `user_thing`, y únicamente con las tres operaciones que usa el código.
+
+**Por qué la Lambda necesita `iot:DescribeThing`.** Es la validación de RF9: antes de guardar una vinculación, comprueba que `monoambiente-<código>` exista ([ThingGateway.exists()](lambda/lambda_function.py#L165-L171)).
 
 ### 3.5 Configuración en Alexa
 
-_Pendiente (fase 6): modelo de interacción y vinculación con la función Lambda._
+| Parámetro | Valor |
+|---|---|
+| Nombre e invocación | `monoambiente inteligente` |
+| Idioma principal | Spanish (US) |
+| Tipo de skill | Custom, creada desde cero (*Start from Scratch*) |
+| Modelo de interacción | Pegado en el **JSON Editor** de la consola y compilado con **Build skill**. Exportado en [alexa/interaction-model.es-US.json](alexa/interaction-model.es-US.json) |
+| Endpoint | **AWS Lambda ARN**: el ARN de `monoambiente-skill` en la región por defecto. La skill se creó con la plantilla *Alexa-hosted (Python)*, pero ese backend no se usa: el endpoint apunta a la función propia |
+| Vinculación con la Lambda | En los dos sentidos: el endpoint de la skill apunta a la Lambda, y el disparador de la Lambda solo acepta el Skill ID de esta skill |
+| Pruebas | Pestaña **Test** de la Alexa Developer Console, en etapa *Development*; muestra el JSON de entrada y de salida de cada solicitud (capturas de A01 a A09) |
 
 ### 3.6 Credenciales y secretos
 
-_Pendiente (fase 6)._
+| Secreto | Dónde está | Cómo se protege |
+|---|---|---|
+| SSID y contraseña WiFi | `include/secrets.h` | En [.gitignore](.gitignore); en el repositorio solo está la plantilla [secrets.example.h](include/secrets.example.h), sin valores reales |
+| Certificado del dispositivo y clave privada | `include/secrets.h` | Igual; además, `.gitignore` excluye `certs/`, `*.pem`, `*.crt` y `*.key` |
+| Endpoint de AWS IoT | `include/secrets.h` y variable de entorno `IOT_ENDPOINT` de la Lambda | No aparece en el código; en los logs publicados se reemplazó por `xxxxxxxx-ats.iot…` |
+| Credenciales de AWS de la Lambda | Rol IAM de la función | La Lambda no tiene access keys: boto3 toma credenciales temporales del rol |
+| Número de cuenta de AWS | — | Reemplazado por `<account-id>` en [aws/](aws/README.md); las capturas están recortadas para no mostrarlo |
+| `userId` de Alexa | DynamoDB | En CloudWatch se registra solo un hash de 10 caracteres |
+
+Ni el firmware ni la Lambda contienen access keys de AWS, como exige la consigna. [check_secrets.py](tools/check_secrets.py) lo comprueba en los archivos publicados y en todo el historial de git (B03, §4.3).
 
 ### 3.7 Compilación, carga y despliegue
 
-_Pendiente (fase 6)._
+**Firmware**, desde la raíz del proyecto:
+
+1. Copiar `include/secrets.example.h` como `include/secrets.h` y completar las credenciales WiFi, el endpoint, la CA raíz, el certificado y la clave privada.
+2. Comprobar que `LINK_CODE` en [config.h](include/config.h) coincida con el nombre del Thing.
+3. Compilar, cargar y abrir el monitor:
+
+```bash
+pio run -e esp32doit-devkit-v1 -t upload -t monitor
+```
+
+Para probar el hardware sin AWS, con el Shadow reemplazado por el monitor serie (se envía un `delta` como `{"state":{"door":"open"}}`):
+
+```bash
+pio run -e local_test -t upload -t monitor
+```
+
+**Lambda**, desde la raíz del proyecto, en Windows:
+
+```bash
+python -m pip install -r lambda/requirements.txt -t lambda/package
+```
+
+```bash
+copy lambda\lambda_function.py lambda\package\
+```
+
+```bash
+python -c "import shutil; shutil.make_archive('lambda/lambda_deployment', 'zip', 'lambda/package')"
+```
+
+El archivo `lambda/lambda_deployment.zip` se sube en la consola de Lambda (**Code** → **Upload from** → **.zip file**). `lambda/package/` y los `.zip` están en `.gitignore`.
+
+**Pruebas y herramientas**, desde la raíz del proyecto:
+
+```bash
+python -m unittest discover -s lambda/tests -v                                  # B01: pruebas unitarias de la Lambda
+python tools/serial_check.py --port COM3 --log docs/evidencias/B02/B02_ESP32.log   # B02: firmware local_test
+python tools/check_secrets.py -o docs/evidencias/B03/B03_salida.txt              # B03: secretos
+python tools/serial_logger.py --port COM3 --out logs/A10_ESP32.log               # guarda el log de la placa
+python tools/analyze_log.py logs/A10_ESP32.log A05_cloudwatch.csv -o salida.txt  # mide los requerimientos
+```
 
 ### 3.8 Fragmentos clave
 
-_Pendiente (fase 6)._
+Los fragmentos son extractos cortos; el código completo está en los archivos enlazados.
+
+#### 3.8.1 Bucle principal sin bloqueos
+
+`loop()` toma el tiempo una sola vez y se lo pasa a cada módulo, que hace su trabajo solo si le corresponde y vuelve de inmediato ([main.cpp, líneas 70 a 82](src/main.cpp#L70-L82)):
+
+```cpp
+void loop() {
+  const uint32_t nowMs = millis();
+
+  health.update(nowMs, wifi.disconnections(), shadow.disconnections());
+  wifi.update(nowMs);
+  timeSync.update(wifi.isConnected());
+  shadow.update(nowMs);
+  for (DeviceComponent* component : components) {
+    component->update(nowMs);
+  }
+  reporter.update(nowMs);
+  statusLed.update(nowMs, wifi.isConnected(), shadow.isConnected());
+}
+```
+
+El firmware no usa `delay()`. Para agregar un sensor o actuador basta con sumarlo al arreglo `components[]` ([main.cpp, línea 40](src/main.cpp#L40)): el bucle, el reporte y la entrega de `desired` lo incluyen solos.
+
+#### 3.8.2 Conexión MQTT sobre TLS y pedido del Shadow
+
+`connect()` abre la conexión con el client ID igual al nombre del Thing. El intervalo de 5 s entre intentos se cuenta desde el **fin** del intento, porque un intento fallido puede bloquear varios segundos en la consulta DNS o en el *handshake* TLS; esta fue la corrección del defecto encontrado en A07 (§4.4) ([ShadowClient.cpp, líneas 71 a 87](src/ShadowClient.cpp#L71-L87)):
+
+```cpp
+  const bool connected = mqtt_.connect(thingName_.c_str());
+  // A failed DNS lookup or TLS handshake can block for several seconds, so
+  // the retry interval starts when the attempt ends. Otherwise the next
+  // attempt would start at once and loop() would stay blocked.
+  lastAttemptMs_ = millis();
+  if (connected) {
+    onConnected(lastAttemptMs_);
+  } else {
+    EventLog::recordf("MQTT_CONNECT_FAILED", "state=%d", mqtt_.state());
+  }
+```
+
+Al conectarse, `onConnected()` se suscribe con QoS 1 a `update/delta`, `get/accepted`, `get/rejected` y `update/rejected`, y programa el pedido del documento para 500 ms después, porque PubSubClient no informa cuándo AWS confirma las suscripciones ([líneas 89 a 107](src/ShadowClient.cpp#L89-L107)). `requestShadowIfDue()` publica en `get` y lo repite cada 5 s hasta recibir la respuesta ([líneas 120 a 130](src/ShadowClient.cpp#L120-L130)). Así, una orden que quedó pendiente mientras el objeto estaba desconectado se aplica al volver (RNF5).
+
+#### 3.8.3 Filtro de versiones del `delta`
+
+`handleDelta()` registra el `delta`, descarta las versiones repetidas o atrasadas y entrega el estado a los componentes ([ShadowTransport.cpp, líneas 28 a 49](src/ShadowTransport.cpp#L28-L49)). El filtro está en `acceptVersion()` ([líneas 73 a 88](src/ShadowTransport.cpp#L73-L88)):
+
+```cpp
+  const int64_t version = value.as<int64_t>();
+  if (version <= lastVersion_) {
+    EventLog::recordf("STALE_IGNORED", "source=%s version=%lld last=%lld",
+                      source, static_cast<long long>(version),
+                      static_cast<long long>(lastVersion_));
+    return false;
+  }
+  lastVersion_ = version;
+  return true;
+```
+
+#### 3.8.4 Actuador que confirma después de moverse
+
+`applyDesired()` valida el valor (`INVALID_VALUE` si no es `open` ni `closed`), no repite un movimiento en curso ni uno innecesario y, si hace falta, inicia el movimiento ([DoorActuator.cpp, líneas 34 a 62](src/DoorActuator.cpp#L34-L62)). `update()` cambia la posición reportada recién cuando pasaron los 400 ms ([líneas 16 a 27](src/DoorActuator.cpp#L16-L27)):
+
+```cpp
+  // Signed difference: a move started during this loop iteration has
+  // moveStartMs_ later than nowMs, which must not look like a long wait.
+  const int32_t elapsedMs = static_cast<int32_t>(nowMs - moveStartMs_);
+  if (moving_ && elapsedMs >= static_cast<int32_t>(config::door::SETTLE_TIME_MS)) {
+    moving_ = false;
+    position_ = target_;
+    EventLog::recordf("ACTUATOR_DONE", "door=%s angle=%d",
+                      positionName(position_), positionAngle(position_));
+    requestReport();
+  }
+```
+
+La diferencia con signo es la corrección del defecto encontrado en B02 (§4.4): `moveStartMs_` se toma con `millis()` dentro de la misma vuelta del bucle, después de `nowMs`, y una resta sin signo daba un número enorme, así que el movimiento se daba por terminado de inmediato.
+
+#### 3.8.5 Sensor de presencia con calentamiento y retención
+
+`update()` ignora el PIR durante los primeros 30 s, lo lee cada 50 ms, marca presencia con cada lectura en alto y la quita recién 10 s después del último movimiento ([PresenceSensor.cpp, líneas 14 a 35](src/PresenceSensor.cpp#L14-L35)):
+
+```cpp
+  if (digitalRead(config::pins::PIR_OUTPUT) == HIGH) {
+    lastMotionMs_ = nowMs;
+    setPresence(true);
+  } else if (presence_ &&
+             nowMs - lastMotionMs_ >= config::pir::PRESENCE_HOLD_MS) {
+    setPresence(false);
+  }
+```
+
+`setPresence()` solo registra y pide un reporte cuando el valor cambia ([líneas 41 a 48](src/PresenceSensor.cpp#L41-L48)).
+
+#### 3.8.6 Política de reporte
+
+`ShadowReporter::update()` implementa la política de §2.8: reporte por evento con 1 s de separación mínima y heartbeat de 60 s; sin conexión, el reporte queda pendiente ([ShadowReporter.cpp, líneas 14 a 31](src/ShadowReporter.cpp#L14-L31)):
+
+```cpp
+  if (!transport_.isConnected()) {
+    return;  // A pending report stays pending until the link returns.
+  }
+
+  const uint32_t elapsedMs = nowMs - lastReportMs_;
+  if (elapsedMs < config::report::MIN_REPORT_INTERVAL_MS) {
+    return;
+  }
+
+  if (reportPending_) {
+    reportPending_ = !publish(nowMs, "event");
+  } else if (elapsedMs >= config::report::HEARTBEAT_PERIOD_MS) {
+    publish(nowMs, "heartbeat");
+  }
+```
+
+`publish()` le pide a cada componente sus atributos (`fillReported()`), así cada reporte trae el estado completo (RF2), y controla que el documento quepa en 512 bytes ([líneas 45 a 67](src/ShadowReporter.cpp#L45-L67)).
+
+#### 3.8.7 Evidencia de estabilidad y watchdog
+
+`HealthMonitor::begin()` registra el motivo del último reinicio (`RESET_REASON`, por ejemplo `brownout` o `task_watchdog`) y configura un watchdog de 30 s ([HealthMonitor.cpp, líneas 16 a 23](src/HealthMonitor.cpp#L16-L23)). `update()` lo alimenta en cada vuelta, mide la vuelta más larga de `loop()` y cada 60 s escribe una línea `HEALTH` con el tiempo encendido, el heap libre y mínimo, la señal WiFi, las caídas y `max_loop_ms` ([líneas 25 a 57](src/HealthMonitor.cpp#L25-L57)). De esas líneas salen las medidas de RNF1.
+
+#### 3.8.8 Hora UTC en los logs
+
+`TimeSync` inicia el NTP en segundo plano en cuanto hay WiFi ([TimeSync.cpp, líneas 14 a 30](src/TimeSync.cpp#L14-L30)), y `EventLog` antepone a cada línea `[t_ms|UTC]` ([EventLog.cpp, líneas 16 a 30](src/EventLog.cpp#L16-L30)). La hora UTC permite comparar el log del objeto con el de la Lambda en CloudWatch, que también está en UTC, y medir tiempos de extremo a extremo (A05).
+
+#### 3.8.9 Lambda: resolución del Thing (RF8)
+
+Todos los intents que necesitan un objeto heredan este método, que busca la vinculación del usuario antes de hacer nada ([lambda_function.py, líneas 247 a 255](lambda/lambda_function.py#L247-L255)):
+
+```python
+    def handle(self, handler_input):
+        thing_name = links.find_thing(get_user_id(handler_input))
+        audit(handler_input)["thing"] = thing_name
+        if thing_name is None:
+            audit(handler_input)["result"] = "not_linked"
+            return respond(handler_input, NOT_LINKED_SPEECH)
+        return respond(
+            handler_input, self.handle_thing(thing_name, audit(handler_input))
+        )
+```
+
+#### 3.8.10 Lambda: validación y vinculación (RF7, RF9)
+
+`parse_link_code()` acepta solo seis dígitos sin cero inicial ([líneas 235 a 241](lambda/lambda_function.py#L235-L241)). `LinkThingHandler.handle()` valida el formato, comprueba que el Thing exista con `ThingGateway.exists()` y recién entonces guarda la vinculación con `LinkRepository.save()`, que escribe `fechaVinculacion` en ISO 8601 UTC ([líneas 396 a 439](lambda/lambda_function.py#L396-L439)).
+
+#### 3.8.11 Lambda: comando con confirmación (RF5, RF10, RF11)
+
+`DoorCommandHandler.handle_thing()` no reescribe el Shadow si la puerta ya está en la posición pedida, escribe `desired`, no espera si el objeto está desconectado y, si está en línea, espera la confirmación ([líneas 275 a 303](lambda/lambda_function.py#L275-L303)). La espera está en `ThingGateway.wait_for_door()` ([líneas 189 a 202](lambda/lambda_function.py#L189-L202)):
+
+```python
+        deadline = self._clock() + CONFIRM_TIMEOUT_S
+        while True:
+            state = self.get_state(thing_name)
+            if state is not None and state.reported.get(DOOR_ATTRIBUTE) == door_state:
+                return True
+            if self._clock() >= deadline:
+                return False
+            self._sleep(CONFIRM_POLL_S)
+```
+
+`_clock` y `_sleep` se reciben en el constructor; en B01 se reemplazan por un reloj simulado, así la prueba comprueba el límite de 3 s sin esperar de verdad. La decisión de "desconectado" está en `ShadowState.online` y `offline_note()` ([líneas 114 a 126](lambda/lambda_function.py#L114-L126)).
+
+#### 3.8.12 Lambda: una línea de log por solicitud
+
+`log_request()` escribe en CloudWatch una línea JSON `SKILL_REQUEST` con el intent, un hash del usuario, el Thing, el resultado, la versión del Shadow y los tiempos `lambda_ms` y `confirm_ms` ([líneas 521 a 544](lambda/lambda_function.py#L521-L544)). La llaman `RequestLogger`, al final de cada solicitud, y `CatchAllExceptionHandler`, cuando hay un error.
 
 ### 3.9 Temporización sin bloqueos
 
-_Pendiente (fase 6)._
+| Constante | Valor | Archivo | Uso |
+|---|---|---|---|
+| `POLL_PERIOD_MS` | 50 ms | [config.h](include/config.h) | Lectura del PIR |
+| `WARMUP_MS` | 30 000 ms | config.h | Calentamiento del PIR al arrancar |
+| `PRESENCE_HOLD_MS` | 10 000 ms | config.h | Retención de la presencia después del último movimiento |
+| `SETTLE_TIME_MS` | 400 ms | config.h | Duración de un movimiento del servo |
+| `MIN_REPORT_INTERVAL_MS` | 1000 ms | config.h | Separación mínima entre reportes |
+| `HEARTBEAT_PERIOD_MS` | 60 000 ms | config.h | Reporte periódico de respaldo |
+| `WIFI_RETRY_INTERVAL_MS` | 10 000 ms | config.h | Reintento de WiFi |
+| `MQTT_RETRY_INTERVAL_MS` | 5000 ms | config.h | Reintento de MQTT, contado desde el fin del intento anterior |
+| `GET_AFTER_SUBSCRIBE_MS` | 500 ms | config.h | Espera entre las suscripciones y el pedido del documento |
+| `GET_RESPONSE_TIMEOUT_MS` | 5000 ms | config.h | Repetición del pedido del documento sin respuesta |
+| `MQTT_KEEPALIVE_S` | 60 s | config.h | *Keep-alive* de la conexión MQTT |
+| `TLS_CONNECT_TIMEOUT_S`, `TLS_HANDSHAKE_TIMEOUT_S` | 8 s cada uno | config.h | Límite de la conexión TCP y del *handshake* TLS |
+| `LOG_PERIOD_MS` | 60 000 ms | config.h | Línea `HEALTH` |
+| `WATCHDOG_TIMEOUT_S` | 30 s | config.h | Reinicio si `loop()` se detiene |
+| `BLINK_WIFI_DOWN_MS`, `BLINK_SHADOW_DOWN_MS` | 200 ms y 1000 ms | config.h | Medio período del parpadeo del LED |
+| `CONFIRM_TIMEOUT_S`, `CONFIRM_POLL_S` | 3.0 s y 0.25 s | [lambda_function.py](lambda/lambda_function.py) | Espera de la confirmación en la Lambda |
+| `OFFLINE_AFTER_S` | 150 s | lambda_function.py | Antigüedad a partir de la cual el objeto se considera desconectado |
+
+- **Sin `delay()`.** Cada tarea periódica compara el tiempo transcurrido con su intervalo y vuelve de inmediato si todavía no le corresponde actuar. `WiFi.begin()` y el NTP trabajan en segundo plano. En la corrida de estabilidad, la vuelta más larga de `loop()` fue de 21 ms (A10).
+- **Resta sin signo.** Las comparaciones usan la forma `nowMs - last >= INTERVAL` con `uint32_t`, que da el tiempo correcto aunque `millis()` vuelva a 0 cada 2<sup>32</sup> ms ≈ 49.7 días. Hay dos excepciones a propósito, con diferencia con signo: el fin del movimiento del servo, porque `moveStartMs_` puede ser posterior a `nowMs` (§3.8.4), y el pedido del documento, que se programa para un instante futuro (`nextGetMs_`).
+- **El único bloqueo que queda: la conexión MQTT.** `mqtt_.connect()` de PubSubClient es sincrónica: resuelve el DNS y hace el *handshake* TLS antes de volver. Una conexión exitosa detuvo `loop()` unos 2 s (`max_loop_ms=2111` en A07); un intento fallido puede durar más mientras falla el DNS, y por eso el siguiente intento se cuenta desde el fin del anterior (§3.8.2). El watchdog de 30 s supera el peor caso de 16 s de los dos límites de TLS, así que no reinicia la placa durante una conexión lenta. La solución completa está en §7.
+- **Tiempos de la Lambda.** La espera de la confirmación (hasta 3 s) más las llamadas a AWS quedan dentro del límite de 7 s de la función, que a su vez está por debajo de los 8 s que Alexa espera una respuesta.
 
 ### 3.10 Registro de eventos (logs)
 
-_Pendiente (fase 6)._
+Los logs son la base para medir los requerimientos. El objeto y la Lambda registran la hora en UTC, así sus eventos se pueden poner en una misma línea de tiempo.
+
+**Objeto inteligente.** [EventLog.cpp](src/EventLog.cpp) imprime por el monitor serie una línea por evento con el formato `[t_ms|UTC] EVENTO detalles`. `t_ms` son los milisegundos desde el arranque (`millis()`), y UTC es la hora NTP con milisegundos, o `-` hasta que se sincroniza el reloj. El filtro `log2file` de PlatformIO o [serial_logger.py](tools/serial_logger.py) guardan cada sesión en un archivo.
+
+| Evento | Cuándo ocurre |
+|---|---|
+| `BOOT`, `RESET_REASON`, `LINK_CODE` | Al arrancar: motivo del reinicio y código de vinculación |
+| `WIFI_CONNECTING`, `WIFI_CONNECTED`, `WIFI_LOST` | Estado del WiFi; `WIFI_LOST` lleva un contador de caídas |
+| `MQTT_CONNECTING`, `MQTT_CONNECTED`, `MQTT_CONNECT_FAILED`, `MQTT_LOST` | Estado de la conexión con AWS IoT Core |
+| `TIME_SYNC_START`, `TIME_SYNCED` | Sincronización NTP |
+| `GET_TX`, `GET_RX`, `GET_REJECTED` | Pedido del documento completo y su respuesta |
+| `DELTA_RX version=N` | `delta` recibido, con su versión y su contenido |
+| `STALE_IGNORED`, `INVALID_VALUE`, `JSON_ERROR`, `UPDATE_REJECTED` | Órdenes descartadas y errores |
+| `ACTUATOR_START`, `ACTUATOR_DONE` | Inicio y fin del movimiento del servo |
+| `PIR_READY`, `PRESENCE_ON`, `PRESENCE_OFF` | Fin del calentamiento y cambios de presencia |
+| `REPORT_TX reason=event\|heartbeat`, `REPORT_TX_FAILED` | Reporte publicado en `reported`, con su contenido |
+| `HEALTH` | Cada 60 s: tiempo encendido, heap libre y mínimo, RSSI, caídas de WiFi y MQTT y vuelta más larga de `loop()` |
+
+**Lambda.** Cada solicitud termina con una línea JSON en CloudWatch:
+
+```json
+{"event": "SKILL_REQUEST", "request": "IntentRequest", "intent": "OpenDoor", "user": "40fdb5ffb4",
+ "alexa_timestamp": "2026-11-10 03:11:22+00:00", "lambda_ms": 1181, "confirm_ms": 1181,
+ "start_utc_ms": 1794280282123, "thing": "monoambiente-739264", "version": 360,
+ "desired_set_utc_ms": 1794280282224, "confirmed_utc_ms": 1794280283304, "result": "confirmed"}
+```
+
+`user` es un hash del `userId`; `result` es el camino que tomó la solicitud (`linked`, `confirmed`, `queued_offline`, `not_linked`…); `version` es la versión del Shadow que escribió el comando, y une la línea con el `DELTA_RX` del objeto.
+
+**Uso de los logs en las mediciones.** [analyze_log.py](tools/analyze_log.py) lee el log del objeto, la exportación de CloudWatch o los dos, y escribe una línea por requisito terminada en `PASS`, `FAIL`, `NOT ENOUGH DATA` o `INFO`.
+
+| Requisito | Dato que se obtiene de los logs |
+|---|---|
+| RF2, RNF4 | Intervalos entre `REPORT_TX`, atributos de cada reporte y demora entre un cambio de estado y su reporte |
+| RF3 | De `DELTA_RX` al `REPORT_TX` con la nueva posición |
+| RNF1 | Líneas `HEALTH` y `BOOT`: duración, reinicios, caídas, `max_loop_ms` y heap |
+| RNF3, RF10 | `confirm_ms` de la Lambda y, cruzando por versión, del inicio de la Lambda a `ACTUATOR_DONE` |
+| RNF5 | De `WIFI_CONNECTED` a `ACTUATOR_DONE`, e intervalos entre `WIFI_CONNECTING` |
 
 ### 3.11 Buenas prácticas aplicadas
 
-_Pendiente (fase 6)._
+- **Programación orientada a objetos.** Cada responsabilidad está en una clase. Dos interfaces separan lo que cambia de lo que no: `DeviceComponent` (sensores y actuadores) y `ShadowTransport` (enlace con el Shadow). En la Lambda, los servicios de AWS están detrás de `LinkRepository` y `ThingGateway`, y los handlers comparten la resolución del Thing por herencia (§2.3).
+- **Extensible.** Un sensor o actuador nuevo es una clase que implementa `DeviceComponent` y una línea en `components[]`; el resto del firmware no cambia.
+- **Sin números mágicos.** Las 54 constantes del firmware están en [config.h](include/config.h), agrupadas por namespace y con su unidad en el nombre (`_MS`, `_S`, `_DEG`, `_HZ`, `_US`). La Lambda usa constantes de módulo y lee la configuración del despliegue de variables de entorno.
+- **Sin esperas activas.** No hay `delay()`; el único bloqueo, la conexión MQTT, está acotado y documentado (§3.9).
+- **Compilación limpia.** El firmware compila con `-Wall -Wextra` y sin ningún warning: RAM 14.7 % y flash 71.8 % (compilación de verificación del 10/11/2026).
+- **Convenciones de C++.** Estilo de la guía de Google: sangría de 2 espacios, clases en PascalCase, métodos y variables en camelCase, miembros privados con `_` final, constantes en MAYÚSCULAS, `enum class`, `static_cast`, `constexpr`, constructores `explicit`, métodos `const` y `#pragma once`.
+- **Convenciones de Python.** Nombres según PEP 8: funciones y variables en snake_case, clases en PascalCase, constantes en MAYÚSCULAS y miembros internos con `_` inicial. Docstrings en el módulo, en las clases de datos y de handlers con lógica propia, y en las funciones. Los clientes de AWS se crean una sola vez por contenedor, al cargar el módulo.
+- **Documentación en el código.** Cada clase del firmware está documentada con comentarios Doxygen (`/** … */`) en su `.h`, y las interfaces `DeviceComponent` y `ShadowTransport` documentan el contrato de cada método: qué hace, sus unidades y qué devuelve. Las clases derivadas heredan esa documentación. Los comentarios, los nombres y los logs están en inglés; el informe, en español.
+- **Pruebas.** 23 pruebas unitarias de la Lambda sin AWS (B01), una prueba automática del firmware por el puerto serie (B02) y un analizador de logs que calcula cada requerimiento.
+- **Seguridad.** Sin secretos en el repositorio ni access keys en el código; permisos documentados con su versión mínima (§3.4.4, §3.6).
+- **Control de versiones.** Commits pequeños con prefijos convencionales (`feat`, `fix`, `test`, `docs`, `chore`), hechos por cada integrante con su propia cuenta.
 
 ### 3.12 Cobertura de los requerimientos
 
-_Pendiente (fase 6)._
+Cada requerimiento de §1 está implementado en los archivos y métodos que indica la matriz de trazabilidad de §1.5, y cada uno se verifica con al menos una prueba de §4. Las limitaciones conocidas del diseño son la conexión MQTT sincrónica (§3.9), la falta de una prueba de propiedad del objeto al vincular (§2.6.4) y que la posición de la puerta se deduce del comando al servo y no de un sensor de la puerta; las tres se analizan en §7.
 
 ---
 
