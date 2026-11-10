@@ -1,0 +1,157 @@
+   input docs/evidencias/A10/A10_ESP32.log: device
+   input docs/evidencias/A05/A05_cloudwatch.csv: lambda
+
+== FILE A10_ESP32.log ==
+
+== ESP32 log ==
+   lines=314 span=27.3 min boots=0 reset_reasons=- utc_clock=yes
+   error/warning lines: 0
+
+== RNF1 stability ==
+RNF1 longest run without restart: 27.3 min (>= 15.0) -> PASS
+RNF1 restarts inside the log: 0 (0) -> PASS
+   HEALTH lines=27 heap first/last=196960/196960 min_heap=182532 rssi -83..-22 dBm
+RNF1 longest loop iteration: 21 ms (<= 500) -> PASS
+RNF1 WiFi + MQTT drops: 0 (0) -> PASS
+RNF1 free heap loss first->last HEALTH: 0 bytes (<= 4096) -> PASS
+
+== RF2 / RNF4 reporting ==
+   reports=115 {'reason=event': 113, 'reason=heartbeat': 2} gap ms: n=114 min=998 median=11132 p95=42359 max=59999
+RF2/RNF4 longest gap between reports while connected: 59999 ms (<= 61500) -> PASS
+RF2 reports missing an attribute: 0 (0) -> PASS
+   state change -> REPORT_TX ms: n=113 min=4 median=5 p95=6 max=804
+RNF4 event report delay: max 804 ms (<= 1100) -> PASS
+   published reports: 253/h -> 6066/day, 181974/month (heartbeat only: 1440/day)
+
+== RF3 actuation ==
+   line 22 version=412 door=open moved move=411 ms reported=416 ms
+   line 32 version=417 door=closed moved move=410 ms reported=415 ms
+   line 54 version=427 door=open moved move=411 ms reported=416 ms
+   line 62 version=431 door=closed moved move=410 ms reported=415 ms
+   line 74 version=436 door=open moved move=410 ms reported=415 ms
+   line 82 version=440 door=closed moved move=411 ms reported=416 ms
+   line 111 version=453 door=open moved move=410 ms reported=415 ms
+   line 119 version=457 door=closed moved move=411 ms reported=416 ms
+   line 147 version=469 door=open moved move=411 ms reported=416 ms
+   line 155 version=473 door=closed moved move=411 ms reported=1150 ms
+   line 160 version=474 door=closed no_move move=None ms reported=713 ms
+   line 168 version=478 door=open moved move=410 ms reported=415 ms
+   line 176 version=482 door=closed moved move=411 ms reported=416 ms
+   line 181 version=484 door=open moved move=411 ms reported=417 ms
+   line 194 version=490 door=closed moved move=411 ms reported=416 ms
+   line 207 version=496 door=open moved move=410 ms reported=415 ms
+   line 211 version=498 door=closed moved move=411 ms reported=416 ms
+   line 252 version=516 door=open moved move=411 ms reported=416 ms
+   line 257 version=518 door=closed moved move=411 ms reported=416 ms
+   line 263 version=521 door=open moved move=411 ms reported=416 ms
+   line 267 version=523 door=closed moved move=410 ms reported=415 ms
+   line 271 version=525 door=open moved move=411 ms reported=416 ms
+   line 275 version=527 door=closed moved move=411 ms reported=1169 ms
+   line 280 version=528 door=closed no_move move=None ms reported=684 ms
+   line 282 version=530 door=open moved move=410 ms reported=415 ms
+   DELTA_RX -> reported door ms: n=30 min=415 median=416 p95=713 max=1169
+RF3 valid deltas confirmed in reported within 1500 ms: 30/30 -> PASS
+
+== RF1 / RNF2 presence ==
+   PRESENCE_ON=43 PRESENCE_OFF=43
+   presence episodes ms: n=42 min=11800 median=18855 p95=42360 max=51050
+RNF2 episodes shorter than the 10000 ms hold: 0 (0) -> PASS
+
+== RNF5 reconnection ==
+   no WIFI_LOST or BOOT in this log
+
+== Lambda (CloudWatch SKILL_REQUEST lines) ==
+   requests=58 users=2
+     CloseDoor:confirmed x16
+     GetDoorState:door=closed x2
+     GetDoorState:door=open x1
+     GetPresence:presence=False x8
+     GetPresence:presence=True x12
+     LinkThing:linked x1
+     OpenDoor:already x2
+     OpenDoor:confirmed x15
+     OpenDoor:queued_offline x1
+     2026-11-09 12:00:00+00:00 LinkThing user=3ef09f6651 thing=monoambiente-518306 result=linked lambda_ms=617 confirm_ms=None
+     2026-11-10 03:00:00+00:00 OpenDoor user=3ef09f6651 thing=monoambiente-518306 result=queued_offline lambda_ms=447 confirm_ms=None
+     2026-11-10 02:56:41+00:00 GetDoorState user=40fdb5ffb4 thing=monoambiente-739264 result=door=open lambda_ms=257 confirm_ms=None
+     2026-11-10 03:00:13+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=220 confirm_ms=None
+     2026-11-10 03:00:32+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=60 confirm_ms=None
+     2026-11-10 03:00:40+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=76 confirm_ms=None
+     2026-11-10 03:01:09+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=54 confirm_ms=None
+     2026-11-10 03:01:19+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=58 confirm_ms=None
+     2026-11-10 03:02:09+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=False lambda_ms=70 confirm_ms=None
+     2026-11-10 03:03:22+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=79 confirm_ms=None
+     2026-11-10 03:04:10+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=False lambda_ms=90 confirm_ms=None
+     2026-11-10 03:10:21+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=1423 confirm_ms=1423
+     2026-11-10 03:10:48+00:00 GetDoorState user=40fdb5ffb4 thing=monoambiente-739264 result=door=closed lambda_ms=74 confirm_ms=None
+     2026-11-10 03:11:22+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=1181 confirm_ms=1181
+     2026-11-10 03:11:49+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=already lambda_ms=67 confirm_ms=None
+     2026-11-10 03:14:29+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=already lambda_ms=260 confirm_ms=None
+     2026-11-10 03:14:40+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=1177 confirm_ms=1177
+     2026-11-10 03:19:06+00:00 GetDoorState user=40fdb5ffb4 thing=monoambiente-739264 result=door=closed lambda_ms=280 confirm_ms=None
+     2026-11-10 03:24:54+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=1304 confirm_ms=1304
+     2026-11-10 03:25:37+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=950 confirm_ms=950
+     2026-11-10 03:26:15+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=51 confirm_ms=None
+     2026-11-10 03:27:04+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=False lambda_ms=80 confirm_ms=None
+     2026-11-10 03:27:20+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=895 confirm_ms=895
+     2026-11-10 03:27:50+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=918 confirm_ms=918
+     2026-11-10 03:28:01+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=False lambda_ms=59 confirm_ms=None
+     2026-11-10 03:28:20+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=52 confirm_ms=None
+     2026-11-10 03:28:58+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=919 confirm_ms=919
+     2026-11-10 03:29:19+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=888 confirm_ms=888
+     2026-11-10 03:31:34+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=False lambda_ms=281 confirm_ms=None
+     2026-11-10 03:32:48+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=92 confirm_ms=None
+     2026-11-10 03:34:07+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=901 confirm_ms=901
+     2026-11-10 03:34:49+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=922 confirm_ms=922
+     2026-11-10 03:36:00+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=False lambda_ms=60 confirm_ms=None
+     2026-11-10 03:37:37+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=239 confirm_ms=None
+     2026-11-10 03:38:24+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=903 confirm_ms=903
+     2026-11-10 03:38:44+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=1676 confirm_ms=1676
+     2026-11-10 03:39:13+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=890 confirm_ms=890
+     2026-11-10 03:39:45+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=910 confirm_ms=910
+     2026-11-10 03:40:01+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=892 confirm_ms=892
+     2026-11-10 03:40:17+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=False lambda_ms=44 confirm_ms=None
+     2026-11-10 03:40:33+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=69 confirm_ms=None
+     2026-11-10 03:41:22+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=919 confirm_ms=919
+     2026-11-10 03:42:26+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=949 confirm_ms=949
+     2026-11-10 03:42:49+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=892 confirm_ms=892
+     2026-11-10 03:43:21+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=True lambda_ms=40 confirm_ms=None
+     2026-11-10 03:44:26+00:00 GetPresence user=40fdb5ffb4 thing=monoambiente-739264 result=presence=False lambda_ms=68 confirm_ms=None
+     2026-11-10 03:47:43+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=1079 confirm_ms=1079
+     2026-11-10 03:47:55+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=1141 confirm_ms=1141
+     2026-11-10 03:48:02+00:00 OpenDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=1147 confirm_ms=1147
+     2026-11-10 03:48:10+00:00 CloseDoor user=40fdb5ffb4 thing=monoambiente-739264 result=confirmed lambda_ms=899 confirm_ms=898
+   lambda_ms of non-command requests: n=27 min=40 median=74 p95=447 max=617
+   confirm_ms (Lambda start -> door in reported): n=31 min=876 median=922 p95=1423 max=1691
+RNF3 commands confirmed within 3000 ms: 31/31 (need >= 20) -> PASS
+RF4-RF9 requests that ended in error: 0 (0) -> PASS
+
+== RNF3 end-to-end with both clocks (NTP on the ESP32) ==
+   version=412 UpdateThingShadow->DELTA_RX=94 ms Lambda start->servo done=984 ms ->REPORT_TX=988 ms confirm_ms=1304
+   version=417 UpdateThingShadow->DELTA_RX=90 ms Lambda start->servo done=621 ms ->REPORT_TX=625 ms confirm_ms=950
+   version=427 UpdateThingShadow->DELTA_RX=88 ms Lambda start->servo done=595 ms ->REPORT_TX=599 ms confirm_ms=895
+   version=431 UpdateThingShadow->DELTA_RX=76 ms Lambda start->servo done=607 ms ->REPORT_TX=611 ms confirm_ms=918
+   version=436 UpdateThingShadow->DELTA_RX=71 ms Lambda start->servo done=581 ms ->REPORT_TX=585 ms confirm_ms=919
+   version=440 UpdateThingShadow->DELTA_RX=119 ms Lambda start->servo done=598 ms ->REPORT_TX=602 ms confirm_ms=888
+   version=453 UpdateThingShadow->DELTA_RX=70 ms Lambda start->servo done=560 ms ->REPORT_TX=564 ms confirm_ms=901
+   version=457 UpdateThingShadow->DELTA_RX=190 ms Lambda start->servo done=703 ms ->REPORT_TX=707 ms confirm_ms=922
+   version=469 UpdateThingShadow->DELTA_RX=37 ms Lambda start->servo done=549 ms ->REPORT_TX=553 ms confirm_ms=903
+   version=473 UpdateThingShadow->DELTA_RX=158 ms Lambda start->servo done=640 ms ->REPORT_TX=1379 ms confirm_ms=1676
+   version=478 UpdateThingShadow->DELTA_RX=56 ms Lambda start->servo done=537 ms ->REPORT_TX=541 ms confirm_ms=890
+   version=482 UpdateThingShadow->DELTA_RX=47 ms Lambda start->servo done=568 ms ->REPORT_TX=572 ms confirm_ms=910
+   version=484 UpdateThingShadow->DELTA_RX=98 ms Lambda start->servo done=600 ms ->REPORT_TX=606 ms confirm_ms=892
+   version=490 UpdateThingShadow->DELTA_RX=116 ms Lambda start->servo done=627 ms ->REPORT_TX=631 ms confirm_ms=919
+   version=496 UpdateThingShadow->DELTA_RX=27 ms Lambda start->servo done=567 ms ->REPORT_TX=571 ms confirm_ms=949
+   version=498 UpdateThingShadow->DELTA_RX=94 ms Lambda start->servo done=595 ms ->REPORT_TX=600 ms confirm_ms=892
+   version=516 UpdateThingShadow->DELTA_RX=18 ms Lambda start->servo done=688 ms ->REPORT_TX=692 ms confirm_ms=1079
+   version=518 UpdateThingShadow->DELTA_RX=185 ms Lambda start->servo done=677 ms ->REPORT_TX=681 ms confirm_ms=1141
+   version=521 UpdateThingShadow->DELTA_RX=270 ms Lambda start->servo done=769 ms ->REPORT_TX=773 ms confirm_ms=1147
+   version=523 UpdateThingShadow->DELTA_RX=76 ms Lambda start->servo done=584 ms ->REPORT_TX=588 ms confirm_ms=898
+   version=525 UpdateThingShadow->DELTA_RX=391 ms Lambda start->servo done=872 ms ->REPORT_TX=876 ms confirm_ms=1149
+   version=527 UpdateThingShadow->DELTA_RX=89 ms Lambda start->servo done=611 ms ->REPORT_TX=1369 ms confirm_ms=1691
+   version=530 UpdateThingShadow->DELTA_RX=308 ms Lambda start->servo done=816 ms ->REPORT_TX=820 ms confirm_ms=1157
+   version=532 UpdateThingShadow->DELTA_RX=208 ms Lambda start->servo done=682 ms ->REPORT_TX=686 ms confirm_ms=1144
+   version=534 UpdateThingShadow->DELTA_RX=151 ms Lambda start->servo done=632 ms ->REPORT_TX=636 ms confirm_ms=896
+   cloud delivery ms: n=28 min=18 median=96 p95=308 max=391
+   Lambda start -> servo done ms: n=28 min=537 median=616 p95=872 max=984
+RNF3 Lambda start -> servo done <= 3000 ms: 28/28 -> PASS
