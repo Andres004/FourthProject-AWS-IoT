@@ -30,6 +30,7 @@ MAX_HEAP_LOSS_BYTES = 4096  # RNF1: free heap, first vs. last HEALTH line.
 MAX_REPORT_GAP_MS = 61_500  # RF2/RNF4: 60 s heartbeat + loop tolerance.
 MAX_EVENT_REPORT_MS = 1_100  # RNF4: state change -> REPORT_TX (1 s limit).
 MAX_DELTA_TO_REPORT_MS = 1_500  # RF3: DELTA_RX -> confirming REPORT_TX.
+EVENT_SEARCH_MS = 5_000  # Window where a state change must find its report.
 MAX_END_TO_END_MS = 3_000  # RNF3: Lambda receives intent -> door confirmed.
 MIN_COMMANDS = 20  # RNF3: commands needed for the measurement.
 MAX_PENDING_APPLY_MS = 10_000  # RNF5: WIFI_CONNECTED -> pending door moved.
@@ -189,6 +190,10 @@ def connected_windows(events):
             start = None
     if start is not None:
         windows.append((start, events[-1].t_ms))
+    link_events = {"MQTT_CONNECTED", "MQTT_LOST", "WIFI_LOST", "BOOT"}
+    if not windows and not any(e.name in link_events for e in events):
+        # An excerpt cut from a longer session that was already online.
+        windows.append((events[0].t_ms, events[-1].t_ms))
     return windows
 
 
@@ -324,7 +329,9 @@ def analyze_reports(events, report):
             continue
         if not inside(event.t_ms, windows):
             continue
-        sent = next_event(events, index, ("REPORT_TX",), 5_000)
+        if events[-1].t_ms - event.t_ms < EVENT_SEARCH_MS:
+            continue  # The log ends before its report could appear.
+        sent = next_event(events, index, ("REPORT_TX",), EVENT_SEARCH_MS)
         if sent is None:
             late.append((event, None))
             continue
@@ -473,8 +480,11 @@ def analyze_reconnection(events, report):
             report.result("RNF5", "Shadow synchronized after reconnection",
                           False, enough=mqtt is not None)
             continue
-        got_index = events.index(got)
-        moved = next_event(events, got_index, ("ACTUATOR_DONE",), 3_000)
+        # AWS may deliver the pending delta right after MQTT_CONNECTED, before
+        # the /get answer, so the move is searched from WIFI_CONNECTED on.
+        wifi_index = events.index(wifi)
+        limit_ms = got.t_ms - wifi.t_ms + 3_000
+        moved = next_event(events, wifi_index, ("ACTUATOR_DONE",), limit_ms)
         if moved:
             total = moved.t_ms - wifi.t_ms
             report.result(
@@ -543,7 +553,12 @@ def analyze_cross(events, records, report):
         index = by_version[version]
         delta = events[index]
         done = next_event(events, index, ("ACTUATOR_DONE",), 3_000)
-        sent = next_event(events, index, ("REPORT_TX",), 3_000)
+        target = (delta.payload() or {}).get("state", {}).get("door")
+        sent = next_event(
+            events, index, ("REPORT_TX",), 3_000,
+            lambda e: ((e.payload() or {}).get("state", {})
+                       .get("reported", {}).get("door")) == target,
+        )
         rows.append({
             "version": version,
             "cloud_ms": delta.utc_ms - record["desired_set_utc_ms"],
