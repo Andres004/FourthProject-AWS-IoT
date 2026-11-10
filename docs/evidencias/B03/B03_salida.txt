@@ -1,6 +1,6 @@
-Tracked files scanned: 38
+Tracked files scanned: 149
 RNF6 secrets in tracked files: 0 (0) -> PASS
-Commits scanned: 12
+Commits scanned: 27
 RNF6 secrets in git history: 0 (0) -> PASS
 Secret paths checked against .gitignore: 5
 RNF6 secret files ignored by git: 5/5 -> PASS
