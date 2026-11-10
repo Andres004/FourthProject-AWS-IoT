@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="920" height="540" font-family="Arial, Helvetica, sans-serif">
-  <title>Esquema eléctrico del objeto inteligente: ESP32 DOIT DevKit V1, servo SG90, PIR AM312 y LED de estado</title>
+  <title>Esquema eléctrico del objeto inteligente: ESP32 DOIT DevKit V1, servo SG90 y PIR AM312 a 5 V, LED de estado y tierra común</title>
   <rect x="0" y="0" width="920" height="540" fill="#ffffff"/>
 
   <!-- ESP32 -->
@@ -12,7 +12,7 @@
   <circle cx="340" cy="210" r="4" fill="#2b2b2b"/><text x="350" y="214" font-size="13" fill="#1a1a1a">GND</text>
   <circle cx="340" cy="270" r="4" fill="#2b2b2b"/><text x="350" y="274" font-size="13" fill="#1a1a1a">D13 (GPIO13)</text>
   <!-- right pins -->
-  <circle cx="560" cy="150" r="4" fill="#2b2b2b"/><text x="550" y="154" text-anchor="end" font-size="13" fill="#1a1a1a">3V3</text>
+  <circle cx="560" cy="150" r="4" fill="#2b2b2b"/><text x="550" y="154" text-anchor="end" font-size="13" fill="#1a1a1a">5 V (VIN)</text>
   <circle cx="560" cy="210" r="4" fill="#2b2b2b"/><text x="550" y="214" text-anchor="end" font-size="13" fill="#1a1a1a">D26 (GPIO26)</text>
   <circle cx="560" cy="320" r="4" fill="#2b2b2b"/><text x="550" y="324" text-anchor="end" font-size="13" fill="#1a1a1a">D32 (GPIO32)</text>
   <circle cx="560" cy="380" r="4" fill="#2b2b2b"/><text x="550" y="384" text-anchor="end" font-size="13" fill="#1a1a1a">GND</text>
@@ -30,7 +30,7 @@
   <line x1="220" y1="210" x2="340" y2="210" stroke="#3e2723" stroke-width="3"/>
   <line x1="220" y1="270" x2="340" y2="270" stroke="#ef6c00" stroke-width="3"/>
   <text x="280" y="142" text-anchor="middle" font-size="11" fill="#c62828">5 V</text>
-  <text x="280" y="262" text-anchor="middle" font-size="11" fill="#ef6c00">PWM 50 Hz</text>
+  <text x="258" y="262" text-anchor="middle" font-size="11" fill="#ef6c00">PWM 50 Hz</text>
 
   <!-- PIR AM312 -->
   <rect x="690" y="110" width="180" height="140" rx="8" fill="#eefaf0" stroke="#2b2b2b" stroke-width="2"/>
@@ -43,9 +43,9 @@
   <circle cx="800" cy="250" r="4" fill="#2b2b2b"/>
   <line x1="560" y1="150" x2="690" y2="150" stroke="#c62828" stroke-width="3"/>
   <line x1="560" y1="210" x2="690" y2="210" stroke="#2e7d32" stroke-width="3"/>
-  <text x="625" y="142" text-anchor="middle" font-size="11" fill="#c62828">3.3 V</text>
+  <text x="625" y="142" text-anchor="middle" font-size="11" fill="#c62828">5 V</text>
   <text x="625" y="202" text-anchor="middle" font-size="11" fill="#2e7d32">salida digital</text>
-  <text x="625" y="228" text-anchor="middle" font-size="10" fill="#555555">pull-down interno</text>
+  <text x="625" y="228" text-anchor="middle" font-size="10" fill="#555555">3.3 V en alto, pull-down interno</text>
 
   <!-- LED de estado -->
   <line x1="560" y1="320" x2="600" y2="320" stroke="#1565c0" stroke-width="3"/>
@@ -63,7 +63,13 @@
   <line x1="718" y1="320" x2="760" y2="320" stroke="#1565c0" stroke-width="3"/>
   <line x1="760" y1="320" x2="760" y2="460" stroke="#3e2723" stroke-width="3"/>
 
-  <!-- GND común -->
+  <!-- GND común: servo, ESP32, PIR y LED -->
+  <!-- the ground line hops over the servo signal line (no connection) -->
+  <path d="M300 210 V262 A8 8 0 0 1 300 278 V460" fill="none" stroke="#3e2723" stroke-width="3"/>
+  <line x1="300" y1="460" x2="600" y2="460" stroke="#3e2723" stroke-width="3"/>
+  <circle cx="300" cy="210" r="5" fill="#3e2723"/>
+  <circle cx="600" cy="460" r="5" fill="#3e2723"/>
+  <circle cx="800" cy="460" r="5" fill="#3e2723"/>
   <line x1="560" y1="380" x2="600" y2="380" stroke="#3e2723" stroke-width="3"/>
   <line x1="600" y1="380" x2="600" y2="460" stroke="#3e2723" stroke-width="3"/>
   <line x1="800" y1="250" x2="800" y2="460" stroke="#3e2723" stroke-width="3"/>
@@ -83,5 +89,6 @@
   <line x1="50" y1="414" x2="80" y2="414" stroke="#ef6c00" stroke-width="3"/><text x="88" y="418" font-size="12" fill="#1a1a1a">Señal del actuador</text>
   <line x1="50" y1="436" x2="80" y2="436" stroke="#2e7d32" stroke-width="3"/><text x="88" y="440" font-size="12" fill="#1a1a1a">Señal del sensor</text>
   <line x1="50" y1="458" x2="80" y2="458" stroke="#1565c0" stroke-width="3"/><text x="88" y="462" font-size="12" fill="#1a1a1a">Indicador de conexión</text>
-  <text x="50" y="500" font-size="11" fill="#555555">Los dos pines GND del ESP32 están unidos en la placa.</text>
+  <text x="50" y="500" font-size="11" fill="#555555">Una sola tierra: servo, ESP32, PIR y LED comparten GND. VIN (5 V) alimenta al servo y al PIR.</text>
+  <text x="50" y="516" font-size="11" fill="#555555">La única resistencia del circuito es la del LED.</text>
 </svg>

@@ -16,38 +16,36 @@
 ---
 ## Resumen ejecutivo
 
-**Qué es.** Un objeto inteligente para la puerta de un monoambiente: un ESP32 abre y cierra la puerta (una maqueta) con un servo SG90 y detecta con un sensor PIR AM312 si hay alguien en la entrada. El usuario lo maneja en español desde la skill de Alexa "monoambiente inteligente": pregunta si hay alguien en la puerta, la abre o la cierra y consulta su estado, sin estar en casa.
+**Qué es.** Un objeto inteligente para la puerta de un monoambiente. Un ESP32 abre y cierra la puerta (maqueta) con un servo SG90 y detecta con un PIR AM312 si hay alguien en la entrada. El usuario lo maneja en español con la skill de Alexa **"monoambiente inteligente"**: pregunta si hay alguien en la puerta, la abre o la cierra y consulta su estado sin estar en casa. Una misma skill atiende a varios usuarios, cada uno con su propio objeto.
 
-**Arquitectura** (§2.1).
-
-- **Objeto inteligente:** ESP32 con firmware orientado a objetos, conectado por MQTT sobre TLS (puerto 8883, certificado X.509) al Device Shadow de su Thing en AWS IoT Core (`us-east-2`).
-- **Backend:** una función AWS Lambda en Python resuelve el Thing de cada usuario en DynamoDB y lee o escribe su Shadow.
-- **Alexa nunca habla con el objeto:** la Lambda solo escribe `desired` y lee `reported`; el objeto solo publica `reported` y recibe el `delta`.
+**Arquitectura** (§2.1). Alexa → **Lambda** (Python, `us-east-2`) → **DynamoDB** (`userId → thingName`) y **Device Shadow** de AWS IoT Core → **ESP32** por MQTT sobre TLS (puerto 8883, certificado X.509). Alexa nunca habla con el objeto: la Lambda solo escribe `desired` y lee `reported`, y el objeto solo publica `reported` y recibe el `delta`. La base de datos y el backend están en nuestra cuenta de AWS, no en el backend Alexa-hosted.
 
 **Cómo funciona** (§2.4).
-
-- **Vinculación:** el usuario dice el código de 6 dígitos que muestra el objeto; la Lambda valida el formato, comprueba que el Thing exista y guarda `userId → thingName`. Cada usuario actúa solo sobre su objeto.
-- **Consulta:** la Lambda responde con el último `reported`; si el objeto no reporta hace más de 150 s, lo advierte.
-- **Comando:** la Lambda escribe `desired.door`, el objeto recibe el `delta`, mueve el servo y confirma en `reported`; la skill dice "Listo" solo cuando lee esa confirmación.
+- **Vincular:** el usuario dice el código de 6 dígitos del objeto; la Lambda valida el formato, comprueba que el Thing exista y guarda la vinculación, que persiste entre sesiones y se puede cambiar o borrar.
+- **Consultar:** la Lambda responde con el último `reported` y advierte si el objeto no reporta hace más de 150 s.
+- **Ordenar:** la Lambda escribe `desired.door`; el objeto mueve el servo y lo confirma en `reported`; la skill dice "Listo" solo al leer esa confirmación (hasta 3 s).
 - **Sin conexión:** la orden queda en el Shadow y el objeto la aplica sola al volver la red o la energía.
 
-**Cumplimiento** (§5.1).
+**Cumplimiento** (§5.1). 13 pruebas (10 físicas y 3 automáticas), todas aprobadas.
 
 | Requisito | Declarado | Medido | Veredicto |
 |---|---|---|---|
-| RF1 a RF6: sensor, reporte, actuador y voz | Según §1.3 | 15 de 15 cruces detectados; 115 de 115 reportes completos; 8 de 8 consultas del sensor, 6 de 6 respuestas en A04 y 28 de 28 comandos en A05 correctos | Cumple |
-| RF7 a RF9: vinculación | Persistente, por usuario, validada | 13 de 13 respuestas; dos usuarios con Things distintos; 0 datos inválidos guardados | Cumple |
-| RF10 a RF12: confirmación, desconexión, inválidos | Propios del grupo | 28 de 28 confirmados; avisos de desconexión correctos; 0 movimientos por valores inválidos | Cumple |
-| RNF1 Estabilidad | ≥ 15 min, 0 reinicios, `loop()` ≤ 500 ms | 27.3 min, 0 reinicios, 0 caídas, `loop()` máx. 21 ms | Cumple |
-| RNF2 Exactitud | PIR 100 % y 0 falsos positivos; servo ±5° | PIR 15 de 15 y 0 en 5 min; servo pendiente de medición | Cumple el PIR |
-| RNF3 Tiempo de respuesta | ≤ 3 s | Mediana 919 ms, máx. 1691 ms (28 comandos) | Cumple |
-| RNF4 Frecuencia de reporte | Evento ≤ 1.1 s; heartbeat 60 s | Evento: mediana 5 ms, máx. 804 ms; heartbeat 60 000 ms | Cumple |
-| RNF5 Reconexión | Orden pendiente ≤ 10 s | 3.3 a 3.9 s | Cumple |
-| RNF6 Seguridad | 0 secretos | 0 en archivos e historial | Cumple |
+| RF1–RF6: sensor, reporte, actuador y voz | §1.3 | 15/15 cruces, 115/115 reportes completos, 8/8 consultas y 28/28 comandos correctos | Cumple |
+| RF7–RF9: vinculación | Persistente, validada, por usuario | 13/13 respuestas; 2 usuarios con Things distintos; 0 datos inválidos guardados | Cumple |
+| RF10–RF12: confirmación, desconexión, inválidos (propios) | §1.3 | 28/28 confirmados; avisos correctos; 0 movimientos por valores inválidos | Cumple |
+| RNF1 Estabilidad | ≥ 15 min, 0 reinicios, `loop()` ≤ 500 ms | 27.3 min, 0 reinicios, 0 caídas, `loop()` máx. 21 ms en operación normal (al conectar: 2.1–2.4 s, §4.5) | Cumple |
+| RNF2 Exactitud | PIR 100 % y 0 falsos positivos; servo ±5° | 15/15 y 0 en 5 min; servo < 3° | Cumple |
+| RNF3 Tiempo de respuesta | ≤ 3 s (Lambda → objeto confirmado) | Mediana 919 ms, p95 1676 ms, máx. 1691 ms (28 comandos) | Cumple |
+| RNF4 Frecuencia de reporte | Evento ≤ 1.1 s; heartbeat 60 s | Evento máx. 804 ms; heartbeat 60 000 ms; ~1440 mensajes/día en reposo | Cumple |
+| RNF5 Reconexión | Orden pendiente ≤ 10 s | 3.3–3.9 s tras volver la red o la energía | Cumple |
+| RNF6 Seguridad | 0 secretos publicados | 0 en archivos e historial | Cumple |
 
-**Hallazgos.** Las pruebas encontraron y corrigieron dos defectos que el uso normal no mostraba: el servo se confirmaba antes de terminar de moverse (B02) y el firmware se bloqueaba hasta 7 s con WiFi sin Internet (A07) (§4.4). El tiempo de un comando lo domina el servo (411 ms de 919 ms); la nube aporta 96 ms (§5.1).
+**Hallazgos** (§4.4). Las pruebas encontraron dos defectos que el uso normal no mostraba: el Shadow confirmaba la puerta antes de que el servo terminara de moverse (B02, **corregido**) y, con WiFi sin Internet, los reintentos de MQTT bloqueaban el firmware hasta 7 s (A07, **mitigado**). El tiempo de un comando lo domina el servo (400 ms); la nube aporta ~96 ms.
 
-**Pendiente.** La medición del ángulo del servo con transportador (A06-C) y la foto del montaje (§2.2.3).
+**Limitaciones** (§4.5, §7). El tramo voz → Lambda no se midió; una sola red y una noche de pruebas; el PIR se probó con 15 cruces; la conexión MQTT sigue siendo sincrónica; `servo_angle` es el ángulo ordenado, no medido; los permisos de AWS son amplios (se documentan los mínimos).
+
+**Cómo probarlo.** El [README](README.md) explica cómo cargar el firmware y qué frases decirle a Alexa; la evidencia de cada prueba está en [docs/evidencias/](docs/evidencias/README.md).
+
 
 ---
 ## Contenido
@@ -172,7 +170,7 @@ RF1 a RF9 responden a los requerimientos mínimos de la consigna (§3.1). RF10 a
 |---|---|---|---|---|
 | RNF1 | Estabilidad | ≥ 15 min continuos con 0 reinicios, 0 caídas de WiFi o MQTT, iteración de `loop()` ≤ 500 ms y pérdida de heap libre ≤ 4096 bytes entre la primera y la última línea `HEALTH`. | Líneas `HEALTH` (cada 60 s) y `BOOT`/`RESET_REASON` del log del OI. | A10 |
 | RNF2 | Exactitud del sensor y del actuador | PIR: detección del 100 % de los cruces de una persona a 0.5, 1.0 y 2.0 m (5 cruces por distancia) y 0 falsos positivos en 5 min sin personas. Servo: error ≤ 5° respecto de un transportador en 0° y 90°. | Conteo de `PRESENCE_ON` por distancia medida con cinta métrica; ángulo medido con transportador en fotos. | A06 |
-| RNF3 | Tiempo de respuesta extremo a extremo | ≤ 3 s desde que la Lambda recibe el comando hasta que la puerta está confirmada en `reported`, en ≥ 20 comandos. | `confirm_ms` de la Lambda (un solo reloj) y, de forma cruzada, `DELTA_RX` y `ACTUATOR_DONE` del OI con hora NTP. | A05 |
+| RNF3 | Tiempo de respuesta extremo a extremo | ≤ 3 s en la cadena Alexa → Lambda → Shadow → objeto, en ≥ 20 comandos. Se mide desde que la Lambda recibe el intent hasta que la puerta está confirmada en `reported`; el tramo simulador → Lambda no es medible desde la Lambda (§4.5). | `confirm_ms` de la Lambda (un solo reloj) y, de forma cruzada, `DELTA_RX` y `ACTUATOR_DONE` del OI con hora NTP. | A05 |
 | RNF4 | Frecuencia de reporte | Por evento: ≤ 1.1 s desde el cambio de estado. Periódico: cada 60 s (máx. 61.5 s entre reportes). Consumo: alrededor de 1440 mensajes por día en reposo. | Intervalos entre `REPORT_TX` del log del OI y prueba automática B02. | A10, B02 |
 | RNF5 | Reconexión y sincronización | El WiFi reintenta cada 10 s ± 0.5 s; tras recuperar la red, la orden pendiente se aplica en ≤ 10 s desde `WIFI_CONNECTED`, sin intervención. | Secuencia `WIFI_LOST` → `WIFI_CONNECTED` → `MQTT_CONNECTED` → `GET_RX` → `ACTUATOR_DONE` del log del OI. | A07, A08 |
 | RNF6 | Seguridad | 0 secretos en los archivos del repositorio y en todo su historial; archivos de secretos ignorados por git; plantilla publicada. | [tools/check_secrets.py](tools/check_secrets.py), con un control positivo sobre el `secrets.h` real. | B03 |
@@ -204,7 +202,7 @@ Justificación de los valores declarados:
 | RF11 Aviso de desconexión | §2.4.4 | `ShadowState.online`; `ShadowState.offline_note()` | A02, A07, B01 | Cumple: aviso con 2 y 3 min sin reportes; orden encolada (A07) |
 | RF12 Comandos inválidos o repetidos | §2.5 | `DoorActuator::applyDesired()`; `ShadowTransport::acceptVersion()` | A09, B02 | Cumple: 3 de 3 valores inválidos sin movimiento (A09); 16 de 16 casos (B02) |
 | RNF1 Estabilidad | §3.9 temporización | `loop()` de [main.cpp](src/main.cpp); [HealthMonitor.cpp](src/HealthMonitor.cpp) | A10 | Cumple: 27.3 min, 0 reinicios, 0 caídas, `loop()` máx. 21 ms, 0 bytes de heap perdidos |
-| RNF2 Exactitud | §1.2 | `PresenceSensor`; `DoorActuator` (`CLOSED_ANGLE_DEG`, `OPEN_ANGLE_DEG`) | A06 | PIR cumple: 15 de 15 y 0 falsos positivos en 5.0 min. Servo: pendiente de medición |
+| RNF2 Exactitud | §1.2 | `PresenceSensor`; `DoorActuator` (`CLOSED_ANGLE_DEG`, `OPEN_ANGLE_DEG`) | A06 | Cumple: PIR 15 de 15 y 0 falsos positivos en 5.0 min; servo con diferencia estimada < 3° en 0° y 90° (4 fotos) |
 | RNF3 Tiempo de respuesta | §2.4.3 | `DoorCommandHandler.handle_thing()`; `SETTLE_TIME_MS` | A05 | Cumple: 28 de 28; confirmación mediana 919 ms y máx. 1691 ms |
 | RNF4 Frecuencia de reporte | §2.8 | `ShadowReporter` (`MIN_REPORT_INTERVAL_MS`, `HEARTBEAT_PERIOD_MS`) | A03, A10, B02 | Cumple: evento máx. 804 ms (A10) y 254 ms (A03); heartbeat 60 000 ms (B02) |
 | RNF5 Reconexión | §2.4.4 | [WifiManager.cpp](src/WifiManager.cpp); [ShadowClient.cpp](src/ShadowClient.cpp): `onConnected()`, `requestShadowIfDue()` | A07, A08 | Cumple: orden pendiente aplicada 3297–3848 ms después de `WIFI_CONNECTED` (A07) y 3.9 s después del arranque (A08) |
@@ -309,33 +307,35 @@ Hay dos confirmaciones distintas: la respuesta de `UpdateThingShadow` solo indic
 
 ![Esquema eléctrico del objeto inteligente: ESP32 DOIT DevKit V1, servo SG90, PIR AM312 y LED de estado](docs/img/circuito_objeto_inteligente.svg)
 
-**Figura 4.** Esquema eléctrico del objeto inteligente. El servo se alimenta con 5 V desde el pin VIN, que recibe la tensión del USB, y recibe la señal PWM por GPIO13. El PIR se alimenta con 3.3 V y entrega su salida digital en GPIO26. El LED de estado, en serie con su resistencia, va de GPIO32 a GND. Todas las tierras son comunes.
+**Figura 4.** Esquema eléctrico del objeto inteligente. El servo se alimenta con 5 V desde el pin VIN, que recibe la tensión del USB, y recibe la señal PWM por GPIO13. El PIR también se alimenta con 5 V desde VIN y entrega su salida digital de 3.3 V en GPIO26. El LED de estado, en serie con su resistencia (la única del circuito), va de GPIO32 a GND. Todas las tierras son una sola: el GND del servo, del PIR, del LED y del ESP32 están unidos en la línea de tierra de la protoboard.
 
 | Componente | Pin del componente | Conexión | Pin del ESP32 | Constante en el código |
 |---|---|---|---|---|
 | Servo SG90 | Señal (cable naranja) | Directa | D13 (GPIO13) | `config::pins::SERVO_SIGNAL = 13` |
 | Servo SG90 | V+ (cable rojo) | Directa | VIN (5 V del USB) | — |
-| Servo SG90 | GND (cable marrón) | Directa | GND | — |
+| Servo SG90 | GND (cable marrón) | Directa, a la tierra común | GND | — |
 | PIR AM312 | OUT | Directa; entrada con *pull-down* interno | D26 (GPIO26) | `config::pins::PIR_OUTPUT = 26` |
-| PIR AM312 | VCC | Directa | 3V3 | — |
-| PIR AM312 | GND | Directa | GND | — |
+| PIR AM312 | VCC | Directa | VIN (5 V del USB) | — |
+| PIR AM312 | GND | Directa, a la tierra común | GND | — |
 | LED de estado | Ánodo | A través de una resistencia de 220–330 Ω | D32 (GPIO32) | `config::pins::STATUS_LED = 32` |
-| LED de estado | Cátodo | Directa | GND | — |
+| LED de estado | Cátodo | Directa, a la tierra común | GND | — |
 
 - **Señal del servo.** [DoorActuator.cpp](src/DoorActuator.cpp) genera con la librería ESP32Servo una señal de 50 Hz (`PWM_FREQUENCY_HZ`) con pulsos de 500 µs para 0° a 2400 µs para 180° (`PULSE_MIN_US`, `PULSE_MAX_US`). Para 0° (cerrada) el pulso es de 500 µs y para 90° (abierta), de 500 + 1900 × 90 / 180 = 1450 µs. El servo interpreta un pulso de 3.3 V como nivel alto, así que la señal no necesita adaptación.
-- **Salida del PIR.** El AM312 alimentado con 3.3 V entrega 3.3 V en alto, el nivel lógico del ESP32, por eso no hace falta el divisor de tensión que necesitaba el HC-SR04 en la práctica anterior. [PresenceSensor.cpp](src/PresenceSensor.cpp) configura GPIO26 como `INPUT_PULLDOWN`: si el cable del sensor se suelta, la entrada queda en bajo y el objeto informa "sin presencia" en lugar de presencias falsas.
+- **Salida del PIR.** El AM312 acepta de 2.7 a 12 V de alimentación y tiene un regulador interno, así que alimentado con 5 V igual entrega 3.3 V en alto, el nivel lógico del ESP32, por eso no hace falta el divisor de tensión que necesitaba el HC-SR04 en la práctica anterior. [PresenceSensor.cpp](src/PresenceSensor.cpp) configura GPIO26 como `INPUT_PULLDOWN`: si el cable del sensor se suelta, la entrada queda en bajo y el objeto informa "sin presencia" en lugar de presencias falsas.
 - **Corriente del LED.** I = (3.3 V − V<sub>f</sub>) / R. Para un LED con V<sub>f</sub> ≈ 2.0 V, entre 3.9 mA (330 Ω) y 5.9 mA (220 Ω), muy por debajo de los 20 mA recomendados por pin.
 
 #### 2.2.2 Pines y alimentación
 
 - **Pines.** El objeto usa GPIO13, GPIO26 y GPIO32. No son pines de arranque (*strapping*: 0, 2, 5, 12 y 15), no están conectados a la memoria flash (6 a 11) y no son de solo entrada (34 a 39). Los tres se usan como entradas o salidas digitales: el ADC2 que comparten GPIO13 y GPIO26 no se usa, así que no hay conflicto con el WiFi.
-- **Alimentación.** La placa se alimenta por USB. El servo toma 5 V del pin VIN, es decir, directamente del USB, y no del regulador de 3.3 V de la placa. El PIR consume muy poco y se alimenta de 3V3. Toda la tensión del circuito es de 5 V o menos, dentro del límite de 12 V DC de la consigna, y ningún componente conmuta 220 V AC.
-- **Riesgo del servo.** Al arrancar un movimiento, el servo pide un pico de corriente que comparte el USB con el ESP32. Si la tensión cayera demasiado, el ESP32 se reiniciaría por *brownout*. No ocurrió en las pruebas: el firmware registra el motivo de cada reinicio (`RESET_REASON`) y los logs de A04, A07, A09 y A10 registran 36 movimientos del servo sin ningún reinicio, y la placa llegó a funcionar 83 min seguidos sin reiniciarse (A10, §4). Para un uso real se recomienda una fuente de 5 V aparte para el servo, con la tierra común (§7).
+- **Alimentación.** La placa se alimenta por USB. El servo toma 5 V del pin VIN, es decir, directamente del USB, y no del regulador de 3.3 V de la placa. El PIR consume muy poco y también toma 5 V de VIN. Toda la tensión del circuito es de 5 V o menos, dentro del límite de 12 V DC de la consigna, y ningún componente conmuta 220 V AC.
+- **Riesgo del servo.** Al arrancar un movimiento, el servo pide un pico de corriente que comparte el USB con el ESP32. Si la tensión cayera demasiado, el ESP32 se reiniciaría por *brownout*. No ocurrió en las pruebas: el firmware registra el motivo de cada reinicio (`RESET_REASON`) y los logs de A04, A07, A09 y A10 registran 36 movimientos del servo sin ningún reinicio, y la placa llegó a funcionar 87 min seguidos sin reiniciarse (A10, §4). Para un uso real se recomienda una fuente de 5 V aparte para el servo, con la tierra común (§7).
 - **Estado seguro.** Al arrancar, [DoorActuator.cpp](src/DoorActuator.cpp) lleva el servo a 0° (puerta cerrada) antes de conectarse a la red. Si se corta la energía, la puerta queda cerrada al volver, y recién después se aplica la orden que esté pendiente en el Shadow (A08).
 
 #### 2.2.3 Montaje real
 
-_Pendiente: foto del montaje real del objeto inteligente y la maqueta de la puerta (Figura 5)._
+![Montaje del objeto inteligente](docs/img/montaje.jpeg)
+
+**Figura 5.** Montaje real: ESP32 DOIT DevKit V1 en la protoboard, alimentado por USB-C; PIR AM312 (OUT a D26, VCC a VIN 5 V); servo SG90 (señal a D13, V+ al pin VIN de 5 V); LED de estado en D32 con su resistencia. Vista vertical: [montaje_vertical.jpeg](docs/img/montaje_vertical.jpeg).
 
 ### 2.3 Diagramas de clases
 
@@ -1767,13 +1767,13 @@ RNF3 se midió de dos formas independientes, en la misma corrida que A10:
 
 | ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
 |---|---|---|---|---|---|---|
-| A05 | RNF3, RF10 | 1. Con el objeto conectado y el log grabando, alternar "abre la puerta" y "cierra la puerta" cada 40 s, hasta 28 comandos.<br>2. Exportar CloudWatch del mismo intervalo.<br>3. Analizar el CSV junto con el log de A10. | ≥ 20 comandos; todos confirmados en ≤ 3000 ms por los dos métodos; respuesta "Listo, la puerta está …" en todos. | 28 de 28 comandos confirmados (`confirmed`). Ver Tabla 4. | Aprobada | [A05/](docs/evidencias/A05/README.md): [A05_cloudwatch.csv](docs/evidencias/A05/A05_cloudwatch.csv), [A05_analisis.txt](docs/evidencias/A05/A05_analisis.txt), capturas A05_captura_602 a 604 |
+| A05 | RNF3, RF10 | 1. Con el objeto conectado y el log grabando, alternar "abre la puerta" y "cierra la puerta" hasta 28 comandos, a intervalos irregulares de 6 s a casi 5 min, con una ráfaga final de 13 comandos en 85 s (03:47:43–03:49:08 UTC).<br>2. Exportar CloudWatch del mismo intervalo.<br>3. Analizar el CSV junto con el log de A10. | ≥ 20 comandos; todos confirmados en ≤ 3000 ms por los dos métodos; respuesta "Listo, la puerta está …" en todos. | 28 de 28 comandos confirmados (`confirmed`). Ver Tabla 4. | Aprobada | [A05/](docs/evidencias/A05/README.md): [A05_cloudwatch.csv](docs/evidencias/A05/A05_cloudwatch.csv), [A05_analisis.txt](docs/evidencias/A05/A05_analisis.txt), capturas A05_captura_602 a 604 |
 
 **Tabla 4.** Tiempos de A05, de `A05_analisis.txt`
 
 | Medida | n | Mín. | Mediana | p95 | Máx. | Límite | Veredicto |
 |---|---|---|---|---|---|---|---|
-| `confirm_ms`: Lambda → puerta confirmada en `reported` | 28 | 876 ms | 919 ms | 1304 ms | 1691 ms | 3000 ms | PASS |
+| `confirm_ms`: Lambda → puerta confirmada en `reported` | 28 | 876 ms | 919 ms | 1676 ms | 1691 ms | 3000 ms | PASS |
 | Lambda → servo detenido (dos relojes) | 28 | 537 ms | 616 ms | 872 ms | 984 ms | 3000 ms | PASS |
 | `UpdateThingShadow` → `DELTA_RX` (nube) | 28 | 18 ms | 96 ms | 308 ms | 391 ms | — | INFO |
 
@@ -1785,7 +1785,7 @@ El peor caso de dos relojes (984 ms, versión 412) fue el primer comando despué
 |---|---|---|---|---|---|---|
 | A06-A | RNF2, RF1 | 1. Marcar en el piso 0.5, 1.0 y 2.0 m frente al sensor.<br>2. En cada distancia, cruzar 5 veces caminando de lado a lado, con 12 s quieto fuera del campo entre cruces (más que la retención de 10 s).<br>3. Contar un cruce solo si su `PRESENCE_ON` llega después de un `PRESENCE_OFF`. | 15 de 15 cruces detectados. | 15 de 15 cruces detectados (Tabla 5). | Aprobada | [A06_PIR_ESP32.log](docs/evidencias/A06/A06_PIR_ESP32.log), [A06/](docs/evidencias/A06/README.md) |
 | A06-B | RNF2 | Dejar el sensor apuntando a la entrada vacía durante 5 min, sin nadie en la habitación. | 0 `PRESENCE_ON`. | 0 `PRESENCE_ON` entre las 04:30:41 y las 04:35:41 UTC (5.0 min). | Aprobada | [A06_PIR_ESP32.log](docs/evidencias/A06/A06_PIR_ESP32.log) |
-| A06-C | RNF2 | Con un transportador centrado en el eje, 2 fotos en `closed` (0°) y 2 en `open` (90°), abriendo y cerrando por voz. | Las 4 posiciones dentro de ±5°. | Pendiente de medición. | Pendiente | — |
+| A06-C | RNF2 | Con un transportador apoyado sobre el servo, 2 fotos en `closed` (0°) y 2 en `open` (90°), abriendo y cerrando por voz. | Las 4 posiciones dentro de ±5°. | En `closed`, el brazo queda paralelo a la línea 0°–180°; en `open`, perpendicular, sobre la marca de 90°. Diferencia estimada < 3° en las 4 fotos. Durante las fotos llegó dos veces el mismo `closed` (versiones 716 y 717) con el servo en movimiento y no hubo un segundo movimiento. | Aprobada | [A06_servo_cerrada_1.jpeg](docs/evidencias/A06/A06_servo_cerrada_1.jpeg), [A06_servo_cerrada_2.jpeg](docs/evidencias/A06/A06_servo_cerrada_2.jpeg), [A06_servo_abierta_1.jpeg](docs/evidencias/A06/A06_servo_abierta_1.jpeg), [A06_servo_abierta_2.jpeg](docs/evidencias/A06/A06_servo_abierta_2.jpeg), [A06_video_servo.mp4](docs/evidencias/A06/A06_video_servo.mp4), [A06_servo_ESP32.log](docs/evidencias/A06/A06_servo_ESP32.log) |
 
 **Tabla 5.** Cruces detectados por distancia (A06-A)
 
@@ -1833,7 +1833,7 @@ Mientras el valor inválido sigue en `desired`, AWS publica un `delta` nuevo con
 
 | ID | Requisitos | Procedimiento | Criterio de éxito | Resultado observado | Estado | Evidencia |
 |---|---|---|---|---|---|---|
-| A10 | RNF1, RF2, RF3, RNF4 | Dejar el objeto funcionando sin tocar la placa durante la corrida de A05: 28 comandos de voz, uno cada 40 s aproximadamente, y pasos frente al PIR cada pocos minutos. Analizar el log completo. | ≥ 15 min continuos; 0 reinicios; 0 caídas de WiFi y MQTT; `loop()` ≤ 500 ms; pérdida de heap ≤ 4096 bytes; ≤ 61 500 ms entre reportes; los 3 atributos en cada reporte; cambio de estado → reporte ≤ 1100 ms; `delta` → `reported` ≤ 1500 ms. | Ver Tabla 7. Todas las medidas cumplen. | Aprobada | [A10/](docs/evidencias/A10/README.md): [A10_ESP32.log](docs/evidencias/A10/A10_ESP32.log), [A10_analisis.txt](docs/evidencias/A10/A10_analisis.txt) |
+| A10 | RNF1, RF2, RF3, RNF4 | Dejar el objeto funcionando sin tocar la placa durante la corrida de A05: 28 comandos de voz a intervalos irregulares (de 6 s a casi 5 min, con una ráfaga final de 13 comandos en 85 s), y pasos frente al PIR cada pocos minutos. Analizar el log completo. | ≥ 15 min continuos; 0 reinicios; 0 caídas de WiFi y MQTT; `loop()` ≤ 500 ms; pérdida de heap ≤ 4096 bytes; ≤ 61 500 ms entre reportes; los 3 atributos en cada reporte; cambio de estado → reporte ≤ 1100 ms; `delta` → `reported` ≤ 1500 ms. | Ver Tabla 7. Todas las medidas cumplen. | Aprobada | [A10/](docs/evidencias/A10/README.md): [A10_ESP32.log](docs/evidencias/A10/A10_ESP32.log), [A10_analisis.txt](docs/evidencias/A10/A10_analisis.txt) |
 
 **Tabla 7.** Medidas de A10, de `A10_analisis.txt`
 
@@ -1851,7 +1851,7 @@ Mientras el valor inválido sigue en `desired`, AWS publica un `delta` nuevo con
 | Episodios de presencia de menos de 10 s | 0 de 42 | 0 | PASS (RF1) |
 | Señal WiFi (RSSI) | −83 a −22 dBm | — | INFO |
 
-Fuera de la corrida, la placa se encendió a las 22:21 (hora de Bolivia) y a las 23:44 llevaba 83 min sin reiniciarse ni perder la conexión, pasando por A01 a A05, A09 y A10 (`HEALTH uptime_s=4980 … wifi_drops=0 mqtt_drops=0`). Los máximos de 804 ms y 1169 ms se explican en §4.5.
+Fuera de la corrida, la placa se encendió a las 22:21 (hora de Bolivia) y a las 23:48 llevaba 87 min sin reiniciarse ni perder la conexión, pasando por A01 a A05, A09 y A10 (`HEALTH uptime_s=5220 … wifi_drops=0 mqtt_drops=0`). Los máximos de 804 ms y 1169 ms se explican en §4.5.
 
 ### 4.3 B. Pruebas automáticas
 
@@ -1930,13 +1930,13 @@ Qué permiten afirmar los datos y qué no:
 - **Reporte por evento: 804 ms en A10 frente a 254 ms en A03.** Los dos valores son correctos y vienen del mismo mecanismo: el intervalo mínimo de 1 s entre reportes. En A10 ([A10_ESP32.log](docs/evidencias/A10/A10_ESP32.log), líneas 41 a 44), `PRESENCE_OFF` se reportó a los 3 868 092 ms y `PRESENCE_ON` llegó 196 ms después: su reporte esperó hasta completar el segundo (3 869 092 ms), 804 ms después del cambio. En A03, el reporte anterior había salido 745 ms antes, y la espera fue de 254 ms. Por diseño, la demora máxima es 1000 ms más una vuelta de `loop()`, y por eso el límite declarado es 1.1 s. La mediana, de 5 ms, es el caso normal.
 - **`DELTA_RX` → `reported`: 415 ms en A04 frente a 1169 ms en A10.** El mismo mecanismo: en A10 ([líneas 275 a 281](docs/evidencias/A10/A10_ESP32.log)), un `PRESENCE_ON` se reportó 240 ms antes de que el servo terminara, así que el reporte con la nueva posición esperó hasta completar el segundo. Sigue dentro del límite de 1.5 s de RF3 y del de 3 s de RNF3. Los valores de 684 y 713 ms son `delta` que pedían la posición actual y solo requerían confirmar.
 - **El tiempo de respuesta no incluye el reconocimiento de voz.** RNF3 se mide desde que la Lambda recibe el intent: el tiempo que el simulador tarda en convertir el texto en un intent no se puede medir desde la Lambda. `confirm_ms` es una cota superior del tiempo real, porque incluye hasta 250 ms de espera entre consultas de la Lambda.
-- **Peor caso de A05 (984 ms y `confirm_ms` de 1304 ms).** Fue el primer comando después de 5 min sin comandos. La causa más probable es que el contenedor de la Lambda o sus conexiones con AWS IoT estaban inactivos; el log no permite separarlo con más detalle. Desde el segundo comando, el tiempo quedó entre 537 y 872 ms.
+- **Peores casos de A05.** Son dos casos distintos. (1) La versión 412 tuvo el peor tiempo hasta el servo detenido (984 ms, `confirm_ms` 1304 ms): fue el primer comando después de 10 min sin comandos (el anterior fue a las 03:14:40 UTC). La causa más probable es que el contenedor de la Lambda o sus conexiones con AWS IoT estaban inactivos; el log no permite separarlo con más detalle. Desde el segundo comando, el tiempo hasta el servo quedó entre 537 y 872 ms. (2) Los peores `confirm_ms` fueron 1691 ms (versión 527) y 1676 ms (versión 473), con el servo detenido a tiempo: un evento del PIR se reportó ~150 ms después del `DELTA_RX`, y el reporte con la nueva posición de la puerta tuvo que esperar el mínimo de 1 s entre reportes (`MIN_REPORT_INTERVAL_MS`). Es el costo de limitar la frecuencia de mensajes.
 - **Medición con dos relojes.** Une el reloj de la Lambda con el NTP del objeto, cuyo error es del orden de decenas de milisegundos. Por eso el tiempo de la nube (mínimo 18 ms) es solo informativo; el veredicto de RNF3 se apoya en `confirm_ms`, que usa un solo reloj.
 - **Tamaño de la muestra del PIR.** 15 de 15 cruces detectados no prueban una tasa de detección del 95 % o más: con 15 de 15, la cota inferior de confianza del 95 % es 81.9 %. Los datos permiten afirmar que el sensor detectó todos los cruces probados a 0.5, 1.0 y 2.0 m, caminando a ritmo normal y de lado a lado; no dicen nada de personas que se acercan de frente o muy despacio, ni de otras distancias. El primer cruce a 0.5 m se repitió porque el sensor seguía activo por un movimiento anterior.
-- **Posición del servo.** `servo_angle` es el ángulo que se ordenó al servo, no un ángulo medido. La exactitud del servo (A06-C) quedó pendiente de medición, y el objeto no tiene un sensor que confirme la posición real de la puerta (§7).
+- **Posición del servo.** `servo_angle` es el ángulo que se ordenó al servo, no un ángulo medido. La medición con transportador (A06-C) dio una diferencia estimada < 3°, pero se leyó a ojo sobre fotos con el transportador sostenido a mano (resolución de unos ±2–3°), y el brazo se encastra en el eje en pasos de unos 15°. El objeto no tiene un sensor que confirme la posición real de la puerta (§7).
 - **A08, intento 1.** No fue concluyente: la orden pendiente era `closed`, la misma posición en la que arranca la puerta por seguridad, así que no se distinguía si la orden se aplicó. Se repitió con `open`.
 - **A09, `delta` repetidos.** Mientras el valor inválido sigue en `desired`, AWS publica un `delta` nuevo con cada actualización de `reported`: 13 `INVALID_VALUE` para 3 publicaciones. El servo nunca se movió, pero cada repetición es un mensaje más. La Lambda nunca escribe valores inválidos, así que solo ocurre si alguien publica a mano en el Shadow (§7).
-- **Bloqueo de la conexión TLS.** Después de la corrección D2, la conexión MQTT exitosa todavía detiene `loop()` unos 2 s (`max_loop_ms=2111` en A07), porque PubSubClient conecta de forma sincrónica. Solo ocurre al reconectarse y no afecta al funcionamiento normal (21 ms en A10).
+- **Bloqueo de la conexión TLS y alcance de RNF1.** RNF1 (`loop()` ≤ 500 ms) se cumple en operación normal con la red estable (21 ms en A10). Durante una conexión, en cambio, PubSubClient conecta de forma sincrónica y detiene `loop()`: 2407 ms en la primera conexión tras cargar el firmware y 2111 ms en la reconexión de A07 (por eso `A07_analisis_tras_correccion.txt` marca `RNF1 … FAIL`: ese análisis aplica el criterio de operación normal a un tramo con cortes). La corrección D2 **mitiga** el caso sin Internet: entre intentos quedan siempre 5 s libres, pero un intento aislado todavía puede bloquear unos 7 s si el DNS no responde; en el intento 3 los fallos duraron unos 16–23 ms, así que esa condición no se reprodujo después de la corrección. El watchdog de 30 s cubre ese peor caso (8 + 8 + 5 s de TLS/MQTT más ~7 s de DNS = 28 s).
 - **Caída de la red con un hotspot.** Al apagar el hotspot, primero se cae MQTT y entre 35 y 120 s después el WiFi: durante ese tramo, el teléfono sigue asociado pero sin Internet, que es justo el caso que reveló D2.
 - **Segundo usuario.** En A02, el segundo usuario se simuló con un evento de prueba de la Lambda (`test-user-2`), no con otra cuenta de Alexa. Los datos demuestran que la Lambda separa a los usuarios por `userId`; no prueban el comportamiento con dos cuentas reales.
 - **Alcance de las pruebas.** Todas se hicieron entre la noche del 9 y la madrugada del 10 de noviembre de 2026, con una sola placa, una sola red (el hotspot de un celular, con una señal de −83 a −22 dBm) y un solo Thing con hardware. Los tiempos dependen de esa red: los resultados no permiten afirmar el mismo margen en otra red ni en otro día.
@@ -1969,8 +1969,8 @@ Fuentes de error consideradas:
 | RF10 Confirmación al usuario | "Listo…" si llega `reported` en 3 s; aviso si no | 28 de 28 confirmados (A05); aviso sin confirmación con la placa apagada (A08) | A05, A08, B01 | Log y automática | Cumple |
 | RF11 Aviso de desconexión | Aviso con más de 150 s sin reportes; orden encolada | Avisos con 2 y 3 min; `queued_offline` en A02 y A07; límite de 150/151 s en B01 | A07, A02, B01 | Física y automática | Cumple |
 | RF12 Inválidos y repetidos | Sin movimiento; `INVALID_VALUE`, `JSON_ERROR`, `STALE_IGNORED` | 3 de 3 inválidos sin movimiento (A09); 9 de 9 casos de rechazo en B02 (C03, C04 y C06 a C12) | A09, B02 | Log y automática | Cumple |
-| RNF1 Estabilidad | ≥ 15 min, 0 reinicios, 0 caídas, `loop()` ≤ 500 ms, heap ≤ 4096 bytes | 27.3 min, 0 reinicios, 0 caídas, `loop()` máx. 21 ms, 0 bytes perdidos; 83 min sin reiniciar en total | A10 | Log | Cumple |
-| RNF2 Exactitud | PIR: 100 % de cruces y 0 falsos positivos. Servo: ±5° | PIR: 15 de 15 y 0 en 5.0 min. Servo: pendiente de medición | A06 | Física y log | Cumple el PIR; servo pendiente |
+| RNF1 Estabilidad | ≥ 15 min, 0 reinicios, 0 caídas, `loop()` ≤ 500 ms, heap ≤ 4096 bytes | 27.3 min, 0 reinicios, 0 caídas, `loop()` máx. 21 ms, 0 bytes perdidos; 87 min sin reiniciar en total | A10 | Log | Cumple |
+| RNF2 Exactitud | PIR: 100 % de cruces y 0 falsos positivos. Servo: ±5° | PIR: 15 de 15 y 0 en 5.0 min. Servo: < 3° en 0° y 90° (4 fotos) | A06 | Física, log y fotos | Cumple |
 | RNF3 Tiempo de respuesta | ≤ 3 s en ≥ 20 comandos | 28 comandos; confirmación: mediana 919 ms, máx. 1691 ms; servo detenido: mediana 616 ms, máx. 984 ms | A05 ([A05_analisis.txt](docs/evidencias/A05/A05_analisis.txt)) | Log | Cumple |
 | RNF4 Frecuencia de reporte | Evento ≤ 1.1 s; heartbeat ≤ 61.5 s; ~1440 mensajes/día en reposo | Evento: mediana 5 ms, máx. 804 ms (A10) y 254 ms (A03); heartbeat 60 000 ms; reposo 1440/día por diseño, 6066/día proyectados con el uso intensivo de A10 | A10, A03, B02 | Log y automática | Cumple |
 | RNF5 Reconexión | WiFi cada 10 000 ± 500 ms; orden pendiente ≤ 10 s desde `WIFI_CONNECTED` | Reintentos de 9999–10 000 ms; orden aplicada a 3297 y 3848 ms (A07) y 3316 ms (A08) | A07, A08 | Log y video | Cumple |
@@ -2006,15 +2006,15 @@ Lo que los datos permiten afirmar:
 - **Los máximos de los reportes son una decisión de diseño.** Los 804 ms de RNF4 y los 1169 ms de RF3 no son ruido: son el intervalo mínimo de 1 s entre reportes, que agrupa los cambios muy seguidos para no generar ráfagas de mensajes. En el caso normal, el reporte sale 5 ms después del cambio.
 - **El Shadow desacopla de verdad a Alexa del objeto.** Una orden dada con el objeto sin red o sin energía se guardó en `desired` y se aplicó sola entre 3.3 y 3.9 s después de recuperarse (A07, A08), sin movimientos duplicados.
 - **La skill no está atada a un único Thing.** Dos usuarios, cada uno con su Thing, solo actuaron sobre el suyo (A02), y la vinculación se valida antes de guardarse (A01).
-- **El firmware es estable en el tiempo probado.** 27.3 min de corrida medida y 83 min sin reiniciar, con 0 caídas y sin pérdida de memoria (A10).
+- **El firmware es estable en el tiempo probado.** 27.3 min de corrida medida y 87 min sin reiniciar, con 0 caídas y sin pérdida de memoria (A10).
 - **Las pruebas encontraron defectos reales.** D1 y D2 (§4.4) no se veían usando el sistema: el servo parecía funcionar y el bloqueo solo aparecía con WiFi pero sin Internet. Sin B02 y sin el corte de red de A07, el sistema habría confirmado posiciones antes de tiempo y se habría congelado con una red degradada.
 
 Lo que los datos no permiten afirmar:
 
-- **La exactitud del servo**, que quedó pendiente de medición, ni la posición física real de la puerta, porque `servo_angle` es el ángulo ordenado y no uno medido.
+- **Un error del servo menor que unos 3°**, porque el ángulo se leyó a ojo sobre fotos, ni la posición física real de la puerta durante el uso, porque `servo_angle` es el ángulo ordenado y no uno medido.
 - **Una tasa de detección del PIR del 95 % o más.** Con 15 cruces, la cota inferior de confianza es 81.9 %, y solo se probaron cruces laterales a tres distancias.
 - **El tiempo percibido por el usuario de punta a punta.** RNF3 empieza cuando la Lambda recibe el intent; el reconocimiento de voz del simulador no está incluido.
-- **Estabilidad por días.** Se midieron 27.3 min de corrida analizada y 83 min sin reiniciar; no se probaron horas ni días seguidos, ni el comportamiento al renovar la conexión TLS a largo plazo.
+- **Estabilidad por días.** Se midieron 27.3 min de corrida analizada y 87 min sin reiniciar; no se probaron horas ni días seguidos, ni el comportamiento al renovar la conexión TLS a largo plazo.
 - **La generalidad de los tiempos.** Todo se midió en una noche, con una red (el hotspot de un celular) y una placa.
 
 ---
@@ -2038,10 +2038,10 @@ Mejoras técnicas, cada una ligada a la prueba que la motiva:
 - **Conexión MQTT no bloqueante (A07, D2).** La conexión exitosa todavía detiene `loop()` unos 2 s (`max_loop_ms=2111`). Moverla a una tarea propia de FreeRTOS, o usar un cliente MQTT asíncrono, dejaría el PIR y el LED funcionando durante la reconexión.
 - **Borrar las órdenes inválidas (A09).** Al rechazar un valor, el objeto podría publicar `{"state":{"desired":{"door":null}}}` para borrarlo y evitar que AWS reenvíe el `delta` con cada reporte (13 `INVALID_VALUE` para 3 publicaciones).
 - **Aplicar los permisos mínimos (§3.4.4, B03).** Reemplazar `Allow * *` por [iot-policy.json](aws/iot-policy.json) y las políticas administradas de la Lambda por [lambda-role-policy.json](aws/lambda-role-policy.json). Con varios dispositivos, una política con variables de AWS IoT (por ejemplo, el nombre del Thing conectado) evita escribir una política por cada uno.
-- **Medir la exactitud del servo y la posición real de la puerta (A06-C, §4.5).** Completar la medición con transportador y agregar un sensor de puerta, como un *reed switch* o un final de carrera, como un componente más (`DeviceComponent`): así `reported.door` diría dónde está la puerta y no solo qué se le ordenó al servo.
+- **Medir la posición real de la puerta (A06-C, §4.5).** Medir el ángulo con el transportador fijado al eje (no a mano) y agregar un sensor de puerta, como un *reed switch* o un final de carrera, como un componente más (`DeviceComponent`): así `reported.door` diría dónde está la puerta y no solo qué se le ordenó al servo.
 - **Fuente aparte para el actuador (§2.2.2).** No hubo reinicios por *brownout*, pero un servo más grande o una cerradura compartirían la corriente del USB con el ESP32. Una fuente de 5 V propia, con la tierra común, elimina ese riesgo.
 - **Más evidencia estadística (A05, A06, A10).** Repetir A05 y A10 en otra red y otro día, con corridas de varias horas, y aumentar los cruces del PIR (con 59 de 59 cruces detectados, la cota inferior de confianza llegaría al 95 %), incluyendo personas que se acercan de frente.
-- **Primer comando más rápido (A05).** El peor caso (1304 ms de confirmación) fue el primer comando después de 5 min; si el arranque en frío de la Lambda se volviera notorio, se podría reducir el tamaño del paquete o mantener la función activa.
+- **Primer comando más rápido (A05).** El primer comando después de 10 min sin uso tardó 984 ms hasta el servo, frente a una mediana de 616 ms; si el arranque en frío de la Lambda se volviera notorio, se podría reducir el tamaño del paquete o mantener la función activa.
 - **Cuenta de AWS.** Configurar una alerta de facturación, como recomienda la consigna, y usar usuarios IAM para cada integrante en lugar de compartir las credenciales de la cuenta.
 
 Extensiones hacia un uso real:
@@ -2071,7 +2071,7 @@ Evidencias de las pruebas, una carpeta por prueba en [docs/evidencias/](docs/evi
 | [A03](docs/evidencias/A03/README.md) | Consulta del sensor | 2 capturas, 1 video, `A03_ESP32.log`, `A03_cloudwatch.csv`, `A03_analisis.txt` | 8 de 8 respuestas; reporte en mediana 5 ms (RF4, RNF4) |
 | [A04](docs/evidencias/A04/README.md) | Comandos y estado | 7 capturas, 3 videos del servo, `A04_ESP32.log`, `A04_analisis.txt` | 6 de 6 respuestas; `delta` → `reported` en 415 ms (RF3, RF5, RF6, RF10) |
 | [A05](docs/evidencias/A05/README.md) | Tiempo de respuesta | 3 capturas, `A05_cloudwatch.csv`, `A05_analisis.txt` | 28 de 28; confirmación en mediana 919 ms y máx. 1691 ms (RNF3) |
-| [A06](docs/evidencias/A06/README.md) | Exactitud | `A06_PIR_ESP32.log` | 15 de 15 cruces y 0 falsos positivos (RNF2) |
+| [A06](docs/evidencias/A06/README.md) | Exactitud | `A06_PIR_ESP32.log`, `A06_servo_ESP32.log`, 4 fotos del servo, `A06_video_servo.mp4` | 15 de 15 cruces, 0 falsos positivos y servo < 3° (RNF2) |
 | [A07](docs/evidencias/A07/README.md) | Caída de WiFi | 5 capturas, 1 video, 2 logs y 2 análisis (antes y después de la corrección D2) | Orden pendiente aplicada a 3297–3848 ms (RNF5, RF11) |
 | [A08](docs/evidencias/A08/README.md) | Corte de energía | 4 capturas, 1 video, `A08_ESP32.log` | Orden pendiente aplicada 3.9 s después de enchufar (RNF5, RF10) |
 | [A09](docs/evidencias/A09/README.md) | Comandos inválidos | 4 capturas, `A09_ESP32.log` | 3 de 3 inválidos sin movimiento (RF12) |

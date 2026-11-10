@@ -148,7 +148,7 @@ Puedes dibujarlo en Wokwi/Fritzing o en Mermaid. Datos reales:
 | Servo SG90 | Señal (naranja) | GPIO13 |
 | Servo SG90 | V+ (rojo) / GND (marrón) | 5 V (VIN, desde USB) / GND común |
 | PIR AM312 | OUT | GPIO26 (D26), entrada con pull-down interno |
-| PIR AM312 | VCC / GND | 3.3 V / GND común |
+| PIR AM312 | VCC / GND | 5 V (VIN) / GND común |
 | LED de estado | Ánodo con resistencia 220–330 Ω | GPIO32 (solo indicador: rápido = sin WiFi, lento = sin Shadow, fijo = en línea) |
 
 Justificación de GPIO: 13, 26 y 32 no son pines de arranque (*strapping*) ni de la flash. El servo se alimenta del 5 V de la placa; en las pruebas no hubo ningún reinicio inesperado (83 min seguidos sin reiniciar, ver A10), pero se recomienda fuente de 5 V externa con GND común para un uso real. Incluye una **foto del montaje** (falta tomarla).
