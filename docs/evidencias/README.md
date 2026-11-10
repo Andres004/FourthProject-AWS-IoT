@@ -9,7 +9,7 @@ Una carpeta por prueba del [plan de pruebas](../PLAN_DE_PRUEBAS.md). Cada `READM
 | [A03](A03/README.md) Consulta del sensor por voz | RF1, RF4, RNF4 | PASS: 8/8 respuestas coinciden con el PIR |
 | [A04](A04/README.md) Comandos y estado de la puerta | RF3, RF5, RF6, RF10 | PASS: 6/6; `DELTA_RX` → `reported` en 415 ms |
 | [A05](A05/README.md) Tiempo de respuesta extremo a extremo | RNF3, RF10 | PASS: 28/28; mediana 616 ms al servo detenido, máx. 1691 ms confirmado |
-| [A06](A06/README.md) Exactitud del PIR y del servo | RNF2, RF1 | PIR PASS: 15/15 y 0 falsos positivos; servo pendiente |
+| [A06](A06/README.md) Exactitud del PIR y del servo | RNF2, RF1 | PASS: 15/15 cruces, 0 falsos positivos en 5 min, servo < 3° en 0° y 90° |
 | [A07](A07/README.md) Caída de WiFi con orden pendiente | RNF5, RF11 | PASS: orden aplicada 3.3–3.8 s después de volver el WiFi; defecto corregido |
 | [A08](A08/README.md) Corte de energía con orden pendiente | RNF5, RF10 | PASS: orden aplicada 3.9 s después del arranque |
 | [A09](A09/README.md) Comandos inválidos desde AWS | RF12, RF3 | PASS: 3/3 rechazados, 2/2 válidos aplicados |
