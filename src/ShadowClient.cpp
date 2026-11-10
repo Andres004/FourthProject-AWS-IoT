@@ -64,6 +64,10 @@ bool ShadowClient::publishReported(const char* payload) {
   return mqtt_.publish(updateTopic_.c_str(), payload);
 }
 
+uint32_t ShadowClient::disconnections() const {
+  return disconnections_;
+}
+
 void ShadowClient::connect(uint32_t nowMs) {
   attemptedConnection_ = true;
   lastAttemptMs_ = nowMs;
@@ -104,7 +108,9 @@ void ShadowClient::markDisconnected() {
   }
   sessionActive_ = false;
   getPending_ = false;
-  EventLog::recordf("MQTT_LOST", "state=%d", mqtt_.state());
+  ++disconnections_;
+  EventLog::recordf("MQTT_LOST", "state=%d count=%lu", mqtt_.state(),
+                    static_cast<unsigned long>(disconnections_));
 }
 
 void ShadowClient::requestShadowIfDue(uint32_t nowMs) {

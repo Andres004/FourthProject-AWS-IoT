@@ -3,7 +3,10 @@
 /**
  * @brief Timestamped Serial log used as evidence for the NFR measurements.
  *
- * Every line has the format "[t_ms] EVENT details".
+ * Every line has the format "[t_ms|UTC] EVENT details", where t_ms is the
+ * time since boot and UTC is the NTP time with milliseconds, or "-" while
+ * the clock is not synchronized yet. Example:
+ * "[48211|2026-11-09T21:05:07.123Z] DELTA_RX version=57 {...}".
  */
 class EventLog {
  public:

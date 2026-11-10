@@ -7,6 +7,7 @@
 #pragma once
 
 #include <stdint.h>
+#include <time.h>
 
 namespace config {
 
@@ -44,6 +45,22 @@ constexpr uint32_t GET_AFTER_SUBSCRIBE_MS = 500;    // Wait for subscriptions be
 constexpr uint32_t GET_RESPONSE_TIMEOUT_MS = 5000;  // Repeat /get after this silence [ms]
 }  // namespace network
 
+/** UTC clock used to correlate device logs with the Lambda logs. */
+namespace clock_sync {
+constexpr char NTP_SERVER_PRIMARY[] = "pool.ntp.org";
+constexpr char NTP_SERVER_SECONDARY[] = "time.google.com";
+constexpr long UTC_OFFSET_S = 0;  // Logs use UTC, like CloudWatch
+constexpr long DST_OFFSET_S = 0;  // No daylight saving time in UTC
+constexpr time_t MIN_VALID_EPOCH_S = 1767225600;  // 2026-01-01: clock is set
+}  // namespace clock_sync
+
+/** Stability evidence: health log and loop watchdog. */
+namespace health {
+constexpr uint32_t LOG_PERIOD_MS = 60000;  // Between HEALTH lines [ms]
+// Longest legal blocking call: TCP 8 s + TLS 8 s + MQTT 5 s = 21 s.
+constexpr uint32_t WATCHDOG_TIMEOUT_S = 30;  // Reset if loop() stalls [s]
+}  // namespace health
+
 /** Device Shadow topics and error codes. */
 namespace shadow_api {
 constexpr char TOPIC_PREFIX[] = "$aws/things/";  // Topic = prefix + thing + suffix
@@ -54,6 +71,7 @@ constexpr char TOPIC_GET[] = "/shadow/get";
 constexpr char TOPIC_GET_ACCEPTED[] = "/shadow/get/accepted";
 constexpr char TOPIC_GET_REJECTED[] = "/shadow/get/rejected";
 constexpr int ERROR_CODE_NOT_FOUND = 404;  // /get rejected: Shadow does not exist yet
+constexpr char KEY_VERSION[] = "version";  // Shadow document version
 }  // namespace shadow_api
 
 /** Shadow document contract shared with the Lambda function. */

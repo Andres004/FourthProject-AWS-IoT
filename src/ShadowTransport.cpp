@@ -3,6 +3,7 @@
 #include <utility>
 
 #include "EventLog.h"
+#include "config.h"
 
 namespace {
 
@@ -25,11 +26,15 @@ void ShadowTransport::setHandlers(DesiredHandler desiredHandler,
 }
 
 void ShadowTransport::handleDelta(const uint8_t* payload, size_t length) {
-  EventLog::recordf("DELTA_RX", "%.*s", static_cast<int>(length),
-                    reinterpret_cast<const char*>(payload));
-
   JsonDocument document;
   if (!parseDocument(payload, length, document)) {
+    return;
+  }
+  EventLog::recordf("DELTA_RX", "version=%lld %.*s",
+                    document[config::shadow_api::KEY_VERSION].as<long long>(),
+                    static_cast<int>(length),
+                    reinterpret_cast<const char*>(payload));
+  if (!acceptVersion(document, "delta")) {
     return;
   }
 
@@ -44,11 +49,18 @@ void ShadowTransport::handleDelta(const uint8_t* payload, size_t length) {
 }
 
 void ShadowTransport::handleGetAccepted(const uint8_t* payload, size_t length) {
-  EventLog::record("GET_RX");
-
   JsonDocument document;
   if (!parseDocument(payload, length, document)) {
     return;
+  }
+  EventLog::recordf("GET_RX", "version=%lld",
+                    document[config::shadow_api::KEY_VERSION].as<long long>());
+  // Always applied: after a reconnection it is the reference state, even if
+  // its version equals the last delta seen.
+  const int64_t version =
+      document[config::shadow_api::KEY_VERSION].as<int64_t>();
+  if (version > lastVersion_) {
+    lastVersion_ = version;
   }
 
   JsonObjectConst desired = document["state"]["desired"];
@@ -56,6 +68,23 @@ void ShadowTransport::handleGetAccepted(const uint8_t* payload, size_t length) {
     desiredHandler_(desired);
   }
   notifySynced();
+}
+
+bool ShadowTransport::acceptVersion(const JsonDocument& document,
+                                    const char* source) {
+  JsonVariantConst value = document[config::shadow_api::KEY_VERSION];
+  if (value.isNull()) {
+    return true;  // The local test transport sends deltas without version.
+  }
+  const int64_t version = value.as<int64_t>();
+  if (version <= lastVersion_) {
+    EventLog::recordf("STALE_IGNORED", "source=%s version=%lld last=%lld",
+                      source, static_cast<long long>(version),
+                      static_cast<long long>(lastVersion_));
+    return false;
+  }
+  lastVersion_ = version;
+  return true;
 }
 
 void ShadowTransport::notifySynced() {

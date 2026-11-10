@@ -34,11 +34,18 @@ class ShadowTransport {
   /** Publishes a serialized {"state":{"reported":...}} document. */
   virtual bool publishReported(const char* payload) = 0;
 
+  /** @return Times the Shadow link has been lost since boot. */
+  virtual uint32_t disconnections() const { return 0; }
+
   /** Registers the callbacks used for incoming Shadow data. */
   void setHandlers(DesiredHandler desiredHandler, SyncHandler syncHandler);
 
  protected:
-  /** Applies an /update/delta document, whose "state" is the difference. */
+  /**
+   * Applies an /update/delta document, whose "state" is the difference.
+   * A document whose version is not newer than the last one applied is a
+   * duplicate or out-of-order delivery (MQTT QoS 1) and is ignored.
+   */
   void handleDelta(const uint8_t* payload, size_t length);
 
   /** Applies a /get/accepted document, whose desired part is pending work. */
@@ -48,6 +55,10 @@ class ShadowTransport {
   void notifySynced();
 
  private:
+  /** @return false when the document version was already processed. */
+  bool acceptVersion(const JsonDocument& document, const char* source);
+
   DesiredHandler desiredHandler_;
   SyncHandler syncHandler_;
+  int64_t lastVersion_ = -1;  // -1: nothing processed since boot
 };

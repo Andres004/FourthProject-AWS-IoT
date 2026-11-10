@@ -78,4 +78,28 @@ To add a sensor or actuator, implement `DeviceComponent` and register the object
 
 ## Log events
 
-`BOOT`, `LINK_CODE`, `WIFI_*`, `MQTT_*`, `GET_TX`, `GET_RX`, `GET_REJECTED`, `DELTA_RX`, `ACTUATOR_START`, `ACTUATOR_DONE`, `PIR_READY`, `PRESENCE_ON`, `PRESENCE_OFF`, `REPORT_TX`, `UPDATE_REJECTED`, `INVALID_VALUE`, `JSON_ERROR`.
+Every Serial line has the format `[t_ms|UTC] EVENT details`. `t_ms` is the time since boot. `UTC` is the NTP time with milliseconds, or `-` until the clock is synchronized, and is used to compare device logs with the Lambda logs in CloudWatch.
+
+| Event | Meaning |
+|---|---|
+| `BOOT`, `RESET_REASON`, `LINK_CODE` | Start, why the chip restarted (`brownout`, `task_watchdog`...) and the code to say to Alexa |
+| `WIFI_*`, `MQTT_*`, `TIME_SYNC_START`, `TIME_SYNCED` | Connection and clock state; `*_LOST` lines carry a drop counter |
+| `GET_TX`, `GET_RX`, `GET_REJECTED` | Full Shadow request after each connection |
+| `DELTA_RX version=N` | Desired change received; `STALE_IGNORED` drops duplicated or older versions |
+| `ACTUATOR_START`, `ACTUATOR_DONE` | Servo movement and its confirmation |
+| `PIR_READY`, `PRESENCE_ON`, `PRESENCE_OFF` | Sensor warm-up end and presence changes |
+| `REPORT_TX reason=event\|heartbeat` | Report published to `reported` |
+| `HEALTH` | Every 60 s: uptime, free and minimum heap, RSSI, link drops and longest loop iteration |
+| `UPDATE_REJECTED`, `INVALID_VALUE`, `JSON_ERROR`, `REPORT_TX_FAILED` | Errors |
+
+A task watchdog restarts the ESP32 if `loop()` stalls for 30 s.
+
+## Lambda tests
+
+The skill backend has unit tests that replace DynamoDB and AWS IoT with in-memory fakes. They need the dependencies in `lambda/package` (see the AWS guide):
+
+```bash
+python -m unittest discover -s lambda/tests -v
+```
+
+Each request writes one `SKILL_REQUEST` JSON line to CloudWatch, with the intent, a hash of the user, the Thing, the result, the Shadow version written and the Lambda time.

@@ -25,6 +25,7 @@ class ShadowClient : public ShadowTransport {
   void update(uint32_t nowMs) override;
   bool isConnected() const override;
   bool publishReported(const char* payload) override;
+  uint32_t disconnections() const override;
 
  private:
   void connect(uint32_t nowMs);
@@ -49,6 +50,7 @@ class ShadowClient : public ShadowTransport {
   bool sessionActive_ = false;
   bool attemptedConnection_ = false;
   bool getPending_ = false;
+  uint32_t disconnections_ = 0;
   uint32_t lastAttemptMs_ = 0;
   uint32_t nextGetMs_ = 0;
 };

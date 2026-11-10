@@ -7,9 +7,11 @@
 #include "DeviceComponent.h"
 #include "DoorActuator.h"
 #include "EventLog.h"
+#include "HealthMonitor.h"
 #include "PresenceSensor.h"
 #include "ShadowReporter.h"
 #include "StatusLed.h"
+#include "TimeSync.h"
 #include "WifiManager.h"
 #include "config.h"
 
@@ -22,6 +24,8 @@
 namespace {
 
 WifiManager wifi;
+TimeSync timeSync;
+HealthMonitor health;
 StatusLed statusLed;
 DoorActuator door;
 PresenceSensor presence;
@@ -49,6 +53,7 @@ void applyDesiredToComponents(JsonObjectConst desired) {
 void setup() {
   EventLog::begin();
   EventLog::record("BOOT");
+  health.begin();
   EventLog::recordf("LINK_CODE", "%lu",
                     static_cast<unsigned long>(config::device::LINK_CODE));
 
@@ -65,7 +70,9 @@ void setup() {
 void loop() {
   const uint32_t nowMs = millis();
 
+  health.update(nowMs, wifi.disconnections(), shadow.disconnections());
   wifi.update(nowMs);
+  timeSync.update(wifi.isConnected());
   shadow.update(nowMs);
   for (DeviceComponent* component : components) {
     component->update(nowMs);

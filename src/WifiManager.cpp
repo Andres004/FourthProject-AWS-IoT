@@ -23,7 +23,9 @@ void WifiManager::update(uint32_t nowMs) {
       EventLog::recordf("WIFI_CONNECTED", "ip=%s",
                         WiFi.localIP().toString().c_str());
     } else {
-      EventLog::record("WIFI_LOST");
+      ++disconnections_;
+      EventLog::recordf("WIFI_LOST", "count=%lu",
+                        static_cast<unsigned long>(disconnections_));
       startConnection(nowMs);
     }
     return;
@@ -37,6 +39,10 @@ void WifiManager::update(uint32_t nowMs) {
 
 bool WifiManager::isConnected() const {
   return connected_;
+}
+
+uint32_t WifiManager::disconnections() const {
+  return disconnections_;
 }
 
 void WifiManager::startConnection(uint32_t nowMs) {
