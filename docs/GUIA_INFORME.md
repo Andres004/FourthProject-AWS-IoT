@@ -418,6 +418,8 @@ ESP32: cada línea `[t_ms|UTC] EVENTO detalle` (tabla de eventos en el [README](
 
 Todo está en [aws/README.md](../aws/README.md): Things, certificado, política usada (`Allow * *`) **y la mínima**, rol de la Lambda (`AWSIoTFullAccess` + `AmazonDynamoDBFullAccess`) **y el mínimo**, riesgos de los permisos amplios, variables de entorno, timeout 7 s, disparador con verificación del Skill ID, endpoint de la skill = ARN de la Lambda. **La consigna exige explicar qué se asignó, por qué y cuál sería el mínimo**: copia esa tabla.
 
+**Dónde vive cada cosa (aclararlo en el informe y en la defensa):** la skill se creó con la plantilla *Alexa-hosted (Python)*, pero en **Build → Endpoint** se reemplazó por el **ARN de nuestra Lambda** `monoambiente-skill`. Por eso el backend, la tabla DynamoDB `user_thing` y los logs de CloudWatch están en **nuestra cuenta de AWS** (`us-east-2`), y el código y la base de datos que trae una skill Alexa-hosted **no se usan**. Alexa solo convierte la frase en un intent y lo envía a la Lambda. La evidencia está en A01 (ítems de DynamoDB en la consola de AWS) y en los CSV de CloudWatch.
+
 Para las capturas de configuración usa las de [docs/GUIA_AWS_ANDRES.md](GUIA_AWS_ANDRES.md) como guía de qué mostrar (sin mostrar claves ni el número de cuenta).
 
 ---
@@ -433,7 +435,7 @@ Copia la estructura de [docs/PLAN_DE_PRUEBAS.md](PLAN_DE_PRUEBAS.md) y, por cada
 | A03 Consulta del sensor | 8/8 respuestas coinciden con el PIR; reporte del cambio: mediana 5 ms, máx. 254 ms |
 | A04 Comandos | 6/6; `DELTA_RX` → `reported` 415–416 ms; "ya está abierta" no reescribe el Shadow |
 | A05 Tiempo de respuesta | **28/28**; Lambda → servo detenido: mediana **616 ms**, máx. **984 ms**; Lambda → confirmado en `reported`: mediana **919 ms**, máx. **1691 ms**; nube (`UpdateThingShadow` → `DELTA_RX`): mediana 96 ms |
-| A06 Exactitud | PIR **15/15** cruces (0.5, 1.0, 2.0 m), **0** falsos positivos en 5.0 min; servo: *pendiente (fotos con transportador)* |
+| A06 Exactitud | PIR **15/15** cruces (0.5, 1.0, 2.0 m), **0** falsos positivos en 5.0 min; servo: 4/4 fotos con diferencia estimada < 3° en 0° y 90° |
 | A07 Caída de WiFi | Aviso "no se reporta desde hace 2/3 minutos"; orden pendiente aplicada **3848 ms** y **3297 ms** después de `WIFI_CONNECTED`; reintentos WiFi cada 10 000 ms |
 | A08 Corte de energía | Orden pendiente `open` aplicada **3.9 s** después de enchufar |
 | A09 Comandos inválidos | 3/3 rechazados (`medio`, `5`, `OPEN`) sin mover; 2/2 válidos después |
@@ -467,7 +469,7 @@ Copia la estructura de [docs/PLAN_DE_PRUEBAS.md](PLAN_DE_PRUEBAS.md) y, por cada
 | Requisito | Declarado | Medido | Prueba | Veredicto |
 |---|---|---|---|---|
 | RNF1 | ≥ 15 min, 0 reinicios, `loop()` ≤ 500 ms | 27.3 min, 0, 21 ms (83 min sin reinicio en total) | A10 | Cumple |
-| RNF2 | 100 % detección 0.5–2.0 m, 0 falsos positivos; servo ±5° | 15/15, 0 en 5 min; servo pendiente | A06 | Cumple (PIR) |
+| RNF2 | 100 % detección 0.5–2.0 m, 0 falsos positivos; servo ±5° | 15/15, 0 en 5 min; servo < 3° | A06 | Cumple |
 | RNF3 | ≤ 3 s | máx. 1691 ms (confirmado), 984 ms (servo) | A05 | Cumple |
 | RNF4 | evento ≤ 1.1 s, heartbeat ≤ 61.5 s | máx. 804 ms, 59 999 ms | A10, A03, B02 | Cumple |
 | RNF5 | orden pendiente ≤ 10 s | 3.3–3.9 s | A07, A08 | Cumple |
@@ -503,7 +505,7 @@ Enlaces a: `docs/evidencias/` (índice), `docs/PLAN_DE_PRUEBAS.md`, `alexa/`, `a
 
 ## 9. Lo que todavía falta (antes de entregar)
 
-- [ ] A06: fotos del servo con transportador y de las marcas del piso (Andrés).
+- [x] A06: fotos del servo con transportador (falta solo la foto de las marcas del piso, opcional).
 - [ ] Foto del montaje completo y diagrama de circuito.
 - [ ] Capturas de configuración de AWS/Alexa para §3.4–3.5 (sin número de cuenta).
 - [ ] `Informe.md` completo, con commits de los dos.
