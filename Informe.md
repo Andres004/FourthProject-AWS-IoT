@@ -317,12 +317,12 @@ Hay dos confirmaciones distintas: la respuesta de `UpdateThingShadow` solo indic
 | PIR AM312 | OUT | Directa; entrada con *pull-down* interno | D26 (GPIO26) | `config::pins::PIR_OUTPUT = 26` |
 | PIR AM312 | VCC | Directa | VIN (5 V del USB) | — |
 | PIR AM312 | GND | Directa, a la tierra común | GND | — |
-| LED de estado | Ánodo | A través de una resistencia de 220–330 Ω | D32 (GPIO32) | `config::pins::STATUS_LED = 32` |
+| LED de estado | Ánodo | A través de una resistencia de 220 Ω | D32 (GPIO32) | `config::pins::STATUS_LED = 32` |
 | LED de estado | Cátodo | Directa, a la tierra común | GND | — |
 
 - **Señal del servo.** [DoorActuator.cpp](src/DoorActuator.cpp) genera con la librería ESP32Servo una señal de 50 Hz (`PWM_FREQUENCY_HZ`) con pulsos de 500 µs para 0° a 2400 µs para 180° (`PULSE_MIN_US`, `PULSE_MAX_US`). Para 0° (cerrada) el pulso es de 500 µs y para 90° (abierta), de 500 + 1900 × 90 / 180 = 1450 µs. El servo interpreta un pulso de 3.3 V como nivel alto, así que la señal no necesita adaptación.
 - **Salida del PIR.** El AM312 acepta de 2.7 a 12 V de alimentación y tiene un regulador interno, así que alimentado con 5 V igual entrega 3.3 V en alto, el nivel lógico del ESP32, por eso no hace falta el divisor de tensión que necesitaba el HC-SR04 en la práctica anterior. [PresenceSensor.cpp](src/PresenceSensor.cpp) configura GPIO26 como `INPUT_PULLDOWN`: si el cable del sensor se suelta, la entrada queda en bajo y el objeto informa "sin presencia" en lugar de presencias falsas.
-- **Corriente del LED.** I = (3.3 V − V<sub>f</sub>) / R. Para un LED con V<sub>f</sub> ≈ 2.0 V, entre 3.9 mA (330 Ω) y 5.9 mA (220 Ω), muy por debajo de los 20 mA recomendados por pin.
+- **Corriente del LED.** I = (3.3 V − V<sub>f</sub>) / R. Para un LED con V<sub>f</sub> ≈ 2.0 V, unos 5.9 mA con 220 Ω, muy por debajo de los 20 mA recomendados por pin.
 
 #### 2.2.2 Pines y alimentación
 
