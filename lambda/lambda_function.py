@@ -46,6 +46,12 @@ DOOR_CLOSED = "closed"
 OFFLINE_AFTER_S = 150
 SECONDS_PER_MINUTE = 60
 
+# After a command, the Lambda waits for the ESP32 to confirm the new position
+# in "reported". The limit equals the declared end-to-end response time, and
+# stays below the 7 s Lambda timeout and the 8 s Alexa limit.
+CONFIRM_TIMEOUT_S = 3.0
+CONFIRM_POLL_S = 0.25  # About 12 GetThingShadow calls in the worst case
+
 USER_HASH_LENGTH = 10  # Logged instead of the full Alexa userId.
 MS_PER_S = 1000
 
@@ -149,9 +155,12 @@ class LinkRepository:
 class ThingGateway:
     """Reads and updates Things in AWS IoT Core."""
 
-    def __init__(self, iot_client, iot_data_client):
+    def __init__(self, iot_client, iot_data_client, clock=time.monotonic,
+                 sleep=time.sleep):
         self._iot = iot_client
         self._iot_data = iot_data_client
+        self._clock = clock
+        self._sleep = sleep
 
     def exists(self, thing_name):
         """Returns True when the Thing is registered in AWS IoT Core."""
@@ -176,6 +185,21 @@ class ThingGateway:
             thingName=thing_name, payload=json.dumps(payload)
         )
         return json.loads(response["payload"].read()).get("version")
+
+    def wait_for_door(self, thing_name, door_state):
+        """Polls "reported" until the door reaches door_state.
+
+        Returns True when the ESP32 confirmed the position within
+        CONFIRM_TIMEOUT_S, False otherwise.
+        """
+        deadline = self._clock() + CONFIRM_TIMEOUT_S
+        while True:
+            state = self.get_state(thing_name)
+            if state is not None and state.reported.get(DOOR_ATTRIBUTE) == door_state:
+                return True
+            if self._clock() >= deadline:
+                return False
+            self._sleep(CONFIRM_POLL_S)
 
 
 links = LinkRepository(boto3.resource("dynamodb").Table(TABLE_NAME))
@@ -236,12 +260,14 @@ class LinkedThingHandler(AbstractRequestHandler):
 
 
 class DoorCommandHandler(LinkedThingHandler):
-    """Writes a door position in "desired" (RF5)."""
+    """Writes a door position in "desired" (RF5) and waits for the ESP32 to
+    confirm it in "reported" (RF3), as feedback for the user."""
 
     intent_name = None
     target = None
     already_speech = None
-    moving_speech = None
+    done_speech = None
+    action_name = None
 
     def can_handle(self, handler_input):
         return is_intent_name(self.intent_name)(handler_input)
@@ -265,22 +291,32 @@ class DoorCommandHandler(LinkedThingHandler):
                 "Envié la orden, pero tu casa está desconectada. "
                 "Se aplicará apenas vuelva a conectarse."
             )
-        record["result"] = "sent"
-        return self.moving_speech
+        if not things.wait_for_door(thing_name, self.target):
+            record["result"] = "sent_unconfirmed"
+            return (
+                f"Envié la orden para {self.action_name} la puerta, pero todavía "
+                "no recibo la confirmación. Pregúntame su estado en unos segundos."
+            )
+        # Lambda start to confirmed "reported": one clock, end-to-end time.
+        record["confirmed_utc_ms"] = now_ms()
+        record["result"] = "confirmed"
+        return self.done_speech
 
 
 class OpenDoorHandler(DoorCommandHandler):
     intent_name = "OpenDoor"
     target = DOOR_OPEN
     already_speech = "La puerta ya está abierta."
-    moving_speech = "Abriendo la puerta."
+    done_speech = "Listo, la puerta está abierta."
+    action_name = "abrir"
 
 
 class CloseDoorHandler(DoorCommandHandler):
     intent_name = "CloseDoor"
     target = DOOR_CLOSED
     already_speech = "La puerta ya está cerrada."
-    moving_speech = "Cerrando la puerta."
+    done_speech = "Listo, la puerta está cerrada."
+    action_name = "cerrar"
 
 
 class GetPresenceHandler(LinkedThingHandler):
@@ -498,6 +534,11 @@ def log_request(handler_input):
         "user": user_hash,
         "alexa_timestamp": str(request.timestamp),
         "lambda_ms": end - record.get("start_utc_ms", end),
+        "confirm_ms": (
+            record["confirmed_utc_ms"] - record["start_utc_ms"]
+            if "confirmed_utc_ms" in record and "start_utc_ms" in record
+            else None
+        ),
         **record,
     }
     logger.info(json.dumps(line, default=str, ensure_ascii=False))

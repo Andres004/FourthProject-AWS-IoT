@@ -79,12 +79,34 @@ class FakeIot:
         return {"thingName": thingName}
 
 
+class FakeClock:
+    """Monotonic clock that only advances when the code sleeps."""
+
+    def __init__(self):
+        self.now = 0.0
+
+    def time(self):
+        return self.now
+
+    def sleep(self, seconds):
+        self.now += seconds
+
+
 class FakeIotData:
+    """In-memory Shadows plus a simulated ESP32.
+
+    After a desired update, the simulated device copies "desired" into
+    "reported" once the Lambda has read the Shadow device_reads times.
+    device_reads = None plays an ESP32 that never answers.
+    """
+
     exceptions = types.SimpleNamespace(ResourceNotFoundException=NotFound)
 
     def __init__(self):
         self.shadows = {}
         self.updates = []
+        self.device_reads = 2
+        self.reads_since_update = 0
 
     def put_shadow(self, thing, reported=None, desired=None, age_s=10):
         stamp = {"timestamp": NOW_S - age_s}
@@ -98,6 +120,14 @@ class FakeIotData:
     def get_thing_shadow(self, thingName):
         if thingName not in self.shadows:
             raise NotFound(thingName)
+        self.reads_since_update += 1
+        if (
+            self.updates
+            and self.device_reads is not None
+            and self.reads_since_update >= self.device_reads
+        ):
+            state = self.shadows[thingName]["state"]
+            state.setdefault("reported", {}).update(state.get("desired", {}))
         body = json.dumps(self.shadows[thingName]).encode("utf-8")
         return {"payload": io.BytesIO(body)}
 
@@ -110,6 +140,7 @@ class FakeIotData:
         desired = shadow["state"].setdefault("desired", {})
         desired.update(update["state"]["desired"])
         shadow["version"] += 1
+        self.reads_since_update = 0
         body = json.dumps({"version": shadow["version"]}).encode("utf-8")
         return {"payload": io.BytesIO(body)}
 
@@ -158,8 +189,11 @@ class SkillTestCase(unittest.TestCase):
         self.table = FakeTable()
         self.iot = FakeIot([THING_1, THING_2])
         self.iot_data = FakeIotData()
+        self.clock = FakeClock()
         skill.links = skill.LinkRepository(self.table)
-        skill.things = skill.ThingGateway(self.iot, self.iot_data)
+        skill.things = skill.ThingGateway(
+            self.iot, self.iot_data, clock=self.clock.time, sleep=self.clock.sleep
+        )
 
     def call(self, event):
         """Runs the skill and returns (speech, log record)."""
@@ -307,17 +341,18 @@ class CommandTests(SkillTestCase):
         super().setUp()
         self.link(USER_A, THING_1)
 
-    def test_rf5_open_and_close_write_desired(self):
+    def test_rf5_rf3_open_and_close_are_confirmed_by_device(self):
         self.iot_data.put_shadow(THING_1, reported={"door": "closed"})
         speech, record = self.call(intent(USER_A, "OpenDoor"))
-        self.assertIn("Abriendo la puerta", speech)
-        self.assertEqual(record["result"], "sent")
+        self.assertIn("Listo, la puerta está abierta", speech)
+        self.assertEqual(record["result"], "confirmed")
         self.assertEqual(record["version"], 41)
-        self.assertIn("desired_set_utc_ms", record)
+        self.assertIsNotNone(record["confirm_ms"])
+        self.assertGreaterEqual(record["confirm_ms"], 0)
 
         self.iot_data.put_shadow(THING_1, reported={"door": "open"})
         speech, _ = self.call(intent(USER_A, "CloseDoor"))
-        self.assertIn("Cerrando la puerta", speech)
+        self.assertIn("Listo, la puerta está cerrada", speech)
         self.assertEqual(
             [update for _, update in self.iot_data.updates],
             [
@@ -340,8 +375,20 @@ class CommandTests(SkillTestCase):
             THING_1, reported={"door": "closed"}, desired={"door": "open"}
         )
         speech, _ = self.call(intent(USER_A, "CloseDoor"))
-        self.assertIn("Cerrando la puerta", speech)
+        self.assertIn("Listo, la puerta está cerrada", speech)
         self.assertEqual(len(self.iot_data.updates), 1)
+
+    def test_rf5_no_confirmation_within_3_s_is_reported(self):
+        self.iot_data.put_shadow(THING_1, reported={"door": "closed"})
+        self.iot_data.device_reads = None
+        speech, record = self.call(intent(USER_A, "OpenDoor"))
+        self.assertIn("todavía no recibo la confirmación", speech)
+        self.assertEqual(record["result"], "sent_unconfirmed")
+        self.assertIsNone(record["confirm_ms"])
+        self.assertGreaterEqual(self.clock.now, skill.CONFIRM_TIMEOUT_S)
+        self.assertLess(
+            self.clock.now, skill.CONFIRM_TIMEOUT_S + skill.CONFIRM_POLL_S
+        )
 
     def test_rnf_offline_command_is_queued_in_desired(self):
         self.iot_data.put_shadow(THING_1, reported={"door": "open"}, age_s=600)
@@ -349,6 +396,7 @@ class CommandTests(SkillTestCase):
         self.assertIn("tu casa está desconectada", speech)
         self.assertEqual(record["result"], "queued_offline")
         self.assertEqual(len(self.iot_data.updates), 1)
+        self.assertEqual(self.clock.now, 0.0, "no waiting when offline")
 
 
 class RobustnessTests(SkillTestCase):
