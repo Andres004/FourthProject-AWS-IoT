@@ -1,0 +1,33 @@
+   input docs/evidencias/A01/A01_cloudwatch.csv: lambda
+
+== Lambda (CloudWatch SKILL_REQUEST lines) ==
+   requests=14 users=1
+     AMAZON.StopIntent:- x1
+     GetPresence:not_linked x1
+     LaunchRequest:- x2
+     LinkThing:already_linked x1
+     LinkThing:changed x2
+     LinkThing:invalid_code x1
+     LinkThing:linked x2
+     LinkThing:thing_not_found x1
+     SessionEndedRequest:- x1
+     UnlinkThing:not_linked x1
+     UnlinkThing:unlinked x1
+     2026-11-10 02:34:15+00:00 SessionEndedRequest user=40fdb5ffb4 thing=None result=None lambda_ms=57 confirm_ms=None
+     2026-11-10 02:34:15+00:00 LaunchRequest user=40fdb5ffb4 thing=None result=None lambda_ms=378 confirm_ms=None
+     2026-11-10 02:34:41+00:00 GetPresence user=40fdb5ffb4 thing=None result=not_linked lambda_ms=39 confirm_ms=None
+     2026-11-10 02:36:31+00:00 LinkThing user=40fdb5ffb4 thing=None result=invalid_code lambda_ms=0 confirm_ms=None
+     2026-11-10 02:36:46+00:00 LinkThing user=40fdb5ffb4 thing=monoambiente-999999 result=thing_not_found lambda_ms=219 confirm_ms=None
+     2026-11-10 02:37:40+00:00 LinkThing user=40fdb5ffb4 thing=monoambiente-739264 result=linked lambda_ms=306 confirm_ms=None
+     2026-11-10 02:38:37+00:00 LinkThing user=40fdb5ffb4 thing=monoambiente-739264 result=already_linked lambda_ms=72 confirm_ms=None
+     2026-11-10 02:39:04+00:00 LinkThing user=40fdb5ffb4 thing=monoambiente-518306 result=changed lambda_ms=92 confirm_ms=None
+     2026-11-10 02:40:44+00:00 LinkThing user=40fdb5ffb4 thing=monoambiente-739264 result=changed lambda_ms=486 confirm_ms=None
+     2026-11-10 02:40:58+00:00 UnlinkThing user=40fdb5ffb4 thing=monoambiente-739264 result=unlinked lambda_ms=81 confirm_ms=None
+     2026-11-10 02:41:40+00:00 UnlinkThing user=40fdb5ffb4 thing=None result=not_linked lambda_ms=40 confirm_ms=None
+     2026-11-10 02:42:23+00:00 LinkThing user=40fdb5ffb4 thing=monoambiente-739264 result=linked lambda_ms=280 confirm_ms=None
+     2026-11-10 02:42:33+00:00 AMAZON.StopIntent user=40fdb5ffb4 thing=None result=None lambda_ms=0 confirm_ms=None
+     2026-11-10 02:43:00+00:00 LaunchRequest user=40fdb5ffb4 thing=monoambiente-739264 result=None lambda_ms=36 confirm_ms=None
+   lambda_ms of non-command requests: n=14 min=0 median=76 p95=378 max=486
+   confirm_ms (Lambda start -> door in reported): n=0
+RNF3 commands confirmed within 3000 ms: 0/0 (need >= 20) -> NOT ENOUGH DATA
+RF4-RF9 requests that ended in error: 0 (0) -> PASS
