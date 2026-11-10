@@ -1,0 +1,92 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "monoambiente inteligente",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "LinkThing",
+          "slots": [
+            {
+              "name": "code",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "vincula mi casa con el código {code}",
+            "vincular mi casa con el código {code}",
+            "cambia mi casa al código {code}",
+            "mi código es {code}"
+          ]
+        },
+        {
+          "name": "UnlinkThing",
+          "slots": [],
+          "samples": [
+            "desvincula mi casa",
+            "elimina la vinculación",
+            "desvincular mi casa"
+          ]
+        },
+        {
+          "name": "GetPresence",
+          "slots": [],
+          "samples": [
+            "hay alguien en la puerta",
+            "hay alguien en la entrada",
+            "detectas a alguien en la entrada",
+            "hay presencia en la puerta"
+          ]
+        },
+        {
+          "name": "OpenDoor",
+          "slots": [],
+          "samples": [
+            "abre la puerta",
+            "abrir la puerta",
+            "abre la puerta principal"
+          ]
+        },
+        {
+          "name": "CloseDoor",
+          "slots": [],
+          "samples": [
+            "cierra la puerta",
+            "cerrar la puerta",
+            "cierra la puerta principal"
+          ]
+        },
+        {
+          "name": "GetDoorState",
+          "slots": [],
+          "samples": [
+            "la puerta está abierta",
+            "la puerta está cerrada",
+            "cuál es el estado de la puerta",
+            "cómo está la puerta"
+          ]
+        }
+      ],
+      "types": []
+    }
+  }
+}
