@@ -1922,11 +1922,106 @@ Fuentes de error consideradas:
 
 ### 5.1 Resultados consolidados
 
-_Pendiente (fase 8)._
+**Tabla 10.** Valores medidos frente a los declarados en §1.3 y §1.4. Tipo de evidencia: *física* (observación del montaje, capturas o video), *log* (log del objeto o CloudWatch, analizados con `analyze_log.py`) o *automática* (pruebas unitarias o scripts).
+
+| Requisito | Valor declarado | Valor medido | Prueba y evidencia | Tipo de evidencia | Veredicto |
+|---|---|---|---|---|---|
+| RF1 Detectar presencia | `PRESENCE_ON` tras 30 s de calentamiento; retención de 10 s | 15 de 15 cruces detectados; 42 episodios en A10, ninguno de menos de 10 s | A06, A03, A10 | Física y log | Cumple |
+| RF2 Reporte periódico | Tres atributos por reporte; ≤ 61.5 s entre reportes | 115 de 115 reportes completos; máx. 59 999 ms entre reportes; heartbeat a 60 000 ms | A10, B02 ([A10_analisis.txt](docs/evidencias/A10/A10_analisis.txt)) | Log y automática | Cumple |
+| RF3 Aplicar el `delta` | Confirmado en `reported` en ≤ 1.5 s | 30 de 30; mediana 416 ms, máx. 1169 ms | A10, A04, A09, B02 | Log y automática | Cumple |
+| RF4 Consulta del sensor | Respuesta según `reported.presence` | 8 de 8 respuestas correctas | A03, B01 ([A03](docs/evidencias/A03/README.md)) | Física, log y automática | Cumple |
+| RF5 Comando por voz | `desired.door` cambia en el Shadow del usuario | 6 de 6 (A04) y 28 de 28 (A05) | A04, A05, B01 | Física, log y automática | Cumple |
+| RF6 Estado de la puerta | Según `reported.door`; menciona la orden pendiente | Correcto en A04; no anuncia un `desired` inválido (A09) | A04, A09, B01 | Física y automática | Cumple |
+| RF7 Vinculación persistente | Ítem en DynamoDB, usado en otra sesión | 13 de 13 respuestas; persistió en una sesión nueva | A01, B01 ([A01](docs/evidencias/A01/README.md)) | Física, log y automática | Cumple |
+| RF8 Thing por usuario | Guía al usuario sin vincular; cada usuario solo actúa sobre su Thing | Guía en A01; el segundo usuario solo modificó `monoambiente-518306` | A01, A02, B01 | Física y automática | Cumple |
+| RF9 Validar, cambiar y eliminar | Datos inválidos no se guardan; cambiar reemplaza; desvincular borra | 0 datos inválidos guardados; cambio y desvinculación correctos; 7 códigos inválidos rechazados en B01 | A01, B01 | Física y automática | Cumple |
+| RF10 Confirmación al usuario | "Listo…" si llega `reported` en 3 s; aviso si no | 28 de 28 confirmados (A05); aviso sin confirmación con la placa apagada (A08) | A05, A08, B01 | Log y automática | Cumple |
+| RF11 Aviso de desconexión | Aviso con más de 150 s sin reportes; orden encolada | Avisos con 2 y 3 min; `queued_offline` en A02 y A07; límite de 150/151 s en B01 | A07, A02, B01 | Física y automática | Cumple |
+| RF12 Inválidos y repetidos | Sin movimiento; `INVALID_VALUE`, `JSON_ERROR`, `STALE_IGNORED` | 3 de 3 inválidos sin movimiento (A09); 9 de 9 casos de rechazo en B02 (C03, C04 y C06 a C12) | A09, B02 | Log y automática | Cumple |
+| RNF1 Estabilidad | ≥ 15 min, 0 reinicios, 0 caídas, `loop()` ≤ 500 ms, heap ≤ 4096 bytes | 27.3 min, 0 reinicios, 0 caídas, `loop()` máx. 21 ms, 0 bytes perdidos; 83 min sin reiniciar en total | A10 | Log | Cumple |
+| RNF2 Exactitud | PIR: 100 % de cruces y 0 falsos positivos. Servo: ±5° | PIR: 15 de 15 y 0 en 5.0 min. Servo: pendiente de medición | A06 | Física y log | Cumple el PIR; servo pendiente |
+| RNF3 Tiempo de respuesta | ≤ 3 s en ≥ 20 comandos | 28 comandos; confirmación: mediana 919 ms, máx. 1691 ms; servo detenido: mediana 616 ms, máx. 984 ms | A05 ([A05_analisis.txt](docs/evidencias/A05/A05_analisis.txt)) | Log | Cumple |
+| RNF4 Frecuencia de reporte | Evento ≤ 1.1 s; heartbeat ≤ 61.5 s; ~1440 mensajes/día en reposo | Evento: mediana 5 ms, máx. 804 ms (A10) y 254 ms (A03); heartbeat 60 000 ms; reposo 1440/día por diseño, 6066/día proyectados con el uso intensivo de A10 | A10, A03, B02 | Log y automática | Cumple |
+| RNF5 Reconexión | WiFi cada 10 000 ± 500 ms; orden pendiente ≤ 10 s desde `WIFI_CONNECTED` | Reintentos de 9999–10 000 ms; orden aplicada a 3297 y 3848 ms (A07) y 3316 ms (A08) | A07, A08 | Log y video | Cumple |
+| RNF6 Seguridad | 0 secretos en archivos e historial | 0 en 149 archivos y 27 commits; 5 de 5 rutas ignoradas; control positivo detectado | B03 | Automática | Cumple |
+| Pruebas de software | Todas `ok` | B01: 23 de 23; B02: 16 de 16 | B01, B02 | Automática | Cumple |
+
+```mermaid
+xychart-beta
+    title "Peor valor medido como porcentaje de su límite"
+    x-axis ["RNF1 loop", "RNF5 reconexión", "RNF3 confirmación", "RNF4 evento", "RF3 delta"]
+    y-axis "% del límite" 0 --> 100
+    bar [4.2, 38.5, 56.4, 73.1, 77.9]
+```
+
+**Figura 12.** Margen de cada requisito de tiempo. Barras: el peor valor medido dividido por su límite. RNF1: 21 de 500 ms; RNF5: 3848 de 10 000 ms; RNF3: 1691 de 3000 ms; RNF4: 804 de 1100 ms; RF3: 1169 de 1500 ms. El intervalo entre reportes de RF2 (59 999 de 61 500 ms) no se incluye, porque está fijado por el heartbeat de 60 s y no es un retraso.
+
+```mermaid
+xychart-beta
+    title "Composición aproximada de un comando (medianas de A05, ms)"
+    x-axis ["Lambda: DynamoDB y Shadow", "Nube: delta", "Servo", "Reporte y consulta"]
+    y-axis "Tiempo (ms)" 0 --> 500
+    bar [109, 96, 411, 303]
+```
+
+**Figura 13.** De dónde sale la mediana de 919 ms entre la llegada del intent y la respuesta "Listo". Datos de [A05_analisis.txt](docs/evidencias/A05/A05_analisis.txt): la nube aporta una mediana de 96 ms (`UpdateThingShadow` → `DELTA_RX`); el servo, 11 ms hasta arrancar más 400 ms de movimiento; la Lambda, desde que recibe el intent hasta escribir `desired`, el resto de la mediana de 616 ms hasta el servo detenido (unos 109 ms); y el reporte junto con la espera entre consultas de la Lambda, los 303 ms que separan los 616 ms de los 919 ms. Los segmentos se calcularon con medianas, así que su suma es aproximada.
 
 ### 5.2 Análisis crítico
 
-_Pendiente (fase 8)._
+Lo que los datos permiten afirmar:
+
+- **Todos los requerimientos medidos cumplen, con margen.** El peor caso de cada requisito de tiempo queda entre el 4 % y el 78 % de su límite (Figura 12). RNF3, el requisito central de la consigna, usó como máximo el 56 % de los 3 s, y en mediana el 31 %.
+- **El tiempo de respuesta lo domina el servo, no la nube.** De los 919 ms de mediana, 411 ms son el servo y solo 96 ms la entrega del `delta` (Figura 13). La confirmación en `reported` (RF10) agrega unos 300 ms de reporte y de espera entre consultas a cambio de una respuesta verdadera: el usuario escucha "Listo" solo cuando la puerta se movió.
+- **Los máximos de los reportes son una decisión de diseño.** Los 804 ms de RNF4 y los 1169 ms de RF3 no son ruido: son el intervalo mínimo de 1 s entre reportes, que agrupa los cambios muy seguidos para no generar ráfagas de mensajes. En el caso normal, el reporte sale 5 ms después del cambio.
+- **El Shadow desacopla de verdad a Alexa del objeto.** Una orden dada con el objeto sin red o sin energía se guardó en `desired` y se aplicó sola entre 3.3 y 3.9 s después de recuperarse (A07, A08), sin movimientos duplicados.
+- **La skill no está atada a un único Thing.** Dos usuarios, cada uno con su Thing, solo actuaron sobre el suyo (A02), y la vinculación se valida antes de guardarse (A01).
+- **El firmware es estable en el tiempo probado.** 27.3 min de corrida medida y 83 min sin reiniciar, con 0 caídas y sin pérdida de memoria (A10).
+- **Las pruebas encontraron defectos reales.** D1 y D2 (§4.4) no se veían usando el sistema: el servo parecía funcionar y el bloqueo solo aparecía con WiFi pero sin Internet. Sin B02 y sin el corte de red de A07, el sistema habría confirmado posiciones antes de tiempo y se habría congelado con una red degradada.
+
+Lo que los datos no permiten afirmar:
+
+- **La exactitud del servo**, que quedó pendiente de medición, ni la posición física real de la puerta, porque `servo_angle` es el ángulo ordenado y no uno medido.
+- **Una tasa de detección del PIR del 95 % o más.** Con 15 cruces, la cota inferior de confianza es 81.9 %, y solo se probaron cruces laterales a tres distancias.
+- **El tiempo percibido por el usuario de punta a punta.** RNF3 empieza cuando la Lambda recibe el intent; el reconocimiento de voz del simulador no está incluido.
+- **Estabilidad por días.** Se midieron 27.3 min de corrida analizada y 83 min sin reiniciar; no se probaron horas ni días seguidos, ni el comportamiento al renovar la conexión TLS a largo plazo.
+- **La generalidad de los tiempos.** Todo se midió en una noche, con una red (el hotspot de un celular) y una placa.
+
+## 6. Conclusiones
+
+1. **Integración completa a través del Shadow.** El sistema cumple los requerimientos funcionales RF1 a RF12: el objeto reporta presencia y estado de la puerta en `reported`, aplica el `delta` en el servo y lo confirma, y la skill responde consultas y ejecuta comandos en español sobre el Thing de cada usuario, sin comunicarse nunca directamente con el objeto (§5.1).
+2. **El Device Shadow es lo que da robustez al sistema.** Como la Lambda solo escribe `desired` y el objeto solo `reported`, una orden no se pierde si el objeto está desconectado: en A07 y A08 se aplicó sola entre 3.3 y 3.9 s después de volver la red o la energía, muy por debajo del límite de 10 s de RNF5.
+3. **Confirmar con `reported` vale el costo.** Esperar la confirmación del objeto (RF10) agrega unos 300 ms a la respuesta, pero la mediana sigue en 919 ms, el 31 % del límite de 3 s. A cambio, la skill nunca afirma que la puerta se movió cuando no ocurrió: con la placa sin energía respondió que no recibió confirmación (A08), y con el objeto desconectado avisó que la orden queda en espera (A07).
+4. **La política de reporte cumple la consigna y la capa gratuita.** El reporte por evento con 1 s mínimo y heartbeat de 60 s reporta los cambios con una mediana de 5 ms y un máximo de 804 ms, y en reposo usa 1440 mensajes por día, el 19 % de las operaciones de Shadow gratuitas; un heartbeat de 10 s las habría superado (§2.8.3).
+5. **La vinculación por código permite varios usuarios con validación.** El código de 6 dígitos sin cero inicial, validado contra el registro de AWS IoT antes de guardarse, separa a cada usuario en su Thing (A01, A02) y es compatible con cómo Alexa entrega los números.
+6. **Un diseño modular se pudo probar sin AWS.** Las interfaces `DeviceComponent` y `ShadowTransport` permitieron probar el firmware por el puerto serie (B02), y la inyección del reloj en la Lambda, probar el límite de 3 s sin esperar (B01). Esas pruebas encontraron un defecto (D1) que el uso normal no mostraba.
+7. **Los logs con hora UTC hicieron medibles los requerimientos.** Un log de eventos en el objeto y una línea `SKILL_REQUEST` por solicitud, unidos por la versión del Shadow, permitieron medir cada requerimiento con números y no por observación, y descomponer el tiempo de un comando en sus partes (Figura 13).
+
+## 7. Recomendaciones
+
+Mejoras técnicas, cada una ligada a la prueba que la motiva:
+
+- **Conexión MQTT no bloqueante (A07, D2).** La conexión exitosa todavía detiene `loop()` unos 2 s (`max_loop_ms=2111`). Moverla a una tarea propia de FreeRTOS, o usar un cliente MQTT asíncrono, dejaría el PIR y el LED funcionando durante la reconexión.
+- **Borrar las órdenes inválidas (A09).** Al rechazar un valor, el objeto podría publicar `{"state":{"desired":{"door":null}}}` para borrarlo y evitar que AWS reenvíe el `delta` con cada reporte (13 `INVALID_VALUE` para 3 publicaciones).
+- **Aplicar los permisos mínimos (§3.4.4, B03).** Reemplazar `Allow * *` por [iot-policy.json](aws/iot-policy.json) y las políticas administradas de la Lambda por [lambda-role-policy.json](aws/lambda-role-policy.json). Con varios dispositivos, una política con variables de AWS IoT (por ejemplo, el nombre del Thing conectado) evita escribir una política por cada uno.
+- **Medir la exactitud del servo y la posición real de la puerta (A06-C, §4.5).** Completar la medición con transportador y agregar un sensor de puerta, como un *reed switch* o un final de carrera, como un componente más (`DeviceComponent`): así `reported.door` diría dónde está la puerta y no solo qué se le ordenó al servo.
+- **Fuente aparte para el actuador (§2.2.2).** No hubo reinicios por *brownout*, pero un servo más grande o una cerradura compartirían la corriente del USB con el ESP32. Una fuente de 5 V propia, con la tierra común, elimina ese riesgo.
+- **Más evidencia estadística (A05, A06, A10).** Repetir A05 y A10 en otra red y otro día, con corridas de varias horas, y aumentar los cruces del PIR (con 59 de 59 cruces detectados, la cota inferior de confianza llegaría al 95 %), incluyendo personas que se acercan de frente.
+- **Primer comando más rápido (A05).** El peor caso (1304 ms de confirmación) fue el primer comando después de 5 min; si el arranque en frío de la Lambda se volviera notorio, se podría reducir el tamaño del paquete o mantener la función activa.
+- **Cuenta de AWS.** Configurar una alerta de facturación, como recomienda la consigna, y usar usuarios IAM para cada integrante en lugar de compartir las credenciales de la cuenta.
+
+Extensiones hacia un uso real:
+
+- **Cerradura real.** Reemplazar el servo de la maqueta por una cerradura solenoide de 12 V controlada con un MOSFET, siempre en baja tensión, como otro `DeviceComponent`, con el sensor de puerta para confirmar el cierre.
+- **Aviso cuando alguien llega.** Hoy el usuario tiene que preguntar; con eventos proactivos de Alexa, la skill podría avisar cuando `presence` pasa a `true`.
+- **Historial de presencia.** Una regla de AWS IoT podría guardar cada cambio de `presence` en otra tabla de DynamoDB, para preguntar "¿cuándo vino alguien?".
+- **Varias puertas por usuario.** Agregar una clave de ordenamiento a `user_thing` (por ejemplo, el nombre de la puerta) y un slot en los intents.
+- **Prueba de propiedad al vincular (§2.6.4).** Que el objeto muestre un código de un solo uso que cambie en cada vinculación, o implementar Account Linking con OAuth, para que conocer el código fijo no alcance para vincular un objeto ajeno.
+
+Limitaciones conocidas del diseño y cómo resolverlas:
+
+- **Dependencia de Internet:** sin conexión, el objeto no recibe órdenes nuevas. Una puerta real necesitaría además una forma local de abrirla, como un botón o una llave.
+- **Conexión sincrónica:** ver la primera recomendación.
+- **Posición deducida del comando:** ver la recomendación del sensor de puerta.
 
 ---
 
