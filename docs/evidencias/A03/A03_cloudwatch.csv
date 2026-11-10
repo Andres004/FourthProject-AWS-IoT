@@ -1,0 +1,51 @@
+@timestamp,@message
+2026-11-10 02:34:16.959,"[INFO]	2026-11-10T02:34:16.959Z	259ccdbf-0f03-4e99-99d7-25cf03e0577a	{""event"": ""SKILL_REQUEST"", ""request"": ""SessionEndedRequest"", ""intent"": null, ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:34:15+00:00"", ""lambda_ms"": 57, ""confirm_ms"": null, ""start_utc_ms"": 1794278056902}
+"
+2026-11-10 02:34:17.420,"[INFO]	2026-11-10T02:34:17.420Z	3fd0c54f-b616-43ab-a11f-150f540f5e99	{""event"": ""SKILL_REQUEST"", ""request"": ""LaunchRequest"", ""intent"": null, ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:34:15+00:00"", ""lambda_ms"": 378, ""confirm_ms"": null, ""start_utc_ms"": 1794278057042, ""thing"": null}
+"
+2026-11-10 02:34:42.060,"[INFO]	2026-11-10T02:34:42.060Z	ee325db8-092d-4591-aca0-2af7dca623fd	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""GetPresence"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:34:41+00:00"", ""lambda_ms"": 39, ""confirm_ms"": null, ""start_utc_ms"": 1794278082020, ""thing"": null, ""result"": ""not_linked""}
+"
+2026-11-10 02:36:31.438,"[INFO]	2026-11-10T02:36:31.438Z	3ce8d000-6dd6-4668-a2bc-c9b6188d427d	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""LinkThing"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:36:31+00:00"", ""lambda_ms"": 0, ""confirm_ms"": null, ""start_utc_ms"": 1794278191438, ""result"": ""invalid_code"", ""code"": ""123""}
+"
+2026-11-10 02:36:46.401,"[INFO]	2026-11-10T02:36:46.401Z	da35d31f-295b-4759-998f-724c2f02942a	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""LinkThing"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:36:46+00:00"", ""lambda_ms"": 219, ""confirm_ms"": null, ""start_utc_ms"": 1794278206182, ""thing"": ""monoambiente-999999"", ""result"": ""thing_not_found""}
+"
+2026-11-10 02:37:41.058,"[INFO]	2026-11-10T02:37:41.058Z	21234ea7-97f5-43ed-91e6-be7349957310	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""LinkThing"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:37:40+00:00"", ""lambda_ms"": 306, ""confirm_ms"": null, ""start_utc_ms"": 1794278260752, ""thing"": ""monoambiente-739264"", ""result"": ""linked""}
+"
+2026-11-10 02:38:38.018,"[INFO]	2026-11-10T02:38:38.018Z	6d52dd6e-afc9-44f7-956d-6a1cdeeb689e	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""LinkThing"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:38:37+00:00"", ""lambda_ms"": 72, ""confirm_ms"": null, ""start_utc_ms"": 1794278317946, ""thing"": ""monoambiente-739264"", ""result"": ""already_linked""}
+"
+2026-11-10 02:39:04.537,"[INFO]	2026-11-10T02:39:04.537Z	fcf1a109-d7df-406a-be05-ae0af55437f8	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""LinkThing"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:39:04+00:00"", ""lambda_ms"": 92, ""confirm_ms"": null, ""start_utc_ms"": 1794278344445, ""thing"": ""monoambiente-518306"", ""result"": ""changed"", ""previous"": ""monoambiente-739264""}
+"
+2026-11-10 02:40:44.936,"[INFO]	2026-11-10T02:40:44.936Z	05054962-20d6-483e-a29e-9efedb2383c3	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""LinkThing"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:40:44+00:00"", ""lambda_ms"": 486, ""confirm_ms"": null, ""start_utc_ms"": 1794278444450, ""thing"": ""monoambiente-739264"", ""result"": ""changed"", ""previous"": ""monoambiente-518306""}
+"
+2026-11-10 02:40:58.416,"[INFO]	2026-11-10T02:40:58.416Z	6846bb9e-8d4d-46a4-94e2-2a9cd50c668f	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""UnlinkThing"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:40:58+00:00"", ""lambda_ms"": 81, ""confirm_ms"": null, ""start_utc_ms"": 1794278458335, ""thing"": ""monoambiente-739264"", ""result"": ""unlinked""}
+"
+2026-11-10 02:41:41.076,"[INFO]	2026-11-10T02:41:41.076Z	3d62c47b-41e3-4683-a135-419a7c533df6	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""UnlinkThing"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:41:40+00:00"", ""lambda_ms"": 40, ""confirm_ms"": null, ""start_utc_ms"": 1794278501036, ""thing"": null, ""result"": ""not_linked""}
+"
+2026-11-10 02:42:23.815,"[INFO]	2026-11-10T02:42:23.815Z	a70bc355-1f5b-4133-a5af-366016064d10	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""LinkThing"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:42:23+00:00"", ""lambda_ms"": 280, ""confirm_ms"": null, ""start_utc_ms"": 1794278543535, ""thing"": ""monoambiente-739264"", ""result"": ""linked""}
+"
+2026-11-10 02:42:33.731,"[INFO]	2026-11-10T02:42:33.731Z	28d30632-af0e-4d3d-8ed8-fbbaf864b88f	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""AMAZON.StopIntent"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:42:33+00:00"", ""lambda_ms"": 0, ""confirm_ms"": null, ""start_utc_ms"": 1794278553730}
+"
+2026-11-10 02:43:01.035,"[INFO]	2026-11-10T02:43:01.035Z	68d56a54-0d42-45e7-ad78-b0f17882035b	{""event"": ""SKILL_REQUEST"", ""request"": ""LaunchRequest"", ""intent"": null, ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:43:00+00:00"", ""lambda_ms"": 36, ""confirm_ms"": null, ""start_utc_ms"": 1794278580999, ""thing"": ""monoambiente-739264""}
+"
+2026-11-10 02:51:26.073,"[INFO]	2026-11-10T02:51:26.073Z	f90f1d73-0096-4c37-a5b6-c4332b294769	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""LinkThing"", ""user"": ""3ef09f6651"", ""alexa_timestamp"": ""2026-11-09 12:00:00+00:00"", ""lambda_ms"": 617, ""confirm_ms"": null, ""start_utc_ms"": 1794279085455, ""thing"": ""monoambiente-518306"", ""result"": ""linked""}
+"
+2026-11-10 02:54:10.734,"[INFO]	2026-11-10T02:54:10.734Z	50be29ca-99d8-4336-899f-e7c1fe5b248b	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""OpenDoor"", ""user"": ""3ef09f6651"", ""alexa_timestamp"": ""2026-11-10 03:00:00+00:00"", ""lambda_ms"": 447, ""confirm_ms"": null, ""start_utc_ms"": 1794279250286, ""thing"": ""monoambiente-518306"", ""version"": 2, ""desired_set_utc_ms"": 1794279250733, ""result"": ""queued_offline""}
+"
+2026-11-10 02:56:42.054,"[INFO]	2026-11-10T02:56:42.054Z	7c1e300c-da76-474e-9bab-d8eb488709f1	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""GetDoorState"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 02:56:41+00:00"", ""lambda_ms"": 257, ""confirm_ms"": null, ""start_utc_ms"": 1794279401797, ""thing"": ""monoambiente-739264"", ""result"": ""door=open"", ""age_s"": 1}
+"
+2026-11-10 03:00:14.035,"[INFO]	2026-11-10T03:00:14.035Z	2c05bac4-5ba9-4f73-b032-9ac12af601ce	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""GetPresence"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 03:00:13+00:00"", ""lambda_ms"": 220, ""confirm_ms"": null, ""start_utc_ms"": 1794279613815, ""thing"": ""monoambiente-739264"", ""result"": ""presence=True"", ""age_s"": 10}
+"
+2026-11-10 03:00:32.795,"[INFO]	2026-11-10T03:00:32.795Z	35bdf593-954f-4447-a2ed-b6c71ca8e7b4	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""GetPresence"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 03:00:32+00:00"", ""lambda_ms"": 60, ""confirm_ms"": null, ""start_utc_ms"": 1794279632735, ""thing"": ""monoambiente-739264"", ""result"": ""presence=True"", ""age_s"": 0}
+"
+2026-11-10 03:00:40.629,"[INFO]	2026-11-10T03:00:40.629Z	ad6be2c8-e6af-4758-8e78-ad01ff97e680	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""GetPresence"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 03:00:40+00:00"", ""lambda_ms"": 76, ""confirm_ms"": null, ""start_utc_ms"": 1794279640553, ""thing"": ""monoambiente-739264"", ""result"": ""presence=True"", ""age_s"": 8}
+"
+2026-11-10 03:01:09.635,"[INFO]	2026-11-10T03:01:09.635Z	083ec79c-8c64-4f41-b2c8-5a95c60d60c6	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""GetPresence"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 03:01:09+00:00"", ""lambda_ms"": 54, ""confirm_ms"": null, ""start_utc_ms"": 1794279669581, ""thing"": ""monoambiente-739264"", ""result"": ""presence=True"", ""age_s"": 19}
+"
+2026-11-10 03:01:19.295,"[INFO]	2026-11-10T03:01:19.295Z	bb14a792-8f54-4019-a341-18db52f7214b	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""GetPresence"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 03:01:19+00:00"", ""lambda_ms"": 58, ""confirm_ms"": null, ""start_utc_ms"": 1794279679237, ""thing"": ""monoambiente-739264"", ""result"": ""presence=True"", ""age_s"": 29}
+"
+2026-11-10 03:02:09.615,"[INFO]	2026-11-10T03:02:09.615Z	2ea18233-b533-4280-8a48-b5cadbab4149	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""GetPresence"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 03:02:09+00:00"", ""lambda_ms"": 70, ""confirm_ms"": null, ""start_utc_ms"": 1794279729545, ""thing"": ""monoambiente-739264"", ""result"": ""presence=False"", ""age_s"": 26}
+"
+2026-11-10 03:03:23.036,"[INFO]	2026-11-10T03:03:23.036Z	1a5c3c85-4f5c-403e-9d4b-a62394f0c4c0	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""GetPresence"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 03:03:22+00:00"", ""lambda_ms"": 79, ""confirm_ms"": null, ""start_utc_ms"": 1794279802957, ""thing"": ""monoambiente-739264"", ""result"": ""presence=True"", ""age_s"": 35}
+"
+2026-11-10 03:04:10.696,"[INFO]	2026-11-10T03:04:10.696Z	4a2f6366-aab0-4c4d-9512-d998fa356adf	{""event"": ""SKILL_REQUEST"", ""request"": ""IntentRequest"", ""intent"": ""GetPresence"", ""user"": ""40fdb5ffb4"", ""alexa_timestamp"": ""2026-11-10 03:04:10+00:00"", ""lambda_ms"": 90, ""confirm_ms"": null, ""start_utc_ms"": 1794279850606, ""thing"": ""monoambiente-739264"", ""result"": ""presence=False"", ""age_s"": 7}
+"
