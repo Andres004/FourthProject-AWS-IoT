@@ -1,0 +1,55 @@
+[1690983|2026-11-10T02:50:03.299Z] PRESENCE_ON
+[1690987|2026-11-10T02:50:03.303Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[1711833|2026-11-10T02:50:24.149Z] PRESENCE_OFF
+[1711839|2026-11-10T02:50:24.155Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[1735483|2026-11-10T02:50:47.799Z] PRESENCE_ON
+[1735487|2026-11-10T02:50:47.803Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[1740140|2026-11-10T02:50:52.456Z] HEALTH uptime_s=1740 heap=197164 min_heap=182532 rssi=-56 wifi_drops=0 mqtt_drops=0 max_loop_ms=17
+[1748133|2026-11-10T02:51:00.449Z] PRESENCE_OFF
+[1748137|2026-11-10T02:51:00.453Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[1769483|2026-11-10T02:51:21.799Z] PRESENCE_ON
+[1769488|2026-11-10T02:51:21.803Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[1782733|2026-11-10T02:51:35.049Z] PRESENCE_OFF
+[1782737|2026-11-10T02:51:35.053Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[1783683|2026-11-10T02:51:35.999Z] PRESENCE_ON
+[1783737|2026-11-10T02:51:36.053Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[1800140|2026-11-10T02:51:52.456Z] HEALTH uptime_s=1800 heap=197148 min_heap=182532 rssi=-54 wifi_drops=0 mqtt_drops=0 max_loop_ms=15
+[1830033|2026-11-10T02:52:22.349Z] PRESENCE_OFF
+[1830038|2026-11-10T02:52:22.353Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[1831233|2026-11-10T02:52:23.549Z] PRESENCE_ON
+[1831238|2026-11-10T02:52:23.553Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[1854733|2026-11-10T02:52:47.049Z] PRESENCE_OFF
+[1854737|2026-11-10T02:52:47.053Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[1860140|2026-11-10T02:52:52.456Z] HEALTH uptime_s=1860 heap=197164 min_heap=182532 rssi=-57 wifi_drops=0 mqtt_drops=0 max_loop_ms=15
+[1887583|2026-11-10T02:53:19.899Z] PRESENCE_ON
+[1887588|2026-11-10T02:53:19.903Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[1920140|2026-11-10T02:53:52.456Z] HEALTH uptime_s=1920 heap=197164 min_heap=182532 rssi=-50 wifi_drops=0 mqtt_drops=0 max_loop_ms=11
+[1935733|2026-11-10T02:54:08.049Z] PRESENCE_OFF
+[1935738|2026-11-10T02:54:08.054Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[1948833|2026-11-10T02:54:21.149Z] PRESENCE_ON
+[1948838|2026-11-10T02:54:21.153Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[1980140|2026-11-10T02:54:52.456Z] HEALTH uptime_s=1980 heap=197164 min_heap=182532 rssi=-57 wifi_drops=0 mqtt_drops=0 max_loop_ms=16
+[1980183|2026-11-10T02:54:52.499Z] PRESENCE_OFF
+[1980188|2026-11-10T02:54:52.503Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[2029733|2026-11-10T02:55:42.049Z] PRESENCE_ON
+[2029738|2026-11-10T02:55:42.053Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[2040140|2026-11-10T02:55:52.456Z] HEALTH uptime_s=2040 heap=197164 min_heap=182532 rssi=-57 wifi_drops=0 mqtt_drops=0 max_loop_ms=15
+[2041533|2026-11-10T02:55:53.849Z] PRESENCE_OFF
+[2041537|2026-11-10T02:55:53.853Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[2048583|2026-11-10T02:56:00.899Z] PRESENCE_ON
+[2048587|2026-11-10T02:56:00.903Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[2061633|2026-11-10T02:56:13.949Z] PRESENCE_OFF
+[2061638|2026-11-10T02:56:13.953Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[2068083|2026-11-10T02:56:20.399Z] PRESENCE_ON
+[2068088|2026-11-10T02:56:20.403Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[2079883|2026-11-10T02:56:32.199Z] PRESENCE_OFF
+[2079887|2026-11-10T02:56:32.203Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[2088533|2026-11-10T02:56:40.849Z] PRESENCE_ON
+[2088537|2026-11-10T02:56:40.853Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[2100140|2026-11-10T02:56:52.456Z] HEALTH uptime_s=2100 heap=197164 min_heap=182532 rssi=-60 wifi_drops=0 mqtt_drops=0 max_loop_ms=15
+[2129583|2026-11-10T02:57:21.899Z] PRESENCE_OFF
+[2129588|2026-11-10T02:57:21.904Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[2150833|2026-11-10T02:57:43.149Z] PRESENCE_ON
+[2150837|2026-11-10T02:57:43.153Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[2160140|2026-11-10T02:57:52.456Z] HEALTH uptime_s=2160 heap=197164 min_heap=182532 rssi=-58 wifi_drops=0 mqtt_drops=0 max_loop_ms=16
+[2174783|2026-11-10T02:58:07.099Z] PRESENCE_OFF
