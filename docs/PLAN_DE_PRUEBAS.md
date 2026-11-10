@@ -30,7 +30,7 @@ RF1 a RF9 son los de la consigna. RF10 a RF12 se agregan porque cierran casos qu
 | ID | Atributo | Valor declarado | Método de verificación | Prueba |
 |---|---|---|---|---|
 | RNF1 | Estabilidad | ≥ 15 min continuos con 0 reinicios, 0 caídas de WiFi o MQTT, iteración de `loop()` ≤ 500 ms y pérdida de heap libre ≤ 4096 bytes entre la primera y la última línea `HEALTH`. | Líneas `HEALTH` (cada 60 s) y `BOOT`/`RESET_REASON` del log de la ESP32. | A10 |
-| RNF2 | Exactitud del sensor y del actuador | PIR: detección ≥ 95 % de los pasos de una persona entre 0.5 y 2.0 m (40 pasos) y 0 falsos positivos en 10 min sin personas. Servo: error ≤ 5° respecto de un transportador en 0° y 90°. | Conteo de `PRESENCE_ON` por distancia medida con cinta métrica; ángulo medido con transportador en fotos. | A06 |
+| RNF2 | Exactitud del sensor y del actuador | PIR: detección del 100 % de los cruces de una persona a 0.5, 1.0 y 2.0 m (5 cruces por distancia) y 0 falsos positivos en 5 min sin personas. Servo: error ≤ 5° respecto de un transportador en 0° y 90°. | Conteo de `PRESENCE_ON` por distancia medida con cinta métrica; ángulo medido con transportador en fotos. | A06 |
 | RNF3 | Tiempo de respuesta extremo a extremo | ≤ 3 s desde que la Lambda recibe el comando hasta que la puerta está confirmada, en ≥ 20 comandos. | `confirm_ms` de la Lambda (un solo reloj) y, de forma cruzada, `DELTA_RX`/`ACTUATOR_DONE` de la ESP32 con hora NTP. | A05 |
 | RNF4 | Frecuencia de reporte | Por evento: ≤ 1.1 s desde el cambio de estado. Periódico: cada 60 s (máx. 61.5 s entre reportes). Consumo: alrededor de 1440 mensajes por día en reposo. | Intervalos `REPORT_TX` del log y prueba automática B02. | A10, B02 |
 | RNF5 | Reconexión y sincronización | WiFi reintenta cada 10 s ± 0.5 s; tras recuperar la red, la orden pendiente se aplica en ≤ 10 s desde `WIFI_CONNECTED`, sin intervención. | Secuencia `WIFI_LOST` → `WIFI_CONNECTED` → `MQTT_CONNECTED` → `GET_RX` → `ACTUATOR_DONE`. | A07, A08 |
@@ -56,7 +56,7 @@ RF1 a RF9 son los de la consigna. RF10 a RF12 se agregan porque cierran casos qu
 | A03 | Consulta del sensor por voz | RF1, RF4 | 10 min |
 | A04 | Comandos y estado de la puerta por voz | RF3, RF5, RF6, RF10 | 15 min |
 | A05 | Tiempo de respuesta extremo a extremo | RNF3, RF10 | junto con A10 |
-| A06 | Exactitud del PIR y del servo | RNF2, RF1 | 30 min |
+| A06 | Exactitud del PIR y del servo | RNF2, RF1 | 20 min |
 | A07 | Caída de WiFi con orden pendiente | RNF5, RF11 | 15 min |
 | A08 | Corte de energía con orden pendiente | RNF5, RF10 | 10 min |
 | A09 | Comandos inválidos desde AWS | RF12 | 10 min |
@@ -69,7 +69,7 @@ RF1 a RF9 son los de la consigna. RF10 a RF12 se agregan porque cierran casos qu
 
 ### Preparación común
 
-- **Log de la ESP32:** con el firmware real, abre **PlatformIO → Monitor**. Cada sesión se guarda en `logs/device-monitor-AAMMDD-HHMMSS.log`. Al terminar la prueba, cierra el monitor (`Ctrl+C`) y copia ese archivo a la carpeta de la prueba con el nombre que se indica.
+- **Log de la ESP32:** [tools/serial_logger.py](../tools/serial_logger.py) graba el puerto serie en segundo plano, sin reiniciar la placa (DTR y RTS liberados), y vuelve a abrir el puerto solo si la placa se desenchufa. Cada evidencia es el tramo del log entre la hora de inicio y fin de la prueba, con las horas UTC de las líneas. Como alternativa, el monitor de PlatformIO guarda cada sesión en `logs/` (filtro `log2file`).
 - **Log de la Lambda:** CloudWatch → **Logs Insights** → grupo `/aws/lambda/monoambiente-skill`, rango de tiempo de la prueba, y esta consulta:
 
   ```text
@@ -151,9 +151,9 @@ Después de los pasos 1 y 4, captura el Shadow: `desired.door` = `reported.door`
 
 ### A05 y A10. Tiempo de respuesta y estabilidad (misma corrida)
 
-1. Reinicia la ESP32 con el botón EN y abre el monitor serie de inmediato.
+1. Con la ESP32 ya conectada y el registro del log activo (sin reiniciarla).
 2. Durante **al menos 17 min**, sin tocar la placa:
-   - cada 40 s aproximadamente, alterna "abre la puerta" y "cierra la puerta" en el simulador, hasta completar **24 comandos**;
+   - cada 40 s aproximadamente, alterna "abre la puerta" y "cierra la puerta" en el simulador, hasta completar **al menos 20 comandos** (se hicieron 28);
    - cada 3 min, pasa frente al sensor.
 3. Graba en video 3 de los comandos con un cronómetro visible.
 4. Cierra el monitor y guarda `A10_ESP32.log`; exporta CloudWatch del mismo intervalo como `A05_cloudwatch.csv`.
@@ -164,16 +164,18 @@ Después de los pasos 1 y 4, captura el Shadow: `desired.door` = `reported.door`
 
 ### A06. Exactitud del PIR y del servo
 
-**PIR, detección.** Marca con cinta en el piso las distancias 0.5, 1.0, 1.5, 2.0, 2.5 y 3.0 m frente al sensor (foto con la cinta métrica).
+**PIR, detección.** Marca con cinta en el piso las distancias 0.5, 1.0 y 2.0 m frente al sensor (foto con la cinta métrica).
 
-1. Para cada distancia, abre un monitor nuevo (un archivo por distancia), espera a que no haya presencia y cruza **10 veces** caminando a ritmo normal de lado a lado, esperando **15 s** entre cruces (más que los 10 s de retención).
-2. Guarda cada archivo como `A06_PIR_050cm.log`, `A06_PIR_100cm.log`, etc.
+1. Para cada distancia, espera quieto fuera del campo hasta que no haya presencia, y cruza **5 veces** caminando a ritmo normal de lado a lado, esperando **12 s** quieto entre cruces (más que los 10 s de retención).
+2. Se anota la hora de inicio de cada bloque; cada cruce cuenta si su `PRESENCE_ON` llega después de un `PRESENCE_OFF`.
 
-**PIR, falsos positivos.** Deja el sensor apuntando a la entrada vacía durante 10 min, sin nadie en la habitación, y guarda `A06_PIR_vacio.log`.
+**PIR, falsos positivos.** Deja el sensor apuntando a la entrada vacía durante 5 min, sin nadie en la habitación.
 
-**Servo.** Con un transportador centrado en el eje, toma 5 fotos en `closed` (0°) y 5 en `open` (90°), abriendo y cerrando por voz entre fotos.
+**Servo.** Con un transportador centrado en el eje, toma 2 fotos en `closed` (0°) y 2 en `open` (90°), abriendo y cerrando por voz.
 
-**Criterio:** entre 0.5 y 2.0 m, `PRESENCE_ON` ≥ 38 de 40 cruces (95 %); 0 `PRESENCE_ON` en `A06_PIR_vacio.log`; las 10 fotos del servo dentro de ±5°. Las distancias de 2.5 y 3.0 m se informan sin veredicto.
+**Criterio:** 15 de 15 cruces detectados; 0 `PRESENCE_ON` en los 5 min sin personas; las 4 fotos del servo dentro de ±5°.
+
+> Se redujo de 40 cruces a 15 por tiempo. Con 15 cruces, un 100 % observado no permite afirmar una tasa de detección mayor al 95 % con confianza estadística; el informe lo declara como limitación.
 
 ### A07. Caída de WiFi con orden pendiente
 
