@@ -1,0 +1,224 @@
+[5339006|2026-11-10T03:50:51.321Z] REPORT_TX reason=heartbeat {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+[5340140|2026-11-10T03:50:52.456Z] HEALTH uptime_s=5340 heap=196960 min_heap=182532 rssi=-38 wifi_drops=0 mqtt_drops=0 max_loop_ms=15
+[5383752|2026-11-10T03:51:36.068Z] PRESENCE_ON
+[5383757|2026-11-10T03:51:36.072Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":true}}}
+[5400140|2026-11-10T03:51:52.456Z] HEALTH uptime_s=5400 heap=196944 min_heap=182532 rssi=-37 wifi_drops=0 mqtt_drops=0 max_loop_ms=15
+[5401202|2026-11-10T03:51:53.518Z] PRESENCE_OFF
+[5401207|2026-11-10T03:51:53.522Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+[5431252|2026-11-10T03:52:23.568Z] PRESENCE_ON
+[5431257|2026-11-10T03:52:23.572Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":true}}}
+[5445602|2026-11-10T03:52:37.918Z] PRESENCE_OFF
+[5445606|2026-11-10T03:52:37.922Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+[5451902|2026-11-10T03:52:44.218Z] PRESENCE_ON
+[5451906|2026-11-10T03:52:44.222Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":true}}}
+[5460140|2026-11-10T03:52:52.456Z] HEALTH uptime_s=5460 heap=196960 min_heap=182532 rssi=-32 wifi_drops=0 mqtt_drops=0 max_loop_ms=15
+[5463702|2026-11-10T03:52:56.018Z] PRESENCE_OFF
+[5463707|2026-11-10T03:52:56.022Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+[5489702|2026-11-10T03:53:22.018Z] PRESENCE_ON
+[5489707|2026-11-10T03:53:22.022Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":true}}}
+[5496349][E][ssl_client.cpp:37] _handle_error(): [data_to_read():361]: (-76) UNKNOWN ERROR CODE (004C)
+[5496361|2026-11-10T03:53:28.676Z] MQTT_LOST state=-3 count=1
+[5496361|2026-11-10T03:53:28.677Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5496372][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5496383|2026-11-10T03:53:28.699Z] MQTT_CONNECT_FAILED state=-2
+[5501360|2026-11-10T03:53:33.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5501360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5501377|2026-11-10T03:53:33.693Z] MQTT_CONNECT_FAILED state=-2
+[5502310|2026-11-10T03:53:34.626Z] PRESENCE_OFF
+[5506360|2026-11-10T03:53:38.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5506360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5506377|2026-11-10T03:53:38.693Z] MQTT_CONNECT_FAILED state=-2
+[5511360|2026-11-10T03:53:43.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5511360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5511377|2026-11-10T03:53:43.693Z] MQTT_CONNECT_FAILED state=-2
+[5516360|2026-11-10T03:53:48.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5516360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5516377|2026-11-10T03:53:48.693Z] MQTT_CONNECT_FAILED state=-2
+[5520140|2026-11-10T03:53:52.456Z] HEALTH uptime_s=5520 heap=243076 min_heap=182532 rssi=0 wifi_drops=0 mqtt_drops=1 max_loop_ms=23
+[5521360|2026-11-10T03:53:53.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5521360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5521377|2026-11-10T03:53:53.693Z] MQTT_CONNECT_FAILED state=-2
+[5526360|2026-11-10T03:53:58.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5526360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5526377|2026-11-10T03:53:58.693Z] MQTT_CONNECT_FAILED state=-2
+[5531360|2026-11-10T03:54:03.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5531360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5531377|2026-11-10T03:54:03.693Z] MQTT_CONNECT_FAILED state=-2
+[5536360|2026-11-10T03:54:08.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5536360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5536377|2026-11-10T03:54:08.693Z] MQTT_CONNECT_FAILED state=-2
+[5541360|2026-11-10T03:54:13.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5541360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5541377|2026-11-10T03:54:13.693Z] MQTT_CONNECT_FAILED state=-2
+[5546360|2026-11-10T03:54:18.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5546360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5546377|2026-11-10T03:54:18.693Z] MQTT_CONNECT_FAILED state=-2
+[5551360|2026-11-10T03:54:23.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5551360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5551377|2026-11-10T03:54:23.693Z] MQTT_CONNECT_FAILED state=-2
+[5556360|2026-11-10T03:54:28.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5556360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5556377|2026-11-10T03:54:28.693Z] MQTT_CONNECT_FAILED state=-2
+[5561360|2026-11-10T03:54:33.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5561360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5561377|2026-11-10T03:54:33.693Z] MQTT_CONNECT_FAILED state=-2
+[5561610|2026-11-10T03:54:33.926Z] PRESENCE_ON
+[5566360|2026-11-10T03:54:38.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5566360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5566377|2026-11-10T03:54:38.693Z] MQTT_CONNECT_FAILED state=-2
+[5571360|2026-11-10T03:54:43.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5571360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5571377|2026-11-10T03:54:43.693Z] MQTT_CONNECT_FAILED state=-2
+[5576360|2026-11-10T03:54:48.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5576360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5576377|2026-11-10T03:54:48.693Z] MQTT_CONNECT_FAILED state=-2
+[5580140|2026-11-10T03:54:52.456Z] HEALTH uptime_s=5580 heap=243076 min_heap=182532 rssi=0 wifi_drops=0 mqtt_drops=1 max_loop_ms=17
+[5581360|2026-11-10T03:54:53.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5581360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5581377|2026-11-10T03:54:53.693Z] MQTT_CONNECT_FAILED state=-2
+[5583510|2026-11-10T03:54:55.826Z] PRESENCE_OFF
+[5586360|2026-11-10T03:54:58.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5586360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5586377|2026-11-10T03:54:58.693Z] MQTT_CONNECT_FAILED state=-2
+[5591360|2026-11-10T03:55:03.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5591360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5591377|2026-11-10T03:55:03.693Z] MQTT_CONNECT_FAILED state=-2
+[5596360|2026-11-10T03:55:08.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5596360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5596377|2026-11-10T03:55:08.693Z] MQTT_CONNECT_FAILED state=-2
+[5601360|2026-11-10T03:55:13.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5601360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5601377|2026-11-10T03:55:13.693Z] MQTT_CONNECT_FAILED state=-2
+[5602460|2026-11-10T03:55:14.776Z] PRESENCE_ON
+[5606360|2026-11-10T03:55:18.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5606360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5606377|2026-11-10T03:55:18.693Z] MQTT_CONNECT_FAILED state=-2
+[5611360|2026-11-10T03:55:23.676Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5611360][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5611377|2026-11-10T03:55:23.693Z] MQTT_CONNECT_FAILED state=-2
+[5616349|2026-11-10T03:55:28.665Z] WIFI_LOST count=1
+[5616349|2026-11-10T03:55:28.665Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5623610|2026-11-10T03:55:35.926Z] PRESENCE_OFF
+[5626349|2026-11-10T03:55:38.665Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5636349|2026-11-10T03:55:48.665Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5640140|2026-11-10T03:55:52.456Z] HEALTH uptime_s=5640 heap=243108 min_heap=182532 rssi=0 wifi_drops=1 mqtt_drops=1 max_loop_ms=17
+[5645810|2026-11-10T03:55:58.126Z] PRESENCE_ON
+[5646349|2026-11-10T03:55:58.665Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5656349|2026-11-10T03:56:08.665Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5666349|2026-11-10T03:56:18.665Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5676349|2026-11-10T03:56:28.665Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5676616|2026-11-10T03:56:28.931Z] WIFI_CONNECTED ip=172.20.10.2
+[5676616|2026-11-10T03:56:28.932Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5680733|2026-11-10T03:56:33.049Z] MQTT_CONNECTED
+[5680743|2026-11-10T03:56:33.059Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":true}}}
+[5681051|2026-11-10T03:56:33.367Z] DELTA_RX version=556 {"version":556,"timestamp":1794282993,"state":{"door":"open"},"metadata":{"door":{"timestamp":1794282993}}}
+[5681062|2026-11-10T03:56:33.378Z] ACTUATOR_START door=open
+[5681235|2026-11-10T03:56:33.551Z] GET_TX
+[5681462|2026-11-10T03:56:33.778Z] ACTUATOR_DONE door=open angle=90
+[5681467|2026-11-10T03:56:33.783Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[5681493|2026-11-10T03:56:33.809Z] GET_RX version=556
+[5682466|2026-11-10T03:56:34.782Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[5696528|2026-11-10T03:56:48.844Z] PRESENCE_OFF
+[5696532|2026-11-10T03:56:48.848Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[5700140|2026-11-10T03:56:52.456Z] HEALTH uptime_s=5700 heap=199432 min_heap=182532 rssi=-44 wifi_drops=1 mqtt_drops=1 max_loop_ms=4139
+[5702678|2026-11-10T03:56:54.994Z] PRESENCE_ON
+[5702683|2026-11-10T03:56:54.998Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[5714478|2026-11-10T03:57:06.794Z] PRESENCE_OFF
+[5714483|2026-11-10T03:57:06.798Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[5718728|2026-11-10T03:57:11.044Z] PRESENCE_ON
+[5718733|2026-11-10T03:57:11.048Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[5730528|2026-11-10T03:57:22.844Z] PRESENCE_OFF
+[5730533|2026-11-10T03:57:22.848Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[5744128|2026-11-10T03:57:36.444Z] PRESENCE_ON
+[5744133|2026-11-10T03:57:36.449Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+[5750944][E][ssl_client.cpp:37] _handle_error(): [data_to_read():361]: (-76) UNKNOWN ERROR CODE (004C)
+[5750955|2026-11-10T03:57:43.271Z] MQTT_LOST state=-3 count=2
+[5750956|2026-11-10T03:57:43.272Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5750967][E][ssl_client.cpp:99] start_ssl_client(): connect on fd 48, errno: 118, "Host is unreachable"
+[5750977][E][WiFiClientSecure.cpp:144] connect(): start_ssl_client: -1
+[5750984|2026-11-10T03:57:43.300Z] MQTT_CONNECT_FAILED state=-2
+[5755934|2026-11-10T03:57:48.250Z] PRESENCE_OFF
+[5755955|2026-11-10T03:57:48.271Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5762955][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5762965|2026-11-10T03:57:55.281Z] MQTT_CONNECT_FAILED state=-2
+[5762966|2026-11-10T03:57:55.282Z] HEALTH uptime_s=5762 heap=243076 min_heap=182532 rssi=0 wifi_drops=1 mqtt_drops=2 max_loop_ms=7010
+[5762977|2026-11-10T03:57:55.293Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5769987][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5769997|2026-11-10T03:58:02.313Z] MQTT_CONNECT_FAILED state=-2
+[5769997|2026-11-10T03:58:02.313Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5777008][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5777018|2026-11-10T03:58:09.334Z] MQTT_CONNECT_FAILED state=-2
+[5777018|2026-11-10T03:58:09.334Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5784029][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5784039|2026-11-10T03:58:16.355Z] MQTT_CONNECT_FAILED state=-2
+[5784039|2026-11-10T03:58:16.355Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5791050][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5791060|2026-11-10T03:58:23.376Z] MQTT_CONNECT_FAILED state=-2
+[5791060|2026-11-10T03:58:23.376Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5798071][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5798081|2026-11-10T03:58:30.397Z] MQTT_CONNECT_FAILED state=-2
+[5798081|2026-11-10T03:58:30.397Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5805092][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5805102|2026-11-10T03:58:37.418Z] MQTT_CONNECT_FAILED state=-2
+[5805102|2026-11-10T03:58:37.418Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5812113][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5812123|2026-11-10T03:58:44.439Z] MQTT_CONNECT_FAILED state=-2
+[5812123|2026-11-10T03:58:44.439Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5819134][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5819144|2026-11-10T03:58:51.460Z] MQTT_CONNECT_FAILED state=-2
+[5819144|2026-11-10T03:58:51.460Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5826155][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5826165|2026-11-10T03:58:58.481Z] MQTT_CONNECT_FAILED state=-2
+[5826166|2026-11-10T03:58:58.481Z] HEALTH uptime_s=5826 heap=243076 min_heap=182532 rssi=0 wifi_drops=1 mqtt_drops=2 max_loop_ms=7032
+[5826176|2026-11-10T03:58:58.492Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5833187][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5833197|2026-11-10T03:59:05.513Z] MQTT_CONNECT_FAILED state=-2
+[5833197|2026-11-10T03:59:05.513Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5840208][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5840218|2026-11-10T03:59:12.534Z] MQTT_CONNECT_FAILED state=-2
+[5840218|2026-11-10T03:59:12.534Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5847229][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5847239|2026-11-10T03:59:19.555Z] MQTT_CONNECT_FAILED state=-2
+[5847239|2026-11-10T03:59:19.555Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5854250][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5854260|2026-11-10T03:59:26.576Z] MQTT_CONNECT_FAILED state=-2
+[5854260|2026-11-10T03:59:26.576Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5861271][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5861281|2026-11-10T03:59:33.597Z] MQTT_CONNECT_FAILED state=-2
+[5861281|2026-11-10T03:59:33.597Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5868292][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5868302|2026-11-10T03:59:40.618Z] MQTT_CONNECT_FAILED state=-2
+[5868302|2026-11-10T03:59:40.618Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5875313][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for xxxxxxxx-ats.iot.us-east-2.amazonaws.com
+[5875323|2026-11-10T03:59:47.639Z] MQTT_CONNECT_FAILED state=-2
+[5875323|2026-11-10T03:59:47.639Z] WIFI_LOST count=2
+[5875324|2026-11-10T03:59:47.640Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5885323|2026-11-10T03:59:57.639Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5886165|2026-11-10T03:59:58.481Z] HEALTH uptime_s=5886 heap=243052 min_heap=182532 rssi=0 wifi_drops=2 mqtt_drops=2 max_loop_ms=7032
+[5895323|2026-11-10T04:00:07.639Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5905323|2026-11-10T04:00:17.639Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5915323|2026-11-10T04:00:27.639Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5925323|2026-11-10T04:00:37.639Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5927529|2026-11-10T04:00:39.845Z] PRESENCE_ON
+[5935323|2026-11-10T04:00:47.639Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5945079|2026-11-10T04:00:57.395Z] PRESENCE_OFF
+[5945323|2026-11-10T04:00:57.639Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5945479|2026-11-10T04:00:57.795Z] PRESENCE_ON
+[5946165|2026-11-10T04:00:58.481Z] HEALTH uptime_s=5946 heap=243052 min_heap=182532 rssi=0 wifi_drops=2 mqtt_drops=2 max_loop_ms=10
+[5955323|2026-11-10T04:01:07.639Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5965323|2026-11-10T04:01:17.639Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5965779|2026-11-10T04:01:18.095Z] PRESENCE_OFF
+[5975323|2026-11-10T04:01:27.639Z] WIFI_CONNECTING ssid=Andy’s Iphone
+[5975869|2026-11-10T04:01:28.184Z] WIFI_CONNECTED ip=172.20.10.2
+[5975869|2026-11-10T04:01:28.185Z] MQTT_CONNECTING client_id=monoambiente-739264
+[5979072|2026-11-10T04:01:31.387Z] MQTT_CONNECTED
+[5979083|2026-11-10T04:01:31.398Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":false}}}
+[5979307|2026-11-10T04:01:31.622Z] DELTA_RX version=566 {"version":566,"timestamp":1794283291,"state":{"door":"closed"},"metadata":{"door":{"timestamp":1794283257}}}
+[5979318|2026-11-10T04:01:31.633Z] ACTUATOR_START door=closed
+[5979574|2026-11-10T04:01:31.889Z] GET_TX
+[5979717|2026-11-10T04:01:32.033Z] ACTUATOR_DONE door=closed angle=0
+[5979722|2026-11-10T04:01:32.037Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+[5979838|2026-11-10T04:01:32.153Z] GET_RX version=566
+[5980721|2026-11-10T04:01:33.037Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":false}}}
+[5999293|2026-11-10T04:01:51.609Z] PRESENCE_ON
+[5999298|2026-11-10T04:01:51.613Z] REPORT_TX reason=event {"state":{"reported":{"door":"closed","servo_angle":0,"presence":true}}}
