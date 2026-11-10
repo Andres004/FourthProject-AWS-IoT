@@ -932,19 +932,233 @@ sequenceDiagram
 
 ### 2.5 Especificación del documento Shadow
 
-_Pendiente (fase 5)._
+El Shadow es el contrato entre la Lambda y el objeto inteligente: ninguno de los dos conoce al otro, solo el documento. Las claves y los valores están definidos una sola vez en cada programa: en el namespace `config::shadow_doc` de [config.h](include/config.h) y en las constantes `DOOR_ATTRIBUTE`, `PRESENCE_ATTRIBUTE`, `DOOR_OPEN` y `DOOR_CLOSED` de [lambda_function.py](lambda/lambda_function.py).
+
+#### 2.5.1 Thing y temas MQTT
+
+| Aspecto | Definición |
+|---|---|
+| Thing | `monoambiente-<código>`, donde el código son los 6 dígitos de `config::device::LINK_CODE` (en el prototipo, `monoambiente-739264`). Hay un Thing por objeto |
+| Tipo de Shadow | Shadow clásico (sin nombre) del Thing |
+| Conexión | MQTT 3.1.1 sobre TLS al puerto 8883, client ID igual al nombre del Thing |
+| Calidad de servicio | Suscripciones con QoS 1: AWS reenvía un mensaje no confirmado. Las publicaciones del objeto usan QoS 0, el único que publica la librería PubSubClient; un reporte perdido se corrige con el siguiente reporte o con el heartbeat |
+
+Prefijo de todos los temas: `$aws/things/monoambiente-739264/shadow/`.
+
+| Tema | Sentido | Contenido | Uso en el objeto | Evento del log |
+|---|---|---|---|---|
+| `update` | Objeto → AWS | `{"state":{"reported":{…}}}` | Publicar el estado del objeto ([ShadowReporter.cpp](src/ShadowReporter.cpp)) | `REPORT_TX` |
+| `update/delta` | AWS → objeto | Atributos de `desired` que difieren de `reported`, con `version` | Aplicar la orden ([ShadowTransport.cpp](src/ShadowTransport.cpp), `handleDelta()`) | `DELTA_RX` |
+| `update/rejected` | AWS → objeto | Código y mensaje de error | Solo se registra | `UPDATE_REJECTED` |
+| `get` | Objeto → AWS | Mensaje vacío | Pedir el documento completo al conectarse | `GET_TX` |
+| `get/accepted` | AWS → objeto | Documento completo, con `desired`, `reported` y `version` | Aplicar la orden pendiente (`handleGetAccepted()`) | `GET_RX` |
+| `get/rejected` | AWS → objeto | Código de error; 404 si el Shadow no existe | Con 404, el primer reporte crea el documento | `GET_REJECTED` |
+
+La Lambda no usa MQTT: lee y escribe el mismo documento con las operaciones `GetThingShadow` y `UpdateThingShadow` de la API de datos de AWS IoT, por HTTPS.
+
+#### 2.5.2 Documento y atributos
+
+```json
+{
+  "state": {
+    "desired":  { "door": "open" },
+    "reported": { "door": "closed", "servo_angle": 0, "presence": false },
+    "delta":    { "door": "open" }
+  },
+  "metadata": { "reported": { "door": { "timestamp": 1794283473 } } },
+  "version": 577,
+  "timestamp": 1794283689
+}
+```
+
+Estructura del documento que devuelve `GetThingShadow` con una orden pendiente, como en A07; los valores de `metadata` y `timestamp` son de ejemplo. AWS agrega `delta`, `metadata`, `version` y `timestamp`; los programas solo escriben dentro de `state`.
+
+| Atributo | Sección | Tipo | Valores válidos | Quién lo escribe | Quién lo lee |
+|---|---|---|---|---|---|
+| `door` | `desired` | string | `"open"`, `"closed"` (en minúsculas) | Lambda, con cada comando (`ThingGateway.set_desired_door()`) | AWS, para calcular el `delta`; la Lambda, solo para avisar una orden pendiente |
+| `door` | `reported` | string | `"open"`, `"closed"` | Objeto, cuando el servo termina de moverse | Lambda (RF6, RF10) |
+| `servo_angle` | `reported` | entero | `0` (cerrada) o `90` (abierta), según `CLOSED_ANGLE_DEG` y `OPEN_ANGLE_DEG` | Objeto | Diagnóstico: muestra el ángulo que se ordenó al servo |
+| `presence` | `reported` | booleano | `true`, `false` | Objeto, al cambiar el estado del PIR | Lambda (RF4) |
+
+Cada reporte trae los tres atributos de `reported` a la vez, aunque solo uno haya cambiado: así el documento siempre describe el estado completo del objeto y la Lambda no combina datos de momentos distintos (RF2).
+
+#### 2.5.3 Uso de `desired`, `reported` y `delta`
+
+- **`desired` lo escribe solo la Lambda, y solo con `open` o `closed`.** Expresa lo que el usuario quiere. El objeto nunca lo escribe.
+- **`reported` lo escribe solo el objeto.** Expresa lo que el objeto hizo y mide. La Lambda nunca lo escribe, y responde las consultas con `reported`, no con `desired`: si la orden no se cumplió, el usuario no recibe una respuesta falsa (RF4, RF6).
+- **`reported.door` cambia recién al terminar el movimiento.** Durante los 400 ms del servo, `reported.door` conserva la posición anterior; así, la confirmación de la Lambda (RF10) significa que la puerta llegó.
+- **`delta` lo calcula AWS** cuando `desired` difiere de `reported`, y lo publica en `update/delta`. Cuando el objeto reporta la posición pedida, el `delta` desaparece. Si la puerta ya está en la posición pedida, el objeto igual publica un reporte para que el `delta` desaparezca.
+- **Orden pendiente.** Si `desired.door` es `open` o `closed` y difiere de `reported.door`, la Lambda la menciona al responder el estado de la puerta ("Hay una orden pendiente para abrirla."). Un valor inválido en `desired` no se anuncia como orden (A09).
+- **Antigüedad.** La Lambda calcula cuánto hace que el objeto reportó a partir del `timestamp` del documento y de los `timestamp` de `metadata.reported`. Si pasan más de 150 s (`OFFLINE_AFTER_S`), lo considera desconectado (RF11).
+
+#### 2.5.4 Versiones
+
+AWS incrementa `version` con cada cambio del documento. El objeto guarda la última versión aplicada (`lastVersion_` de `ShadowTransport`):
+
+- Un `delta` con versión menor o igual que la última se descarta (`STALE_IGNORED`). Con QoS 1, AWS puede reentregar un mensaje, y tras una reconexión puede llegar un `delta` atrasado; ninguno de los dos mueve el servo (RF12).
+- La respuesta a `/get` siempre se aplica, porque después de una reconexión es el estado de referencia, y actualiza la última versión.
+- Si la orden coincide con el destino del movimiento en curso o con la posición actual, `DoorActuator` no vuelve a mover el servo, aunque la versión sea nueva.
+
+#### 2.5.5 Manejo de errores
+
+| Situación | Quién la detecta | Respuesta | Efecto en el sistema |
+|---|---|---|---|
+| `door` con un valor distinto de `open`/`closed` (`"medio"`, `5`, `"OPEN"`) | Objeto (`DoorActuator::applyDesired()`) | `INVALID_VALUE` | El servo no se mueve; la Lambda no lo anuncia como orden pendiente (A09) |
+| JSON mal formado | Objeto (`ShadowTransport`) | `JSON_ERROR reason=…` | Se descarta el mensaje (B02) |
+| `delta` sin `state` | Objeto | `JSON_ERROR reason=missing_state` | Se descarta el mensaje (B02) |
+| `delta` sin `door` | Objeto | Ninguna | El actuador lo ignora: no es para él (B02) |
+| `delta` repetido o atrasado | Objeto (`acceptVersion()`) | `STALE_IGNORED` | El servo no se mueve (B02) |
+| `update` rechazado por AWS | AWS | `update/rejected` → `UPDATE_REJECTED` | Se registra; el siguiente reporte lo reemplaza |
+| `/get` sin respuesta en 5 s | Objeto | Repite `GET_TX` | Hasta recibir el documento |
+| `/get` rechazado con 404 | AWS | `GET_REJECTED` | El Shadow todavía no existe: el primer reporte lo crea |
+| Cambio de estado sin conexión | Objeto (`ShadowReporter`) | Ninguna | El reporte queda pendiente y se envía apenas vuelve la conexión (A07) |
+| Error al publicar un reporte | Objeto (`ShadowReporter`) | `REPORT_TX_FAILED` | El reporte queda pendiente y se reintenta tras el mínimo de 1 s |
+| Shadow inexistente o sin el atributo | Lambda | "Todavía no hay datos reportados por tu casa." | `result: no_data` |
+| Error de AWS en la Lambda | Lambda (`CatchAllExceptionHandler`) | "Hubo un problema al procesar tu pedido." | `result: error`, con el tipo de excepción en el log |
+
+#### 2.5.6 Ejemplo de sesión real
+
+Orden _"abre la puerta"_ de la prueba A04. Línea de la Lambda en CloudWatch ([A05_cloudwatch.csv](docs/evidencias/A05/A05_cloudwatch.csv)), resumida:
+
+```text
+{"event": "SKILL_REQUEST", "intent": "OpenDoor", "thing": "monoambiente-739264",
+ "start_utc_ms": 1794280282123, "desired_set_utc_ms": 1794280282224, "version": 360,
+ "confirmed_utc_ms": 1794280283304, "confirm_ms": 1181, "result": "confirmed"}
+```
+
+Log del objeto ([A04_ESP32.log](docs/evidencias/A04/A04_ESP32.log), líneas 15 a 18):
+
+```text
+[2970124|2026-11-10T03:11:22.439Z] DELTA_RX version=360 {"version":360,"timestamp":1794280282,"state":{"door":"open"},"metadata":{"door":{"timestamp":1794280282}}}
+[2970134|2026-11-10T03:11:22.450Z] ACTUATOR_START door=open
+[2970534|2026-11-10T03:11:22.850Z] ACTUATOR_DONE door=open angle=90
+[2970539|2026-11-10T03:11:22.855Z] REPORT_TX reason=event {"state":{"reported":{"door":"open","servo_angle":90,"presence":true}}}
+```
+
+La versión 360 une las dos líneas. La Lambda escribió `desired` a las 03:11:22.224; el `delta` llegó al objeto 215 ms después (03:11:22.439); el servo arrancó 11 ms más tarde y terminó a los 400 ms; el reporte salió 5 ms después. La Lambda leyó la confirmación en su siguiente consulta y respondió "Listo, la puerta está abierta." 1181 ms después de recibir el intent.
 
 ### 2.6 Diseño del mecanismo de vinculación
 
-_Pendiente (fase 5)._
+#### 2.6.1 Identificador
+
+| Aspecto | Definición |
+|---|---|
+| Identificador | Código de vinculación de 6 dígitos que no empieza en 0 (`config::device::LINK_CODE`, en el prototipo `739264`) |
+| Relación con el Thing | El nombre del Thing es `monoambiente-` más el código. La Lambda lo arma con `THING_NAME_PREFIX` y el objeto con `config::device::THING_NAME_PREFIX`, así los dos usan el mismo nombre sin una tabla intermedia |
+| Dónde lo ve el usuario | El objeto lo imprime al arrancar (`LINK_CODE 739264`). En un producto, iría en una etiqueta del dispositivo |
+| Cómo lo dice | Dígito por dígito o como número: _"vincula mi casa con el código siete tres nueve dos seis cuatro"_. El slot `code` es de tipo `AMAZON.NUMBER` |
+
+**Por qué seis dígitos sin cero inicial.**
+
+- **No es trivial de adivinar.** Hay 900 000 códigos posibles (100 000 a 999 999), y el código no se publica en el Shadow. Con un nombre como "maceta 1", cualquier usuario podría vincular el objeto de otro; la consigna recomienda evitarlo.
+- **Se dice fácil por voz.** Seis dígitos son cortos de dictar, y Alexa los devuelve como un número en el slot.
+- **Sin cero inicial.** `AMAZON.NUMBER` entrega un número, y un cero a la izquierda se perdería ("cero siete…" llegaría como "7…"): el código no coincidiría con el Thing. Por eso `parse_link_code()` rechaza un código que empiece en 0, y los Things se crean con códigos que no empiezan en 0.
+
+#### 2.6.2 Modelo de datos
+
+Tabla `user_thing` de DynamoDB, en `us-east-2` ([definición](aws/dynamodb-table.md)):
+
+| Atributo | Tipo | Rol | Ejemplo |
+|---|---|---|---|
+| `userId` | String | Clave de partición: el `context.System.user.userId` que envía Alexa en cada solicitud | `amzn1.ask.account.AMASSKDEAA…` |
+| `thingName` | String | Thing vinculado | `monoambiente-739264` |
+| `fechaVinculacion` | String, ISO 8601 en UTC | Fecha de la última vinculación o cambio | `2026-11-10T02:39:04.497180+00:00` |
+
+- **Sin clave de ordenamiento:** cada usuario tiene como máximo un objeto vinculado, así que `userId` identifica el ítem. Vincular otro código reemplaza el ítem (`PutItem`), y eso es "cambiar la vinculación".
+- **Acceso solo por clave:** la Lambda usa `GetItem`, `PutItem` y `DeleteItem`, nunca `Scan` ni `Query`. Cada solicitud cuesta una lectura, sin importar cuántos usuarios haya.
+- **Varios usuarios, un objeto cada uno:** dos usuarios pueden tener objetos distintos (A02) o el mismo objeto, porque la tabla no exige que `thingName` sea único.
+
+#### 2.6.3 Operaciones y validaciones
+
+| Operación | Intent | Validaciones, en orden | Resultado |
+|---|---|---|---|
+| Vincular | `LinkThing` | 1. Formato: solo dígitos, exactamente 6, sin 0 inicial (`parse_link_code()`).<br>2. El Thing existe en AWS IoT (`iot:DescribeThing`, `ThingGateway.exists()`).<br>3. El usuario no está ya vinculado a ese Thing (`GetItem`). | `PutItem` → "Listo, tu casa con el código … quedó vinculada." (`linked`). Un error en 1 o 2 no escribe nada (`invalid_code`, `thing_not_found`); el caso 3 responde `already_linked` |
+| Cambiar | `LinkThing` con otro código | Las mismas | `PutItem` reemplaza el ítem → "Listo, cambié tu vinculación al código …" (`changed`) |
+| Desvincular | `UnlinkThing` | El usuario tiene una vinculación (`GetItem`) | `DeleteItem` → "Tu casa quedó desvinculada." (`unlinked`) |
+| Resolver | Todos los que usan el objeto (`GetPresence`, `GetDoorState`, `OpenDoor`, `CloseDoor`) | El usuario tiene una vinculación (`LinkedThingHandler.handle()`) | El Thing de ese usuario, o la guía "Todavía no tienes una casa vinculada. Di: vincula mi casa con el código…" (`not_linked`) |
+
+La vinculación persiste entre sesiones porque está en DynamoDB y no en los atributos de sesión de Alexa: al abrir la skill otra vez, `LaunchRequest` ya saluda al usuario vinculado (A01, paso 13).
+
+#### 2.6.4 Alcance y limitaciones
+
+- **No se prueba la propiedad del objeto.** Quien conozca el código puede vincularlo. El código no trivial reduce el riesgo, pero no lo elimina; la consigna deja fuera de alcance el Account Linking (OAuth). Las mejoras posibles están en §7.
+- **El `userId` depende de la skill habilitada.** Alexa genera un `userId` nuevo si el usuario deshabilita la skill y la vuelve a habilitar; en ese caso tendría que vincular su objeto otra vez.
+- **Privacidad en los logs.** La Lambda registra en CloudWatch un hash de 10 caracteres del `userId` (`USER_HASH_LENGTH`), nunca el identificador completo.
 
 ### 2.7 Diseño de la skill de Alexa
 
-_Pendiente (fase 5)._
+| Aspecto | Definición |
+|---|---|
+| Nombre de invocación | **monoambiente inteligente** (_"Alexa, abre monoambiente inteligente"_) |
+| Idioma | Spanish (US), `es-US` |
+| Modelo de interacción | [alexa/interaction-model.es-US.json](alexa/interaction-model.es-US.json), exportado de la Alexa Developer Console |
+| Endpoint | ARN de la función Lambda `monoambiente-skill`; el disparador de la Lambda verifica el Skill ID |
+| Uso | Simulador de pruebas de la Alexa Developer Console, por texto o voz |
+
+**Tabla 2.** Intents de la skill. Las frases son las del modelo de interacción.
+
+| Intent | Requisitos | Slot | Frases de ejemplo | Handler | Respuesta típica |
+|---|---|---|---|---|---|
+| `LinkThing` | RF7, RF9 | `code` (`AMAZON.NUMBER`) | "vincula mi casa con el código {code}", "vincular mi casa con el código {code}", "cambia mi casa al código {code}", "mi código es {code}" | `LinkThingHandler` | "Listo, tu casa con el código 7 3 9 2 6 4 quedó vinculada." |
+| `UnlinkThing` | RF9 | — | "desvincula mi casa", "desvincular mi casa", "elimina la vinculación" | `UnlinkThingHandler` | "Tu casa quedó desvinculada." |
+| `GetPresence` | RF4, RF11 | — | "hay alguien en la puerta", "hay alguien en la entrada", "detectas a alguien en la entrada", "hay presencia en la puerta" | `GetPresenceHandler` | "Sí, se detecta a alguien en la entrada." / "No, no se detecta a nadie en la entrada." |
+| `OpenDoor` | RF5, RF10, RF11 | — | "abre la puerta", "abrir la puerta", "abre la puerta principal" | `OpenDoorHandler` | "Listo, la puerta está abierta." / "La puerta ya está abierta." |
+| `CloseDoor` | RF5, RF10, RF11 | — | "cierra la puerta", "cerrar la puerta", "cierra la puerta principal" | `CloseDoorHandler` | "Listo, la puerta está cerrada." / "La puerta ya está cerrada." |
+| `GetDoorState` | RF6, RF11 | — | "cómo está la puerta", "cuál es el estado de la puerta", "la puerta está abierta", "la puerta está cerrada" | `GetDoorStateHandler` | "La puerta está cerrada. Hay una orden pendiente para abrirla." |
+| `AMAZON.HelpIntent` | — | — | Integrado ("ayuda") | `HelpIntentHandler` | "Puedes vincular tu casa con un código, abrir o cerrar la puerta…" |
+| `AMAZON.CancelIntent`, `AMAZON.StopIntent` | — | — | Integrados ("cancela", "detener") | `CancelOrStopIntentHandler` | "Hasta luego." y cierra la sesión |
+| `AMAZON.FallbackIntent`, `AMAZON.NavigateHomeIntent` | — | — | Integrados | `UnhandledRequestHandler` | "No entendí eso. Puedes vincular tu casa…" |
+
+Además, `LaunchRequest` (abrir la skill) saluda y, si el usuario no tiene un objeto vinculado, le explica cómo vincularlo.
+
+**Decisiones de diseño.**
+
+- **Un intent por acción y sin slot para la acción.** `OpenDoor` y `CloseDoor` son intents separados en lugar de un `SetDoor` con un slot `{estado}`: el reconocimiento no depende de que Alexa resuelva bien el valor del slot, y cada frase lleva directo a su handler.
+- **Frases en forma de pregunta y de afirmación.** "la puerta está abierta" se interpreta como la pregunta "¿la puerta está abierta?" del simulador, que se escribe sin signos de interrogación; por eso pertenece a `GetDoorState` y no a un comando.
+- **Sesión abierta.** Todas las respuestas, salvo detener y cancelar, terminan con la repregunta "¿Qué quieres hacer?" (`respond()`), así el usuario da varias órdenes sin volver a decir el nombre de invocación.
+- **Código leído dígito por dígito.** Las respuestas usan SSML `<say-as interpret-as="digits">` (`say_digits()`): Alexa dice "siete tres nueve dos seis cuatro" y no "setecientos treinta y nueve mil…", que es como el usuario lo lee en el objeto.
+- **Respuestas que dicen la verdad del objeto.** Las consultas se responden con `reported` y los comandos con la confirmación del objeto (RF10); si el objeto no responde o está desconectado, la skill lo dice en lugar de afirmar algo que no ocurrió (RF11).
 
 ### 2.8 Frecuencia de reporte y consumo de mensajes
 
-_Pendiente (fase 5)._
+#### 2.8.1 Política de reporte
+
+[ShadowReporter.cpp](src/ShadowReporter.cpp) combina un reporte por evento con un reporte periódico de respaldo, como recomienda la consigna:
+
+| Disparador | Cuándo | Constante | Evento del log |
+|---|---|---|---|
+| Evento | Al cambiar `presence` (`PRESENCE_ON`/`PRESENCE_OFF`) o `door` (`ACTUATOR_DONE`), y para confirmar una orden que no requiere movimiento | — | `REPORT_TX reason=event` |
+| Intervalo mínimo | Entre dos reportes pasa al menos 1 s; los cambios que ocurren antes se agrupan en un solo reporte con el estado final | `MIN_REPORT_INTERVAL_MS = 1000` | — |
+| Heartbeat | Si pasaron 60 s sin ningún reporte | `HEARTBEAT_PERIOD_MS = 60000` | `REPORT_TX reason=heartbeat` |
+| Sincronización | Después de conectarse y recibir el documento con `/get` | — | `REPORT_TX reason=event` |
+| Sin conexión | El cambio queda pendiente y se publica apenas vuelve la conexión | — | — |
+
+El umbral del reporte por evento es el cambio de estado, porque las dos variables son discretas: `presence` es `true` o `false`, y `door`, `open` o `closed`. No hay un "cambio significativo" que medir, como en una variable continua.
+
+#### 2.8.2 Justificación según la dinámica de las variables
+
+- **Presencia.** La llegada de una persona es un evento discreto que el usuario quiere saber en el momento, así que se reporta de inmediato. El PIR solo cambia de estado al detectar movimiento y la presencia se retiene 10 s, así que un mismo episodio produce dos reportes (llegada y salida), no uno por cada movimiento.
+- **Puerta.** Es un evento discreto que, además, confirma una orden del usuario: la Lambda espera ese reporte para decir "Listo" (RF10). Por eso sale apenas termina el movimiento, en el orden de 1 s que pide la consigna para un evento como la apertura de una puerta.
+- **Intervalo mínimo de 1 s.** Si el PIR oscila o llegan órdenes seguidas, se evita una ráfaga de mensajes. Es la razón por la que el límite de RNF4 es 1.1 s: un cambio que ocurre justo después de otro reporte espera hasta 1 s.
+- **Heartbeat de 60 s.** Sin cambios, no hay nada nuevo que informar; el heartbeat solo demuestra que el objeto sigue en línea. La Lambda considera desconectado al objeto después de 150 s sin reportes (2.5 heartbeats, RF11), lo que tolera un heartbeat perdido y una reconexión.
+
+#### 2.8.3 Consumo de mensajes
+
+Cada reporte es un mensaje MQTT publicado y una operación de actualización del Shadow. Con un documento de menos de 512 bytes (`PAYLOAD_BUFFER_SIZE`), AWS lo cuenta como una sola unidad de cada tipo, porque mide los mensajes en bloques de 5 KB y las operaciones del Shadow en bloques de 1 KB. Como referencia, la capa gratuita de 12 meses de [AWS IoT Core](https://aws.amazon.com/iot-core/pricing/) incluye 500 000 mensajes y 225 000 operaciones de registro o de Shadow por mes.
+
+**Tabla 3.** Reportes del objeto según la política de reporte, para un objeto
+
+| Escenario | Reportes por día | Reportes por mes (30 días) | Frente a 225 000 operaciones de Shadow por mes |
+|---|---|---|---|
+| Reposo: solo el heartbeat de 60 s | 1440 | 43 200 | 19 % |
+| Uso intensivo medido en A10: 253 reportes por hora (113 por evento y 2 por heartbeat en 27.3 min) | 6066 | 181 974 | 81 % |
+| Alternativa descartada: heartbeat de 10 s, sin eventos | 8640 | 259 200 | 115 %: supera la capa gratuita |
+
+- **Reposo.** El caso normal de una puerta: la mayor parte del día nadie llega y nadie da órdenes. El consumo es el 19 % del límite.
+- **Uso intensivo.** A10 es una prueba con una persona pasando frente al sensor y comandos cada pocos segundos durante 27 min; proyectarla a un día entero es un caso extremo. Aun así queda dentro de la capa gratuita.
+- **Heartbeat de 10 s.** Daría 6 veces más mensajes que el de 60 s sin ninguna información nueva, porque los cambios ya se reportan por evento, y por sí solo superaría las operaciones gratuitas del Shadow.
+
+Cada comando de voz agrega, además, la entrega del `delta` al objeto y las operaciones de la Lambda sobre el Shadow: una lectura inicial, una escritura de `desired` y una lectura cada 250 ms hasta la confirmación, unas 6 operaciones con la mediana de 919 ms de A05. Cien comandos por día sumarían unas 18 000 operaciones por mes.
 
 ---
 
