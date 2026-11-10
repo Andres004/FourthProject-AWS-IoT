@@ -750,21 +750,185 @@ El orden en que los handlers se registran en el `SkillBuilder` importa: el SDK u
 
 ### 2.4 Diagramas de secuencia
 
+Los cuatro diagramas van del usuario al objeto inteligente. Los nombres de los eventos (`DELTA_RX`, `ACTUATOR_DONE`…) son los del log del objeto y los valores de `result` son los de la línea `SKILL_REQUEST` de la Lambda, así cada paso se puede seguir en la evidencia de §4. Los tiempos indicados son los medidos en las pruebas.
+
 #### 2.4.1 Vinculación de un Thing
 
-_Pendiente (fase 4)._
+```mermaid
+sequenceDiagram
+    autonumber
+    actor U as Usuario
+    participant A as Alexa
+    participant L as Lambda
+    participant R as AWS IoT (registro)
+    participant D as DynamoDB
+    participant E as Objeto inteligente
+
+    Note over E: Al arrancar imprime su código (LINK_CODE<br/>739264). Su Thing es monoambiente-739264
+    U->>A: "vincula mi casa con el código siete tres nueve<br/>dos seis cuatro"
+    A->>L: IntentRequest LinkThing, slot code = 739264,<br/>userId
+    Note over L: parse_link_code(): seis dígitos y sin cero<br/>inicial
+    alt Código inválido
+        L-->>A: "El código debe tener seis dígitos y no empezar<br/>en cero." (invalid_code)
+    else Código válido
+        L->>R: DescribeThing(monoambiente-739264)
+        alt El Thing no existe
+            R-->>L: ResourceNotFoundException
+            L-->>A: "No encontré ninguna casa con el código …"<br/>(thing_not_found)
+        else El Thing existe
+            R-->>L: descripción del Thing
+            L->>D: GetItem(userId)
+            D-->>L: vinculación actual (o ninguna)
+            alt Ya vinculado a ese mismo Thing
+                L-->>A: "Tu casa ya estaba vinculada con el código …"<br/>(already_linked)
+            else Sin vinculación o con otro Thing
+                L->>D: PutItem(userId, thingName, fechaVinculacion)
+                L-->>A: "Listo, tu casa con el código … quedó<br/>vinculada." (linked)<br/>o "Listo, cambié tu vinculación al código …"<br/>(changed)
+            end
+        end
+    end
+    A-->>U: respuesta, con el código leído dígito por dígito
+    U->>A: "desvincula mi casa"
+    A->>L: IntentRequest UnlinkThing, userId
+    L->>D: GetItem(userId)
+    alt Tiene una vinculación
+        L->>D: DeleteItem(userId)
+        L-->>A: "Tu casa quedó desvinculada." (unlinked)
+    else No tiene vinculación
+        L-->>A: "No tienes ninguna casa vinculada." (not_linked)
+    end
+    A-->>U: respuesta
+```
+
+**Figura 8.** Vinculación, cambio y desvinculación (RF7, RF9). El código de 6 dígitos lo muestra el objeto al arrancar; el nombre del Thing es `monoambiente-` más el código. La Lambda valida primero el formato, sin consultar a AWS, y después que el Thing exista en AWS IoT; recién entonces escribe en DynamoDB, así un dato inválido nunca se guarda. Cambiar de objeto es vincular otro código: `PutItem` reemplaza el ítem del usuario, porque `userId` es la clave de partición. La vinculación no depende de que el objeto esté conectado. En A01 la Lambda tardó una mediana de 76 ms por solicitud.
 
 #### 2.4.2 Consulta del sensor
 
-_Pendiente (fase 4)._
+```mermaid
+sequenceDiagram
+    autonumber
+    actor U as Usuario
+    participant A as Alexa
+    participant L as Lambda
+    participant D as DynamoDB
+    participant S as Device Shadow
+    participant E as Objeto inteligente
+
+    Note over E: El PIR detecta movimiento: PRESENCE_ON
+    E->>S: update: reported {door, servo_angle, presence:<br/>true} (REPORT_TX, mediana 5 ms después del<br/>cambio)
+    U->>A: "¿hay alguien en la puerta?"
+    A->>L: IntentRequest GetPresence, userId
+    L->>D: GetItem(userId)
+    alt Sin vinculación
+        D-->>L: ningún ítem
+        L-->>A: "Todavía no tienes una casa vinculada. Di:<br/>vincula mi casa…" (not_linked)
+    else Vinculado a monoambiente-739264
+        D-->>L: thingName
+        L->>S: GetThingShadow(monoambiente-739264)
+        S-->>L: documento con state.reported, metadata y<br/>timestamp
+        Note over L: presence = reported.presence (nunca desired)<br/>age_s = timestamp − último<br/>metadata.reported.*.timestamp
+        alt Sin Shadow o sin el atributo presence
+            L-->>A: "Todavía no hay datos reportados por tu casa."<br/>(no_data)
+        else age_s ≤ 150 s
+            L-->>A: "Sí, se detecta a alguien en la entrada."<br/>(presence=True)
+        else age_s > 150 s
+            L-->>A: "Sí, se detecta a alguien en la entrada. Ojo: tu<br/>casa no se reporta desde hace 3 minutos…"
+        end
+    end
+    A-->>U: respuesta
+```
+
+**Figura 9.** Consulta del sensor (RF4, RF8, RF11). La consulta no llega al objeto: la Lambda lee el último `reported`, que el objeto publicó al detectar el cambio. Por eso responde aunque el objeto esté desconectado, y en ese caso agrega la advertencia de antigüedad. La consulta del estado de la puerta (`GetDoorState`, RF6) sigue la misma secuencia con `reported.door`, y además menciona la orden pendiente si `desired.door` es `open` o `closed` y difiere de `reported.door`.
 
 #### 2.4.3 Comando sobre el actuador
 
-_Pendiente (fase 4)._
+```mermaid
+sequenceDiagram
+    autonumber
+    actor U as Usuario
+    participant A as Alexa
+    participant L as Lambda
+    participant D as DynamoDB
+    participant S as Device Shadow
+    participant E as Objeto inteligente
+
+    U->>A: "abre la puerta"
+    A->>L: IntentRequest OpenDoor, userId
+    L->>D: GetItem(userId)
+    D-->>L: monoambiente-739264
+    L->>S: GetThingShadow
+    S-->>L: reported.door, desired.door y antigüedad del<br/>último reporte
+    alt Ya abierta, en línea y sin una orden contraria<br/>pendiente
+        L-->>A: "La puerta ya está abierta." (already: no<br/>escribe el Shadow)
+    else Hay que mover la puerta
+        L->>S: UpdateThingShadow<br/>{"state":{"desired":{"door":"open"}}}
+        S-->>L: version
+        alt Objeto desconectado (último reporte de más de<br/>150 s)
+            L-->>A: "Envié la orden, pero tu casa está desconectada.<br/>Se aplicará apenas vuelva a conectarse."<br/>(queued_offline)
+        else Objeto en línea
+            S->>E: update/delta {"state":{"door":"open"},<br/>"version": N} (mediana 96 ms)
+            par Objeto
+                Note over E: DELTA_RX: descarta la versión si es ≤ la última<br/>aplicada (STALE_IGNORED)<br/>ACTUATOR_START: servo a 90°, 400 ms<br/>(SETTLE_TIME_MS)<br/>ACTUATOR_DONE
+                E->>S: update: reported {door: open, servo_angle: 90,<br/>presence} (415 ms desde DELTA_RX)
+            and Lambda
+                loop Cada 250 ms, como máximo 3 s
+                    L->>S: GetThingShadow
+                    S-->>L: reported.door
+                end
+            end
+            alt reported.door = open dentro de los 3 s
+                L-->>A: "Listo, la puerta está abierta." (confirmed)
+            else No llegó la confirmación
+                L-->>A: "Envié la orden para abrir la puerta, pero<br/>todavía no recibo la confirmación…"<br/>(sent_unconfirmed)
+            end
+        end
+    end
+    A-->>U: respuesta
+```
+
+**Figura 10.** Comando sobre el actuador (RF3, RF5, RF10, RF11, RF12). La Lambda solo escribe `desired`; AWS IoT calcula el `delta` y lo entrega al objeto por la conexión MQTT ya abierta. El objeto confirma en `reported` recién al terminar el movimiento, y la Lambda responde "Listo" solo cuando lee esa confirmación. Tiempos medidos en A05, en 28 comandos: de la llegada del intent a la Lambda al servo detenido, mediana 616 ms y máximo 984 ms; hasta la respuesta "Listo", mediana 919 ms y máximo 1691 ms, dentro del límite de 3 s de RNF3. La nube (de `UpdateThingShadow` a `DELTA_RX`) aportó una mediana de 96 ms; el resto son los 400 ms del servo, el reporte y la espera entre consultas de la Lambda. `CloseDoor` sigue la misma secuencia con `closed` y 0°.
 
 #### 2.4.4 Reconexión y aplicación del estado pendiente
 
-_Pendiente (fase 4)._
+```mermaid
+sequenceDiagram
+    autonumber
+    actor U as Usuario
+    participant L as Alexa y Lambda
+    participant S as Device Shadow
+    participant AP as Punto de acceso
+    participant E as Objeto inteligente
+
+    AP--xE: Corte de la red
+    Note over E: MQTT_LOST y luego WIFI_LOST<br/>Reintenta el WiFi cada 10 s (WIFI_CONNECTING)<br/>LED: parpadeo rápido
+    U->>L: "abre la puerta"
+    L->>S: UpdateThingShadow desired.door = open
+    alt Último reporte de 150 s o menos
+        L-->>U: "Envié la orden para abrir la puerta, pero<br/>todavía no recibo la confirmación…" (tras<br/>esperar 3 s)
+    else Último reporte de más de 150 s
+        L-->>U: "Envié la orden, pero tu casa está desconectada.<br/>Se aplicará apenas vuelva a conectarse."
+    end
+    Note over S: Queda el delta pendiente: desired.door = open,<br/>reported.door = closed
+    AP-->>E: Vuelve la red
+    Note over E: WIFI_CONNECTED (t = 0)
+    E->>S: Conexión TLS y CONNECT MQTT, client ID<br/>monoambiente-739264
+    Note over E: MQTT_CONNECTED (t = 2088 ms)
+    E->>S: SUBSCRIBE update/delta, get/accepted,<br/>get/rejected, update/rejected (QoS 1)
+    E->>S: update: reported pendiente {door: closed, …}<br/>(REPORT_TX)
+    Note over E: Espera 500 ms a que se confirmen las<br/>suscripciones
+    E->>S: publish en get (GET_TX, t = 2591 ms)
+    alt Respuesta a /get
+        S-->>E: get/accepted, versión 577, desired.door = open<br/>(GET_RX, t = 2897 ms)
+    else El delta llega antes que la respuesta a /get
+        S-->>E: update/delta, door = open
+    end
+    Note over E: ACTUATOR_START: servo a 90°<br/>Un delta posterior con la misma orden no inicia<br/>otro movimiento
+    Note over E: ACTUATOR_DONE (t = 3297 ms)
+    E->>S: update: reported {door: open, servo_angle: 90,<br/>presence} (REPORT_TX)
+    Note over S: desired = reported: el delta desaparece
+```
+
+**Figura 11.** Reconexión y sincronización (RNF5, RF11). Mientras el objeto está desconectado, la orden queda guardada en `desired`. Al reconectarse, el objeto se suscribe y pide el documento completo con `/get`, así aplica la orden aunque el `delta` se hubiera publicado mientras estaba desconectado; si no hay respuesta en 5 s, repite el pedido (`GET_RESPONSE_TIMEOUT_MS`). Si AWS responde que el Shadow todavía no existe (`get/rejected` con código 404), el primer reporte lo crea. Los tiempos son los del intento 3 de A07 (log [A07_ESP32_tras_correccion.log](docs/evidencias/A07/A07_ESP32_tras_correccion.log), líneas 75 a 85): la orden pendiente se aplicó 3297 ms después de `WIFI_CONNECTED`. En el intento 2 el `delta` llegó antes que la respuesta a `/get`, y la puerta se movió 3848 ms después de `WIFI_CONNECTED`. Tras un corte de energía (A08), la puerta arranca cerrada, que es el estado seguro, y se abrió 3.9 s después de enchufar la placa. En los dos caminos la orden se aplica una sola vez: el número de versión descarta un `delta` repetido o atrasado, y `DoorActuator` no inicia otro movimiento si la orden coincide con el destino en curso o con la posición actual.
 
 ### 2.5 Especificación del documento Shadow
 
