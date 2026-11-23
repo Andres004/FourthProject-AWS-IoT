@@ -31,7 +31,29 @@ constexpr uint8_t PIR_OUTPUT = 26;      // AM312 digital output (3.3 V, active H
 /** Shadow document contract of the -lights Thing (technical guide section 5.4). */
 namespace shadow_doc {
 constexpr char KEY_PRESENCE[] = "presence";  // reported: boolean
+// One flat attribute per zone, desired and reported, value LIGHT_ON/LIGHT_OFF.
+constexpr char KEY_LIGHT_KITCHEN[] = "light_kitchen";
+constexpr char KEY_LIGHT_LIVING[] = "light_living";
+constexpr char KEY_LIGHT_DINING[] = "light_dining";
+constexpr char KEY_LIGHT_BATHROOM[] = "light_bathroom";
+constexpr char KEY_LIGHT_BEDROOM[] = "light_bedroom";
+constexpr char LIGHT_ON[] = "on";    // Valid value of every KEY_LIGHT_*
+constexpr char LIGHT_OFF[] = "off";  // Valid value of every KEY_LIGHT_*
 }  // namespace shadow_doc
+
+/** Zone names used in the logs (zone=... in LIGHT_APPLIED). */
+namespace zones {
+constexpr char KITCHEN[] = "kitchen";
+constexpr char LIVING[] = "living";
+constexpr char DINING[] = "dining";
+constexpr char BATHROOM[] = "bathroom";
+constexpr char BEDROOM[] = "bedroom";
+}  // namespace zones
+
+/** White LEDs that represent the zone lights (220 ohm, active HIGH). */
+namespace light {
+constexpr bool ACTIVE_HIGH = true;  // GPIO HIGH turns the LED on
+}  // namespace light
 
 /**
  * Events of the -lights Thing and their report priority (higher wins when
