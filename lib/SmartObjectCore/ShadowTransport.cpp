@@ -44,7 +44,7 @@ void ShadowTransport::handleDelta(const uint8_t* payload, size_t length) {
     return;
   }
   if (desiredHandler_) {
-    desiredHandler_(state);
+    desiredHandler_(state, DesiredSource::kDelta);
   }
 }
 
@@ -65,7 +65,7 @@ void ShadowTransport::handleGetAccepted(const uint8_t* payload, size_t length) {
 
   JsonObjectConst desired = document["state"]["desired"];
   if (!desired.isNull() && desiredHandler_) {
-    desiredHandler_(desired);
+    desiredHandler_(desired, DesiredSource::kSync);
   }
   notifySynced();
 }

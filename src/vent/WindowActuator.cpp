@@ -1,10 +1,13 @@
+/**
+ * @file WindowActuator.cpp
+ * @brief Window servo: command validation, timed move and confirmation.
+ */
 #include "WindowActuator.h"
 
 #include <Arduino.h>
 #include <string.h>
 
 #include "EventLog.h"
-#include "config_vent.h"
 
 void WindowActuator::begin() {
   servo_.setPeriodHertz(config::window::PWM_FREQUENCY_HZ);
@@ -22,7 +25,8 @@ void WindowActuator::update(uint32_t nowMs) {
     position_ = target_;
     EventLog::recordf("ACTUATOR_DONE", "window=%s angle=%d",
                       positionName(position_), positionAngle(position_));
-    requestReport();
+    requestReport(config::vent_events::WINDOW_CHANGED,
+                  config::vent_events::PRIORITY_WINDOW, moveOrigin_);
   }
 }
 
@@ -31,7 +35,8 @@ void WindowActuator::fillReported(JsonObject reported) const {
   reported[config::shadow_doc::KEY_SERVO_ANGLE] = positionAngle(position_);
 }
 
-void WindowActuator::applyDesired(JsonObjectConst desired) {
+void WindowActuator::applyDesired(JsonObjectConst desired,
+                                  DesiredSource source) {
   JsonVariantConst value = desired[config::shadow_doc::KEY_WINDOW];
   if (value.isNull()) {
     return;
@@ -51,13 +56,18 @@ void WindowActuator::applyDesired(JsonObjectConst desired) {
     return;
   }
 
+  // The command is consumed now: the next report deletes it from desired.
+  markDesiredConsumed(config::shadow_doc::KEY_WINDOW);
+  markDesiredConsumed(config::report_doc::KEY_CMD_ORIGIN);
+
   if (moving_ && target == target_) {
     return;  // Already on its way; the report goes out when the move ends.
   }
   if (!moving_ && target == position_) {
-    requestReport();  // Nothing to move; confirming clears the delta.
+    requestConfirmation();  // Nothing to move; the report clears the delta.
     return;
   }
+  moveOrigin_ = commandOrigin(desired, source);
   startMove(target);
 }
 
@@ -76,5 +86,6 @@ void WindowActuator::startMove(Position target) {
   moving_ = true;
   moveStartMs_ = millis();
   servo_.write(positionAngle(target_));
-  EventLog::recordf("ACTUATOR_START", "window=%s", positionName(target_));
+  EventLog::recordf("ACTUATOR_START", "window=%s origin=%s",
+                    positionName(target_), moveOrigin_);
 }

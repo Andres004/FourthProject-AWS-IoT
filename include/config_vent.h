@@ -32,6 +32,25 @@ constexpr char WINDOW_OPEN[] = "open";             // Valid value of KEY_WINDOW
 constexpr char WINDOW_CLOSED[] = "closed";         // Valid value of KEY_WINDOW
 }  // namespace shadow_doc
 
+/**
+ * Events of the -vent Thing and their report priority (higher wins when two
+ * events fall inside the minimum report interval).
+ */
+namespace vent_events {
+constexpr char GAS_ALARM_ON[] = "gas_alarm_on";
+constexpr char GAS_ALARM_OFF[] = "gas_alarm_off";
+constexpr char WINDOW_CHANGED[] = "window_changed";
+constexpr char MODE_CHANGED[] = "mode_changed";
+constexpr char THRESHOLDS_CHANGED[] = "thresholds_changed";
+constexpr char GAS_CHANGED[] = "gas_changed";
+
+constexpr uint8_t PRIORITY_GAS_ALARM = 50;   // gas_alarm_on / gas_alarm_off
+constexpr uint8_t PRIORITY_WINDOW = 40;      // window_changed
+constexpr uint8_t PRIORITY_MODE = 30;        // mode_changed
+constexpr uint8_t PRIORITY_THRESHOLDS = 20;  // thresholds_changed
+constexpr uint8_t PRIORITY_GAS_CHANGED = 10; // gas_changed
+}  // namespace vent_events
+
 /** SG90 servo that moves the window. */
 namespace window {
 constexpr int PWM_FREQUENCY_HZ = 50;      // Standard servo frequency [Hz]

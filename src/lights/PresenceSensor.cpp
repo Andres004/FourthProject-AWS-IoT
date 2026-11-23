@@ -1,3 +1,7 @@
+/**
+ * @file PresenceSensor.cpp
+ * @brief PIR polling, warm-up, hold time and presence events.
+ */
 #include "PresenceSensor.h"
 
 #include <Arduino.h>
@@ -43,6 +47,12 @@ void PresenceSensor::setPresence(bool presence) {
     return;
   }
   presence_ = presence;
-  EventLog::record(presence_ ? "PRESENCE_ON" : "PRESENCE_OFF");
-  requestReport();
+  namespace ev = config::lights_events;
+  if (presence_) {
+    EventLog::record("PRESENCE_DETECTED");
+    requestReport(ev::PRESENCE_DETECTED, ev::PRIORITY_PRESENCE_DETECTED);
+  } else {
+    EventLog::record("PRESENCE_CLEARED");
+    requestReport(ev::PRESENCE_CLEARED, ev::PRIORITY_PRESENCE_CLEARED);
+  }
 }

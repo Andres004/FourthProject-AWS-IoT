@@ -9,6 +9,7 @@
  */
 #pragma once
 
+#include <stddef.h>
 #include <stdint.h>
 #include <time.h>
 
@@ -78,6 +79,34 @@ constexpr uint32_t MIN_REPORT_INTERVAL_MS = 1000;  // Min time between reports [
 // Full vent report plus "desired": {key: null} is about 400 bytes (contract V3).
 constexpr uint16_t PAYLOAD_BUFFER_SIZE = 1024;     // Serialized report limit [bytes]
 }  // namespace report
+
+/**
+ * Report metadata shared by both Things (technical guide sections 5.3, 5.4
+ * and 5.6). Board-specific events and their priorities live in
+ * config_vent.h and config_lights.h.
+ */
+namespace report_doc {
+constexpr char KEY_EVENT[] = "event";            // reported: why this report was sent
+constexpr char KEY_ORIGIN[] = "origin";          // reported: who caused the last change
+constexpr char KEY_SEQ[] = "seq";                // reported: report counter since boot
+constexpr char KEY_DEVICE_TS[] = "device_ts";    // reported: UTC epoch at publish [ms]
+constexpr char KEY_CMD_ORIGIN[] = "cmd_origin";  // desired: written with each command
+
+constexpr char EVENT_BOOT[] = "boot";            // First report after a restart
+constexpr char EVENT_HEARTBEAT[] = "heartbeat";  // Periodic report, nothing changed
+
+constexpr char ORIGIN_BOOT[] = "boot";    // State restored at boot (NVS or /get)
+constexpr char ORIGIN_VOICE[] = "voice";  // Command from the Alexa skill
+constexpr char ORIGIN_CLOUD[] = "cloud";  // Command from the control Lambda (C1)
+constexpr char ORIGIN_EDGE[] = "edge";    // Automatic rule on the board (E1)
+
+// When two events fall inside MIN_REPORT_INTERVAL_MS the highest priority
+// one names the report; the state itself is never lost (full "reported").
+constexpr uint8_t PRIORITY_HEARTBEAT = 0;  // Lowest: nothing better to report
+
+constexpr int64_t DEVICE_TS_UNKNOWN = 0;  // device_ts before the NTP sync
+constexpr size_t MAX_CONSUMED_KEYS = 4;   // desired keys a component clears per report
+}  // namespace report_doc
 
 /** Connection status LED (GPIO 32 on both boards). */
 namespace status_led {

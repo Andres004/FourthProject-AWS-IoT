@@ -54,7 +54,7 @@ class SmartObjectApp {
   void update(uint32_t nowMs);
 
  private:
-  void applyDesired(JsonObjectConst desired);
+  void applyDesired(JsonObjectConst desired, DesiredSource source);
 
   DeviceComponent* const* components_;
   size_t componentCount_;

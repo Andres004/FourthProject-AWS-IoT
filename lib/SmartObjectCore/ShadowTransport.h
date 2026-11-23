@@ -6,6 +6,8 @@
 
 #include <functional>
 
+#include "DeviceComponent.h"
+
 /**
  * @brief Link between the firmware and a Device Shadow.
  *
@@ -14,8 +16,9 @@
  */
 class ShadowTransport {
  public:
-  /** Receives the desired state to apply. */
-  using DesiredHandler = std::function<void(JsonObjectConst desired)>;
+  /** Receives the desired state to apply and whether it is a delta or a sync. */
+  using DesiredHandler =
+      std::function<void(JsonObjectConst desired, DesiredSource source)>;
 
   /** Called when the initial Shadow synchronization ends. */
   using SyncHandler = std::function<void()>;

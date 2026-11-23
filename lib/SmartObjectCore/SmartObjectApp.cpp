@@ -33,8 +33,12 @@ void SmartObjectApp::begin() {
     components_[i]->begin();
   }
 
-  shadow_.setHandlers([this](JsonObjectConst desired) { applyDesired(desired); },
-                      [this] { reporter_.requestReport(); });
+  shadow_.setHandlers(
+      [this](JsonObjectConst desired, DesiredSource source) {
+        applyDesired(desired, source);
+      },
+      // After every (re)connection the full state is reported again.
+      [this] { reporter_.requestReport(); });
   wifi_.begin();
   shadow_.begin();
 }
@@ -51,8 +55,9 @@ void SmartObjectApp::update(uint32_t nowMs) {
   statusLed_.update(nowMs, wifi_.isConnected(), shadow_.isConnected());
 }
 
-void SmartObjectApp::applyDesired(JsonObjectConst desired) {
+void SmartObjectApp::applyDesired(JsonObjectConst desired,
+                                  DesiredSource source) {
   for (size_t i = 0; i < componentCount_; ++i) {
-    components_[i]->applyDesired(desired);
+    components_[i]->applyDesired(desired, source);
   }
 }

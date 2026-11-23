@@ -33,6 +33,20 @@ namespace shadow_doc {
 constexpr char KEY_PRESENCE[] = "presence";  // reported: boolean
 }  // namespace shadow_doc
 
+/**
+ * Events of the -lights Thing and their report priority (higher wins when
+ * two events fall inside the minimum report interval).
+ */
+namespace lights_events {
+constexpr char LIGHT_CHANGED[] = "light_changed";
+constexpr char PRESENCE_DETECTED[] = "presence_detected";  // Rising edge of presence
+constexpr char PRESENCE_CLEARED[] = "presence_cleared";    // Falling edge of presence
+
+constexpr uint8_t PRIORITY_LIGHT = 30;              // light_changed
+constexpr uint8_t PRIORITY_PRESENCE_DETECTED = 20;  // presence_detected
+constexpr uint8_t PRIORITY_PRESENCE_CLEARED = 10;   // presence_cleared
+}  // namespace lights_events
+
 /** AM312 PIR presence sensor. */
 namespace pir {
 constexpr uint32_t POLL_PERIOD_MS = 50;       // Between digital reads [ms]

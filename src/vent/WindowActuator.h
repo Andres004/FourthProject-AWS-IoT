@@ -1,14 +1,21 @@
+/**
+ * @file WindowActuator.h
+ * @brief SG90 servo that opens and closes the window of the model.
+ */
 #pragma once
 
 #include <ESP32Servo.h>
 
 #include "DeviceComponent.h"
+#include "config_vent.h"
 
 /**
  * @brief Servo-driven window controlled through the Shadow "window" attribute.
  *
  * The reported position changes only after the servo has had time to finish
  * its movement, so the Shadow never confirms a move that is still in progress.
+ * An applied command clears desired.window and desired.cmd_origin in the next
+ * report, so a stale desired value can never move the window again.
  */
 class WindowActuator : public DeviceComponent {
  public:
@@ -22,7 +29,7 @@ class WindowActuator : public DeviceComponent {
   void fillReported(JsonObject reported) const override;
 
   /** Validates and applies the "window" attribute, when present. */
-  void applyDesired(JsonObjectConst desired) override;
+  void applyDesired(JsonObjectConst desired, DesiredSource source) override;
 
  private:
   enum class Position { kClosed, kOpen };
@@ -37,4 +44,5 @@ class WindowActuator : public DeviceComponent {
   Position target_ = Position::kClosed;
   bool moving_ = false;
   uint32_t moveStartMs_ = 0;
+  const char* moveOrigin_ = config::report_doc::ORIGIN_BOOT;  // Cause of the current move
 };

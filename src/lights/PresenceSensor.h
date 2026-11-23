@@ -1,3 +1,7 @@
+/**
+ * @file PresenceSensor.h
+ * @brief AM312 PIR at the entrance; informative only, it drives nothing.
+ */
 #pragma once
 
 #include "DeviceComponent.h"
@@ -7,6 +11,7 @@
  *
  * A PIR detects movement, not stillness, so presence stays active for a hold
  * time after the last detected movement. Readings are ignored during warm-up.
+ * Each edge is reported as presence_detected / presence_cleared.
  */
 class PresenceSensor : public DeviceComponent {
  public:
