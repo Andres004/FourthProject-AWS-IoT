@@ -31,6 +31,22 @@ class WindowActuator : public DeviceComponent {
   /** Validates and applies the "window" attribute, when present. */
   void applyDesired(JsonObjectConst desired, DesiredSource source) override;
 
+  /**
+   * Starts moving the window, used by commands and by the automatic logic.
+   * @param open true to open, false to close.
+   * @param origin Who causes the move ("voice", "cloud", "edge", "boot").
+   * @return false when the window is already there or already on its way.
+   */
+  bool moveTo(bool open, const char* origin);
+
+  /** @return true when the window is open or opening. */
+  bool isOpenOrOpening() const {
+    return (moving_ ? target_ : position_) == Position::kOpen;
+  }
+
+  /** @return true while the servo has not finished its movement. */
+  bool isMoving() const { return moving_; }
+
  private:
   enum class Position { kClosed, kOpen };
 

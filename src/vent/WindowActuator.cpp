@@ -60,15 +60,24 @@ void WindowActuator::applyDesired(JsonObjectConst desired,
   markDesiredConsumed(config::shadow_doc::KEY_WINDOW);
   markDesiredConsumed(config::report_doc::KEY_CMD_ORIGIN);
 
+  const bool moved =
+      moveTo(target == Position::kOpen, commandOrigin(desired, source));
+  if (!moved && !moving_) {
+    requestConfirmation();  // Nothing to move; the report clears the delta.
+  }
+}
+
+bool WindowActuator::moveTo(bool open, const char* origin) {
+  const Position target = open ? Position::kOpen : Position::kClosed;
   if (moving_ && target == target_) {
-    return;  // Already on its way; the report goes out when the move ends.
+    return false;  // Already on its way; the report goes out when it ends.
   }
   if (!moving_ && target == position_) {
-    requestConfirmation();  // Nothing to move; the report clears the delta.
-    return;
+    return false;
   }
-  moveOrigin_ = commandOrigin(desired, source);
+  moveOrigin_ = origin;
   startMove(target);
+  return true;
 }
 
 const char* WindowActuator::positionName(Position position) {
