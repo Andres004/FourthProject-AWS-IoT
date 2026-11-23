@@ -24,8 +24,13 @@ PATTERNS = {
         r'WIFI_PASSWORD\[\]\s*=\s*"(?!YOUR_WIFI_PASSWORD")[^"]+"'
     ),
 }
+BOARDS = ("vent", "lights")
 MUST_BE_IGNORED = (
     "include/secrets.h",
+    "include/secrets_vent.h",
+    "include/secrets_lights.h",
+    "certificados-vent/device-certificate.pem.crt",
+    "certificados-lights/private.pem.key",
     "certs/device-certificate.pem.crt",
     "certificados/private.pem.key",
     "AmazonRootCA1.pem",
@@ -88,21 +93,25 @@ def main():
                  f" -> {'PASS' if not not_ignored else 'FAIL'}")
     failures += bool(not_ignored)
 
-    template_ok = "include/secrets.example.h" in tracked
-    lines.append(f"RNF6 template include/secrets.example.h published: "
-                 f"{'yes' if template_ok else 'no'} -> "
-                 f"{'PASS' if template_ok else 'FAIL'}")
-    failures += not template_ok
+    for board in BOARDS:
+        template = f"include/secrets_{board}.example.h"
+        template_ok = template in tracked
+        lines.append(f"RNF6 template {template} published: "
+                     f"{'yes' if template_ok else 'no'} -> "
+                     f"{'PASS' if template_ok else 'FAIL'}")
+        failures += not template_ok
 
     # Positive control: the real (ignored) secrets file must be detected,
     # which shows that a PASS above is not a blind scanner. Only the kinds
     # of secret are printed, never their values.
-    real = Path("include/secrets.h")
-    if real.exists():
+    expected = {"private key", "certificate", "IoT endpoint", "WiFi password"}
+    for board in BOARDS:
+        real = Path(f"include/secrets_{board}.h")
+        if not real.exists():
+            continue
         kinds = scan(real.read_text(encoding="utf-8", errors="replace"))
-        expected = {"private key", "certificate", "IoT endpoint", "WiFi password"}
         control_ok = expected <= set(kinds)
-        lines.append(f"Control: include/secrets.h (not published) detected as "
+        lines.append(f"Control: {real.as_posix()} (not published) detected as "
                      f"{kinds} -> {'PASS' if control_ok else 'FAIL'}")
         failures += not control_ok
 

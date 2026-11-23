@@ -3,8 +3,10 @@
 #include <WiFi.h>
 
 #include "EventLog.h"
-#include "config.h"
-#include "secrets.h"
+#include "config_common.h"
+
+WifiManager::WifiManager(const char* ssid, const char* password)
+    : ssid_(ssid), password_(password) {}
 
 void WifiManager::begin() {
   WiFi.persistent(false);  // Avoid wearing the flash on every reconnection.
@@ -47,7 +49,7 @@ uint32_t WifiManager::disconnections() const {
 
 void WifiManager::startConnection(uint32_t nowMs) {
   lastAttemptMs_ = nowMs;
-  EventLog::recordf("WIFI_CONNECTING", "ssid=%s", secrets::WIFI_SSID);
+  EventLog::recordf("WIFI_CONNECTING", "ssid=%s", ssid_);
   WiFi.disconnect();
-  WiFi.begin(secrets::WIFI_SSID, secrets::WIFI_PASSWORD);
+  WiFi.begin(ssid_, password_);
 }

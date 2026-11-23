@@ -5,7 +5,7 @@
 #include "EventLog.h"
 
 void SerialShadowClient::begin() {
-  EventLog::record("LOCAL_TEST_MODE send {\"state\":{\"door\":\"open\"}}");
+  EventLog::record("LOCAL_TEST_MODE send a delta line: {\"state\":{...}}");
   notifySynced();
 }
 

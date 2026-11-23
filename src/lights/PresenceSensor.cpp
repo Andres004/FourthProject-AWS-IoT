@@ -3,7 +3,7 @@
 #include <Arduino.h>
 
 #include "EventLog.h"
-#include "config.h"
+#include "config_lights.h"
 
 void PresenceSensor::begin() {
   // The pull-down keeps the input LOW if the sensor gets disconnected.

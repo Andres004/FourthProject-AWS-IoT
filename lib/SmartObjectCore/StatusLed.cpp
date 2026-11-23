@@ -2,10 +2,10 @@
 
 #include <Arduino.h>
 
-#include "config.h"
+#include "config_common.h"
 
 void StatusLed::begin() {
-  pinMode(config::pins::STATUS_LED, OUTPUT);
+  pinMode(config::status_led::PIN, OUTPUT);
   write(false);
 }
 
@@ -29,5 +29,5 @@ void StatusLed::update(uint32_t nowMs, bool wifiConnected,
 
 void StatusLed::write(bool on) {
   on_ = on;
-  digitalWrite(config::pins::STATUS_LED, on_ ? HIGH : LOW);
+  digitalWrite(config::status_led::PIN, on_ ? HIGH : LOW);
 }

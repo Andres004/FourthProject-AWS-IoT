@@ -1,9 +1,11 @@
 /**
- * @file secrets.example.h
- * @brief Template for secrets.h, without real values.
+ * @file secrets_vent.example.h
+ * @brief Template for secrets_vent.h (board 1, ventilation), without real values.
  *
- * Copy this file to include/secrets.h and fill in the values. secrets.h is
- * excluded by .gitignore: never commit credentials, certificates or keys.
+ * Copy this file to include/secrets_vent.h and fill in the values. secrets_vent.h
+ * is excluded by .gitignore: never commit credentials, certificates or keys.
+ * The certificate and key are the ones created for Thing smartloft-<code>-vent
+ * (folder certificados-vent/, kept outside the repository).
  */
 #pragma once
 

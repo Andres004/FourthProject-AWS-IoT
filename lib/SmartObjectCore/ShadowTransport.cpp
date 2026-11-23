@@ -3,7 +3,7 @@
 #include <utility>
 
 #include "EventLog.h"
-#include "config.h"
+#include "config_common.h"
 
 namespace {
 

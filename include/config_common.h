@@ -1,8 +1,11 @@
 /**
- * @file config.h
- * @brief Firmware constants: pins, timing, Shadow contract and MQTT settings.
+ * @file config_common.h
+ * @brief Constants shared by both SmartLoft firmwares: identity, logging,
+ * network, clock, health, Shadow API, reporting and status LED.
  *
- * Credentials and the AWS endpoint live in secrets.h, which is not committed.
+ * Board-specific constants live in config_vent.h and config_lights.h.
+ * Credentials and the AWS endpoint live in secrets_<board>.h, which are not
+ * committed.
  */
 #pragma once
 
@@ -11,23 +14,17 @@
 
 namespace config {
 
-/** Identity of this smart object in AWS IoT Core. */
+/** Identity of the smart home in AWS IoT Core. */
 namespace device {
-constexpr char THING_NAME_PREFIX[] = "monoambiente-";  // Thing name = prefix + LINK_CODE
+// Thing name = THING_NAME_PREFIX + LINK_CODE + board suffix ("-vent"/"-lights").
+constexpr char THING_NAME_PREFIX[] = "smartloft-";
 constexpr uint32_t LINK_CODE = 739264;  // Six digits, first digit not 0; spoken to Alexa
 }  // namespace device
 
-/** ESP32 GPIO numbers. */
-namespace pins {
-constexpr uint8_t SERVO_SIGNAL = 13;  // SG90 PWM signal
-constexpr uint8_t STATUS_LED = 32;    // Connection indicator only, NOT the actuator
-constexpr uint8_t PIR_OUTPUT = 26;    // AM312 digital output (3.3 V, active HIGH)
-}  // namespace pins
-
 /** Serial event log. */
 namespace serial_log {
-constexpr uint32_t BAUD_RATE = 115200;  // Serial Monitor speed [baud]
-constexpr uint16_t MAX_DETAILS_LENGTH = 256;  // Longest formatted detail [characters]
+constexpr uint32_t BAUD_RATE = 115200;        // Serial Monitor speed [baud]
+constexpr uint16_t MAX_DETAILS_LENGTH = 1280;  // Longest formatted detail [characters]
 }  // namespace serial_log
 
 /** WiFi, TLS and MQTT connection settings. */
@@ -45,7 +42,7 @@ constexpr uint32_t GET_AFTER_SUBSCRIBE_MS = 500;    // Wait for subscriptions be
 constexpr uint32_t GET_RESPONSE_TIMEOUT_MS = 5000;  // Repeat /get after this silence [ms]
 }  // namespace network
 
-/** UTC clock used to correlate device logs with the Lambda logs. */
+/** UTC clock used for device_ts and to correlate logs with CloudWatch. */
 namespace clock_sync {
 constexpr char NTP_SERVER_PRIMARY[] = "pool.ntp.org";
 constexpr char NTP_SERVER_SECONDARY[] = "time.google.com";
@@ -74,48 +71,24 @@ constexpr int ERROR_CODE_NOT_FOUND = 404;  // /get rejected: Shadow does not exi
 constexpr char KEY_VERSION[] = "version";  // Shadow document version
 }  // namespace shadow_api
 
-/** Shadow document contract shared with the Lambda function. */
-namespace shadow_doc {
-constexpr char KEY_DOOR[] = "door";                // desired and reported: string
-constexpr char KEY_SERVO_ANGLE[] = "servo_angle";  // reported: integer [deg]
-constexpr char KEY_PRESENCE[] = "presence";        // reported: boolean
-constexpr char DOOR_OPEN[] = "open";               // Valid value of KEY_DOOR
-constexpr char DOOR_CLOSED[] = "closed";           // Valid value of KEY_DOOR
-}  // namespace shadow_doc
-
-/** SG90 servo that moves the door. */
-namespace door {
-constexpr int PWM_FREQUENCY_HZ = 50;     // Standard servo frequency [Hz]
-constexpr int PULSE_MIN_US = 500;        // Pulse width at 0 deg [us]
-constexpr int PULSE_MAX_US = 2400;       // Pulse width at 180 deg [us]
-constexpr int CLOSED_ANGLE_DEG = 0;      // Door closed; calibrate on the model [deg]
-constexpr int OPEN_ANGLE_DEG = 90;       // Door open; calibrate on the model [deg]
-constexpr uint32_t SETTLE_TIME_MS = 400; // Time allowed to finish a move [ms]
-}  // namespace door
-
-/** AM312 PIR presence sensor. */
-namespace pir {
-constexpr uint32_t POLL_PERIOD_MS = 50;       // Between digital reads [ms]
-constexpr uint32_t WARMUP_MS = 30000;         // Output ignored after boot [ms]
-constexpr uint32_t PRESENCE_HOLD_MS = 10000;  // Presence kept after last motion [ms]
-}  // namespace pir
-
-/** Shadow reporting policy. */
+/** Shadow reporting policy (guide section 5.8). */
 namespace report {
-constexpr uint32_t HEARTBEAT_PERIOD_MS = 60000;   // Max time between reports [ms]
-constexpr uint32_t MIN_REPORT_INTERVAL_MS = 1000; // Min time between reports [ms]
-constexpr uint16_t PAYLOAD_BUFFER_SIZE = 512;     // Serialized report limit [bytes]
+constexpr uint32_t HEARTBEAT_PERIOD_MS = 60000;    // Max time between reports [ms]
+constexpr uint32_t MIN_REPORT_INTERVAL_MS = 1000;  // Min time between reports [ms]
+// Full vent report plus "desired": {key: null} is about 400 bytes (contract V3).
+constexpr uint16_t PAYLOAD_BUFFER_SIZE = 1024;     // Serialized report limit [bytes]
 }  // namespace report
 
-/** Connection status LED patterns. */
+/** Connection status LED (GPIO 32 on both boards). */
 namespace status_led {
-constexpr uint32_t BLINK_WIFI_DOWN_MS = 200;   // Half period without WiFi [ms]
+constexpr uint8_t PIN = 32;                      // Indicator only, NOT an actuator
+constexpr uint32_t BLINK_WIFI_DOWN_MS = 200;     // Half period without WiFi [ms]
 constexpr uint32_t BLINK_SHADOW_DOWN_MS = 1000;  // Half period without MQTT [ms]
 }  // namespace status_led
 
-/** Serial protocol of the LOCAL_TEST_MODE build. */
+/** Serial protocol of the *_local_test builds. */
 namespace local_test {
-constexpr uint16_t MAX_LINE_LENGTH = 256;  // Longest Serial line [characters]
+constexpr uint16_t MAX_LINE_LENGTH = 512;  // Longest Serial line [characters]
 }  // namespace local_test
 
 }  // namespace config

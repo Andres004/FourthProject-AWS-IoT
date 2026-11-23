@@ -1,18 +1,18 @@
 #include "ShadowClient.h"
 
 #include "EventLog.h"
-#include "config.h"
-#include "secrets.h"
+#include "config_common.h"
 
-ShadowClient::ShadowClient(const WifiManager& wifi)
-    : wifi_(wifi), mqtt_(tlsClient_) {}
+ShadowClient::ShadowClient(const WifiManager& wifi, const Settings& settings)
+    : wifi_(wifi), settings_(settings), mqtt_(tlsClient_) {}
 
 void ShadowClient::begin() {
   namespace api = config::shadow_api;
   namespace net = config::network;
 
+  // Thing and MQTT client ID: smartloft-<LINK_CODE><suffix>.
   thingName_ = String(config::device::THING_NAME_PREFIX) +
-               String(config::device::LINK_CODE);
+               String(config::device::LINK_CODE) + settings_.thingSuffix;
 
   const String base = String(api::TOPIC_PREFIX) + thingName_;
   updateTopic_ = base + api::TOPIC_UPDATE;
@@ -22,13 +22,13 @@ void ShadowClient::begin() {
   getAcceptedTopic_ = base + api::TOPIC_GET_ACCEPTED;
   getRejectedTopic_ = base + api::TOPIC_GET_REJECTED;
 
-  tlsClient_.setCACert(secrets::ROOT_CA);
-  tlsClient_.setCertificate(secrets::DEVICE_CERTIFICATE);
-  tlsClient_.setPrivateKey(secrets::DEVICE_PRIVATE_KEY);
+  tlsClient_.setCACert(settings_.rootCa);
+  tlsClient_.setCertificate(settings_.certificate);
+  tlsClient_.setPrivateKey(settings_.privateKey);
   tlsClient_.setTimeout(net::TLS_CONNECT_TIMEOUT_S);
   tlsClient_.setHandshakeTimeout(net::TLS_HANDSHAKE_TIMEOUT_S);
 
-  mqtt_.setServer(secrets::AWS_IOT_ENDPOINT, net::MQTT_PORT);
+  mqtt_.setServer(settings_.endpoint, net::MQTT_PORT);
   mqtt_.setBufferSize(net::MQTT_BUFFER_SIZE);
   mqtt_.setKeepAlive(net::MQTT_KEEPALIVE_S);
   mqtt_.setSocketTimeout(net::MQTT_SOCKET_TIMEOUT_S);

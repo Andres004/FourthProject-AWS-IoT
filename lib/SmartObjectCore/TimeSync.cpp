@@ -4,7 +4,7 @@
 #include <sys/time.h>
 
 #include "EventLog.h"
-#include "config.h"
+#include "config_common.h"
 
 namespace {
 constexpr int64_t MS_PER_S = 1000;

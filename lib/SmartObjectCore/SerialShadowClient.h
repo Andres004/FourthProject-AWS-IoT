@@ -1,13 +1,13 @@
 #pragma once
 
 #include "ShadowTransport.h"
-#include "config.h"
+#include "config_common.h"
 
 /**
  * @brief Replaces AWS with the Serial Monitor in the local_test environment.
  *
  * Each input line is processed as an /update/delta document, for example
- * {"state":{"door":"open"}}. Reports are printed instead of published.
+ * {"state":{"window":"open"}}. Reports are printed instead of published.
  */
 class SerialShadowClient : public ShadowTransport {
  public:

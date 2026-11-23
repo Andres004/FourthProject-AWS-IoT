@@ -5,7 +5,7 @@
 #include <time.h>
 
 #include "TimeSync.h"
-#include "config.h"
+#include "config_common.h"
 
 namespace {
 

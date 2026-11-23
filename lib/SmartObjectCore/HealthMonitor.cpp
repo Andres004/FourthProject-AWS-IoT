@@ -6,7 +6,7 @@
 #include <esp_task_wdt.h>
 
 #include "EventLog.h"
-#include "config.h"
+#include "config_common.h"
 
 namespace {
 constexpr uint32_t MS_PER_S = 1000;

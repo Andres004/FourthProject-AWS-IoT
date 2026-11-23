@@ -7,6 +7,12 @@
  */
 class WifiManager {
  public:
+  /**
+   * @param ssid Network name; must outlive this object.
+   * @param password Network password; must outlive this object.
+   */
+  WifiManager(const char* ssid, const char* password);
+
   /** Configures the station and starts the first connection attempt. */
   void begin();
 
@@ -22,6 +28,8 @@ class WifiManager {
  private:
   void startConnection(uint32_t nowMs);
 
+  const char* ssid_;
+  const char* password_;
   bool connected_ = false;
   uint32_t disconnections_ = 0;
   uint32_t lastAttemptMs_ = 0;

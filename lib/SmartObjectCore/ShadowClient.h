@@ -4,6 +4,7 @@
 #include <WString.h>
 #include <WiFiClientSecure.h>
 
+#include "ShadowClientSettings.h"
 #include "ShadowTransport.h"
 #include "WifiManager.h"
 
@@ -14,12 +15,14 @@
  * document, so a desired state set while offline is applied on return.
  *
  * Retries are spaced in time. A single attempt can still hold the loop for the
- * TCP and TLS time limits defined in config.h, because PubSubClient connects
+ * TCP and TLS time limits defined in config_common.h, because PubSubClient connects
  * synchronously.
  */
 class ShadowClient : public ShadowTransport {
  public:
-  explicit ShadowClient(const WifiManager& wifi);
+  using Settings = ShadowClientSettings;
+
+  ShadowClient(const WifiManager& wifi, const Settings& settings);
 
   void begin() override;
   void update(uint32_t nowMs) override;
@@ -36,6 +39,7 @@ class ShadowClient : public ShadowTransport {
   void onGetRejected(const uint8_t* payload, size_t length);
 
   const WifiManager& wifi_;
+  const Settings settings_;
   WiFiClientSecure tlsClient_;
   mutable PubSubClient mqtt_;
 

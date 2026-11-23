@@ -5,7 +5,7 @@
 /**
  * @brief Shows the connection state on a LED.
  *
- * The LED is only an indicator; the actuator of the smart object is the servo.
+ * The LED is only an indicator, never one of the smart object's actuators.
  * Fast blink: no WiFi. Slow blink: WiFi without Shadow link. Steady: online.
  */
 class StatusLed {

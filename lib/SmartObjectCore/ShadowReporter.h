@@ -5,7 +5,7 @@
 
 #include "DeviceComponent.h"
 #include "ShadowTransport.h"
-#include "config.h"
+#include "config_common.h"
 
 /**
  * @brief Decides when the full device state is published to "reported".

@@ -1,0 +1,11 @@
+{
+  "name": "SmartObjectCore",
+  "version": "1.0.0",
+  "description": "SmartLoft infrastructure shared by the vent and lights firmwares: WiFi, NTP, health log, status LED, Device Shadow link and reporter.",
+  "frameworks": "arduino",
+  "platforms": "espressif32",
+  "build": {
+    "flags": ["-Wall", "-Wextra", "-I../../include"],
+    "_comment": "-I: the shared constants live in the project include/config_common.h"
+  }
+}

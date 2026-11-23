@@ -5,23 +5,23 @@
 #include "DeviceComponent.h"
 
 /**
- * @brief Servo-driven door controlled through the Shadow "door" attribute.
+ * @brief Servo-driven window controlled through the Shadow "window" attribute.
  *
  * The reported position changes only after the servo has had time to finish
  * its movement, so the Shadow never confirms a move that is still in progress.
  */
-class DoorActuator : public DeviceComponent {
+class WindowActuator : public DeviceComponent {
  public:
-  /** Attaches the servo and moves the door to the closed position. */
+  /** Attaches the servo and moves the window to the closed position. */
   void begin() override;
 
   /** Detects the end of a movement. */
   void update(uint32_t nowMs) override;
 
-  /** Adds "door" and "servo_angle". */
+  /** Adds "window" and "servo_angle". */
   void fillReported(JsonObject reported) const override;
 
-  /** Validates and applies the "door" attribute, when present. */
+  /** Validates and applies the "window" attribute, when present. */
   void applyDesired(JsonObjectConst desired) override;
 
  private:

@@ -5,8 +5,12 @@
 .vscode/ipch
 
 # Secrets: never commit WiFi credentials, certificates or private keys.
+# Only the *.example.h templates are published.
 include/secrets.h
+include/secrets_*.h
+!include/secrets_*.example.h
 certs/
+certificados*/
 *.pem
 *.crt
 *.key
