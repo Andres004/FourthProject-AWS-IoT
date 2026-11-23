@@ -80,6 +80,16 @@ constexpr uint8_t THRESHOLD_MIN_PCT = 1;   // Lowest valid threshold [%]
 constexpr uint8_t THRESHOLD_MAX_PCT = 99;  // Highest valid threshold [%]
 }  // namespace vent_defaults
 
+/**
+ * Simulated gas readings, only in vent_local_test (test B02): sending
+ * {"state":{"sim_gas_pct":45}} replaces the ADC reading and ends the warm-up,
+ * so the hysteresis can be tested without smoke; a negative value goes back
+ * to the real sensor. Production builds ignore this key.
+ */
+namespace gas_simulation {
+constexpr char KEY_SIM_GAS_PCT[] = "sim_gas_pct";  // number 0-100, or < 0 to stop
+}  // namespace gas_simulation
+
 /** NVS (Preferences) storage of mode and thresholds (rule E3). */
 namespace settings_store {
 constexpr char NAMESPACE[] = "smartloft";  // Preferences namespace (max 15 chars)

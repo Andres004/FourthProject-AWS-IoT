@@ -100,9 +100,11 @@ constexpr char ORIGIN_VOICE[] = "voice";  // Command from the Alexa skill
 constexpr char ORIGIN_CLOUD[] = "cloud";  // Command from the control Lambda (C1)
 constexpr char ORIGIN_EDGE[] = "edge";    // Automatic rule on the board (E1)
 
-// When two events fall inside MIN_REPORT_INTERVAL_MS the highest priority
-// one names the report; the state itself is never lost (full "reported").
+// Distinct events that fall inside MIN_REPORT_INTERVAL_MS are queued and
+// published one per interval, highest priority first; the state itself is
+// never lost (every report carries the full "reported").
 constexpr uint8_t PRIORITY_HEARTBEAT = 0;  // Lowest: nothing better to report
+constexpr size_t MAX_PENDING_EVENTS = 4;   // Queued distinct events per component and reporter
 
 constexpr int64_t DEVICE_TS_UNKNOWN = 0;  // device_ts before the NTP sync
 constexpr size_t MAX_CONSUMED_KEYS = 4;   // desired keys a component clears per report

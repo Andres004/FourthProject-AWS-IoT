@@ -6,7 +6,7 @@
 
 #include <functional>
 
-#include "DeviceComponent.h"
+#include "ReportTypes.h"
 
 /**
  * @brief Link between the firmware and a Device Shadow.

@@ -1,13 +1,23 @@
-"""Automatic firmware test over the Serial port (test B02).
+"""Automatic firmware test over the Serial port (test B02), for both boards.
 
-The ESP32 must run the local_test build, where Serial replaces AWS: each line
+The ESP32 must run a *_local_test build, where Serial replaces AWS: each line
 sent is processed as an /update/delta document and each report is printed as
 LOCAL_REPORT. The script sends valid, invalid, duplicated and out-of-order
 deltas and checks the response in the device log.
 
-Usage, from the project root, with the Serial Monitor closed:
-    python tools/serial_check.py --port COM3 --log docs/evidencias/B02/B02_ESP32.log
+Board 1 (vent): the gas reading is simulated with "sim_gas_pct" (only in
+vent_local_test), so the hysteresis of rule E1, rule E2, the rejection of
+voice commands, the clean-up of desired, the event queue and the NVS
+persistence (E3) are checked without smoke.
 
+Board 2 (lights): the five zones, repeated and invalid commands, the
+clean-up of cmd_origin and the grouping of an "all lights" command.
+
+Usage, from the project root, with the Serial Monitor closed:
+    python tools/serial_check.py --board vent --port COM3 --log docs/evidencias_p4/B02/B02_vent_ESP32.log
+    python tools/serial_check.py --board lights --port COM4 --log docs/evidencias_p4/B02/B02_lights_ESP32.log
+
+Add --skip-heartbeat to leave out the last case, which waits about 60 s.
 Exit code 0 when every case passes.
 """
 import argparse
@@ -19,18 +29,32 @@ import time
 import serial  # pyserial
 
 BAUD_RATE = 115200
-BOOT_TIMEOUT_S = 15  # Reset to LOCAL_TEST_MODE line
-QUIET_WINDOW_S = 1.5  # Time to wait for a reaction that must NOT happen
-RESPONSE_TIMEOUT_S = 3.0
-SETTLE_TIME_MS = 400  # config::door::SETTLE_TIME_MS
+BOOT_TIMEOUT_S = 15           # Reset to the first report
+QUIET_WINDOW_S = 1.5          # Time to wait for a reaction that must NOT happen
+RESPONSE_TIMEOUT_S = 4.0      # Gas windows close every 1 s, reports every >= 1 s
+
+# Values copied from the firmware configuration (must match the code).
+SETTLE_TIME_MS = 400           # config::window::SETTLE_TIME_MS
 SETTLE_TOLERANCE_MS = 60
 MIN_REPORT_INTERVAL_MS = 1000  # config::report::MIN_REPORT_INTERVAL_MS
-HEARTBEAT_MS = 60_000  # config::report::HEARTBEAT_PERIOD_MS
+HEARTBEAT_MS = 60_000          # config::report::HEARTBEAT_PERIOD_MS
 HEARTBEAT_TOLERANCE_MS = 1_500
-HEARTBEAT_WAIT_S = 180  # Allows a few PIR events to restart the period
-MAX_LINE_LENGTH = 256  # config::local_test::MAX_LINE_LENGTH
-OPEN_ANGLE = 90
-CLOSED_ANGLE = 0
+HEARTBEAT_WAIT_S = 180         # Event reports restart the heartbeat period
+MAX_LINE_LENGTH = 512          # config::local_test::MAX_LINE_LENGTH
+PAYLOAD_BUFFER_SIZE = 1024     # config::report::PAYLOAD_BUFFER_SIZE
+OPEN_ANGLE = 90                # config::window::OPEN_ANGLE_DEG
+CLOSED_ANGLE = 0               # config::window::CLOSED_ANGLE_DEG
+GAS_WINDOW_MS = 1000           # config::gas::AVERAGE_WINDOW_MS
+
+# Thresholds used by the test (set explicitly at the start, not the defaults).
+TEST_HIGH_PCT = 30
+TEST_LOW_PCT = 20
+
+COMMON_KEYS = ("event", "origin", "seq", "device_ts")
+VENT_KEYS = ("gas_pct", "gas_mv", "gas_alarm", "warming_up", "window",
+             "servo_angle", "mode", "gas_high_pct", "gas_low_pct")
+ZONES = ("kitchen", "living", "dining", "bathroom", "bedroom")
+LIGHT_KEYS = tuple(f"light_{zone}" for zone in ZONES) + ("presence",)
 
 DEVICE_LINE = re.compile(r"\[(\d+)\|[^\]]+\]\s+(\S+)\s*(.*)")
 
@@ -43,6 +67,7 @@ class Device:
         self.log = open(log_path, "w", encoding="utf-8", newline="\n")
         self.buffer = b""
         self.lines = []  # (t_ms, event, details)
+        self.version = 0
 
     def reset(self):
         """Pulses EN through RTS, like the upload tool does."""
@@ -51,6 +76,9 @@ class Device:
         time.sleep(0.1)
         self.port.rts = False
         self.port.reset_input_buffer()
+        self.buffer = b""
+        self.lines = []
+        self.log.write("# RESET\n")
 
     def poll(self):
         self.buffer += self.port.read(4096)
@@ -70,9 +98,14 @@ class Device:
         self.poll()
         return len(self.lines)
 
-    def send(self, text):
+    def send_raw(self, text):
         self.log.write(f"# TX {text}\n")
         self.port.write(text.encode("utf-8") + b"\n")
+
+    def send_state(self, state):
+        """Sends a delta with the next Shadow version."""
+        self.version += 1
+        self.send_raw(json.dumps({"version": self.version, "state": state}))
 
     def wait_for(self, start, event, timeout_s, predicate=None):
         """Returns the first line from start with that event, or None."""
@@ -89,11 +122,31 @@ class Device:
         self.poll()
         return [line for line in self.lines[start:] if line[1] == event]
 
+    def wait_report(self, start, predicate, timeout_s=RESPONSE_TIMEOUT_S):
+        """First LOCAL_REPORT whose parsed document satisfies predicate."""
+        return self.wait_for(start, "LOCAL_REPORT", timeout_s,
+                             lambda line: predicate(report_doc(line)))
 
-def report_door(line):
-    """Returns (door, servo_angle) of a LOCAL_REPORT line."""
-    reported = json.loads(line[2])["state"]["reported"]
-    return reported.get("door"), reported.get("servo_angle")
+
+def report_doc(line):
+    """Parses the JSON document of a LOCAL_REPORT line."""
+    try:
+        return json.loads(line[2])
+    except json.JSONDecodeError:
+        return {"state": {"reported": {}}}
+
+
+def reported(doc):
+    return doc["state"]["reported"]
+
+
+def desired(doc):
+    return doc["state"].get("desired", {})
+
+
+def has(doc, **expected):
+    values = reported(doc)
+    return all(values.get(key) == value for key, value in expected.items())
 
 
 class Checker:
@@ -106,162 +159,375 @@ class Checker:
         self.results.append((case, requirement, verdict, detail))
         print(f"{case} [{requirement}] {verdict}: {detail}", flush=True)
 
-    def command(self, case, requirement, version, door, angle):
-        """A valid delta must move the servo and be confirmed."""
+    def rejected(self, case, requirement, text, expected_event,
+                 forbidden=("ACTUATOR_START", "LIGHT_APPLIED")):
+        """An unusable delta must be logged and must not move anything."""
         dev = self.device
         start = dev.mark()
-        dev.send(json.dumps({"version": version, "state": {"door": door}}))
-        began = dev.wait_for(start, "ACTUATOR_START", RESPONSE_TIMEOUT_S)
-        done = dev.wait_for(start, "ACTUATOR_DONE", RESPONSE_TIMEOUT_S)
-        sent = dev.wait_for(
-            start, "LOCAL_REPORT", RESPONSE_TIMEOUT_S,
-            lambda line: report_door(line) == (door, angle),
-        )
-        delta = dev.wait_for(start, "DELTA_RX", RESPONSE_TIMEOUT_S)
-        ok = all((began, done, sent, delta))
-        move = done[0] - began[0] if ok else None
-        confirm = sent[0] - delta[0] if ok else None
-        ok = ok and abs(move - SETTLE_TIME_MS) <= SETTLE_TOLERANCE_MS
-        self.record(
-            case, requirement, ok,
-            f"door={door}: move {move} ms (expected {SETTLE_TIME_MS} +/- "
-            f"{SETTLE_TOLERANCE_MS}), DELTA_RX -> report {confirm} ms, "
-            f"reported angle={angle}",
-        )
-
-    def rejected(self, case, requirement, line, expected_event):
-        """An unusable delta must be logged and must not move the servo."""
-        dev = self.device
-        start = dev.mark()
-        dev.send(line)
+        dev.send_raw(text)
         logged = dev.wait_for(start, expected_event, RESPONSE_TIMEOUT_S)
         time.sleep(QUIET_WINDOW_S)
-        moves = dev.events_since(start, "ACTUATOR_START")
+        moves = [line for event in forbidden
+                 for line in dev.events_since(start, event)]
         self.record(
             case, requirement, logged is not None and not moves,
-            f"sent {line[:60]!r}: {expected_event} "
+            f"sent {text[:60]!r}: {expected_event} "
             f"{'logged' if logged else 'MISSING'} "
-            f"({logged[2][:50] if logged else ''}), servo moves={len(moves)}",
+            f"({logged[2][:60] if logged else ''}), moves={len(moves)}",
+        )
+
+    def boot(self, case, keys):
+        """Reset, then the first report: event=boot, seq=1 and every key."""
+        dev = self.device
+        dev.reset()
+        ready = dev.wait_for(0, "LOCAL_TEST_MODE", BOOT_TIMEOUT_S)
+        first = dev.wait_for(0, "LOCAL_REPORT", BOOT_TIMEOUT_S)
+        doc = report_doc(first) if first else None
+        missing = [key for key in keys + COMMON_KEYS
+                   if doc is None or key not in reported(doc)]
+        ok = (ready is not None and doc is not None and not missing
+              and has(doc, event="boot", origin="boot", seq=1))
+        self.record(case, "RF2/V1", ok,
+                    f"first report event=boot origin=boot seq=1, "
+                    f"missing keys={missing}")
+        return doc
+
+    def common_tail(self, prefix, skip_heartbeat):
+        """Stale versions, broken JSON, seq, report size and heartbeat."""
+        dev = self.device
+        stale = json.dumps({"version": dev.version, "state": {}})
+        self.rejected(f"{prefix}90", "RF12", stale, "STALE_IGNORED")
+        self.rejected(f"{prefix}91", "RF12", '{"version": 99999, "state": {',
+                      "JSON_ERROR")
+        self.rejected(f"{prefix}92", "RF12",
+                      json.dumps({"version": 99999, "foo": 1}), "JSON_ERROR")
+        self.rejected(f"{prefix}93", "RF12", "x" * (MAX_LINE_LENGTH + 40),
+                      "JSON_ERROR")
+
+        reports = dev.events_since(0, "LOCAL_REPORT")
+        seqs = [reported(report_doc(line)).get("seq") for line in reports]
+        consecutive = seqs == list(range(1, len(seqs) + 1))
+        self.record(f"{prefix}94", "V2", consecutive and bool(seqs),
+                    f"{len(seqs)} reports with seq 1..{len(seqs)} without gaps")
+
+        times = [line[0] for line in reports]
+        gaps = [b - a for a, b in zip(times, times[1:])]
+        sizes = [len(line[2]) for line in reports]
+        self.record(
+            f"{prefix}95", "RNF4/V3",
+            bool(gaps) and min(gaps) >= MIN_REPORT_INTERVAL_MS - 5
+            and max(sizes) < PAYLOAD_BUFFER_SIZE,
+            f"minimum gap {min(gaps, default=None)} ms (>= "
+            f"{MIN_REPORT_INTERVAL_MS}), largest report {max(sizes)} bytes "
+            f"(< {PAYLOAD_BUFFER_SIZE})",
+        )
+
+        if skip_heartbeat:
+            return
+        start = dev.mark()
+        print(f"{prefix}96 waiting for the heartbeat (60 s after the last "
+              "report)...", flush=True)
+        beat = dev.wait_for(start, "REPORT_TX", HEARTBEAT_WAIT_S,
+                            lambda line: "event=heartbeat" in line[2])
+        gap = None
+        if beat:
+            before = [line for line in dev.events_since(0, "REPORT_TX")
+                      if line[0] < beat[0]]
+            gap = beat[0] - before[-1][0] if before else None
+        self.record(
+            f"{prefix}96", "RF2/RNF4",
+            gap is not None and abs(gap - HEARTBEAT_MS) <= HEARTBEAT_TOLERANCE_MS,
+            f"heartbeat {gap} ms after the last report (expected "
+            f"{HEARTBEAT_MS} +/- {HEARTBEAT_TOLERANCE_MS})",
         )
 
 
-def run(checker):
+# --------------------------------------------------------------------------
+# Board 1: ventilation
+# --------------------------------------------------------------------------
+
+def set_gas(dev, pct):
+    dev.send_state({"sim_gas_pct": pct})
+
+
+def run_vent(checker, skip_heartbeat):
     dev = checker.device
-    dev.reset()
-    ready = dev.wait_for(0, "LOCAL_TEST_MODE", BOOT_TIMEOUT_S)
-    first = dev.wait_for(0, "LOCAL_REPORT", BOOT_TIMEOUT_S)
+    doc = checker.boot("V01", VENT_KEYS)
     checker.record(
-        "C01", "RF2", ready is not None and first is not None
-        and report_door(first) == ("closed", CLOSED_ANGLE),
-        "boot in local test mode and first report with door=closed angle=0",
+        "V02", "E2", doc is not None and has(doc, warming_up=True, gas_alarm=False),
+        "boot report during warm-up: warming_up=true, gas_alarm=false",
     )
 
-    checker.command("C02", "RF3", 1, "open", OPEN_ANGLE)
-    checker.rejected("C03", "RF12", json.dumps(
-        {"version": 1, "state": {"door": "closed"}}), "STALE_IGNORED")
-    checker.rejected("C04", "RF12", json.dumps(
-        {"version": 0, "state": {"door": "closed"}}), "STALE_IGNORED")
+    # Known starting point: auto, test thresholds, clean air.
+    start = dev.mark()
+    dev.send_state({"mode": "auto", "gas_high_pct": TEST_HIGH_PCT,
+                    "gas_low_pct": TEST_LOW_PCT, "cmd_origin": "voice"})
+    set_gas(dev, 5)
+    ready = dev.wait_report(start, lambda d: has(
+        d, mode="auto", gas_high_pct=TEST_HIGH_PCT, gas_low_pct=TEST_LOW_PCT,
+        warming_up=False, gas_alarm=False, window="closed"))
+    checker.record("V03", "E2/RF14", ready is not None,
+                   f"auto, {TEST_HIGH_PCT}/{TEST_LOW_PCT}, simulated 5 %: "
+                   "warm-up ends, no alarm, window closed")
+
+    # E1 hysteresis, upper border: just below and exactly at the threshold.
+    start = dev.mark()
+    set_gas(dev, TEST_HIGH_PCT - 1)
+    time.sleep(2 * GAS_WINDOW_MS / 1000)
+    early = dev.events_since(start, "GAS_ALARM_ON")
+    checker.record("V04", "E1", not early,
+                   f"gas {TEST_HIGH_PCT - 1} % (< high): no alarm")
 
     start = dev.mark()
-    dev.send(json.dumps({"version": 2, "state": {"door": "open"}}))
-    sent = dev.wait_for(start, "LOCAL_REPORT", RESPONSE_TIMEOUT_S)
-    moves = dev.events_since(start, "ACTUATOR_START")
+    set_gas(dev, TEST_HIGH_PCT)
+    alarm = dev.wait_for(start, "GAS_ALARM_ON", RESPONSE_TIMEOUT_S)
+    done = dev.wait_for(start, "ACTUATOR_DONE", RESPONSE_TIMEOUT_S,
+                        lambda line: "window=open" in line[2])
+    rep = dev.wait_report(start, lambda d: has(
+        d, event="gas_alarm_on", origin="edge", gas_alarm=True))
+    rep_win = dev.wait_report(start, lambda d: has(
+        d, event="window_changed", origin="edge", window="open",
+        servo_angle=OPEN_ANGLE))
+    edge_ms = done[0] - alarm[0] if alarm and done else None
     checker.record(
-        "C05", "RF3", sent is not None and not moves
-        and report_door(sent) == ("open", OPEN_ANGLE),
-        "same position again: no movement, report sent to clear the delta",
+        "V05", "E1/RF12", all((alarm, done, rep, rep_win)),
+        f"gas {TEST_HIGH_PCT} % (= high): GAS_ALARM_ON -> ACTUATOR_DONE "
+        f"{edge_ms} ms; reports gas_alarm_on and window_changed, origin=edge",
     )
 
-    checker.rejected("C06", "RF12", json.dumps(
-        {"version": 3, "state": {"door": "half"}}), "INVALID_VALUE")
-    checker.rejected("C07", "RF12", json.dumps(
-        {"version": 4, "state": {"door": 1}}), "INVALID_VALUE")
-    checker.rejected("C08", "RF12", json.dumps(
-        {"version": 5, "state": {"door": "OPEN"}}), "INVALID_VALUE")
-    checker.rejected("C09", "RF12", '{"version": 6, "state": {"door": ',
-                     "JSON_ERROR")
-    checker.rejected("C10", "RF12", json.dumps({"version": 7, "foo": 1}),
-                     "JSON_ERROR")
-    checker.rejected("C11", "RF12", "x" * (MAX_LINE_LENGTH + 40), "JSON_ERROR")
+    # E1 hysteresis, lower border.
+    start = dev.mark()
+    set_gas(dev, TEST_LOW_PCT + 1)
+    time.sleep(2 * GAS_WINDOW_MS / 1000)
+    early = dev.events_since(start, "GAS_ALARM_OFF")
+    checker.record("V06", "E1", not early,
+                   f"gas {TEST_LOW_PCT + 1} % (inside the band): alarm stays on")
 
     start = dev.mark()
-    dev.send(json.dumps({"version": 8, "state": {"presence": True}}))
+    set_gas(dev, TEST_LOW_PCT)
+    off = dev.wait_for(start, "GAS_ALARM_OFF", RESPONSE_TIMEOUT_S)
+    closed = dev.wait_report(start, lambda d: has(
+        d, window="closed", gas_alarm=False, origin="edge"))
+    checker.record("V07", "E1", off is not None and closed is not None,
+                   f"gas {TEST_LOW_PCT} % (= low): alarm off, window closes "
+                   "(origin=edge)")
+
+    # Voice command in auto: rejected and removed from desired.
+    start = dev.mark()
+    dev.send_state({"window": "open", "cmd_origin": "voice"})
+    rejected = dev.wait_for(start, "COMMAND_REJECTED", RESPONSE_TIMEOUT_S,
+                            lambda line: "reason=auto_mode" in line[2])
+    cleaned = dev.wait_report(start, lambda d: "window" in desired(d)
+                              and desired(d)["window"] is None)
     time.sleep(QUIET_WINDOW_S)
     moves = dev.events_since(start, "ACTUATOR_START")
-    errors = dev.events_since(start, "INVALID_VALUE")
-    checker.record(
-        "C12", "RF12", not moves and not errors,
-        "delta without the door attribute is ignored by the actuator",
-    )
+    checker.record("V08", "5.6", rejected is not None and cleaned is not None
+                   and not moves,
+                   "window=open in auto: COMMAND_REJECTED auto_mode, no move, "
+                   "desired.window=null")
 
-    checker.command("C13", "RF3", 9, "closed", CLOSED_ANGLE)
-
+    # Manual mode by voice.
     start = dev.mark()
-    dev.send(json.dumps({"version": 10, "state": {"door": "open"}}))
-    time.sleep(0.15)  # Reverse while the servo is still moving.
-    dev.send(json.dumps({"version": 11, "state": {"door": "closed"}}))
-    final = dev.wait_for(
-        start, "LOCAL_REPORT", RESPONSE_TIMEOUT_S,
-        lambda line: report_door(line) == ("closed", CLOSED_ANGLE),
-    )
-    opened = [
-        line for line in dev.events_since(start, "LOCAL_REPORT")
-        if report_door(line)[0] == "open"
-    ]
-    checker.record(
-        "C14", "RF3", final is not None and not opened,
-        "order reversed during the move: ends closed and never reports open",
-    )
+    dev.send_state({"mode": "manual", "cmd_origin": "voice"})
+    applied = dev.wait_for(start, "MODE_APPLIED", RESPONSE_TIMEOUT_S,
+                           lambda line: "mode=manual origin=voice" in line[2])
+    rep = dev.wait_report(start, lambda d: has(
+        d, event="mode_changed", mode="manual", origin="voice")
+        and desired(d).get("cmd_origin", 0) is None)
+    checker.record("V09", "RF14", applied is not None and rep is not None,
+                   "mode=manual by voice: MODE_APPLIED, mode_changed, "
+                   "desired.cmd_origin=null")
 
+    # Manual: voice opens and closes the window.
+    for case, target, angle in (("V10", "open", OPEN_ANGLE),
+                                ("V11", "closed", CLOSED_ANGLE)):
+        start = dev.mark()
+        dev.send_state({"window": target, "cmd_origin": "voice"})
+        began = dev.wait_for(start, "ACTUATOR_START", RESPONSE_TIMEOUT_S)
+        done = dev.wait_for(start, "ACTUATOR_DONE", RESPONSE_TIMEOUT_S)
+        rep = dev.wait_report(start, lambda d, t=target, a=angle: has(
+            d, event="window_changed", window=t, servo_angle=a, origin="voice")
+            and desired(d).get("window", 0) is None)
+        move = done[0] - began[0] if began and done else None
+        ok = (rep is not None and move is not None
+              and abs(move - SETTLE_TIME_MS) <= SETTLE_TOLERANCE_MS)
+        checker.record(case, "RF3/RF12", ok,
+                       f"manual, window={target}: move {move} ms (expected "
+                       f"{SETTLE_TIME_MS} +/- {SETTLE_TOLERANCE_MS}), report "
+                       "origin=voice, desired.window=null")
+
+    # Manual with alarm: the window does not move by itself...
     start = dev.mark()
-    for version, door in ((12, "open"), (13, "closed"), (14, "open")):
-        dev.send(json.dumps({"version": version, "state": {"door": door}}))
-        time.sleep(0.6)  # Each move ends before the next order.
-    dev.wait_for(start, "LOCAL_REPORT", 4.0,
-                 lambda line: report_door(line) == ("open", OPEN_ANGLE))
+    set_gas(dev, TEST_HIGH_PCT + 10)
+    alarm = dev.wait_for(start, "GAS_ALARM_ON", RESPONSE_TIMEOUT_S)
+    rep = dev.wait_report(start, lambda d: has(
+        d, event="gas_alarm_on", gas_alarm=True, mode="manual",
+        window="closed"))
+    time.sleep(QUIET_WINDOW_S)
+    moves = dev.events_since(start, "ACTUATOR_START")
+    checker.record("V12", "5.5", alarm is not None and rep is not None
+                   and not moves,
+                   "manual + gas: alarm reported, window stays closed")
+
+    # ...and "close the window" is rejected while the alarm is on.
+    dev.send_state({"window": "open", "cmd_origin": "voice"})
     time.sleep(1.5)
-    times = [line[0] for line in dev.events_since(start, "LOCAL_REPORT")]
-    gaps = [b - a for a, b in zip(times, times[1:])]
+    start = dev.mark()
+    dev.send_state({"window": "closed", "cmd_origin": "voice"})
+    rejected = dev.wait_for(start, "COMMAND_REJECTED", RESPONSE_TIMEOUT_S,
+                            lambda line: "reason=gas_alarm" in line[2])
+    time.sleep(QUIET_WINDOW_S)
+    moves = dev.events_since(start, "ACTUATOR_START")
+    checker.record("V13", "5.6", rejected is not None and not moves,
+                   "manual + alarm, window=closed: COMMAND_REJECTED gas_alarm")
+
+    # Cloud rule C1 seen from the board: auto from the Cloud while the window
+    # is closed and the gas is high. Two separate reports, mode first.
+    dev.send_state({"sim_gas_pct": TEST_LOW_PCT - 5})
+    dev.wait_for(dev.mark(), "GAS_ALARM_OFF", RESPONSE_TIMEOUT_S)
+    dev.send_state({"window": "closed", "cmd_origin": "voice"})
+    time.sleep(1.5)
+    set_gas(dev, TEST_HIGH_PCT + 10)
+    dev.wait_for(dev.mark(), "GAS_ALARM_ON", RESPONSE_TIMEOUT_S)
+    time.sleep(1.5)
+    start = dev.mark()
+    dev.send_state({"mode": "auto", "cmd_origin": "cloud"})
+    applied = dev.wait_for(start, "MODE_APPLIED", RESPONSE_TIMEOUT_S,
+                           lambda line: "origin=cloud" in line[2])
+    rep_mode = dev.wait_report(start, lambda d: has(
+        d, event="mode_changed", origin="cloud", mode="auto"))
+    rep_win = dev.wait_report(start, lambda d: has(
+        d, event="window_changed", origin="edge", window="open"),
+        timeout_s=2 * RESPONSE_TIMEOUT_S)
+    checker.record("V14", "C1/E1", all((applied, rep_mode, rep_win)),
+                   "auto from the Cloud with gas high: mode_changed "
+                   "origin=cloud, then window_changed origin=edge (2 reports)")
+
+    # Thresholds by voice: valid, then invalid ones.
+    set_gas(dev, 5)
+    time.sleep(2.5)
+    start = dev.mark()
+    dev.send_state({"gas_high_pct": 40, "gas_low_pct": 25,
+                    "cmd_origin": "voice"})
+    applied = dev.wait_for(start, "THRESHOLDS_APPLIED", RESPONSE_TIMEOUT_S)
+    rep = dev.wait_report(start, lambda d: has(
+        d, event="thresholds_changed", gas_high_pct=40, gas_low_pct=25))
+    checker.record("V15", "RF14/E3", applied is not None and rep is not None,
+                   "thresholds 40/25: THRESHOLDS_APPLIED and thresholds_changed")
+
+    for case, state in (("V16", {"gas_low_pct": 40}),
+                        ("V17", {"gas_high_pct": 100}),
+                        ("V18", {"gas_low_pct": 0}),
+                        ("V19", {"gas_high_pct": "abc"})):
+        dev.version += 1
+        checker.rejected(case, "RF14", json.dumps(
+            {"version": dev.version, "state": state}), "COMMAND_REJECTED")
+
+    dev.version += 1
+    checker.rejected("V20", "RF12", json.dumps(
+        {"version": dev.version, "state": {"mode": "turbo"}}), "INVALID_VALUE")
+    dev.version += 1
+    checker.rejected("V21", "RF12", json.dumps(
+        {"version": dev.version, "state": {"window": "half"}}), "INVALID_VALUE")
+
+    # E3: manual + 40/25 survive a restart.
+    dev.send_state({"mode": "manual", "cmd_origin": "voice"})
+    time.sleep(1.5)
+    dev.reset()
+    loaded = dev.wait_for(0, "SETTINGS_LOADED", BOOT_TIMEOUT_S,
+                          lambda line: "mode=manual gas_high_pct=40 "
+                          "gas_low_pct=25" in line[2])
+    first = dev.wait_report(0, lambda d: has(
+        d, event="boot", mode="manual", gas_high_pct=40, gas_low_pct=25),
+        timeout_s=BOOT_TIMEOUT_S)
+    checker.record("V22", "E3", loaded is not None and first is not None,
+                   "after a restart: SETTINGS_LOADED manual 40/25 and boot "
+                   "report with those values")
+    dev.version = 0
+
+    # Leave the board in its normal state.
+    dev.send_state({"mode": "auto", "gas_high_pct": TEST_HIGH_PCT,
+                    "gas_low_pct": TEST_LOW_PCT, "cmd_origin": "voice",
+                    "sim_gas_pct": 5})
+    time.sleep(1.5)
+    checker.common_tail("V", skip_heartbeat)
+
+
+# --------------------------------------------------------------------------
+# Board 2: lights and entrance
+# --------------------------------------------------------------------------
+
+def run_lights(checker, skip_heartbeat):
+    dev = checker.device
+    doc = checker.boot("L01", LIGHT_KEYS)
     checker.record(
-        "C15", "RNF4", bool(gaps) and min(gaps) >= MIN_REPORT_INTERVAL_MS - 5,
-        f"3 orders 600 ms apart: {len(times)} reports, minimum gap "
-        f"{min(gaps, default=None)} ms (>= {MIN_REPORT_INTERVAL_MS})",
+        "L02", "RF2", doc is not None and has(doc, presence=False)
+        and all(reported(doc).get(f"light_{zone}") in ("on", "off")
+                for zone in ZONES),
+        "boot report: five light_* with on/off and presence=false",
     )
 
-    # Any event report (e.g. the PIR) restarts the heartbeat period, so the
-    # gap is measured from the report just before the heartbeat.
+    for index, zone in enumerate(ZONES, start=3):
+        key = f"light_{zone}"
+        start = dev.mark()
+        dev.send_state({key: "on", "cmd_origin": "voice"})
+        applied = dev.wait_for(start, "LIGHT_APPLIED", RESPONSE_TIMEOUT_S,
+                               lambda line, z=zone: f"zone={z} state=on "
+                               "origin=voice" in line[2])
+        rep = dev.wait_report(start, lambda d, k=key: has(
+            d, event="light_changed", origin="voice", **{k: "on"})
+            and desired(d).get("cmd_origin", 0) is None
+            and k not in desired(d))
+        checker.record(f"L{index:02d}", "RF3/RF12",
+                       applied is not None and rep is not None,
+                       f"{key}=on: LIGHT_APPLIED, light_changed origin=voice, "
+                       "cmd_origin cleared and light kept in desired")
+
     start = dev.mark()
-    print("C16 waiting for the heartbeat (60 s after the last report)...",
-          flush=True)
-    beat = dev.wait_for(
-        start, "REPORT_TX", HEARTBEAT_WAIT_S,
-        lambda line: line[2].startswith("reason=heartbeat"),
-    )
-    gap = None
-    if beat:
-        before = [
-            line for line in dev.events_since(0, "REPORT_TX")
-            if line[0] < beat[0]
-        ]
-        gap = beat[0] - before[-1][0]
-    checker.record(
-        "C16", "RF2/RNF4",
-        gap is not None and abs(gap - HEARTBEAT_MS) <= HEARTBEAT_TOLERANCE_MS,
-        f"heartbeat {gap} ms after the last report (expected {HEARTBEAT_MS} "
-        f"+/- {HEARTBEAT_TOLERANCE_MS})",
-    )
+    dev.send_state({"light_kitchen": "on"})
+    confirm = dev.wait_report(start, lambda d: has(d, light_kitchen="on"))
+    time.sleep(QUIET_WINDOW_S)
+    applied = dev.events_since(start, "LIGHT_APPLIED")
+    checker.record("L08", "RF3", confirm is not None and not applied,
+                   "light already on: no change, report sent to clear the delta")
+
+    start = dev.mark()
+    dev.send_state({f"light_{zone}": "off" for zone in ZONES})
+    rep = dev.wait_report(start, lambda d: all(
+        reported(d).get(f"light_{zone}") == "off" for zone in ZONES))
+    time.sleep(QUIET_WINDOW_S)
+    applied = dev.events_since(start, "LIGHT_APPLIED")
+    reports = dev.events_since(start, "LOCAL_REPORT")
+    checker.record("L09", "RF3/RNF4",
+                   rep is not None and len(applied) == len(ZONES)
+                   and len(reports) == 1,
+                   f"all lights off in one delta: {len(applied)} LIGHT_APPLIED, "
+                   f"{len(reports)} report (expected 5 and 1)")
+
+    for case, value in (("L10", "ON"), ("L11", 1), ("L12", "half")):
+        dev.version += 1
+        checker.rejected(case, "RF12", json.dumps(
+            {"version": dev.version, "state": {"light_living": value}}),
+            "INVALID_VALUE")
+
+    checker.common_tail("L", skip_heartbeat)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--board", choices=("vent", "lights"), required=True)
     parser.add_argument("--port", default="COM3")
     parser.add_argument("--log", default="B02_ESP32.log")
+    parser.add_argument("--skip-heartbeat", action="store_true")
     arguments = parser.parse_args()
 
     device = Device(arguments.port, arguments.log)
     checker = Checker(device)
     try:
-        run(checker)
+        if arguments.board == "vent":
+            run_vent(checker, arguments.skip_heartbeat)
+        else:
+            run_lights(checker, arguments.skip_heartbeat)
     finally:
         device.port.close()
         device.log.close()

@@ -1,11 +1,10 @@
 /**
  * @file WindowActuator.cpp
- * @brief Window servo: command validation, timed move and confirmation.
+ * @brief Window servo: timed move and confirmation.
  */
 #include "WindowActuator.h"
 
 #include <Arduino.h>
-#include <string.h>
 
 #include "EventLog.h"
 
@@ -33,38 +32,6 @@ void WindowActuator::update(uint32_t nowMs) {
 void WindowActuator::fillReported(JsonObject reported) const {
   reported[config::shadow_doc::KEY_WINDOW] = positionName(position_);
   reported[config::shadow_doc::KEY_SERVO_ANGLE] = positionAngle(position_);
-}
-
-void WindowActuator::applyDesired(JsonObjectConst desired,
-                                  DesiredSource source) {
-  JsonVariantConst value = desired[config::shadow_doc::KEY_WINDOW];
-  if (value.isNull()) {
-    return;
-  }
-
-  const char* requested = value.as<const char*>();
-  Position target;
-  if (requested != nullptr &&
-      strcmp(requested, config::shadow_doc::WINDOW_OPEN) == 0) {
-    target = Position::kOpen;
-  } else if (requested != nullptr &&
-             strcmp(requested, config::shadow_doc::WINDOW_CLOSED) == 0) {
-    target = Position::kClosed;
-  } else {
-    EventLog::recordf("INVALID_VALUE", "window=%s",
-                      requested != nullptr ? requested : "<not a string>");
-    return;
-  }
-
-  // The command is consumed now: the next report deletes it from desired.
-  markDesiredConsumed(config::shadow_doc::KEY_WINDOW);
-  markDesiredConsumed(config::report_doc::KEY_CMD_ORIGIN);
-
-  const bool moved =
-      moveTo(target == Position::kOpen, commandOrigin(desired, source));
-  if (!moved && !moving_) {
-    requestConfirmation();  // Nothing to move; the report clears the delta.
-  }
 }
 
 bool WindowActuator::moveTo(bool open, const char* origin) {

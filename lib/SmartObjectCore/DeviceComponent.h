@@ -8,20 +8,9 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "ReportQueue.h"
+#include "ReportTypes.h"
 #include "config_common.h"
-
-/** Where a desired state comes from, used to resolve the command origin. */
-enum class DesiredSource {
-  kDelta,  ///< /update/delta: a new command while connected
-  kSync,   ///< /get/accepted: pending desired state after (re)connecting
-};
-
-/** A component's reason to publish a report. */
-struct ReportRequest {
-  const char* event;  ///< Report event name, e.g. "window_changed"
-  uint8_t priority;   ///< Higher wins inside the minimum report interval
-  const char* origin; ///< Who caused the change, or nullptr to keep the last one
-};
 
 /**
  * @brief Common interface of every sensor and actuator of the smart object.
@@ -57,9 +46,9 @@ class DeviceComponent {
   }
 
   /**
-   * Takes the pending report request, if any.
+   * Takes one pending report request (highest priority first). Call it
+   * until it returns false to collect all of them.
    * @param[out] request Filled when the method returns true.
-   * @return true once for each requested report.
    */
   bool consumeReportRequest(ReportRequest& request);
 
@@ -71,8 +60,8 @@ class DeviceComponent {
 
  protected:
   /**
-   * Asks the reporter to publish soon. When several requests arrive before
-   * the report, the one with the highest priority is kept.
+   * Asks the reporter to publish soon. Distinct events are queued and
+   * published one per report interval, highest priority first.
    * @param origin Who caused the change; nullptr keeps the last origin.
    */
   void requestReport(const char* event, uint8_t priority,
@@ -96,8 +85,7 @@ class DeviceComponent {
                                    DesiredSource source);
 
  private:
-  bool reportRequested_ = false;
-  ReportRequest request_ = {nullptr, 0, nullptr};
+  ReportQueue requests_;
   const char* consumedKeys_[config::report_doc::MAX_CONSUMED_KEYS] = {};
   size_t consumedCount_ = 0;
 };

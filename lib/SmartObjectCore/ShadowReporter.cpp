@@ -25,15 +25,19 @@ void ShadowReporter::update(uint32_t nowMs) {
   if (elapsedMs < config::report::MIN_REPORT_INTERVAL_MS) {
     return;
   }
-  if (!reportPending_ && elapsedMs < config::report::HEARTBEAT_PERIOD_MS) {
+  const bool due = reportPending_ || !events_.isEmpty() ||
+                   elapsedMs >= config::report::HEARTBEAT_PERIOD_MS;
+  if (!due) {
     return;
   }
 
   // Attempted even while offline: seq must advance (contract V2) and the
-  // log shows which reports were lost. A failed report is not retried; the
-  // resync after reconnecting publishes the full state again.
-  publish(nowMs);
-  resetPending();
+  // log shows which reports were lost. Failed reports are not retried (no
+  // offline buffer); the resync after reconnecting publishes the full state.
+  if (!publish(nowMs)) {
+    events_.clear();
+  }
+  reportPending_ = false;
 }
 
 void ShadowReporter::requestReport() {
@@ -43,21 +47,24 @@ void ShadowReporter::requestReport() {
 void ShadowReporter::collectComponentRequests() {
   ReportRequest request;
   for (size_t i = 0; i < componentCount_; ++i) {
-    if (components_[i]->consumeReportRequest(request)) {
-      mergeRequest(request);
+    while (components_[i]->consumeReportRequest(request)) {
+      events_.add(request);
     }
   }
 }
 
-void ShadowReporter::mergeRequest(const ReportRequest& request) {
-  if (pendingEvent_ == nullptr || request.priority > pendingPriority_) {
-    pendingEvent_ = request.event;
-    pendingPriority_ = request.priority;
+const char* ShadowReporter::nextEvent() {
+  if (!bootReported_) {
+    return doc::EVENT_BOOT;  // Pending events follow in the next reports.
+  }
+  ReportRequest request;
+  if (!events_.popHighest(request)) {
+    return doc::EVENT_HEARTBEAT;
   }
   if (request.origin != nullptr) {
     lastOrigin_ = request.origin;
   }
-  reportPending_ = true;
+  return request.event;
 }
 
 bool ShadowReporter::publish(uint32_t nowMs) {
@@ -65,9 +72,7 @@ bool ShadowReporter::publish(uint32_t nowMs) {
   lastReportMs_ = nowMs;
   ++seq_;
 
-  const char* event = !bootReported_          ? doc::EVENT_BOOT
-                      : pendingEvent_ != nullptr ? pendingEvent_
-                                                 : doc::EVENT_HEARTBEAT;
+  const char* event = nextEvent();
   int64_t deviceTs = doc::DEVICE_TS_UNKNOWN;
   TimeSync::nowUtcMs(deviceTs);  // Leaves 0 while the clock is not set.
 
@@ -111,10 +116,4 @@ bool ShadowReporter::publish(uint32_t nowMs) {
     components_[i]->clearConsumedDesired();  // The Shadow deletes them now.
   }
   return true;
-}
-
-void ShadowReporter::resetPending() {
-  reportPending_ = false;
-  pendingEvent_ = nullptr;
-  pendingPriority_ = doc::PRIORITY_HEARTBEAT;
 }

@@ -10,12 +10,12 @@
 #include "config_vent.h"
 
 /**
- * @brief Servo-driven window controlled through the Shadow "window" attribute.
+ * @brief Servo-driven window; reports "window" and "servo_angle".
  *
+ * It does not read the Shadow itself: VentilationController decides who may
+ * move it (voice in manual mode, rule E1 in auto mode) and calls moveTo().
  * The reported position changes only after the servo has had time to finish
  * its movement, so the Shadow never confirms a move that is still in progress.
- * An applied command clears desired.window and desired.cmd_origin in the next
- * report, so a stale desired value can never move the window again.
  */
 class WindowActuator : public DeviceComponent {
  public:
@@ -27,9 +27,6 @@ class WindowActuator : public DeviceComponent {
 
   /** Adds "window" and "servo_angle". */
   void fillReported(JsonObject reported) const override;
-
-  /** Validates and applies the "window" attribute, when present. */
-  void applyDesired(JsonObjectConst desired, DesiredSource source) override;
 
   /**
    * Starts moving the window, used by commands and by the automatic logic.

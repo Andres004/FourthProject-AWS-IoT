@@ -11,12 +11,7 @@
 namespace doc = config::report_doc;
 
 bool DeviceComponent::consumeReportRequest(ReportRequest& request) {
-  if (!reportRequested_) {
-    return false;
-  }
-  request = request_;
-  reportRequested_ = false;
-  return true;
+  return requests_.popHighest(request);
 }
 
 void DeviceComponent::fillConsumedDesired(JsonObject desired) const {
@@ -27,16 +22,7 @@ void DeviceComponent::fillConsumedDesired(JsonObject desired) const {
 
 void DeviceComponent::requestReport(const char* event, uint8_t priority,
                                     const char* origin) {
-  if (!reportRequested_ || priority > request_.priority) {
-    request_.event = event;
-    request_.priority = priority;
-  }
-  if (origin != nullptr) {
-    request_.origin = origin;  // The latest cause of a change always wins.
-  } else if (!reportRequested_) {
-    request_.origin = nullptr;
-  }
-  reportRequested_ = true;
+  requests_.add(ReportRequest{event, priority, origin});
 }
 
 void DeviceComponent::requestConfirmation() {

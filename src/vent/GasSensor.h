@@ -33,6 +33,11 @@ class GasSensor : public DeviceComponent {
   /** Adds "gas_pct", "gas_mv" and "warming_up". */
   void fillReported(JsonObject reported) const override;
 
+#ifdef LOCAL_TEST_MODE
+  /** Test B02 only: applies "sim_gas_pct" (see config::gas_simulation). */
+  void applyDesired(JsonObjectConst desired, DesiredSource source) override;
+#endif
+
   /** @return Latest averaged index [% of supply], 0 before the first window. */
   float gasPct() const { return gasPct_; }
 
@@ -61,4 +66,6 @@ class GasSensor : public DeviceComponent {
   uint32_t aoMv_ = 0;
   float gasPct_ = 0.0f;
   float lastRequestedPct_ = 0.0f;  // gas_pct of the last gas_changed request
+  bool simulated_ = false;         // LOCAL_TEST_MODE: simPct_ replaces the ADC
+  float simPct_ = 0.0f;
 };

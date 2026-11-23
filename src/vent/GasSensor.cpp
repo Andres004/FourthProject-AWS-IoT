@@ -51,21 +51,26 @@ void GasSensor::closeWindow(uint32_t nowMs) {
   const uint32_t pinMv = static_cast<uint32_t>(sumPinMv_ / count_);
   aoMv_ = pinToAoMv(pinMv);
   gasPct_ = aoMvToPct(aoMv_);
+  if (simulated_) {
+    gasPct_ = simPct_;
+    aoMv_ = static_cast<uint32_t>(simPct_ * gas::SUPPLY_MV / gas::PERCENT_SCALE +
+                                  gas::ROUNDING_OFFSET);
+  }
   hasReading_ = true;
 
   EventLog::recordf("GAS_SAMPLE",
                     "pin_mv=%lu ao_mv=%lu gas_pct=%.1f min_mv=%lu max_mv=%lu "
-                    "n=%u warming_up=%d",
+                    "n=%u warming_up=%d simulated=%d",
                     static_cast<unsigned long>(pinMv),
                     static_cast<unsigned long>(aoMv_), gasPct_,
                     static_cast<unsigned long>(pinToAoMv(minPinMv_)),
                     static_cast<unsigned long>(pinToAoMv(maxPinMv_)), count_,
-                    warmingUp_ ? 1 : 0);
+                    warmingUp_ ? 1 : 0, simulated_ ? 1 : 0);
   resetWindow(nowMs);
 
   namespace ev = config::vent_events;
   if (warmingUp_) {
-    if (nowMs - startMs_ < gas::WARMUP_MS) {
+    if (!simulated_ && nowMs - startMs_ < gas::WARMUP_MS) {
       return;  // Readings during warm-up are not reliable: no gas_changed.
     }
     warmingUp_ = false;
@@ -80,6 +85,21 @@ void GasSensor::closeWindow(uint32_t nowMs) {
     requestReport(ev::GAS_CHANGED, ev::PRIORITY_GAS_CHANGED);
   }
 }
+
+#ifdef LOCAL_TEST_MODE
+void GasSensor::applyDesired(JsonObjectConst desired, DesiredSource source) {
+  (void)source;
+  JsonVariantConst value = desired[config::gas_simulation::KEY_SIM_GAS_PCT];
+  if (value.isNull()) {
+    return;
+  }
+  const float pct = value.as<float>();
+  simulated_ = pct >= 0.0f;
+  simPct_ = pct > gas::PERCENT_MAX ? gas::PERCENT_MAX : pct;
+  EventLog::recordf("GAS_SIMULATION", "active=%d gas_pct=%.1f",
+                    simulated_ ? 1 : 0, simPct_);
+}
+#endif
 
 void GasSensor::resetWindow(uint32_t nowMs) {
   windowStartMs_ = nowMs;
