@@ -3,34 +3,14 @@
     "languageModel": {
       "invocationName": "monoambiente inteligente",
       "intents": [
-        {
-          "name": "AMAZON.CancelIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.HelpIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.StopIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.NavigateHomeIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.FallbackIntent",
-          "samples": []
-        },
+        { "name": "AMAZON.CancelIntent", "samples": [] },
+        { "name": "AMAZON.HelpIntent", "samples": [] },
+        { "name": "AMAZON.StopIntent", "samples": [] },
+        { "name": "AMAZON.NavigateHomeIntent", "samples": [] },
+        { "name": "AMAZON.FallbackIntent", "samples": [] },
         {
           "name": "LinkThing",
-          "slots": [
-            {
-              "name": "code",
-              "type": "AMAZON.NUMBER"
-            }
-          ],
+          "slots": [{ "name": "code", "type": "AMAZON.NUMBER" }],
           "samples": [
             "vincula mi casa con el código {code}",
             "vincular mi casa con el código {code}",
@@ -41,10 +21,114 @@
         {
           "name": "UnlinkThing",
           "slots": [],
+          "samples": ["desvincula mi casa", "elimina la vinculación", "desvincular mi casa"]
+        },
+        {
+          "name": "TurnOnLight",
+          "slots": [{ "name": "zone", "type": "ZoneType" }],
           "samples": [
-            "desvincula mi casa",
-            "elimina la vinculación",
-            "desvincular mi casa"
+            "enciende la luz de la {zone}",
+            "enciende la luz del {zone}",
+            "enciende la luz de {zone}",
+            "prende la luz de la {zone}",
+            "prende la luz del {zone}",
+            "enciende {zone} las luces",
+            "prende {zone} las luces"
+          ]
+        },
+        {
+          "name": "TurnOffLight",
+          "slots": [{ "name": "zone", "type": "ZoneType" }],
+          "samples": [
+            "apaga la luz de la {zone}",
+            "apaga la luz del {zone}",
+            "apaga la luz de {zone}",
+            "apaga {zone} las luces"
+          ]
+        },
+        {
+          "name": "GetLightState",
+          "slots": [{ "name": "zone", "type": "ZoneType" }],
+          "samples": [
+            "está encendida la luz de la {zone}",
+            "está encendida la luz del {zone}",
+            "cómo está la luz de la {zone}",
+            "cómo está la luz del {zone}",
+            "qué luces están encendidas",
+            "cómo están las luces"
+          ]
+        },
+        {
+          "name": "OpenWindow",
+          "slots": [],
+          "samples": ["abre la ventana", "abrir la ventana", "abre la ventana de la cocina"]
+        },
+        {
+          "name": "CloseWindow",
+          "slots": [],
+          "samples": ["cierra la ventana", "cerrar la ventana", "cierra la ventana de la cocina"]
+        },
+        {
+          "name": "GetWindowState",
+          "slots": [],
+          "samples": [
+            "cómo está la ventana",
+            "está abierta la ventana",
+            "está cerrada la ventana",
+            "estado de la ventana"
+          ]
+        },
+        {
+          "name": "GetGasLevel",
+          "slots": [],
+          "samples": [
+            "hay gas en la cocina",
+            "hay gas",
+            "hay humo en la cocina",
+            "cómo está el aire",
+            "cuál es el nivel de gas"
+          ]
+        },
+        {
+          "name": "SetMode",
+          "slots": [{ "name": "mode", "type": "ModeType" }],
+          "samples": [
+            "activa el modo {mode}",
+            "pon el modo {mode}",
+            "pon la ventilación en {mode}",
+            "pon la ventilación en modo {mode}",
+            "cambia al modo {mode}"
+          ]
+        },
+        {
+          "name": "GetMode",
+          "slots": [],
+          "samples": [
+            "en qué modo está la ventilación",
+            "qué modo tiene la ventilación",
+            "en qué modo está la ventana"
+          ]
+        },
+        {
+          "name": "SetThreshold",
+          "slots": [
+            { "name": "level", "type": "LevelType" },
+            { "name": "value", "type": "AMAZON.NUMBER" }
+          ],
+          "samples": [
+            "cambia el umbral {level} a {value} por ciento",
+            "cambia el umbral {level} a {value}",
+            "pon el umbral {level} en {value} por ciento",
+            "pon el umbral {level} en {value}"
+          ]
+        },
+        {
+          "name": "GetThresholds",
+          "slots": [],
+          "samples": [
+            "cuáles son los umbrales de gas",
+            "cuáles son los umbrales",
+            "qué umbrales tiene el gas"
           ]
         },
         {
@@ -54,39 +138,37 @@
             "hay alguien en la puerta",
             "hay alguien en la entrada",
             "detectas a alguien en la entrada",
-            "hay presencia en la puerta"
-          ]
-        },
-        {
-          "name": "OpenDoor",
-          "slots": [],
-          "samples": [
-            "abre la puerta",
-            "abrir la puerta",
-            "abre la puerta principal"
-          ]
-        },
-        {
-          "name": "CloseDoor",
-          "slots": [],
-          "samples": [
-            "cierra la puerta",
-            "cerrar la puerta",
-            "cierra la puerta principal"
-          ]
-        },
-        {
-          "name": "GetDoorState",
-          "slots": [],
-          "samples": [
-            "la puerta está abierta",
-            "la puerta está cerrada",
-            "cuál es el estado de la puerta",
-            "cómo está la puerta"
+            "hay presencia en la entrada"
           ]
         }
       ],
-      "types": []
+      "types": [
+        {
+          "name": "ZoneType",
+          "values": [
+            { "id": "kitchen", "name": { "value": "cocina" } },
+            { "id": "living", "name": { "value": "sala", "synonyms": ["sala de estar", "living"] } },
+            { "id": "dining", "name": { "value": "comedor" } },
+            { "id": "bathroom", "name": { "value": "baño" } },
+            { "id": "bedroom", "name": { "value": "habitación", "synonyms": ["dormitorio", "cuarto"] } },
+            { "id": "all", "name": { "value": "todas", "synonyms": ["toda la casa", "todas las luces"] } }
+          ]
+        },
+        {
+          "name": "ModeType",
+          "values": [
+            { "id": "auto", "name": { "value": "automático", "synonyms": ["auto"] } },
+            { "id": "manual", "name": { "value": "manual" } }
+          ]
+        },
+        {
+          "name": "LevelType",
+          "values": [
+            { "id": "high", "name": { "value": "alto", "synonyms": ["de alarma"] } },
+            { "id": "low", "name": { "value": "bajo", "synonyms": ["de cierre"] } }
+          ]
+        }
+      ]
     }
   }
 }

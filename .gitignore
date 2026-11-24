@@ -17,6 +17,7 @@ certificados*/
 
 # Lambda build output
 lambda/package/
+lambda/*/package/
 *.zip
 
 # Python caches
