@@ -1,0 +1,109 @@
+
+== FILE A08_vent_ESP32.log ==
+   board=vent lines=4147 span=66.0 min boots=1 reset_reasons=['power_on'] utc_clock=yes
+   error/warning lines: 0
+
+== RNF1 stability (A11) ==
+RNF1 longest run without restart: 66.0 min (>= 30) -> PASS
+RNF1 restarts inside the log: 0 (0) -> PASS
+   HEALTH lines=65 heap first/last=197472/197304 rssi -67..-17 dBm
+RNF1 longest loop iteration: 2913 ms (<= 500) -> FAIL
+RNF1 WiFi + MQTT drops: 0 (0) -> PASS
+RNF1 free heap loss: 168 bytes (<= 4096) -> PASS
+
+== RNF4 reporting, V1 complete reports, V2 seq ==
+   reports=96 failed=0 events={'boot': 1, 'heartbeat': 63, 'gas_changed': 18, 'mode_changed': 2, 'window_changed': 4, 'thresholds_changed': 2, 'gas_alarm_on': 3, 'gas_alarm_off': 3}
+   origins={'boot': 28, 'voice': 24, 'cloud': 1, 'edge': 43}
+V1 reports missing an attribute: 0 (0) -> PASS
+V3 largest report: 293 bytes (< 1024) -> PASS
+   gap between published reports ms: n=95 min=988 median=60000 mean=41213 p95=60001 max=60010
+RNF4 longest gap while connected: 60010 ms (<= 61500) -> PASS
+RNF4 shortest gap: 988 ms (>= 995) -> FAIL
+V2 segment from line 3: seq 1..96, published 96, failed 0, never attempted 0 (0) -> PASS
+   published: 87/h -> 2095/day -> 62842/month (input for B04)
+
+== RNF3 voice commands on the board (A02 lights / A03 window) ==
+   line 1653 MODE_APPLIED mode=manual origin=voice: applied +18 ms, reported +36 ms
+   line 1666 ACTUATOR_DONE window=open angle=90: applied +410 ms, reported +416 ms
+   line 1679 ACTUATOR_DONE window=closed angle=0: applied +411 ms, reported +417 ms
+   line 1701 THRESHOLDS_APPLIED gas_high_pct=20 gas_low_pct=8 origin=voice: applied +17 ms, reported +34 ms
+   line 1724 THRESHOLDS_APPLIED gas_high_pct=15 gas_low_pct=8 origin=voice: applied +18 ms, reported +36 ms
+   line 1929 MODE_APPLIED mode=auto origin=cloud: applied +18 ms, reported +427 ms
+   DELTA_RX -> ACTUATOR_DONE ms: n=2 min=410 median=410 mean=410 p95=411 max=411
+   DELTA_RX -> report ms: n=2 min=416 median=416 mean=416 p95=417 max=417
+RNF3 ACTUATOR_DONE: 2 commands reported within 1500 ms: 2/2 -> PASS
+
+== E1 / E2 / RNF7 edge response (A05) ==
+   GAS_READY at t=60686 ms (61 s after boot)
+E2 alarms during warm-up: 0 (0) -> PASS
+E1 alarm changes outside the thresholds: 0/6 (0) -> PASS
+   GAS_ALARM_ON -> ACTUATOR_DONE open ms: n=0
+   GAS_ALARM_OFF -> ACTUATOR_DONE closed ms: n=1 min=400 median=400 mean=400 p95=400 max=400
+RNF7 edge response max 400 ms (<= 1000), alarms without window move: 0 -> PASS
+A05 smoke cycles in auto: 0 (>= 10) -> FAIL
+
+== C1 / RNF8 cloud response seen from board 1 (A06) ==
+   line 1873 seq=37: REPORT_TX -> DELTA_RX None ms -> MODE_APPLIED None ms (no change: fewer than the limit)
+   line 1893 seq=43: REPORT_TX -> DELTA_RX None ms -> MODE_APPLIED None ms (no change: fewer than the limit)
+   line 1928 seq=52: REPORT_TX -> DELTA_RX 573 ms -> MODE_APPLIED 591 ms
+   gas_alarm_on -> MODE_APPLIED origin=cloud ms: n=1 min=591 median=591 mean=591 p95=591 max=591
+RNF8 cloud response max 591 ms (<= 5000) -> PASS
+
+== RNF9 offline operation / RNF5 reconnection (A09) ==
+   no WIFI_LOST or MQTT_LOST in this log
+
+== FILE A08_lights_ESP32.log ==
+   board=lights lines=182 span=65.6 min boots=1 reset_reasons=['power_on'] utc_clock=yes
+   error/warning lines: 0
+
+== RNF1 stability (A11) ==
+RNF1 longest run without restart: 65.6 min (>= 30) -> PASS
+RNF1 restarts inside the log: 0 (0) -> PASS
+   HEALTH lines=65 heap first/last=199336/199168 rssi -57..-25 dBm
+RNF1 longest loop iteration: 2213 ms (<= 500) -> FAIL
+RNF1 WiFi + MQTT drops: 0 (0) -> PASS
+RNF1 free heap loss: 168 bytes (<= 4096) -> PASS
+
+== RNF4 reporting, V1 complete reports, V2 seq ==
+   reports=80 failed=0 events={'boot': 1, 'light_changed': 8, 'heartbeat': 67, 'presence_detected': 2, 'presence_cleared': 2}
+   origins={'boot': 26, 'voice': 54}
+V1 reports missing an attribute: 0 (0) -> PASS
+V3 largest report: 256 bytes (< 1024) -> PASS
+   gap between published reports ms: n=79 min=987 median=60000 mean=49750 p95=60001 max=60001
+RNF4 longest gap while connected: 60001 ms (<= 61500) -> PASS
+RNF4 shortest gap: 987 ms (>= 995) -> FAIL
+V2 segment from line 3: seq 1..80, published 80, failed 0, never attempted 0 (0) -> PASS
+   published: 73/h -> 1757/day -> 52706/month (input for B04)
+
+== RNF3 voice commands on the board (A02 lights / A03 window) ==
+   line 65 LIGHT_APPLIED zone=kitchen state=off origin=voice: applied +11 ms, reported +741 ms
+   line 70 LIGHT_APPLIED zone=kitchen state=on origin=voice: applied +10 ms, reported +30 ms
+   line 73 LIGHT_APPLIED zone=living state=on origin=voice: applied +11 ms, reported +28 ms
+   line 76 LIGHT_APPLIED zone=dining state=on origin=voice: applied +11 ms, reported +29 ms
+   line 80 LIGHT_APPLIED zone=bathroom state=on origin=voice: applied +11 ms, reported +29 ms
+   line 83 LIGHT_APPLIED zone=bedroom state=on origin=voice: applied +10 ms, reported +29 ms
+   line 88 LIGHT_APPLIED zone=kitchen state=off origin=voice: applied +41 ms, reported +703 ms
+   DELTA_RX -> LIGHT_APPLIED ms: n=7 min=10 median=11 mean=15 p95=41 max=41
+   DELTA_RX -> report ms: n=7 min=28 median=29 mean=227 p95=741 max=741
+RNF3 LIGHT_APPLIED: 7 commands reported within 1500 ms: 7/7 -> PASS
+
+== RNF2 PIR (A12) ==
+   PRESENCE_DETECTED=2 PRESENCE_CLEARED=2 (compare with the passes counted on video)
+RNF2 PIR_READY at 30029 ms (>= 29500); detections before: 0 (0) -> PASS
+   presence episodes ms: n=2 min=11800 median=12375 mean=12375 p95=12950 max=12950
+RNF2 episodes shorter than the 10000 ms hold: 0 (0) -> PASS
+
+== RNF9 offline operation / RNF5 reconnection (A09) ==
+   no WIFI_LOST or MQTT_LOST in this log
+
+== A08 storage integrity and latency (DynamoDB export) ==
+A08 smartloft-739264-lights: 80 distinct seq stored of 80 (1..80) = 100.00 % (>= 99.0) -> PASS
+     storedTs - deviceTs ms (board NTP vs AWS): n=80 min=265 median=320 mean=351 p95=525 max=642; negative=0
+     storedTs - timestamp ms (AWS clock only): n=80 min=60 median=79 mean=82 p95=110 max=151
+A08 smartloft-739264-lights: storage latency max 642 ms (<= 5000), negative values 0 (0) -> PASS
+A08 smartloft-739264-vent: 96 distinct seq stored of 96 (1..96) = 100.00 % (>= 99.0) -> PASS
+     storedTs - deviceTs ms (board NTP vs AWS): n=96 min=262 median=325 mean=346 p95=490 max=655; negative=0
+     storedTs - timestamp ms (AWS clock only): n=96 min=61 median=80 mean=88 p95=136 max=214
+A08 smartloft-739264-vent: storage latency max 655 ms (<= 5000), negative values 0 (0) -> PASS
+A08 A08_vent_ESP32.log: REPORT_TX seq not in DynamoDB: 0/96 -> PASS
+A08 A08_lights_ESP32.log: REPORT_TX seq not in DynamoDB: 0/80 -> PASS

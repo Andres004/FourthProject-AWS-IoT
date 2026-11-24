@@ -35,8 +35,8 @@ constexpr uint32_t MQTT_RETRY_INTERVAL_MS = 5000;   // Between MQTT attempts [ms
 constexpr uint16_t MQTT_PORT = 8883;                // MQTT over TLS port
 constexpr uint16_t MQTT_BUFFER_SIZE = 2048;         // Largest MQTT packet [bytes]
 constexpr uint16_t MQTT_KEEPALIVE_S = 60;           // MQTT keep-alive [s]
-// 10 s: with a weak signal (-72 dBm) the CONNACK arrived after 5 s and every
-// attempt failed with state -4 (see Informe_P4, defect D-07).
+// 10 s instead of 5 s: more margin for the CONNACK on a slow link. It did not
+// fix the drops at -75 dBm (Informe_P4, defect D-07); a stronger signal did.
 constexpr uint16_t MQTT_SOCKET_TIMEOUT_S = 10;      // MQTT read timeout [s]
 constexpr uint32_t TLS_CONNECT_TIMEOUT_S = 8;       // TCP connect limit [s]
 constexpr uint32_t TLS_HANDSHAKE_TIMEOUT_S = 8;     // TLS handshake limit [s]
