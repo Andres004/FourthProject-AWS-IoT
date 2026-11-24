@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SmartLoft - Actividad en la entrada (mockup)</title>
+<link rel="stylesheet" href="mockup.css">
+<script src="charts.js"></script>
+</head>
+<body class="viz-root">
+<header>
+  <div>
+    <h1>Actividad en la entrada</h1>
+    <p>¿En qué horarios hay gente? ¿Hubo movimiento cuando la casa debería estar vacía?</p>
+  </div>
+  <span class="badge">Mockup RF15 · datos ilustrativos</span>
+</header>
+<div class="filters">
+  <span>Casa <b>739264</b></span><span>Sensor <b>PIR de la entrada</b></span><span>Periodo <b>últimos 7 días</b></span>
+</div>
+<main>
+  <div class="row tiles">
+    <div class="card tile">
+      <div class="label">Detecciones (7 días)</div>
+      <div class="value">87</div>
+      <div class="note">Flancos de subida del PIR</div>
+      <div class="query"><b>P2</b> eventKey = …lights#presence_detected · #ts BETWEEN hoy-7d AND ahora → Count</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Franja con más actividad</div>
+      <div class="value">18–22 h</div>
+      <div class="note">31 de las 87 detecciones</div>
+      <div class="query">Derivado del mapa de calor</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Detecciones de madrugada</div>
+      <div class="value">2</div>
+      <div class="alert">Sáb 03:12 y Mié 04:47</div>
+      <div class="query"><b>P2</b> presence_detected · filtro hora local 00–06</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Última detección</div>
+      <div class="value">hace 12 min</div>
+      <div class="note">También por voz: «hay alguien en la entrada»</div>
+      <div class="query"><b>P3</b> eventKey = …#presence_detected · ScanIndexForward = false · Limit = 1</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Detecciones por día y franja horaria</h2>
+    <p class="sub">Cantidad de eventos presence_detected (más oscuro = más detecciones)</p>
+    <div id="heat"></div>
+    <div class="query"><b>P2</b> event-index · eventKey = smartloft-739264-lights#presence_detected · #ts BETWEEN :d0 AND :d7 → agrupar por día y franja de 4 horas (hora local de Bolivia, UTC-4)</div>
+  </div>
+
+  <div class="decision"><b>Decisión que apoya:</b> la casa tiene actividad sobre todo de 18 a 22 h. Las detecciones de madrugada (00–06 h) en días en que nadie debería estar merecen revisión: visita no esperada o falso positivo del PIR.</div>
+</main>
+<footer>Fuente: tabla smartloft-data (DynamoDB). Los números son ilustrativos; el reporte no se implementa en esta práctica.</footer>
+<script>
+heatmap(document.getElementById("heat"), {
+  rows: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+  cols: ["00–06", "06–10", "10–14", "14–18", "18–22", "22–24"],
+  data: [
+    [0, 3, 1, 2, 5, 1],
+    [0, 3, 2, 1, 4, 2],
+    [1, 2, 1, 2, 5, 1],
+    [0, 3, 2, 1, 4, 1],
+    [0, 2, 1, 2, 4, 2],
+    [1, 1, 3, 3, 5, 3],
+    [0, 1, 4, 3, 4, 1],
+  ],
+  scale: ["var(--surface-0)", "#dbe8f8", "#a9c9f0", "#6ea4e4", "#2a78d6", "#1a4f93"],
+});
+</script>
+</body>
+</html>

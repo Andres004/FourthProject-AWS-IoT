@@ -1,0 +1,82 @@
+/* Shared style of the SmartLoft report mockups (RF15). Light mode only:
+   the mockups are exported to PNG for the report. */
+.viz-root {
+  color-scheme: light;
+  --surface-0: #f3f2ef;
+  --surface-1: #fcfcfb;
+  --border: #e2e0da;
+  --grid: #ecebe6;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #7a7973;
+  --series-1: #2a78d6;  /* blue */
+  --series-2: #eb6834;  /* orange */
+  --series-3: #1baf7a;  /* aqua */
+  --seq-1: #dbe8f8;     /* sequential blue, light -> dark */
+  --seq-2: #a9c9f0;
+  --seq-3: #6ea4e4;
+  --seq-4: #2a78d6;
+  --seq-5: #1a4f93;
+  --critical: #c62828;
+  --query-bg: #f6f4ee;
+  --query-border: #d9d4c4;
+}
+* { box-sizing: border-box; }
+body.viz-root {
+  margin: 0;
+  width: 1200px;
+  background: var(--surface-0);
+  font: 15px/1.45 "Segoe UI", system-ui, sans-serif;
+  color: var(--text-primary);
+}
+header {
+  padding: 22px 32px 14px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+header h1 { margin: 0; font-size: 24px; }
+header p { margin: 2px 0 0; color: var(--text-secondary); }
+.badge {
+  font-size: 12px; color: var(--text-secondary);
+  border: 1px solid var(--border); border-radius: 999px; padding: 3px 10px;
+  background: var(--surface-1);
+}
+.filters { display: flex; gap: 8px; padding: 0 32px 14px; }
+.filters span {
+  background: var(--surface-1); border: 1px solid var(--border);
+  border-radius: 8px; padding: 5px 12px; font-size: 13px; color: var(--text-secondary);
+}
+.filters span b { color: var(--text-primary); font-weight: 600; }
+main { padding: 0 32px 28px; display: grid; gap: 16px; }
+.row { display: grid; gap: 16px; }
+.row.tiles { grid-template-columns: repeat(4, 1fr); }
+.row.two { grid-template-columns: 3fr 2fr; }
+.card {
+  background: var(--surface-1); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px 18px;
+}
+.card h2 { margin: 0 0 2px; font-size: 16px; }
+.card .sub { margin: 0 0 10px; color: var(--text-secondary); font-size: 13px; }
+.tile .label { color: var(--text-secondary); font-size: 13px; }
+.tile .value { font-size: 34px; font-weight: 650; line-height: 1.15; }
+.tile .note { color: var(--text-muted); font-size: 12px; }
+.tile .alert { color: var(--critical); font-size: 12px; font-weight: 600; }
+.query {
+  margin-top: 10px; padding: 7px 10px;
+  background: var(--query-bg); border: 1px dashed var(--query-border); border-radius: 8px;
+  font: 12px/1.4 Consolas, "Cascadia Mono", monospace; color: var(--text-secondary);
+}
+.query b { font-family: "Segoe UI", sans-serif; color: var(--text-primary); }
+.decision {
+  background: #eef4fc; border: 1px solid #c9dcf5; border-radius: 12px;
+  padding: 12px 16px; font-size: 14px;
+}
+.decision b { color: var(--series-1); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; color: var(--text-secondary); font-weight: 600; border-bottom: 1px solid var(--border); padding: 6px 4px; }
+td { border-bottom: 1px solid var(--grid); padding: 6px 4px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.legend { display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; }
+svg text { font-family: "Segoe UI", sans-serif; }
+.axis { fill: var(--text-muted); font-size: 12px; }
+.val { fill: var(--text-primary); font-size: 12px; font-weight: 600; }
+footer { padding: 0 32px 20px; color: var(--text-muted); font-size: 12px; }

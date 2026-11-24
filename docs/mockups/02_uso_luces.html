@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SmartLoft - Uso de luces por zona (mockup)</title>
+<link rel="stylesheet" href="mockup.css">
+<script src="charts.js"></script>
+</head>
+<body class="viz-root">
+<header>
+  <div>
+    <h1>Uso de luces por zona</h1>
+    <p>¿Qué zona queda encendida sin uso? ¿Dónde se puede ahorrar?</p>
+  </div>
+  <span class="badge">Mockup RF15 · datos ilustrativos</span>
+</header>
+<div class="filters">
+  <span>Casa <b>739264</b></span><span>Thing <b>smartloft-739264-lights</b></span><span>Periodo <b>últimos 7 días</b></span>
+</div>
+<main>
+  <div class="row tiles">
+    <div class="card tile">
+      <div class="label">Horas de luz (7 días)</div>
+      <div class="value">61 h</div>
+      <div class="note">Suma de las 5 zonas</div>
+      <div class="query"><b>P2</b> eventKey = …lights#light_changed · suma de intervalos on → off</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Zona más usada</div>
+      <div class="value">Sala</div>
+      <div class="note">3,1 h por día en promedio</div>
+      <div class="query">Derivado del gráfico de abajo</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Luces encendidas de madrugada</div>
+      <div class="value">4</div>
+      <div class="alert">Baño: 3 noches entre 01:00 y 06:00</div>
+      <div class="query"><b>P2</b> light_changed con lightBathroom = on · filtro hora local 01–06</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Órdenes por voz</div>
+      <div class="value">38</div>
+      <div class="note">Todas las luces cambian solo por voz</div>
+      <div class="query"><b>P2</b> eventKey = …lights#light_changed · origin = voice → Count</div>
+    </div>
+  </div>
+
+  <div class="row two">
+    <div class="card">
+      <h2>Horas encendidas por día, por zona</h2>
+      <p class="sub">Promedio de los últimos 7 días</p>
+      <div id="byZone"></div>
+      <div class="query"><b>P2</b> event-index · eventKey = smartloft-739264-lights#light_changed · #ts BETWEEN :d0 AND :d7 → para cada zona (lightKitchen, lightLiving, …) sumar el tiempo entre un ítem con «on» y el siguiente con «off», dividido entre 7</div>
+    </div>
+    <div class="card">
+      <h2>Encendidas más tiempo sin cambio</h2>
+      <p class="sub">Intervalos «on» de más de 4 horas</p>
+      <table>
+        <tr><th>Zona</th><th>Desde</th><th>Hasta</th><th>Horas</th></tr>
+        <tr><td>Sala</td><td>Sáb 18:20</td><td>Dom 01:05</td><td>6,8</td></tr>
+        <tr><td>Baño</td><td>Mié 01:40</td><td>Mié 06:55</td><td>5,3</td></tr>
+        <tr><td>Habitación</td><td>Lun 21:10</td><td>Mar 01:30</td><td>4,3</td></tr>
+        <tr><td>Cocina</td><td>Jue 12:15</td><td>Jue 16:40</td><td>4,4</td></tr>
+      </table>
+      <div class="query"><b>P2</b> mismos eventos light_changed · intervalos on → off con duración &gt; 4 h · cruzar con <b>P2</b> presence_detected del mismo rango para ver si había alguien</div>
+    </div>
+  </div>
+
+  <div class="decision"><b>Decisión que apoya:</b> la sala y el baño quedan encendidos de madrugada sin que nadie los apague. Recordatorio por voz o, en una versión futura, apagado automático después de N horas sin presencia.</div>
+</main>
+<footer>Fuente: tabla smartloft-data (DynamoDB). Los números son ilustrativos; el reporte no se implementa en esta práctica.</footer>
+<script>
+barChart(document.getElementById("byZone"), {
+  labels: ["Sala", "Cocina", "Comedor", "Habitación", "Baño"],
+  values: [3.1, 2.4, 1.4, 1.1, 0.7],
+  max: 3.5, color: "var(--series-1)", unit: " h",
+});
+</script>
+</body>
+</html>

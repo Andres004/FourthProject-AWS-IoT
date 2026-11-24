@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SmartLoft - Modo de la ventilación (mockup)</title>
+<link rel="stylesheet" href="mockup.css">
+<script src="charts.js"></script>
+</head>
+<body class="viz-root">
+<header>
+  <div>
+    <h1>Modo de la ventilación</h1>
+    <p>¿El usuario deja la ventilación en manual demasiado tiempo?</p>
+  </div>
+  <span class="badge">Mockup RF15 · datos ilustrativos</span>
+</header>
+<div class="filters">
+  <span>Casa <b>739264</b></span><span>Thing <b>smartloft-739264-vent</b></span><span>Periodo <b>últimos 7 días</b></span>
+</div>
+<main>
+  <div class="row tiles">
+    <div class="card tile">
+      <div class="label">Tiempo en manual</div>
+      <div class="value">13 %</div>
+      <div class="note">21,6 de 168 horas</div>
+      <div class="query"><b>P2</b> eventKey = …vent#mode_changed · suma de intervalos manual → auto</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Pasos a manual por voz</div>
+      <div class="value">3</div>
+      <div class="note">origin = voice, mode = manual</div>
+      <div class="query"><b>P2</b> mode_changed · filtro origin = voice AND mode = manual</div>
+    </div>
+    <div class="card tile">
+      <div class="label">La Nube volvió a «auto» (C1)</div>
+      <div class="value">1</div>
+      <div class="alert">3 alarmas en 24 h estando en manual</div>
+      <div class="query"><b>P2</b> mode_changed · filtro origin = cloud</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Alarmas en manual</div>
+      <div class="value">4 de 9</div>
+      <div class="note">En manual la ventana no se abre sola</div>
+      <div class="query"><b>P2</b> eventKey = …#gas_alarm_on · filtro mode = manual</div>
+    </div>
+  </div>
+
+  <div class="row two">
+    <div class="card">
+      <h2>Horas por día en cada modo</h2>
+      <div class="legend"><span><i class="dot" style="background:var(--series-1)"></i>auto</span><span><i class="dot" style="background:var(--series-2)"></i>manual</span></div>
+      <div id="modes"></div>
+      <div class="query"><b>P2</b> event-index · eventKey = smartloft-739264-vent#mode_changed · #ts BETWEEN :d0 AND :d7 → por día, tiempo entre cada cambio y el siguiente, sumado según el modo; el modo inicial sale del último ítem antes de :d0 (<b>P3</b>)</div>
+    </div>
+    <div class="card">
+      <h2>Cambios de modo</h2>
+      <p class="sub">Quién cambió el modo y cuándo</p>
+      <table>
+        <tr><th>Fecha</th><th>Pasó a</th><th>Origen</th><th>Duró</th></tr>
+        <tr><td>Jue 19:42</td><td>auto</td><td><b>cloud</b> (C1)</td><td>—</td></tr>
+        <tr><td>Jue 12:30</td><td>manual</td><td>voice</td><td>7,2 h</td></tr>
+        <tr><td>Mar 21:05</td><td>auto</td><td>voice</td><td>39 h</td></tr>
+        <tr><td>Mar 12:40</td><td>manual</td><td>voice</td><td>8,4 h</td></tr>
+        <tr><td>Dom 14:00</td><td>auto</td><td>voice</td><td>46 h</td></tr>
+      </table>
+      <div class="query"><b>P2</b> mode_changed del rango, ordenados por #ts · «Duró» = #ts del cambio siguiente − #ts de este</div>
+    </div>
+  </div>
+
+  <div class="decision"><b>Decisión que apoya:</b> el modo manual se usa al cocinar (mediodía), pero a veces queda activo toda la tarde. Si C1 tiene que intervenir seguido, conviene que el usuario no deje la ventilación en manual o que se baje <i>GAS_EVENTS_LIMIT</i>.</div>
+</main>
+<footer>Fuente: tabla smartloft-data (DynamoDB). Los números son ilustrativos; el reporte no se implementa en esta práctica.</footer>
+<script>
+stackedBars(document.getElementById("modes"), {
+  labels: ["Vie", "Sáb", "Dom", "Lun", "Mar", "Mié", "Jue"],
+  a: [24, 24, 18, 24, 15.6, 24, 16.8],
+  b: [0, 0, 6, 0, 8.4, 0, 7.2],
+  total: 24, colors: ["var(--series-1)", "var(--series-2)"],
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>SmartLoft - Seguridad de gas (mockup)</title>
+<link rel="stylesheet" href="mockup.css">
+<script src="charts.js"></script>
+</head>
+<body class="viz-root">
+<header>
+  <div>
+    <h1>Seguridad de gas · Cocina</h1>
+    <p>¿Hay una fuga recurrente? ¿Los umbrales están bien calibrados?</p>
+  </div>
+  <span class="badge">Mockup RF15 · datos ilustrativos</span>
+</header>
+<div class="filters">
+  <span>Casa <b>739264</b></span><span>Thing <b>smartloft-739264-vent</b></span><span>Periodo <b>últimos 7 días</b></span>
+</div>
+<main>
+  <div class="row tiles">
+    <div class="card tile">
+      <div class="label">Alarmas de gas (7 días)</div>
+      <div class="value">9</div>
+      <div class="alert">▲ 3 el jueves: revisar instalación</div>
+      <div class="query"><b>P2</b> event-index · eventKey = …vent#gas_alarm_on · #ts BETWEEN hoy-7d AND ahora → Count</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Pico de gas_pct</div>
+      <div class="value">73 %</div>
+      <div class="note">Umbral de alarma: 15 % · de cierre: 8 %</div>
+      <div class="query"><b>P1</b> thingName = …vent · #ts BETWEEN … → max(gasPct)</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Ventana abierta por gas</div>
+      <div class="value">47 min</div>
+      <div class="note">Suma de aperturas (open → closed)</div>
+      <div class="query"><b>P2</b> eventKey = …#window_changed · pares open → closed</div>
+    </div>
+    <div class="card tile">
+      <div class="label">Veces que la Nube forzó «auto» (C1)</div>
+      <div class="value">1</div>
+      <div class="note">Jueves 19:42 · origin = cloud</div>
+      <div class="query"><b>P2</b> eventKey = …#mode_changed · filtro origin = cloud</div>
+    </div>
+  </div>
+
+  <div class="row two">
+    <div class="card">
+      <h2>Alarmas de gas por día</h2>
+      <p class="sub">Cantidad de eventos gas_alarm_on</p>
+      <div id="perDay"></div>
+      <div class="query"><b>P2</b> event-index · eventKey = smartloft-739264-vent#gas_alarm_on · #ts BETWEEN :d0 AND :d7 → agrupar por día (hora local)</div>
+    </div>
+    <div class="card">
+      <h2>Últimas alarmas</h2>
+      <p class="sub">Duración de la apertura, pico y quién abrió la ventana</p>
+      <table>
+        <tr><th>Inicio</th><th>Duración</th><th>Pico</th><th>Abrió</th><th>Modo</th></tr>
+        <tr><td>Jue 19:42</td><td>6 min</td><td>73 %</td><td>edge</td><td>manual → auto</td></tr>
+        <tr><td>Jue 13:10</td><td>4 min</td><td>38 %</td><td>voice</td><td>manual</td></tr>
+        <tr><td>Jue 12:55</td><td>9 min</td><td>41 %</td><td>voice</td><td>manual</td></tr>
+        <tr><td>Mar 20:03</td><td>5 min</td><td>22 %</td><td>edge</td><td>auto</td></tr>
+        <tr><td>Lun 13:21</td><td>3 min</td><td>18 %</td><td>edge</td><td>auto</td></tr>
+      </table>
+      <div class="query"><b>P2</b> gas_alarm_on y gas_alarm_off del mismo Thing, emparejados por orden de #ts · pico: <b>P1</b> max(gasPct) entre los dos · columna «Abrió» = origin del window_changed</div>
+    </div>
+  </div>
+
+  <div class="decision"><b>Decisión que apoya:</b> si las alarmas se repiten fuera del horario de cocina, o el pico supera el 60 %, revisar la instalación de gas. Si hay muchas alarmas cortas con picos apenas sobre el umbral, subir <i>gas_high_pct</i> por voz.</div>
+</main>
+<footer>Fuente: tabla smartloft-data (DynamoDB). Los números son ilustrativos; el reporte no se implementa en esta práctica.</footer>
+<script>
+columnChart(document.getElementById("perDay"), {
+  labels: ["Vie", "Sáb", "Dom", "Lun", "Mar", "Mié", "Jue"],
+  values: [1, 0, 2, 1, 1, 1, 3],
+  max: 4, color: "var(--series-1)", height: 220, label: [6],
+});
+</script>
+</body>
+</html>
