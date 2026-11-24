@@ -1,0 +1,7 @@
+== C1 / RNF8 cloud response seen from board 1 (A06) ==
+   line 1873 seq=37: REPORT_TX -> DELTA_RX None ms -> MODE_APPLIED None ms (no change: fewer than the limit)
+   line 1893 seq=43: REPORT_TX -> DELTA_RX None ms -> MODE_APPLIED None ms (no change: fewer than the limit)
+   line 1928 seq=52: REPORT_TX -> DELTA_RX 573 ms -> MODE_APPLIED 591 ms
+   gas_alarm_on -> MODE_APPLIED origin=cloud ms: n=1 min=591 median=591 mean=591 p95=591 max=591
+RNF8 cloud response max 591 ms (<= 5000) -> PASS
+

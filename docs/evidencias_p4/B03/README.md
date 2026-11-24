@@ -1,6 +1,6 @@
 # B03 — Secretos en el repositorio y en su historial
 
-- Fecha y hora: 24/11/2026, 07:41 (Bolivia) / 11:41 UTC
+- Fecha y hora: 24/11/2026, 07:53 (Bolivia) / 11:53 UTC
 - Responsable: Dabner
 - Requisito: RNF6 (seguridad)
 - Herramienta: [check_secrets.py](../../../tools/check_secrets.py)
@@ -11,12 +11,12 @@ El script busca claves privadas, certificados, access keys de AWS, números de c
 
 | Comprobación | Resultado | Criterio | Veredicto |
 |---|---|---|---|
-| Secretos en los archivos publicados | 0 en 236 archivos | 0 | PASS |
-| Secretos en el historial | 0 en 66 commits (de los dos integrantes) | 0 | PASS |
+| Secretos en los archivos publicados | 0 en 240 archivos | 0 | PASS |
+| Secretos en el historial | 0 en 68 commits (de los dos integrantes) | 0 | PASS |
 | Rutas de secretos ignoradas por git (`secrets_*.h`, `certificados-*/`, `*.pem`, `*.key`, `*.zip`…) | 9/9 | todas | PASS |
 | Plantillas publicadas (`secrets_vent.example.h`, `secrets_lights.example.h`) | 2/2 | publicadas | PASS |
-| Control positivo sobre los `secrets_*.h` reales (no publicados) | Detecta la clave privada y el certificado de cada placa | Detectar los secretos que contiene | Ver nota |
+| Control positivo sobre los `secrets_*.h` reales (no publicados) | Detecta la clave privada, el certificado, el endpoint y la contraseña WiFi de cada placa | Detectar los 4 tipos | PASS |
 
-**Nota sobre el control positivo.** El control demuestra que el escáner no es ciego: se le pasan los `secrets_*.h` reales, que **no** están en el repositorio, y tiene que encontrar sus secretos. En esta corrida encontró la **clave privada y el certificado** de las dos placas. Marca FAIL porque espera además el endpoint y la contraseña WiFi, que en este momento esos archivos tienen como valores de la plantilla (las placas se probaron en `local_test`, sin conexión). Se vuelve a correr cuando los `secrets_*.h` tengan el endpoint y el WiFi: ⟨resultado final⟩.
+**Control positivo.** Demuestra que el escáner no es ciego: se le pasan los `secrets_*.h` reales, que **no** están en el repositorio, y encuentra en cada uno los cuatro tipos de secreto. Una primera corrida (07:41) dio FAIL en este control porque esos archivos todavía tenían el endpoint y el WiFi de la plantilla; la corrida guardada en [B03_salida.txt](B03_salida.txt) es la de 24/11/2026, 07:53 (Bolivia), con los archivos completos.
 
-**Veredicto: PASS** en las cuatro comprobaciones del repositorio (0 secretos publicados).
+**Veredicto: PASS** (5 de 5 comprobaciones; 0 secretos publicados).

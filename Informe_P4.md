@@ -1412,11 +1412,11 @@ Cada detección dura ≈ 13.7 s: unos 3.7 s de la salida del AM312 más los 10 s
 
 | Comprobación | Resultado | Veredicto |
 |---|---|---|
-| Secretos en los archivos publicados | 0 en 236 archivos | PASS |
-| Secretos en el historial | 0 en 66 commits | PASS |
+| Secretos en los archivos publicados | 0 en 240 archivos | PASS |
+| Secretos en el historial | 0 en 68 commits | PASS |
 | Rutas de secretos ignoradas por git | 9 / 9 | PASS |
 | Plantillas `secrets_*.example.h` publicadas | 2 / 2 | PASS |
-| Control positivo sobre los `secrets_*.h` reales (no publicados) | Detecta la clave y el certificado de cada placa; ⟨endpoint y WiFi cuando se completen⟩ | ⟨⟩ |
+| Control positivo sobre los `secrets_*.h` reales (no publicados) | Detecta la clave, el certificado, el endpoint y la contraseña WiFi de cada placa | PASS |
 
 ### 4.4 Defectos encontrados y corregidos
 
@@ -1458,7 +1458,7 @@ Cada detección dura ≈ 13.7 s: unos 3.7 s de la salida del AM312 más los 10 s
 | RNF3 | Respuesta por voz | ≤ 3 s Lambda → objeto confirmado | ⟨A02, A03⟩ | A02, A03 | ⟨⟩ |
 | RNF4 | Frecuencia de reporte | ≥ 1 s entre reportes; heartbeat 60 s | Mínimo 999 ms (1 ms de registro); heartbeat 60 000 y 59 952 ms | B02 | Cumple |
 | RNF5 | Reconexión | Orden pendiente ≤ 10 s desde `WIFI_CONNECTED` | ⟨A09⟩ | A09 | ⟨⟩ |
-| RNF6 | Seguridad | 0 secretos publicados | 0 en 236 archivos y 66 commits | B03 | Cumple |
+| RNF6 | Seguridad | 0 secretos publicados | 0 en 240 archivos y 68 commits | B03 | Cumple |
 | RNF7 | Integridad del almacenamiento | ≥ 99 % | ⟨A08⟩ | A08 | ⟨⟩ |
 | RNF8 | Latencia del almacenamiento | ≤ 5 s | ⟨A08⟩ | A08 | ⟨⟩ |
 | RNF9 | Respuesta automática Edge | ≤ 1000 ms | 410–411 ms (15 ciclos con gas real); 411 ms con gas simulado | A05, B02 | Cumple |

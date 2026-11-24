@@ -35,7 +35,9 @@ constexpr uint32_t MQTT_RETRY_INTERVAL_MS = 5000;   // Between MQTT attempts [ms
 constexpr uint16_t MQTT_PORT = 8883;                // MQTT over TLS port
 constexpr uint16_t MQTT_BUFFER_SIZE = 2048;         // Largest MQTT packet [bytes]
 constexpr uint16_t MQTT_KEEPALIVE_S = 60;           // MQTT keep-alive [s]
-constexpr uint16_t MQTT_SOCKET_TIMEOUT_S = 5;       // MQTT read timeout [s]
+// 10 s: with a weak signal (-72 dBm) the CONNACK arrived after 5 s and every
+// attempt failed with state -4 (see Informe_P4, defect D-07).
+constexpr uint16_t MQTT_SOCKET_TIMEOUT_S = 10;      // MQTT read timeout [s]
 constexpr uint32_t TLS_CONNECT_TIMEOUT_S = 8;       // TCP connect limit [s]
 constexpr uint32_t TLS_HANDSHAKE_TIMEOUT_S = 8;     // TLS handshake limit [s]
 constexpr uint8_t MQTT_SUBSCRIBE_QOS = 1;           // QoS of Shadow subscriptions
@@ -55,7 +57,7 @@ constexpr time_t MIN_VALID_EPOCH_S = 1767225600;  // 2026-01-01: clock is set
 /** Stability evidence: health log and loop watchdog. */
 namespace health {
 constexpr uint32_t LOG_PERIOD_MS = 60000;  // Between HEALTH lines [ms]
-// Longest legal blocking call: TCP 8 s + TLS 8 s + MQTT 5 s = 21 s.
+// Longest legal blocking call: TCP 8 s + TLS 8 s + MQTT 10 s = 26 s.
 constexpr uint32_t WATCHDOG_TIMEOUT_S = 30;  // Reset if loop() stalls [s]
 }  // namespace health
 

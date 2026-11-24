@@ -1,0 +1,23 @@
+[1777697|2026-11-24T12:48:52.090Z] GAS_ALARM_ON gas_pct=68.1 gas_high_pct=15 mode=manual
+[1777702|2026-11-24T12:48:52.096Z] REPORT_TX seq=37 event=gas_alarm_on origin=voice {"state":{"reported":{"gas_pct":68.1,"gas_mv":3637,"warming_up":fa
+[1783697|2026-11-24T12:48:58.090Z] GAS_ALARM_OFF gas_pct=7.0 gas_low_pct=8 mode=manual
+[1783702|2026-11-24T12:48:58.096Z] REPORT_TX seq=41 event=gas_alarm_off origin=voice {"state":{"reported":{"gas_pct":7,"gas_mv":372,"warming_up":false
+[1789697|2026-11-24T12:49:04.090Z] GAS_ALARM_ON gas_pct=31.7 gas_high_pct=15 mode=manual
+[1789702|2026-11-24T12:49:04.096Z] REPORT_TX seq=43 event=gas_alarm_on origin=voice {"state":{"reported":{"gas_pct":31.7,"gas_mv":1695,"warming_up":fa
+[1798697|2026-11-24T12:49:13.090Z] GAS_ALARM_OFF gas_pct=7.2 gas_low_pct=8 mode=manual
+[1798703|2026-11-24T12:49:13.096Z] REPORT_TX seq=50 event=gas_alarm_off origin=voice {"state":{"reported":{"gas_pct":7.2,"gas_mv":385,"warming_up":fal
+[1812696|2026-11-24T12:49:27.090Z] GAS_ALARM_ON gas_pct=53.3 gas_high_pct=15 mode=manual
+[1812702|2026-11-24T12:49:27.096Z] REPORT_TX seq=52 event=gas_alarm_on origin=voice {"state":{"reported":{"gas_pct":53.3,"gas_mv":2845,"warming_up":fa
+[1813275|2026-11-24T12:49:27.668Z] DELTA_RX version=78 {"version":78,"timestamp":1795524567,"state":{"mode":"auto","cmd_origin":"cloud"},"metadata":{"
+[1813293|2026-11-24T12:49:27.686Z] MODE_APPLIED mode=auto origin=cloud
+[1813307|2026-11-24T12:49:27.701Z] ACTUATOR_START window=open origin=edge
+[1813308|2026-11-24T12:49:27.702Z] EDGE_ACTION window=open gas_pct=53.3
+[1813702|2026-11-24T12:49:28.095Z] REPORT_TX seq=53 event=mode_changed origin=cloud {"state":{"reported":{"gas_pct":74.6,"gas_mv":3982,"warming_up":fa
+[1813735|2026-11-24T12:49:28.128Z] ACTUATOR_DONE window=open angle=90
+[1814702|2026-11-24T12:49:29.095Z] REPORT_TX seq=54 event=window_changed origin=edge {"state":{"reported":{"gas_pct":83.3,"gas_mv":4450,"warming_up":f
+[1819697|2026-11-24T12:49:34.090Z] GAS_ALARM_OFF gas_pct=6.9 gas_low_pct=8 mode=auto
+[1819697|2026-11-24T12:49:34.091Z] ACTUATOR_START window=closed origin=edge
+[1819708|2026-11-24T12:49:34.101Z] EDGE_ACTION window=closed gas_pct=6.9
+[1819714|2026-11-24T12:49:34.107Z] REPORT_TX seq=59 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6.9,"gas_mv":368,"warming_up":fals
+[1820097|2026-11-24T12:49:34.491Z] ACTUATOR_DONE window=closed angle=0
+[1820702|2026-11-24T12:49:35.095Z] REPORT_TX seq=60 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5.3,"gas_mv":285,"warming_up":fal

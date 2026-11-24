@@ -1,0 +1,29 @@
+14:[4041|2026-11-24T12:19:18.672Z] LIGHT_APPLIED zone=kitchen state=on origin=boot
+16:[5038|2026-11-24T12:19:19.668Z] REPORT_TX seq=2 event=light_changed origin=boot {"state":{"reported":{"ligh
+65:[1288195|2026-11-24T12:40:42.825Z] DELTA_RX version=59 {"version":59,"timestamp":1795524042,"state":{"light
+66:[1288206|2026-11-24T12:40:42.836Z] LIGHT_APPLIED zone=kitchen state=off origin=voice
+67:[1288242|2026-11-24T12:40:42.872Z] DELTA_RX version=60 {"version":60,"timestamp":1795524042,"state":{"light
+68:[1288936|2026-11-24T12:40:43.566Z] REPORT_TX seq=27 event=light_changed origin=voice {"state":{"reported":{
+70:[1301161|2026-11-24T12:40:55.791Z] DELTA_RX version=63 {"version":63,"timestamp":1795524055,"state":{"light
+71:[1301171|2026-11-24T12:40:55.802Z] LIGHT_APPLIED zone=kitchen state=on origin=voice
+72:[1301191|2026-11-24T12:40:55.821Z] REPORT_TX seq=29 event=light_changed origin=voice {"state":{"reported":{
+73:[1311068|2026-11-24T12:41:05.698Z] DELTA_RX version=65 {"version":65,"timestamp":1795524065,"state":{"light
+74:[1311079|2026-11-24T12:41:05.709Z] LIGHT_APPLIED zone=living state=on origin=voice
+75:[1311096|2026-11-24T12:41:05.726Z] REPORT_TX seq=30 event=light_changed origin=voice {"state":{"reported":{
+76:[1319451|2026-11-24T12:41:14.081Z] DELTA_RX version=67 {"version":67,"timestamp":1795524073,"state":{"light
+77:[1319462|2026-11-24T12:41:14.092Z] LIGHT_APPLIED zone=dining state=on origin=voice
+78:[1319480|2026-11-24T12:41:14.110Z] REPORT_TX seq=31 event=light_changed origin=voice {"state":{"reported":{
+80:[1323614|2026-11-24T12:41:18.244Z] DELTA_RX version=69 {"version":69,"timestamp":1795524078,"state":{"light
+81:[1323625|2026-11-24T12:41:18.255Z] LIGHT_APPLIED zone=bathroom state=on origin=voice
+82:[1323643|2026-11-24T12:41:18.273Z] REPORT_TX seq=32 event=light_changed origin=voice {"state":{"reported":{
+83:[1336169|2026-11-24T12:41:30.799Z] DELTA_RX version=71 {"version":71,"timestamp":1795524090,"state":{"light
+84:[1336179|2026-11-24T12:41:30.810Z] LIGHT_APPLIED zone=bedroom state=on origin=voice
+85:[1336198|2026-11-24T12:41:30.828Z] REPORT_TX seq=33 event=light_changed origin=voice {"state":{"reported":{
+88:[1396467|2026-11-24T12:42:31.097Z] DELTA_RX version=73 {"version":73,"timestamp":1795524151,"state":{"light
+89:[1396508|2026-11-24T12:42:31.139Z] LIGHT_APPLIED zone=kitchen state=off origin=voice
+90:[1396509|2026-11-24T12:42:31.139Z] LIGHT_APPLIED zone=living state=off origin=voice
+91:[1396519|2026-11-24T12:42:31.149Z] LIGHT_APPLIED zone=dining state=off origin=voice
+92:[1396530|2026-11-24T12:42:31.160Z] LIGHT_APPLIED zone=bathroom state=off origin=voice
+93:[1396530|2026-11-24T12:42:31.160Z] LIGHT_APPLIED zone=bedroom state=off origin=voice
+94:[1396594|2026-11-24T12:42:31.224Z] DELTA_RX version=74 {"version":74,"timestamp":1795524151,"state":{"light
+95:[1397170|2026-11-24T12:42:31.800Z] REPORT_TX seq=35 event=light_changed origin=voice {"state":{"reported":{

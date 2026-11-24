@@ -1,0 +1,17 @@
+1653:[1584988|2026-11-24T12:45:39.382Z] DELTA_RX version=49 {"version":49,"timestamp":1795524339,"state":{"mode":"manual","cmd_origin":"voic
+1655:[1585006|2026-11-24T12:45:39.399Z] MODE_APPLIED mode=manual origin=voice
+1656:[1585024|2026-11-24T12:45:39.417Z] REPORT_TX seq=29 event=mode_changed origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"w
+1666:[1594643|2026-11-24T12:45:49.036Z] DELTA_RX version=51 {"version":51,"timestamp":1795524348,"state":{"window":"open","cmd_origin":"voic
+1667:[1594654|2026-11-24T12:45:49.047Z] ACTUATOR_START window=open origin=voice
+1669:[1595053|2026-11-24T12:45:49.447Z] ACTUATOR_DONE window=open angle=90
+1670:[1595059|2026-11-24T12:45:49.452Z] REPORT_TX seq=30 event=window_changed origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,
+1679:[1602700|2026-11-24T12:45:57.094Z] DELTA_RX version=53 {"version":53,"timestamp":1795524357,"state":{"window":"closed","cmd_origin":"vo
+1680:[1602711|2026-11-24T12:45:57.105Z] ACTUATOR_START window=closed origin=voice
+1681:[1603111|2026-11-24T12:45:57.505Z] ACTUATOR_DONE window=closed angle=0
+1682:[1603117|2026-11-24T12:45:57.510Z] REPORT_TX seq=31 event=window_changed origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,
+1701:[1620541|2026-11-24T12:46:14.934Z] DELTA_RX version=55 {"version":55,"timestamp":1795524373,"state":{"gas_high_pct":20,"cmd_origin":"vo
+1703:[1620558|2026-11-24T12:46:14.952Z] THRESHOLDS_APPLIED gas_high_pct=20 gas_low_pct=8 origin=voice
+1704:[1620575|2026-11-24T12:46:14.968Z] REPORT_TX seq=32 event=thresholds_changed origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":
+1724:[1638730|2026-11-24T12:46:33.123Z] DELTA_RX version=57 {"version":57,"timestamp":1795524393,"state":{"gas_high_pct":15,"cmd_origin":"vo
+1726:[1638748|2026-11-24T12:46:33.142Z] THRESHOLDS_APPLIED gas_high_pct=15 gas_low_pct=8 origin=voice
+1727:[1638766|2026-11-24T12:46:33.159Z] REPORT_TX seq=33 event=thresholds_changed origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":

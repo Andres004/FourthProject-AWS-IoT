@@ -1,0 +1,12 @@
+== RNF3 voice commands on the board (A02 lights / A03 window) ==
+   line 65 LIGHT_APPLIED zone=kitchen state=off origin=voice: applied +11 ms, reported +741 ms
+   line 70 LIGHT_APPLIED zone=kitchen state=on origin=voice: applied +10 ms, reported +30 ms
+   line 73 LIGHT_APPLIED zone=living state=on origin=voice: applied +11 ms, reported +28 ms
+   line 76 LIGHT_APPLIED zone=dining state=on origin=voice: applied +11 ms, reported +29 ms
+   line 80 LIGHT_APPLIED zone=bathroom state=on origin=voice: applied +11 ms, reported +29 ms
+   line 83 LIGHT_APPLIED zone=bedroom state=on origin=voice: applied +10 ms, reported +29 ms
+   line 88 LIGHT_APPLIED zone=kitchen state=off origin=voice: applied +41 ms, reported +703 ms
+   DELTA_RX -> LIGHT_APPLIED ms: n=7 min=10 median=11 mean=15 p95=41 max=41
+   DELTA_RX -> report ms: n=7 min=28 median=29 mean=227 p95=741 max=741
+RNF3 LIGHT_APPLIED: 7 commands reported within 1500 ms: 7/7 -> PASS
+
