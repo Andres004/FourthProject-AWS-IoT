@@ -37,6 +37,7 @@ class SmartObjectApp {
     const char* wifiSsid;
     const char* wifiPassword;
     ShadowClientSettings shadow;
+    int statusLedPin;  ///< GPIO of the connection LED, or status_led::NO_LED
   };
 
   /**

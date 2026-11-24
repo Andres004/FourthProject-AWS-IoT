@@ -36,6 +36,7 @@ const SmartObjectApp::Settings settings = {
     secrets::WIFI_PASSWORD,
     {secrets::AWS_IOT_ENDPOINT, secrets::ROOT_CA, secrets::DEVICE_CERTIFICATE,
      secrets::DEVICE_PRIVATE_KEY, config::board::THING_SUFFIX},
+    config::pins::STATUS_LED,
 };
 
 SmartObjectApp app(settings, components, COMPONENT_COUNT);

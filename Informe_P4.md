@@ -103,6 +103,8 @@ La arquitectura del firmware de la P3 se conserva y se generaliza: el código co
 | ESP32 | 2 | Una por función: la lógica de seguridad (gas) no depende de la placa de luces ni de Internet |
 | Ultrasónico | 0 | El caso no mide niveles ni distancias |
 
+**Precalentamiento.** El MQ-2 estuvo alimentado ≈ 24 h continuas antes de la calibración (22/11 19:27 → 23/11 ≈ 19:25), primero desde el VIN de una ESP32 y, desde el 23/11 ≈ 20:42, desde la fuente externa definitiva. No se grabó la curva de esas 24 h; el calentamiento tras un encendido en frío se mide aparte (A10, `WARMUP_MS`).
+
 **Qué mide el MQ-2.** El firmware no reporta ppm: reporta un **índice relativo** `gas_pct` = tensión de AO / tensión de alimentación × 100. La calibración en ppm exige gases patrón y 24–48 h de precalentamiento por punto; para decidir "abrir la ventana" basta un índice **repetible** y un umbral elegido con datos (§4.2, A10).
 
 ### 1.4 Requerimientos funcionales
@@ -176,10 +178,12 @@ flowchart LR
         VC --> WA["WindowActuator"]
         WA -->|"PWM 50 Hz"| SV["Servo SG90<br/>GPIO13"]
         VC <--> NVS[("NVS<br/>modo y umbrales")]
+        VC --> GL["GasIndicatorLed"] --> LG["LED de gas<br/>D32"]
     end
     subgraph P2["Placa 2 — luces y entrada (ESP32-DevKitC, 38 pines)"]
         PIR["PIR AM312<br/>GPIO26"] --> PS["PresenceSensor"]
         ZL["ZoneLight ×5"] --> LED["5 LEDs<br/>GPIO 22/21/23/19/18"]
+        ST["StatusLed"] --> LS["LED de conexión<br/>GPIO32"]
     end
     FUENTE["Fuente 5 V / 2 A"] --> MQ
     FUENTE --> SV
@@ -187,7 +191,9 @@ flowchart LR
     P2 <-->|"MQTT/TLS 8883<br/>Shadow -lights"| AWS
 ```
 
-Las placas **no se comunican entre sí**: todo pasa por sus Shadows. El servo y el MQ-2 se alimentan de la fuente de 5 V / 2 A con GND común con la placa 1; el 5 V nunca toca VIN, 3V3 ni un GPIO. La placa 2 se alimenta por USB.
+Las placas **no se comunican entre sí ni comparten GND**: todo pasa por sus Shadows. Las dos ESP32 se alimentan por USB. El servo y el MQ-2 se alimentan de una fuente externa de 5 V / 2 A, con GND común con la placa 1; ningún pin de la ESP32 (VIN, 3V3 ni GPIO) va a la línea de 5 V. Se eligió la fuente externa en lugar de VIN porque en la P4 se suma el calefactor del MQ-2 (unos 150 mA permanentes) y así el sensor se calibra con la misma alimentación que usa al final.
+
+**Indicadores.** En la placa 1, el LED de D32 indica el **gas**: apagado = aire normal, encendido = alarma, parpadeo lento = sensor calentando. Hace visible la decisión del Edge en la demo aunque la ventana no se mueva (modo `manual`) y funciona sin conexión; no es un actuador. En la placa 2, el LED de GPIO32 indica la **conexión**, como en la P3.
 
 ### 2.2 Diagrama de arquitectura del sistema
 
@@ -202,9 +208,15 @@ Las placas **no se comunican entre sí**: todo pasa por sus Shadows. El servo y 
 - `V_D34 = V_AO × R2 / (R1 + R2) = V_AO × 15 kΩ / 25 kΩ = 0.6 × V_AO`
 - Con `V_AO = 5.0 V` → `V_D34 = 3.0 V` (< 3.3 V). Medido con la punta AO en +5 V, antes de conectar el sensor: ⟨valor⟩ V (A10).
 - El firmware reconstruye `gas_mv = V_D34 / 0.6` y calcula `gas_pct = gas_mv / SUPPLY_MV × 100`, con `SUPPLY_MV` = ⟨tensión del bus de 5 V medida con el servo y el MQ-2 conectados⟩ mV.
-- Corriente del divisor: `5 V / 25 kΩ = 0.2 mA`, despreciable para la salida del módulo. El capacitor de 100 nF filtra el ruido del calefactor.
+- Con AO en unos 4 V (máximo real del módulo) → `V_D34 ≈ 2.4 V`.
+- Corriente del divisor: `5 V / 25 kΩ = 0.2 mA`, despreciable para la salida del módulo.
+- Filtro: el capacitor de 100 nF ve `10 kΩ ∥ 15 kΩ = 6 kΩ`, así que `f_c = 1 / (2π · 6 kΩ · 100 nF) ≈ 265 Hz`: deja pasar los cambios del gas (segundos) y atenúa el ruido.
+- El MQ-2 va al ADC1 (D34) porque el ADC2 no funciona con el WiFi activo; en la fila libre de la protoboard de la placa 1 no hay otro pin analógico del ADC1.
+- **Fuente:** 5.337 V sin carga en el jack (multímetro UNI-T UT890D) y ≈ 5.35 V en el SPL-62. El firmware y `mq2_probe` usan `SUPPLY_MV = 5340`, así los umbrales de la calibración significan lo mismo en los dos; falta medir el bus con el MQ-2 y el servo funcionando (⟨valor con carga⟩).
 
-**LED de cada zona.** `I = (3.3 V − V_LED) / 220 Ω`; con `V_LED ≈ 2.9 V` (blanco) → `I ≈ 1.8 mA`, muy por debajo del máximo de un GPIO.
+**LED de cada zona.** `I = (3.3 V − V_LED) / 220 Ω`; con `V_LED ≈ 3.0 V` (blanco) → `I ≈ 1.4 mA`, muy por debajo del máximo de un GPIO. Se probó 220 Ω frente a 110 Ω sin diferencia visible de brillo, así que se eligió 220 Ω.
+
+**Servo.** Rojo a la línea de 5 V, marrón a GND y naranja a D13, con un **capacitor de 1000 µF / 10 V** entre 5 V y GND cerca del servo (franja "−" a GND), para absorber el pico de corriente al arrancar el motor.
 
 **Pines** (ninguno es de arranque ni de la flash):
 
@@ -212,13 +224,15 @@ Las placas **no se comunican entre sí**: todo pasa por sus Shadows. El servo y 
 |---|---|---|---|
 | 1 | 13 | Señal del servo | `SERVO` |
 | 1 | 34 | MQ-2 AO (divisor + 100 nF) | `MQ2` |
-| 1 y 2 | 32 | LED de estado (solo indicador) | — |
+| 1 | 32 | LED indicador de gas (D32 → LED → 220 Ω → GND) | — |
+| 1 | 25 | Reservado (buzzer), sin conectar | — |
+| 2 | 32 | LED de estado de la conexión | — |
 | 2 | 22 | Luz de la cocina | `L-COC` |
 | 2 | 21 | Luz de la sala de estar | `L-SAL` |
 | 2 | 23 | Luz del comedor | `L-COM` |
 | 2 | 19 | Luz del baño | `L-BAN` |
 | 2 | 18 | Luz de la habitación | `L-HAB` |
-| 2 | 26 | PIR OUT (VCC a 3V3) | `PIR` |
+| 2 | 26 | PIR OUT (VCC a 3V3, nunca a 5 V) | `PIR` |
 
 ### 2.4 Diagramas de clases
 
@@ -284,6 +298,7 @@ classDiagram
       +load(settings) bool
       +save(settings)
     }
+    class GasIndicatorLed
     class ZoneLight
     class PresenceSensor
 
@@ -304,6 +319,9 @@ classDiagram
     DeviceComponent <|-- VentilationController
     DeviceComponent <|-- ZoneLight
     DeviceComponent <|-- PresenceSensor
+    DeviceComponent <|-- GasIndicatorLed
+    GasIndicatorLed --> GasSensor
+    GasIndicatorLed --> VentilationController
     VentilationController --> GasSensor
     VentilationController --> WindowActuator
     VentilationController --> SettingsStore
@@ -372,7 +390,7 @@ sequenceDiagram
 | ID | Regla | Ubicación | Justificación |
 |---|---|---|---|
 | E1 | En `auto`: `gas_alarm` se enciende con `gas_pct ≥ gas_high_pct` y se apaga con `gas_pct ≤ gas_low_pct` (histéresis); la ventana sigue a la alarma, con origen `edge` | Edge (placa 1) | Respuesta inmediata (≈ 400 ms del servo); sigue funcionando sin Internet; depende solo del dato local |
-| E2 | Durante el calentamiento del MQ-2 (`WARMUP_MS` = ⟨A10⟩ ms) no hay alarma ni acción automática | Edge | Solo la placa sabe cuándo arrancó el sensor |
+| E2 | Durante el calentamiento del MQ-2 (`WARMUP_MS` = 60 000 ms) no hay alarma ni acción automática | Edge | Solo la placa sabe cuándo arrancó el sensor. En A10 un arranque en frío tras 15 min apagado no mostró transitorio; los 60 s quedan como margen |
 | E3 | El modo y los umbrales se guardan en la NVS al aplicarlos | Edge | Si la placa se reinicia sin Internet, E1 sigue con los últimos valores y no con los de compilación |
 | C1 | Al empezar una alarma en `manual`: si hubo ≥ 3 en 24 h, volver a `auto` | Nube (Lambda de control) | Necesita el histórico de DynamoDB, que la placa no tiene; el límite se cambia sin reprogramar. Detalle: **Ricardo** |
 
@@ -425,7 +443,7 @@ stateDiagram-v2
 | `window` | desired / reported | string | `open`, `closed`; en `desired` solo en `manual` y hasta que la placa lo aplica | Skill / placa |
 | `servo_angle` | reported | int | `CLOSED_ANGLE_DEG` = ⟨⟩, `OPEN_ANGLE_DEG` = ⟨⟩ (calibrados en la maqueta) | Placa |
 | `mode` | desired / reported | string | `auto`, `manual` | Skill o Lambda de control / placa |
-| `gas_high_pct`, `gas_low_pct` | desired / reported | int | 1–99, bajo < alto; por defecto ⟨A10⟩ / ⟨A10⟩ | Skill / placa |
+| `gas_high_pct`, `gas_low_pct` | desired / reported | int | 1–99, bajo < alto; por defecto 15 / 8 (calibración A10) | Skill / placa |
 | `cmd_origin` | desired | string | `voice` (skill) o `cloud` (Lambda de control); la placa lo borra al aplicar la orden | Skill / Lambda de control |
 | `event` | reported | string | `boot`, `heartbeat`, `gas_changed`, `gas_alarm_on`, `gas_alarm_off`, `window_changed`, `mode_changed`, `thresholds_changed` | Placa |
 | `origin` | reported | string | Quién causó el último cambio: `boot`, `voice`, `cloud`, `edge` | Placa |
@@ -538,7 +556,7 @@ FourthProject-AWS-IoT/
 │   ├── WifiManager.*            Conexión y reintentos de WiFi
 │   ├── TimeSync.*               Hora UTC por NTP (device_ts)
 │   ├── HealthMonitor.*          Motivo del reinicio, línea HEALTH y watchdog
-│   ├── StatusLed.*              LED de estado de la conexión
+│   ├── StatusLed.*              LED de estado de la conexión (solo placa 2)
 │   ├── EventLog.*               Log con t_ms y hora UTC
 │   └── library.json             Advertencias -Wall -Wextra también en la librería
 ├── src/vent/                    Firmware de la placa 1
@@ -547,6 +565,7 @@ FourthProject-AWS-IoT/
 │   ├── WindowActuator.*         Servo de la ventana
 │   ├── VentilationController.*  Modos, umbrales, E1–E2 y convivencia con la voz
 │   ├── SettingsStore.*          E3: modo y umbrales en la NVS
+│   ├── GasIndicatorLed.*        LED de gas en D32
 │   └── VentSettings.h           Modo, umbrales y su validación
 ├── src/lights/                  Firmware de la placa 2
 │   ├── main.cpp                 Componentes y credenciales de la placa
@@ -578,13 +597,14 @@ FourthProject-AWS-IoT/
 | Común | [ShadowTransport.h](lib/SmartObjectCore/ShadowTransport.h), [.cpp](lib/SmartObjectCore/ShadowTransport.cpp) | `ShadowTransport` | Interpreta el `delta` y el `/get`; filtra versiones; distingue orden nueva de sincronización |
 | Común | [ShadowClient.h](lib/SmartObjectCore/ShadowClient.h), [.cpp](lib/SmartObjectCore/ShadowClient.cpp) | `ShadowClient` | MQTT sobre TLS, suscripciones, `/get` al conectar y reconexión |
 | Común | [SerialShadowClient.h](lib/SmartObjectCore/SerialShadowClient.h), [.cpp](lib/SmartObjectCore/SerialShadowClient.cpp) | `SerialShadowClient` | El mismo contrato por el puerto serie, para probar sin AWS |
-| Común | `WifiManager`, `TimeSync`, `HealthMonitor`, `StatusLed`, `EventLog` | | Como en la P3, sin cambios de lógica; ahora reciben sus datos por parámetro |
+| Común | `WifiManager`, `TimeSync`, `HealthMonitor`, `StatusLed`, `EventLog` | | Como en la P3, sin cambios de lógica; ahora reciben sus datos por parámetro (el pin del LED de conexión es opcional: la placa 1 no lo tiene) |
 | Placa 1 | [config_vent.h](include/config_vent.h) | `config` (namespace) | Pines, divisor, gas, ventana, valores por defecto, eventos y claves de la NVS |
 | Placa 1 | [GasSensor.h](src/vent/GasSensor.h), [.cpp](src/vent/GasSensor.cpp) | `GasSensor` | Muestreo cada 50 ms, promedio de 1 s, `gas_mv`, `gas_pct`, calentamiento y `gas_changed` |
 | Placa 1 | [WindowActuator.h](src/vent/WindowActuator.h), [.cpp](src/vent/WindowActuator.cpp) | `WindowActuator` | Mueve el servo sin bloquear y confirma la posición después de `SETTLE_TIME_MS` |
 | Placa 1 | [VentilationController.h](src/vent/VentilationController.h), [.cpp](src/vent/VentilationController.cpp) | `VentilationController` | Modo, umbrales y alarma; E1–E2; valida y aplica las órdenes de voz y de la Nube |
 | Placa 1 | [SettingsStore.h](src/vent/SettingsStore.h), [.cpp](src/vent/SettingsStore.cpp) | `SettingsStore` | E3: carga y guarda modo y umbrales en la NVS, solo si cambiaron |
 | Placa 1 | [VentSettings.h](src/vent/VentSettings.h) | `VentSettings`, `VentMode` | Valores de la lógica automática y su validación |
+| Placa 1 | [GasIndicatorLed.h](src/vent/GasIndicatorLed.h), [.cpp](src/vent/GasIndicatorLed.cpp) | `GasIndicatorLed` | LED de D32: apagado, encendido con alarma, parpadeo lento durante el calentamiento |
 | Placa 2 | [config_lights.h](include/config_lights.h) | `config` (namespace) | Pines, zonas, PIR y eventos |
 | Placa 2 | [ZoneLight.h](src/lights/ZoneLight.h), [.cpp](src/lights/ZoneLight.cpp) | `ZoneLight` | Valida y aplica `light_<zona>`, reporta `light_changed` con su origen |
 | Placa 2 | [PresenceSensor.h](src/lights/PresenceSensor.h), [.cpp](src/lights/PresenceSensor.cpp) | `PresenceSensor` | PIR con calentamiento de 30 s y retención de 10 s; `presence_detected` / `presence_cleared` |
@@ -766,13 +786,14 @@ Dos eventos distintos en el mismo segundo no se pisan; el mismo evento repetido 
 |---|---|---|---|
 | Muestreo del MQ-2 | 50 ms | `gas::SAMPLE_PERIOD_MS` | [config_vent.h](include/config_vent.h) |
 | Ventana de promedio del gas | 1 s | `gas::AVERAGE_WINDOW_MS` | config_vent.h |
-| Calentamiento del MQ-2 (E2) | ⟨A10⟩ | `gas::WARMUP_MS` | config_vent.h |
+| Calentamiento del MQ-2 (E2) | 60 s | `gas::WARMUP_MS` | config_vent.h |
 | Movimiento del servo | 400 ms | `window::SETTLE_TIME_MS` | config_vent.h |
 | Lectura del PIR | 50 ms | `pir::POLL_PERIOD_MS` | [config_lights.h](include/config_lights.h) |
 | Calentamiento y retención del PIR | 30 s / 10 s | `pir::WARMUP_MS`, `pir::PRESENCE_HOLD_MS` | config_lights.h |
 | Mínimo entre reportes / heartbeat | 1 s / 60 s | `report::MIN_REPORT_INTERVAL_MS`, `HEARTBEAT_PERIOD_MS` | [config_common.h](include/config_common.h) |
 | Reintento de WiFi / MQTT | 10 s / 5 s | `network::WIFI_RETRY_INTERVAL_MS`, `MQTT_RETRY_INTERVAL_MS` | config_common.h |
 | Línea `HEALTH` / watchdog | 60 s / 30 s | `health::LOG_PERIOD_MS`, `WATCHDOG_TIMEOUT_S` | config_common.h |
+| Parpadeo del LED de gas durante el calentamiento | 1 s / 1 s | `gas_led::WARMUP_BLINK_HALF_PERIOD_MS` | config_vent.h |
 
 Ningún archivo usa `delay()`: cada módulo compara `nowMs` con su último instante y vuelve de inmediato. La única espera bloqueante es la conexión MQTT/TLS de PubSubClient (hasta 21 s en el peor caso, cubierta por el watchdog de 30 s), igual que en la P3.
 
@@ -914,7 +935,8 @@ Resultado: ⟨vent: n/n; lights: n/n⟩. Salida y log en `docs/evidencias_p4/B02
 |---|---|---|---|---|
 | D-01 | En el diseño de la política de reporte: cuando la Nube pone `auto` y E1 abre la ventana medio segundo después, solo se reportaba `window_changed` y se perdía el evento `mode_changed` con origen `cloud`, que es justamente el que cuenta el reporte de "veces que la Nube volvió a automático" | El reporte guardaba un solo evento pendiente y el de mayor prioridad reemplazaba al otro dentro del mínimo de 1 s | Cola de eventos por prioridad ([ReportQueue](lib/SmartObjectCore/ReportQueue.h)): los eventos distintos salen uno por segundo; el caso V14 de B02 lo comprueba | `2b012b7` |
 | D-02 | Herramienta: en los logs de `*_local_test`, `analyze_log.py` contaba cada reporte dos veces y daba 0 ms entre reportes | En prueba local cada reporte aparece como `LOCAL_REPORT` y como `REPORT_TX` | Se usa `REPORT_TX` cuando está presente | `7a525d8` |
-| ⟨D-03…⟩ | ⟨defectos de B02, S1–S3 y las pruebas⟩ | | | |
+| D-03 | Montaje: el módulo MQ-2 no encendía en la fuente externa | Un jumper macho-hembra usado como extensión del GND del módulo no hacía contacto | Se diagnosticó moviendo un LED de prueba a las filas de VCC y GND del módulo; se cambió el jumper y se descartó el defectuoso | — (hardware) |
+| ⟨D-04…⟩ | ⟨defectos de B02, S1–S3 y las pruebas⟩ | | | |
 
 ### 4.5 Análisis de errores
 

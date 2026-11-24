@@ -51,6 +51,9 @@ class VentilationController : public DeviceComponent {
   /** Applies "mode", "gas_high_pct", "gas_low_pct" and "window", in that order. */
   void applyDesired(JsonObjectConst desired, DesiredSource source) override;
 
+  /** @return true while the gas alarm (rule E1 hysteresis) is on. */
+  bool gasAlarm() const { return gasAlarm_; }
+
  private:
   bool applyMode(JsonObjectConst desired, const char* origin);
   bool applyThresholds(JsonObjectConst desired, const char* origin);

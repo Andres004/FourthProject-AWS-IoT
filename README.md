@@ -29,21 +29,22 @@ Shadows → reglas de AWS IoT → Lambda de datos   → DynamoDB (histórico)
 | ESP32-DevKitC (38 pines) — placa 2 | Python 3.11 o más reciente (para los scripts) |
 | Sensor MQ-2 (módulo con salida AO) y servo SG90 | Cuenta de AWS (región `us-east-2`, Ohio) |
 | Sensor PIR AM312 | Cuenta de Amazon Developer (Alexa Developer Console) |
-| 5 LEDs blancos con resistencias de 220 Ω, 2 LEDs de estado | Una red WiFi de 2.4 GHz (un solo hotspot para las dos placas) |
+| 5 LEDs blancos con resistencias de 220 Ω, un LED indicador de gas y un LED de conexión | Una red WiFi de 2.4 GHz (un solo hotspot para las dos placas) |
 | Divisor de 10 kΩ / 15 kΩ y capacitor de 100 nF para el MQ-2 | |
-| Fuente de 5 V / 2 A para el servo y el MQ-2 | |
+| Fuente de 5 V / 2 A para el servo y el MQ-2, y un capacitor de 1000 µF / 10 V | |
 
 ## 2. Conexiones
 
-**Placa 1 (ventilación).** El servo y el MQ-2 se alimentan de la fuente de 5 V, con **GND común** con la placa. El 5 V de la fuente nunca va a VIN, 3V3 ni a un GPIO.
+**Placa 1 (ventilación).** La ESP32 se alimenta por USB. El servo y el MQ-2 se alimentan de la fuente externa de 5 V / 2 A, con **GND común** con la placa. El 5 V de la fuente nunca va a VIN, 3V3 ni a un GPIO. Las dos placas **no comparten GND**.
 
 | Componente | Pin del componente | Conexión |
 |---|---|---|
 | Servo SG90 | Señal (naranja) | GPIO13 (cable `SERVO`) |
-| Servo SG90 | V+ (rojo) / GND (marrón) | Fuente 5 V / GND común |
+| Servo SG90 | V+ (rojo) / GND (marrón) | Fuente 5 V / GND común, con un capacitor de 1000 µF / 10 V entre 5 V y GND cerca del servo (franja "−" a GND) |
 | MQ-2 | AO | Divisor: AO → 10 kΩ → **GPIO34** → 15 kΩ → GND, con 100 nF de GPIO34 a GND (cable `MQ2`) |
 | MQ-2 | VCC / GND | Fuente 5 V / GND común |
-| LED de estado | Ánodo, con su resistencia | GPIO32 |
+| LED indicador de gas | D32 → LED → 220 Ω → GND | Apagado: aire normal · Encendido: alarma · Parpadeo lento: sensor calentando |
+| (Buzzer) | GPIO25 | Reservado, sin conectar |
 
 El divisor deja 5 V × 15 / 25 = **3.0 V** en GPIO34. **Antes de conectar el AO real**, comprobarlo con la punta del AO en +5 V: el multímetro debe marcar unos 3.0 V en GPIO34, nunca más de 3.3 V.
 
@@ -57,7 +58,7 @@ El divisor deja 5 V × 15 / 25 = **3.0 V** en GPIO34. **Antes de conectar el AO 
 | Luz del baño | GPIO19 | `L-BAN` |
 | Luz de la habitación | GPIO18 | `L-HAB` |
 | PIR AM312 | OUT → GPIO26; VCC → 3V3; GND → GND | `PIR` |
-| LED de estado | GPIO32 | — |
+| LED de estado de la conexión | GPIO32 → 220 Ω → LED → GND | Fijo: en línea · Parpadeo rápido: sin WiFi · Parpadeo lento: sin AWS |
 
 ## 3. Puesta en marcha
 

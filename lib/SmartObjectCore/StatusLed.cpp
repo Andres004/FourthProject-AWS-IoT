@@ -1,16 +1,28 @@
+/**
+ * @file StatusLed.cpp
+ * @brief Blink patterns of the connection LED.
+ */
 #include "StatusLed.h"
 
 #include <Arduino.h>
 
 #include "config_common.h"
 
+StatusLed::StatusLed(int pin) : pin_(pin) {}
+
 void StatusLed::begin() {
-  pinMode(config::status_led::PIN, OUTPUT);
+  if (pin_ == config::status_led::NO_LED) {
+    return;
+  }
+  pinMode(pin_, OUTPUT);
   write(false);
 }
 
 void StatusLed::update(uint32_t nowMs, bool wifiConnected,
                        bool shadowConnected) {
+  if (pin_ == config::status_led::NO_LED) {
+    return;
+  }
   if (wifiConnected && shadowConnected) {
     if (!on_) {
       write(true);
@@ -29,5 +41,5 @@ void StatusLed::update(uint32_t nowMs, bool wifiConnected,
 
 void StatusLed::write(bool on) {
   on_ = on;
-  digitalWrite(config::status_led::PIN, on_ ? HIGH : LOW);
+  digitalWrite(pin_, on_ ? HIGH : LOW);
 }

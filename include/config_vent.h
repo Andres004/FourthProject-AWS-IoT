@@ -22,6 +22,8 @@ constexpr char THING_SUFFIX[] = "-vent";  // Thing: smartloft-<LINK_CODE>-vent
 namespace pins {
 constexpr uint8_t SERVO_SIGNAL = 13;  // SG90 PWM signal, cable "SERVO"
 constexpr uint8_t GAS_SENSOR = 34;    // MQ-2 AO through the 10k/15k divider (ADC1), cable "MQ2"
+constexpr uint8_t GAS_LED = 32;       // Gas indicator LED (D32 -> LED -> 220 ohm -> GND)
+constexpr uint8_t BUZZER = 25;        // Reserved, not connected and not used yet
 }  // namespace pins
 
 /** Shadow document contract of the -vent Thing (technical guide section 5.3). */
@@ -51,13 +53,15 @@ constexpr float DIVIDER_R_BOTTOM_OHM = 15000.0f;  // GPIO34 -> GND resistor [ohm
 // Pin voltage = AO voltage * gain = 15k / (10k + 15k) = 0.6 [-]
 constexpr float DIVIDER_GAIN =
     DIVIDER_R_BOTTOM_OHM / (DIVIDER_R_TOP_OHM + DIVIDER_R_BOTTOM_OHM);
-// MQ-2 supply measured on the 5 V bus WITH the servo and the MQ-2 connected
-// (execution guide step 0.6, evidence A10). Replace with the measured value.
-constexpr float SUPPLY_MV = 5000.0f;            // [mV]
+// MQ-2 supply: external 5 V / 2 A source, measured WITHOUT load (5.337 V at
+// the jack, UNI-T UT890D, 23/11). Same value as tools/mq2_probe, so the
+// thresholds of the calibration (A10) mean the same here. The loaded value
+// is still pending (no multimeter).
+constexpr float SUPPLY_MV = 5340.0f;            // [mV]
 constexpr uint32_t SAMPLE_PERIOD_MS = 50;       // Between ADC reads [ms]
 constexpr uint32_t AVERAGE_WINDOW_MS = 1000;    // Averaging window; one reading per window [ms]
-// Time after power-up without alarms or automatic actions (rule E2). Measured
-// with a cold start in A10 / M4; replace with the measured value.
+// Time after power-up without alarms or automatic actions (rule E2). A10/M4:
+// a cold start after 15 min off showed no transient; 60 s is kept as margin.
 constexpr uint32_t WARMUP_MS = 60000;           // [ms]
 // A reading that moves this much from the last reported one sends gas_changed.
 constexpr float REPORT_DELTA_PCT = 3.0f;        // [percentage points]
@@ -70,12 +74,14 @@ constexpr float ROUNDING_OFFSET = 0.5f;         // Round to nearest when casting
 
 /**
  * Defaults of the automatic logic, used when the NVS is empty (first boot).
- * Thresholds come from the MQ-2 calibration (A10 / M5); replace them.
+ * Thresholds from the MQ-2 calibration (A10 / M5): clean air < 4.4 % (ADC
+ * floor, 720 flat samples); 11 lighter-gas cycles peaked at 9-73 %. The
+ * 7-point band is larger than the noise, so the alarm does not oscillate.
  */
 namespace vent_defaults {
 constexpr bool MODE_AUTO = true;      // true: "auto", false: "manual"
-constexpr uint8_t GAS_HIGH_PCT = 30;  // Alarm on at gas_pct >= this [%]
-constexpr uint8_t GAS_LOW_PCT = 20;   // Alarm off at gas_pct <= this [%]
+constexpr uint8_t GAS_HIGH_PCT = 15;  // Alarm on at gas_pct >= this [%]
+constexpr uint8_t GAS_LOW_PCT = 8;    // Alarm off at gas_pct <= this [%]
 constexpr uint8_t THRESHOLD_MIN_PCT = 1;   // Lowest valid threshold [%]
 constexpr uint8_t THRESHOLD_MAX_PCT = 99;  // Highest valid threshold [%]
 }  // namespace vent_defaults
@@ -89,6 +95,15 @@ constexpr uint8_t THRESHOLD_MAX_PCT = 99;  // Highest valid threshold [%]
 namespace gas_simulation {
 constexpr char KEY_SIM_GAS_PCT[] = "sim_gas_pct";  // number 0-100, or < 0 to stop
 }  // namespace gas_simulation
+
+/**
+ * Gas indicator LED on D32: off = normal air, on = gas alarm, slow blink =
+ * sensor warming up. It shows the edge decision even when the window does
+ * not move (manual mode) and works offline; it is not an actuator.
+ */
+namespace gas_led {
+constexpr uint32_t WARMUP_BLINK_HALF_PERIOD_MS = 1000;  // Slow blink while warming up [ms]
+}  // namespace gas_led
 
 /** NVS (Preferences) storage of mode and thresholds (rule E3). */
 namespace settings_store {

@@ -49,6 +49,10 @@ GAS_WINDOW_MS = 1000           # config::gas::AVERAGE_WINDOW_MS
 # Thresholds used by the test (set explicitly at the start, not the defaults).
 TEST_HIGH_PCT = 30
 TEST_LOW_PCT = 20
+# Calibrated defaults (config::vent_defaults), restored at the end: the test
+# writes the NVS, and the board must not keep the test values afterwards.
+DEFAULT_HIGH_PCT = 15
+DEFAULT_LOW_PCT = 8
 
 COMMON_KEYS = ("event", "origin", "seq", "device_ts")
 VENT_KEYS = ("gas_pct", "gas_mv", "gas_alarm", "warming_up", "window",
@@ -445,10 +449,10 @@ def run_vent(checker, skip_heartbeat):
                    "report with those values")
     dev.version = 0
 
-    # Leave the board in its normal state.
-    dev.send_state({"mode": "auto", "gas_high_pct": TEST_HIGH_PCT,
-                    "gas_low_pct": TEST_LOW_PCT, "cmd_origin": "voice",
-                    "sim_gas_pct": 5})
+    # Leave the board in its normal state (calibrated thresholds in the NVS).
+    dev.send_state({"mode": "auto", "gas_high_pct": DEFAULT_HIGH_PCT,
+                    "gas_low_pct": DEFAULT_LOW_PCT, "cmd_origin": "voice",
+                    "sim_gas_pct": 2})
     time.sleep(1.5)
     checker.common_tail("V", skip_heartbeat)
 

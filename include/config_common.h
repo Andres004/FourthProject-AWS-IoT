@@ -110,9 +110,12 @@ constexpr int64_t DEVICE_TS_UNKNOWN = 0;  // device_ts before the NTP sync
 constexpr size_t MAX_CONSUMED_KEYS = 4;   // desired keys a component clears per report
 }  // namespace report_doc
 
-/** Connection status LED (GPIO 32 on both boards). */
+/**
+ * Connection status LED. Only board 2 has one (its pin is in config_lights.h);
+ * on board 1 GPIO32 is the gas indicator instead (config_vent.h).
+ */
 namespace status_led {
-constexpr uint8_t PIN = 32;                      // Indicator only, NOT an actuator
+constexpr int NO_LED = -1;                       // Board without a status LED
 constexpr uint32_t BLINK_WIFI_DOWN_MS = 200;     // Half period without WiFi [ms]
 constexpr uint32_t BLINK_SHADOW_DOWN_MS = 1000;  // Half period without MQTT [ms]
 }  // namespace status_led

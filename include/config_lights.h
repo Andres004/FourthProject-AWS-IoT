@@ -26,6 +26,7 @@ constexpr uint8_t LIGHT_DINING = 23;    // Cable "L-COM" (was "L-ENT")
 constexpr uint8_t LIGHT_BATHROOM = 19;  // Cable "L-BAN"
 constexpr uint8_t LIGHT_BEDROOM = 18;   // Cable "L-HAB"
 constexpr uint8_t PIR_OUTPUT = 26;      // AM312 digital output (3.3 V, active HIGH)
+constexpr int STATUS_LED = 32;          // Connection LED (side A, pos. 7), not an actuator
 }  // namespace pins
 
 /** Shadow document contract of the -lights Thing (technical guide section 5.4). */

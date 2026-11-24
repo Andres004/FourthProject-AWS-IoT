@@ -13,6 +13,7 @@ SmartObjectApp::SmartObjectApp(const Settings& settings,
     : components_(components),
       componentCount_(componentCount),
       wifi_(settings.wifiSsid, settings.wifiPassword),
+      statusLed_(settings.statusLedPin),
 #ifdef LOCAL_TEST_MODE
       shadow_(),
 #else

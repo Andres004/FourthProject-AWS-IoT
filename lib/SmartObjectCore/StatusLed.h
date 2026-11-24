@@ -1,3 +1,7 @@
+/**
+ * @file StatusLed.h
+ * @brief Optional LED that shows the WiFi / Shadow connection state.
+ */
 #pragma once
 
 #include <stdint.h>
@@ -7,9 +11,14 @@
  *
  * The LED is only an indicator, never one of the smart object's actuators.
  * Fast blink: no WiFi. Slow blink: WiFi without Shadow link. Steady: online.
+ * A board without status LED passes config::status_led::NO_LED and every
+ * method does nothing.
  */
 class StatusLed {
  public:
+  /** @param pin GPIO of the LED, or config::status_led::NO_LED. */
+  explicit StatusLed(int pin);
+
   /** Configures the LED pin. */
   void begin();
 
@@ -19,6 +28,7 @@ class StatusLed {
  private:
   void write(bool on);
 
+  int pin_;
   bool on_ = false;
   uint32_t lastToggleMs_ = 0;
 };
