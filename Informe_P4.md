@@ -258,7 +258,13 @@ Tres flujos, como en el ejemplo del docente:
 
 ### 2.3 Diagrama de circuito
 
-⟨Esquemáticos en Fritzing/KiCad: `docs/img/esquematico_vent.png` y `docs/img/esquematico_lights.png`.⟩
+**Figura 2.3a.** Placa 1 (ventilación): MQ-2 con divisor y filtro hacia D34, servo en D13 con su capacitor, LED indicador de gas en D32 y fuente externa de 5 V.
+
+![Esquemático de la placa 1](docs/img/esquematico_vent.svg)
+
+**Figura 2.3b.** Placa 2 (luces y entrada): cinco luces con 220 Ω, PIR a 3V3 con salida en GPIO26 y LED de estado de la conexión en GPIO32.
+
+![Esquemático de la placa 2](docs/img/esquematico_lights.svg)
 
 **Divisor del MQ-2.** La AO del módulo llega a 5 V y el ADC del ESP32, con 11 dB, mide hasta ~3.1 V:
 
@@ -1555,5 +1561,5 @@ Cada detección dura ≈ 13.7 s: unos 3.7 s de la salida del AM312 más los 10 s
 | [docs/mockups/](docs/mockups/README.md) | Los 4 mockups (HTML fuente y PNG) |
 | [aws/](aws/README.md), [alexa/](alexa/interaction-model.es-US.json) | Configuración exportada: reglas, tablas, políticas usadas y mínimas, permisos de invocación y modelo de la skill |
 | [tools/](tools/) | Scripts de prueba y medición: `serial_check.py`, `analyze_log.py`, `serial_logger.py`, `check_secrets.py`, `mq2_probe/` |
-| ⟨docs/img/⟩ | ⟨Esquemáticos de las dos placas y fotos del montaje⟩ |
+| [docs/img/](docs/img/) | Esquemáticos de las dos placas ([placa 1](docs/img/esquematico_vent.svg), [placa 2](docs/img/esquematico_lights.svg)) |
 | [Informe.md](Informe.md) | Informe de la Práctica 3, base de esta práctica |
