@@ -1,0 +1,35 @@
+{
+  "_comment": "Resource-based policy statements of each Lambda: who may invoke it. The console adds them when the trigger is created.",
+  "smartloft_data_lambda": {
+    "Sid": "AllowDataRule",
+    "Effect": "Allow",
+    "Principal": { "Service": "iot.amazonaws.com" },
+    "Action": "lambda:InvokeFunction",
+    "Resource": "arn:aws:lambda:us-east-2:<account-id>:function:smartloft_data_lambda",
+    "Condition": {
+      "StringEquals": { "AWS:SourceAccount": "<account-id>" },
+      "ArnLike": { "AWS:SourceArn": "arn:aws:iot:us-east-2:<account-id>:rule/smartloft_data_rule" }
+    }
+  },
+  "smartloft_control_lambda": {
+    "Sid": "AllowControlRule",
+    "Effect": "Allow",
+    "Principal": { "Service": "iot.amazonaws.com" },
+    "Action": "lambda:InvokeFunction",
+    "Resource": "arn:aws:lambda:us-east-2:<account-id>:function:smartloft_control_lambda",
+    "Condition": {
+      "StringEquals": { "AWS:SourceAccount": "<account-id>" },
+      "ArnLike": { "AWS:SourceArn": "arn:aws:iot:us-east-2:<account-id>:rule/smartloft_control_rule" }
+    }
+  },
+  "smartloft_skill_lambda": {
+    "Sid": "AllowAlexaSkill",
+    "Effect": "Allow",
+    "Principal": { "Service": "alexa-appkit.amazon.com" },
+    "Action": "lambda:InvokeFunction",
+    "Resource": "arn:aws:lambda:us-east-2:<account-id>:function:smartloft_skill_lambda",
+    "Condition": {
+      "StringEquals": { "lambda:EventSourceToken": "<skill-id>" }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "UserLinks",
+      "Effect": "Allow",
+      "Action": ["dynamodb:Query", "dynamodb:PutItem", "dynamodb:DeleteItem"],
+      "Resource": "arn:aws:dynamodb:us-east-2:<account-id>:table/smartloft-user-thing"
+    },
+    {
+      "Sid": "CheckThingExists",
+      "Effect": "Allow",
+      "Action": "iot:DescribeThing",
+      "Resource": "arn:aws:iot:us-east-2:<account-id>:thing/smartloft-*"
+    },
+    {
+      "Sid": "ReadAndCommandShadows",
+      "Effect": "Allow",
+      "Action": ["iot:GetThingShadow", "iot:UpdateThingShadow"],
+      "Resource": "arn:aws:iot:us-east-2:<account-id>:thing/smartloft-*"
+    },
+    {
+      "Sid": "WriteOwnLogs",
+      "Effect": "Allow",
+      "Action": ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
+      "Resource": "arn:aws:logs:us-east-2:<account-id>:log-group:/aws/lambda/smartloft_skill_lambda:*"
+    }
+  ]
+}

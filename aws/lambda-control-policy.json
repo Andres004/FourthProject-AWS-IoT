@@ -1,0 +1,23 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CountGasAlarms",
+      "Effect": "Allow",
+      "Action": "dynamodb:Query",
+      "Resource": "arn:aws:dynamodb:us-east-2:<account-id>:table/smartloft-data/index/event-index"
+    },
+    {
+      "Sid": "ForceAutoModeOnVentilationOnly",
+      "Effect": "Allow",
+      "Action": "iot:UpdateThingShadow",
+      "Resource": "arn:aws:iot:us-east-2:<account-id>:thing/smartloft-*-vent"
+    },
+    {
+      "Sid": "WriteOwnLogs",
+      "Effect": "Allow",
+      "Action": ["logs:CreateLogGroup", "logs:CreateLogStream", "logs:PutLogEvents"],
+      "Resource": "arn:aws:logs:us-east-2:<account-id>:log-group:/aws/lambda/smartloft_control_lambda:*"
+    }
+  ]
+}
