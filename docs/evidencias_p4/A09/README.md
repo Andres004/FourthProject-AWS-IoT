@@ -52,4 +52,12 @@ Al volver el hotspot:
 
 **Análisis.** La regla que protege funciona sin Internet: con el hotspot apagado, la placa 1 abrió y cerró la ventana tres veces en 410 ms, como con conexión (A05). Lo que se pierde sin conexión es el **registro**: las alarmas de ese intervalo no llegaron a DynamoDB, así que tampoco las cuenta C1. Esa es la limitación que motiva la recomendación de un buffer de eventos (§7 del informe). Las órdenes por voz no se pierden: quedan en `desired` del Shadow y la placa las recibe con el `/get` al reconectarse.
 
-**Veredicto: PASS** (RNF11, RNF5).
+## Hallazgo: el bucle se bloquea mientras intenta reconectarse (D-08)
+
+Durante los primeros ≈ 2 min de cada corte, el celular mantuvo la asociación WiFi pero sin salida a Internet. En ese estado, cada intento de conexión MQTT bloqueó el bucle ≈ **7 s** (`MQTT_CONNECTING` → `MQTT_CONNECT_FAILED state=-2`: 7010–7021 ms en 10 intentos seguidos), porque PubSubClient conecta de forma sincrónica. Mientras tanto la placa **no muestreó el gas**: los mayores huecos entre `GAS_SAMPLE` fueron de **8.0 a 10.8 s** (el normal es 1 s), y las líneas `HEALTH` registraron `max_loop_ms` de hasta 10 012 ms.
+
+E1 actuó en los tres ciclos porque el gas duró varios segundos, y una vez detectada la alarma la ventana se movió en 410 ms. Pero en el peor caso **la detección puede demorarse hasta ≈ 11 s** sin Internet, frente a ≤ 1 s con conexión. Es la misma limitación que la P3 registró como "mitigada" (A07 de la P3), ahora medida sobre la regla de seguridad. La corrección de fondo es un cliente MQTT no bloqueante o la conexión en otra tarea de FreeRTOS; una mitigación rápida es espaciar los reintentos (backoff), para que el bucle quede bloqueado una fracción menor del tiempo. Queda como recomendación (§7 del informe).
+
+**Lectura de [A09_analisis.txt](A09_analisis.txt).** Las líneas `FAIL` de estabilidad ("4 drops", "longest loop 10 012 ms", "run 9 min") son esperadas en una prueba que corta la red a propósito; las de "shortest gap" (969–977 ms) se explican en [A08](../A08/README.md); "A05 smoke cycles 3" es el criterio de A05.
+
+**Veredicto: PASS** (RNF11, RNF5), con la limitación D-08: sin Internet, la detección del gas puede demorarse hasta ≈ 11 s mientras la placa intenta reconectarse.

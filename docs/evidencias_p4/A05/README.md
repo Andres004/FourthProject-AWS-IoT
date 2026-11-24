@@ -61,4 +61,6 @@
 
 En el primer intento ([A05_intento1_ESP32.log](A05_intento1_ESP32.log)) el gas se soltó a distinta distancia y durante tiempos distintos. Hubo 4 episodios con picos de 9.0 %, 26.3 %, 17.8 % y 81.9 %: los 3 que superaron el 15 % abrieron y cerraron la ventana (411 ms) y el de 9.0 % no produjo alarma. El firmware se comportó bien; la variación estaba en la cantidad de gas que llegaba al sensor. Por eso el estímulo se estandarizó (2–3 cm, gas hasta que se enciende el LED) y la prueba se repitió.
 
+**Lectura de [A05_analisis.txt](A05_analisis.txt).** El script imprime todas sus secciones para cualquier log. En esta prueba solo valen las de E1 / E2 / RNF7. Las dos líneas `FAIL` que aparecen no aplican: "longest run 7.8 min" es el criterio de estabilidad de A11 (≥ 30 min) aplicado a un log de 8 min, y "shortest gap 979 ms" mide el tiempo entre las líneas `REPORT_TX`, que se escriben **después** de publicar; el firmware separa el **inicio** de cada publicación por al menos 1000 ms (`lastReportMs_` se fija antes de publicar), y la diferencia es lo que tarda la publicación anterior.
+
 **Veredicto: PASS** (RF13 E1, RNF9).

@@ -122,7 +122,7 @@
   <line x1="820" y1="406" x2="820" y2="434" stroke="#2b2b2b" stroke-width="2"/>
   <line x1="806" y1="402" x2="814" y2="392" stroke="#2b2b2b" stroke-width="1.5"/>
   <line x1="814" y1="404" x2="822" y2="394" stroke="#2b2b2b" stroke-width="1.5"/>
-  <text x="800" y="456" text-anchor="middle" font-size="11" fill="#1a1a1a">LED de gas</text>
+  <text x="808" y="456" text-anchor="end" font-size="11" fill="#1a1a1a">LED de gas</text>
   <line x1="820" y1="420" x2="870" y2="420" stroke="#1565c0" stroke-width="3"/>
   <rect x="870" y="410" width="56" height="20" fill="#ffffff" stroke="#2b2b2b" stroke-width="2"/>
   <text x="898" y="402" text-anchor="middle" font-size="11" fill="#1a1a1a">220 Ω</text>

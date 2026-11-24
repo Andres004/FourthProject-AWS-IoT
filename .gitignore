@@ -3,6 +3,8 @@
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/ipch
+# IDE settings of each developer (JetBrains)
+.idea/
 
 # Secrets: never commit WiFi credentials, certificates or private keys.
 # Only the *.example.h templates are published.

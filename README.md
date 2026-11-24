@@ -16,7 +16,7 @@ Shadows → reglas de AWS IoT → Lambda de datos   → DynamoDB (histórico)
 ```
 
 - **Informe técnico de la Práctica 4:** [Informe_P4.md](Informe_P4.md)
-- **Informe de la Práctica 3** (sin cambios): [Informe.md](Informe.md)
+- **Informe de la Práctica 3** (sin cambios): [Informe.md](Informe.md). El código que describe ese informe está en el tag [`p3-final`](https://github.com/Andres004/FourthProject-AWS-IoT/tree/p3-final) (commit `73fed14`): los enlaces de `Informe.md` a `src/`, `lambda/` e `include/config.h` corresponden a esa versión, porque en la P4 el código se reorganizó.
 - **Evidencia de cada prueba:** [docs/evidencias_p4/](docs/evidencias_p4/)
 
 ---

@@ -43,8 +43,20 @@
 
 La regla lo entregó a la Lambda de datos, que **no lo guardó** y registró `{"log": "DATA_DISCARDED", "reason": "missing_origin", "thingName": "smartloft-518306-vent", "event": "heartbeat"}` en las dos invocaciones ([A08_01](A08_01_cloudwatch_data_discarded.webp), [A08_02](A08_02_cloudwatch_data_discarded_reason.png)). El motivo es el primer error que encuentra la validación (falta `origin`); el reporte tenía además `gas_pct` no numérico, `window` fuera de su lista, `seq` negativo y le faltaban atributos. Las dos invocaciones terminaron en `DATA_DISCARDED` y ninguna en `DATA_STORED`: 2 / 2 inválidos descartados. La validación de cada campo por separado está cubierta por 34 pruebas unitarias de la Lambda de datos ([B01](../B01/README.md)).
 
+A las 18:29 UTC se publicaron, en el mismo *Thing* de prueba, reportes **completos y válidos salvo en un solo campo**, para comprobar que cada error se detecta por sí mismo ([A08_03](A08_03_cloudwatch_motivos_distintos.webp)):
+
+| Hora (UTC) | Único campo inválido | `reason` registrado | ¿Guardado? |
+|---|---|---|---|
+| 18:29:45.772 | `gas_pct: 150` (fuera de 0–100) | `bad_gas_pct` | No |
+| 18:29:49.386 | `window: "half"` | `bad_window` | No |
+| 18:29:57.851 | `gas_low_pct: 20` con `gas_high_pct: 15` | `low_not_below_high` | No |
+
+Con los dos de las 13:43 (`missing_origin`) suman 5 reportes inválidos y **4 motivos distintos**, todos descartados. El caso `seq` negativo (`bad_seq`) está cubierto por las pruebas unitarias de B01.
+
 | Medida | Valor | Criterio | Veredicto |
 |---|---|---|---|
-| Inválidos descartados | 2 / 2 (`DATA_DISCARDED`, ningún `DATA_STORED`) | 100 % | PASS |
+| Inválidos descartados | 5 / 5 con 4 motivos distintos (`DATA_DISCARDED`, ningún `DATA_STORED`) | 100 % | PASS |
+
+**Lectura de [A08_analisis_logs.txt](A08_analisis_logs.txt).** El script imprime todas sus secciones. Las líneas `FAIL` que aparecen no contradicen el resultado: "longest loop 2913 / 2213 ms" es la conexión MQTT/TLS del primer minuto, explicada en [A11](../A11/README.md); "shortest gap 988 / 987 ms" mide entre líneas `REPORT_TX`, que se escriben después de publicar (el firmware separa el inicio de cada publicación por ≥ 1000 ms); y "A05 smoke cycles 0" es el criterio de A05, que no aplica a esta corrida.
 
 **Veredicto: PASS** (RF10, RF11, RF12, RNF7, RNF8).
