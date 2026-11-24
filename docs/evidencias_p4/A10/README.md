@@ -5,6 +5,9 @@
 - Requisito: RNF2 (exactitud de sensores y actuadores); fundamenta los umbrales de E1 y `WARMUP_MS`
 - Herramientas: [tools/mq2_probe/](../../../tools/mq2_probe/) (una lectura promediada por segundo, 20 muestras cada 50 ms, `SUPPLY_MV = 5340`); multímetro UNI-T UT890D
 - Archivos: [A10_01_clean_air_baseline.png](A10_01_clean_air_baseline.png) (aire limpio), [A10_02_lighter_response.png](A10_02_lighter_response.png) (respuesta a un ciclo de gas de encendedor)
+- Registros crudos con el firmware final (mismo muestreo que `mq2_probe`: 20 lecturas cada 50 ms, promedio de 1 s, una línea `GAS_SAMPLE` por segundo):
+  - [A08_vent_ESP32.log](../A08/A08_vent_ESP32.log): 66 min, **3853 lecturas en aire limpio**
+  - [A05_vent_ESP32.log](../A05/A05_vent_ESP32.log) y [A05_intento1_ESP32.log](../A05/A05_intento1_ESP32.log): **19 ciclos con gas de encendedor**, segundo a segundo
 
 ## Calibración del MQ-2
 
@@ -17,6 +20,20 @@
 | Respuesta al gas | 2–3.5 s hasta el pico | `mq2_probe` con marcas del botón BOOT |
 | Recuperación | 3–5 s hasta volver a la línea base | `mq2_probe` |
 | Arranque en frío (15 min apagado) | Sin transitorio apreciable | `mq2_probe` |
+
+### Registros crudos del firmware
+
+| Medida | Valor | Registro |
+|---|---|---|
+| Aire limpio: lecturas | 3853 (66 min, sin calentamiento ni gas) | [A08_vent_ESP32.log](../A08/A08_vent_ESP32.log) |
+| Aire limpio: índice | 3850 lecturas en **4.4 %**, 3 entre 4.5 y 4.7 %; promedio 4.40 %, desviación estándar 0.006 puntos | ídem |
+| Aire limpio: tensión en D34 | `pin_mv` 142 mV (149–151 mV en 3 lecturas); `min_mv` = `max_mv` dentro de la ventana en 3847 de 3853 | ídem |
+| Ciclos de gas | 15 ciclos estandarizados (A05) + 4 del primer intento | [A05](../A05/README.md) |
+| Picos | 16.8 % a 85.9 % (15 ciclos estandarizados) | ídem |
+| Respuesta (línea base → alarma) | 1.0–3.0 s (promedio 1.5 s) | ídem |
+| Recuperación (fin de la alarma → línea base) | 1.0–2.0 s (promedio 1.3 s) | ídem |
+
+La deriva de la línea base durante 66 min fue nula dentro de la resolución del ADC (4.4 % de principio a fin). Los tiempos de respuesta y recuperación medidos con el firmware son algo menores que los de la calibración (2–3.5 s y 3–5 s), porque allí se tomaron con las marcas manuales del botón BOOT y aquí desde la primera lectura sobre la línea base hasta el cruce del umbral.
 
 **Ejemplo de un ciclo** ([A10_02](A10_02_lighter_response.png)): 4.44 % → 14.57 % (primer segundo con gas) → 56.18 % → **84.36 %** de pico a los 4 s → 16.85 % → 8.93 % → 4.68 % a los 14 s del inicio. El pico dio `pin_mv` = 2703 mV en D34, por debajo de 3.3 V.
 

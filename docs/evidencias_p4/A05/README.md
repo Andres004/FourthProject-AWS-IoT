@@ -57,10 +57,25 @@
 - **Histéresis:** las 15 alarmas se apagaron con índices entre 5.8 % y 8.0 %, siempre ≤ 8 %; ninguna oscilación (cada alarma produjo exactamente un `ON` y un `OFF`).
 - **El umbral filtra los soplos débiles:** dos soplos breves llegaron a 6.1 % y 8.1 % y no produjeron alarma, que es lo esperado.
 
+## Segunda serie: 12 ciclos con la placa conectada a AWS
+
+El 24/11/2026 entre 14:43 y 14:58 (Bolivia), con el firmware `vent` conectado a AWS IoT por el hotspot y en modo `auto`, se registraron otros 12 ciclos con gas de encendedor ([A05_con_aws_vent_ESP32.log](A05_con_aws_vent_ESP32.log), [A05_con_aws_analisis.txt](A05_con_aws_analisis.txt)).
+
+| Medida | Valor | Criterio | Veredicto |
+|---|---|---|---|
+| Ciclos completos | 12 / 12 | ≥ 10 | PASS |
+| `GAS_ALARM_ON` → `ACTUATOR_DONE` (abrir) | mín. 400 / mediana 400 / máx. 401 ms | ≤ 1000 ms | PASS |
+| `GAS_ALARM_OFF` → `ACTUATOR_DONE` (cerrar) | 400 ms en los 12 | ≤ 1000 ms | PASS |
+| Índice al disparar | 15.9 % a 74.6 % | ≥ 15 % | PASS |
+| Cambios de alarma fuera de los umbrales | 0 de 24 | 0 | PASS |
+| Reporte `gas_alarm_on` publicado | 17 ms después de la alarma, con `origin=edge` | — | INFO |
+
+Con conexión, la respuesta del Edge es la misma que sin ella (400 vs. 411 ms): la decisión no pasa por la red.
+
 ## Resultado negativo: primer intento
 
 En el primer intento ([A05_intento1_ESP32.log](A05_intento1_ESP32.log)) el gas se soltó a distinta distancia y durante tiempos distintos. Hubo 4 episodios con picos de 9.0 %, 26.3 %, 17.8 % y 81.9 %: los 3 que superaron el 15 % abrieron y cerraron la ventana (411 ms) y el de 9.0 % no produjo alarma. El firmware se comportó bien; la variación estaba en la cantidad de gas que llegaba al sensor. Por eso el estímulo se estandarizó (2–3 cm, gas hasta que se enciende el LED) y la prueba se repitió.
 
 **Lectura de [A05_analisis.txt](A05_analisis.txt).** El script imprime todas sus secciones para cualquier log. En esta prueba solo valen las de E1 / E2 / RNF7. Las dos líneas `FAIL` que aparecen no aplican: "longest run 7.8 min" es el criterio de estabilidad de A11 (≥ 30 min) aplicado a un log de 8 min, y "shortest gap 979 ms" mide el tiempo entre las líneas `REPORT_TX`, que se escriben **después** de publicar; el firmware separa el **inicio** de cada publicación por al menos 1000 ms (`lastReportMs_` se fija antes de publicar), y la diferencia es lo que tarda la publicación anterior.
 
-**Veredicto: PASS** (RF13 E1, RNF9).
+**Veredicto: PASS** (RF13 E1, RNF9): 27 ciclos en total (15 sin conexión + 12 con AWS), todos entre 400 y 411 ms.

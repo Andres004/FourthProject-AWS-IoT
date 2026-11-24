@@ -1,0 +1,42 @@
+
+== FILE A05_con_aws_vent_ESP32.log ==
+   board=vent lines=1398 span=19.7 min boots=0 reset_reasons=- utc_clock=yes
+   error/warning lines: 1
+     line 1398 t=4549787 MQTT_CONNECT_FAILED state=-2
+
+== RNF1 stability (A11) ==
+RNF1 longest run without restart: 19.7 min (>= 30) -> FAIL
+RNF1 restarts inside the log: 0 (0) -> PASS
+   HEALTH lines=19 heap first/last=197736/197736 rssi -81..-37 dBm
+RNF1 longest loop iteration: 60 ms (<= 500) -> PASS
+RNF1 WiFi + MQTT drops: 6 (0) -> FAIL
+RNF1 free heap loss: 0 bytes (<= 4096) -> PASS
+
+== RNF4 reporting, V1 complete reports, V2 seq ==
+   reports=106 failed=0 events={'heartbeat': 15, 'gas_alarm_on': 12, 'window_changed': 24, 'gas_changed': 43, 'gas_alarm_off': 12}
+   origins={'edge': 106}
+V1 reports missing an attribute: 0 (0) -> PASS
+V3 largest report: 247 bytes (< 1024) -> PASS
+   gap between published reports ms: n=105 min=988 median=1000 mean=10733 p95=60000 max=60001
+RNF4 longest gap while connected: 60001 ms (<= 61500) -> PASS
+RNF4 shortest gap: 988 ms (>= 995) -> FAIL
+V2 segment from line 4: seq 86..191, published 106, failed 0, never attempted 0 (0) -> PASS
+   published: 323/h -> 7757/day -> 232724/month (input for B04)
+
+== RNF3 voice commands on the board (A02 lights / A03 window) ==
+   no DELTA_RX followed by an applied command
+
+== E1 / E2 / RNF7 edge response (A05) ==
+   warm-up ended before this log started (first GAS_SAMPLE has warming_up=0)
+E2 alarms during warm-up: 0 (0) -> PASS
+E1 alarm changes outside the thresholds: 0/24 (0) -> PASS
+   GAS_ALARM_ON -> ACTUATOR_DONE open ms: n=12 min=400 median=400 mean=400 p95=401 max=401
+   GAS_ALARM_OFF -> ACTUATOR_DONE closed ms: n=12 min=400 median=400 mean=400 p95=400 max=400
+RNF7 edge response max 401 ms (<= 1000), alarms without window move: 0 -> PASS
+A05 smoke cycles in auto: 12 (>= 10) -> PASS
+
+== C1 / RNF8 cloud response seen from board 1 (A06) ==
+   no gas_alarm_on report in manual mode
+
+== RNF9 offline operation / RNF5 reconnection (A09) ==
+   MQTT_LOST line 1395: offline 12.0 s (log ends); alarms=0 edge actions=0 lost seq=[]
