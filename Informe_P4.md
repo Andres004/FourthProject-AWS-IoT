@@ -35,7 +35,7 @@
 | Integridad del almacenamiento | ≥ 99 % | 100 % en las dos placas (96/96 y 80/80) (A08) | Cumple |
 | Latencia de almacenamiento | ≤ 5 s | Mediana 325 ms, máx. 655 ms (A08) | Cumple |
 | Respuesta automática Edge | ≤ 1000 ms | 400–411 ms en 27 ciclos: 15 sin conexión y 12 con AWS (A05) | Cumple |
-| Respuesta automática Nube | ≤ 5000 ms | 591 ms del reporte de la alarma al cambio de modo (A06, **n = 1**) | Cumple, con una sola medición |
+| Respuesta automática Nube | ≤ 5000 ms | 591 y 3959 ms del reporte de la alarma al cambio de modo (A06, **n = 2**) | Cumple, con dos mediciones |
 | Operación sin conexión | E1 sigue; lo no enviado se cuenta | E1 sin Internet: 15/15 (A05) y 3/3 (A09); órdenes de voz encoladas aplicadas 1.2–3.1 s después de reconectar (A09) | Cumple |
 | Costo mensual | Dentro de la capa gratuita | ≈ 0.10 USD/mes con la capa gratuita, ≈ 0.46 USD sin ella (B04) | Cumple |
 
@@ -1304,7 +1304,7 @@ Las placas, con el firmware real, conectadas a AWS IoT por un hotspot a 30–50 
 | **A02** luces | Apagar y encender las 5 zonas, consultas, orden repetida, "apaga todas las luces", "¿hay alguien en la puerta?" | **11 / 11**; 8 / 8 comandos confirmados ("Listo…"); en la placa, `DELTA_RX` → `LIGHT_APPLIED` mediana **11 ms** y reporte publicado mediana **29 ms**; "todas" = 1 `delta` y 1 reporte | [A02](docs/evidencias_p4/A02/README.md) |
 | **A03** gas y ventana | Consulta de gas y de la ventana; abrir en `auto` (rechazo); modo manual; abrir y cerrar | **6 / 6**; `DELTA_RX` → `ACTUATOR_DONE` 410–411 ms; confirmación publicada a los 416–417 ms | [A03](docs/evidencias_p4/A03/README.md) |
 | **A04** modo y umbrales | Consultar modo y umbrales; cambiar el alto a 20; bajo 25 (≥ alto); alto 100 (fuera de rango); alto 15 | **7 / 7**; las 2 órdenes inválidas no llegaron a la placa; `THRESHOLDS_APPLIED` 17–18 ms después del `delta` | [A04](docs/evidencias_p4/A04/README.md) |
-| **A06** regla C1 | 3 alarmas con gas de encendedor en `manual` | Alarmas 1 y 2: la Nube no actuó y la ventana no se movió. Alarma 3: `desired.mode = auto` con `cmd_origin = cloud`; **591 ms (n = 1)** desde el reporte `gas_alarm_on` hasta `MODE_APPLIED`; la ventana abierta por E1 a los 1033 ms; `mode_changed` (cloud) y `window_changed` (edge) en reportes separados; sin bucle | [A06](docs/evidencias_p4/A06/README.md) |
+| **A06** regla C1 | 3 alarmas con gas de encendedor en `manual` | Alarmas 1 y 2: la Nube no actuó y la ventana no se movió. Alarma 3: `desired.mode = auto` con `cmd_origin = cloud`; **591 ms** (y 3959 ms en una segunda medición; n = 2) desde el reporte `gas_alarm_on` hasta `MODE_APPLIED`; la ventana abierta por E1 a los 1033 ms; `mode_changed` (cloud) y `window_changed` (edge) en reportes separados; sin bucle | [A06](docs/evidencias_p4/A06/README.md) |
 | **A07** convivencia | Una frase por situación: ventana en `auto`, cerrar con alarma, consulta con alarma, umbrales inválidos, ventana en `manual`, modo tras C1 | **7 / 7** situaciones con la respuesta explicativa esperada; ninguna orden rechazada escribió `desired` | [A07](docs/evidencias_p4/A07/README.md) |
 
 **Tiempo de respuesta por voz (RNF3).** La skill solo responde "Listo…" si lee la confirmación en `reported` dentro de 3 s; los 10 comandos de A02 y A03 la recibieron. Del lado de la placa, cada orden se aplica en 10–41 ms y se confirma en 28–741 ms (741 ms cuando el reporte anterior había salido hace menos de 1 s y el firmware espera el mínimo entre reportes).
@@ -1518,7 +1518,7 @@ El límite que primero se alcanzaría no es el costo sino la cuota gratuita de *
 | RNF7 | Integridad del almacenamiento | ≥ 99 % | 100 % (96/96 y 80/80); 5/5 inválidos descartados (4 motivos) | A08 | Cumple |
 | RNF8 | Latencia del almacenamiento | ≤ 5 s | Mediana 320–325 ms, máx. 655 ms, sin valores negativos | A08 | Cumple |
 | RNF9 | Respuesta automática Edge | ≤ 1000 ms | 400–411 ms en 27 ciclos con gas real (15 sin conexión, 12 con AWS); 411 ms con gas simulado | A05, B02 | Cumple |
-| RNF10 | Respuesta automática Nube | ≤ 5000 ms | 591 ms (`gas_alarm_on` → `MODE_APPLIED origin=cloud`); 1033 ms hasta la ventana abierta. **n = 1**: una sola medición | A06 | Cumple, con una sola medición |
+| RNF10 | Respuesta automática Nube | ≤ 5000 ms | 591 ms (`gas_alarm_on` → `MODE_APPLIED origin=cloud`); 1033 ms hasta la ventana abierta; segunda medición 3959 ms (probable arranque en frío de la Lambda). **n = 2** | A06 | Cumple, con dos mediciones |
 | RNF11 | Operación sin conexión | E1 sigue sin Internet; lo no enviado se declara | E1 sin Internet: 15/15 (A05) y 3/3 (A09); 19 + 2 reportes perdidos, todos registrados como `REPORT_TX_FAILED`. Mientras intenta reconectarse, la lectura del gas se pausa hasta 10.8 s (D-08) | A05, A09 | Cumple, con la limitación D-08 |
 | RNF12 | Costo | Dentro de la capa gratuita | ≈ 0.10 USD/mes con capa gratuita; ≈ 0.46 USD sin ella; reglas al 92 % de su cuota gratuita | B04 | Cumple |
 
@@ -1554,7 +1554,7 @@ El límite que primero se alcanzaría no es el costo sino la cuota gratuita de *
 - **El cuello de botella es el sensor, no el software.** De los ≈ 2–3.5 s totales entre que llega el gas y la ventana está abierta, 1–3 s son la respuesta química del MQ-2 y 1 s es el promedio; el firmware y el servo aportan ≈ 0.4 s.
 - **El umbral filtra lo que debe filtrar.** Con 15 / 8, los soplos breves (6–9 %) no dispararon alarmas y ninguna alarma osciló. El precio es que una fuga muy pequeña tarda en detectarse; el umbral se puede bajar por voz sin reprogramar (RF14).
 - **Limitación de la medición.** El aire limpio queda en el piso no lineal del ADC (142 mV en D34): el sistema no puede medir una deriva menor de 4.4 %, y el índice no es una concentración en ppm.
-- **La Nube agrega ≈ 0.2 s sobre el Edge, no órdenes de magnitud.** C1 respondió en 591 ms (A06, una sola medición) frente a los 411 ms de E1 (A05). La diferencia no está en la velocidad sino en la **disponibilidad**: E1 funcionó sin Internet y C1 no puede.
+- **La Nube agrega ≈ 0.2 s sobre el Edge, no órdenes de magnitud.** C1 respondió en 591 ms (A06; 3959 ms en una segunda medición con la Lambda fría) frente a los 411 ms de E1 (A05). La diferencia no está en la velocidad sino en la **disponibilidad**: E1 funcionó sin Internet y C1 no puede.
 - **La regla del Edge no depende de Internet, pero sí del bucle.** E1 funcionó sin conexión (A05, A09), pero mientras la placa intenta reconectarse con WiFi sin salida, la conexión MQTT sincrónica bloquea el bucle ≈ 7 s por intento y la lectura del gas se pausa hasta 10.8 s (D-08). La lógica de seguridad debería correr aislada de la red (otra tarea o un cliente no bloqueante).
 - **La conectividad fue el punto débil del prototipo, no el código.** La placa 1 no se mantenía conectada con −75 dBm (D-07); la misma placa con −35 dBm no se desconectó en toda la corrida. Un producto real necesitaría una antena externa o un aviso de señal débil.
 

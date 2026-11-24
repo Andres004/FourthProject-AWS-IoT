@@ -32,13 +32,13 @@
 |---|---|---|---|
 | Alarmas en `manual` que no movieron la ventana | 2 / 2 (alarmas 1 y 2) | La Nube no actúa con menos de 3 | PASS |
 | C1 al llegar a 3 alarmas | Sí: `mode = auto`, `cmd_origin = cloud` | Actúa solo por `desired` | PASS |
-| Respuesta de la Nube (`REPORT_TX gas_alarm_on` → `MODE_APPLIED`) | **591 ms (n = 1)** | ≤ 5000 ms | PASS, con una sola medición |
+| Respuesta de la Nube (`REPORT_TX gas_alarm_on` → `MODE_APPLIED`) | **591 ms** (08:49) y **3959 ms** (17:30, [A06_ciclos_vent_ESP32.log](A06_ciclos_vent_ESP32.log)); n = 2 | ≤ 5000 ms | PASS, con dos mediciones |
 | Hasta la ventana abierta (`ACTUATOR_DONE`) | 1033 ms | — | INFO |
 | Eventos de la Nube y del Edge en reportes separados | `mode_changed` (cloud) y luego `window_changed` (edge) | Sin pérdida de eventos (D-01) | PASS |
 | Bucle regla ↔ Lambda | El reporte `mode_changed` no volvió a disparar la regla (no hubo un segundo `DELTA_RX`) | Sin bucle | PASS |
 | Consulta por voz después | "La ventilación está en modo automático." | `auto` | PASS |
 
-**Limitación: n = 1.** C1 solo actúa en la alarma que completa el límite estando en `manual`, así que esta corrida dio **una** medición del tiempo de respuesta de la Nube. El criterio general de las pruebas pide al menos 10 repeticiones por punto; el valor de 591 ms se informa como una medición única, no como un resultado estadístico. Las 13 pruebas unitarias de la Lambda de control (B01) cubren la lógica de la decisión (conteo, exclusión de la alarma actual, modo `auto`), pero no el tiempo.
+**Limitación: n = 2.** C1 solo actúa en la alarma que completa el límite estando en `manual`. Hubo dos mediciones: 591 ms y 3959 ms. La segunda se tomó tras horas sin invocar la Lambda de control; la diferencia es consistente con un arranque en frío (3.1 s medidos en la Lambda de datos, `aws/README.md`), aunque no se verificó en CloudWatch. El criterio general de las pruebas pide al menos 10 repeticiones por punto; los dos valores se informan como mediciones sueltas, no como un resultado estadístico. Las 13 pruebas unitarias de la Lambda de control (B01) cubren la lógica de la decisión (conteo, exclusión de la alarma actual, modo `auto`), pero no el tiempo.
 
 **Análisis.** El camino de la Nube suma la regla de IoT, la invocación de `smartloft_control_lambda`, la consulta a `event-index`, el `UpdateThingShadow` y la entrega del `delta`: 573 ms hasta la placa. Es ≈ 1.4 veces el tiempo de la regla E1 en el Edge (411 ms, A05), aceptable para una decisión que no es urgente: la seguridad inmediata la da E1, que abrió la ventana en cuanto la Nube cambió el modo.
 
