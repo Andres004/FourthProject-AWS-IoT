@@ -1,16 +1,23 @@
-# Puerta inteligente de un monoambiente — SIS-234, Práctica 3
+# SmartLoft: monoambiente inteligente — SIS-234, Práctica 4
 
-Un ESP32 abre y cierra una puerta (maqueta) con un servo SG90 y detecta con un sensor PIR AM312 si hay alguien en la entrada. Se controla por voz o texto desde la skill de Alexa **"monoambiente inteligente"**. Alexa nunca habla con el ESP32: todo pasa por el **Device Shadow** de AWS IoT Core.
+Maqueta de un monoambiente con **dos objetos inteligentes** conectados a AWS IoT Core:
+
+- **Placa 1 — ventilación:** un MQ-2 mide gas y humo; si el índice supera un umbral, un servo SG90 abre la ventana y la cierra al volver a la normalidad. La regla funciona en la placa (Edge), aun sin Internet.
+- **Placa 2 — luces y entrada:** cinco LEDs representan las luces de la cocina, la sala de estar, el comedor, el baño y la habitación; un PIR AM312 detecta presencia en la entrada (solo se consulta, no acciona nada).
+
+Se controlan por voz o texto desde la skill de Alexa **"monoambiente inteligente"**. Alexa y la Nube nunca hablan con las placas: todo pasa por el **Device Shadow** de cada una. Cada reporte se guarda en DynamoDB con su origen (`voice`, `edge`, `cloud`, `boot`).
 
 ```text
-Usuario → Alexa (simulador) → AWS Lambda → DynamoDB (vinculación)
-                                         → Device Shadow ⇄ ESP32 (MQTT/TLS) → servo + PIR
+Usuario → Alexa (simulador) → AWS Lambda (skill) → DynamoDB (vinculación)
+                                                 → Shadow -vent   ⇄ Placa 1 (MQTT/TLS) → MQ-2 + servo
+                                                 → Shadow -lights ⇄ Placa 2 (MQTT/TLS) → 5 LEDs + PIR
+Shadows → reglas de AWS IoT → Lambda de datos   → DynamoDB (histórico)
+                            → Lambda de control → Shadow -vent (vuelve a automático)
 ```
 
-- **Informe técnico:** [Informe.md](Informe.md)
-- **Plan de pruebas:** [docs/PLAN_DE_PRUEBAS.md](docs/PLAN_DE_PRUEBAS.md)
-- **Evidencia de cada prueba:** [docs/evidencias/](docs/evidencias/README.md)
-- **Configuración de AWS y Alexa exportada:** [aws/](aws/README.md), [alexa/](alexa/interaction-model.es-US.json)
+- **Informe técnico de la Práctica 4:** [Informe_P4.md](Informe_P4.md)
+- **Informe de la Práctica 3** (sin cambios): [Informe.md](Informe.md)
+- **Evidencia de cada prueba:** [docs/evidencias_p4/](docs/evidencias_p4/)
 
 ---
 
@@ -18,134 +25,124 @@ Usuario → Alexa (simulador) → AWS Lambda → DynamoDB (vinculación)
 
 | Hardware | Software y cuentas |
 |---|---|
-| ESP32 DOIT DevKit V1 (30 pines) | VS Code con PlatformIO |
-| Servo SG90 | Python 3.11 o más reciente (para las pruebas automáticas y los scripts) |
-| Sensor PIR AM312 | Cuenta de AWS (región `us-east-2`, Ohio) |
-| LED y una resistencia (la única del circuito) | Cuenta de Amazon Developer (Alexa Developer Console) |
-| Protoboard, cables y un cable USB | Una red WiFi de 2.4 GHz |
+| ESP32 DOIT DevKit V1 (30 pines) — placa 1 | VS Code con PlatformIO |
+| ESP32-DevKitC (38 pines) — placa 2 | Python 3.11 o más reciente (para los scripts) |
+| Sensor MQ-2 (módulo con salida AO) y servo SG90 | Cuenta de AWS (región `us-east-2`, Ohio) |
+| Sensor PIR AM312 | Cuenta de Amazon Developer (Alexa Developer Console) |
+| 5 LEDs blancos con resistencias de 220 Ω, 2 LEDs de estado | Una red WiFi de 2.4 GHz (un solo hotspot para las dos placas) |
+| Divisor de 10 kΩ / 15 kΩ y capacitor de 100 nF para el MQ-2 | |
+| Fuente de 5 V / 2 A para el servo y el MQ-2 | |
 
 ## 2. Conexiones
 
-Todas las tierras son una sola: el GND del servo, del PIR, del LED y del ESP32 van a la misma línea de tierra.
+**Placa 1 (ventilación).** El servo y el MQ-2 se alimentan de la fuente de 5 V, con **GND común** con la placa. El 5 V de la fuente nunca va a VIN, 3V3 ni a un GPIO.
 
-| Componente | Pin del componente | Pin del ESP32 |
+| Componente | Pin del componente | Conexión |
 |---|---|---|
-| Servo SG90 | Señal (naranja) | D13 (GPIO13) |
-| Servo SG90 | V+ (rojo) | VIN (5 V del USB) |
-| Servo SG90 | GND (marrón) | GND común |
-| PIR AM312 | OUT | D26 (GPIO26) |
-| PIR AM312 | VCC | VIN (5 V) |
-| PIR AM312 | GND | GND común |
-| LED de estado | Ánodo, a través de la resistencia | D32 (GPIO32) |
-| LED de estado | Cátodo | GND común |
+| Servo SG90 | Señal (naranja) | GPIO13 (cable `SERVO`) |
+| Servo SG90 | V+ (rojo) / GND (marrón) | Fuente 5 V / GND común |
+| MQ-2 | AO | Divisor: AO → 10 kΩ → **GPIO34** → 15 kΩ → GND, con 100 nF de GPIO34 a GND (cable `MQ2`) |
+| MQ-2 | VCC / GND | Fuente 5 V / GND común |
+| LED de estado | Ánodo, con su resistencia | GPIO32 |
 
-Esquema completo: [docs/img/circuito_objeto_inteligente.svg](docs/img/circuito_objeto_inteligente.svg). Foto del montaje: [docs/img/montaje.jpeg](docs/img/montaje.jpeg).
+El divisor deja 5 V × 15 / 25 = **3.0 V** en GPIO34. **Antes de conectar el AO real**, comprobarlo con la punta del AO en +5 V: el multímetro debe marcar unos 3.0 V en GPIO34, nunca más de 3.3 V.
 
-**LED de estado** (solo indicador, no es el actuador):
+**Placa 2 (luces y entrada).** Alimentada por USB.
 
-| LED | Significa |
-|---|---|
-| Parpadeo rápido | Sin WiFi |
-| Parpadeo lento | Con WiFi, pero sin conexión con AWS |
-| Encendido fijo | En línea con el Shadow |
+| Componente | Conexión | Cable |
+|---|---|---|
+| Luz de la cocina | GPIO22 → 220 Ω → LED → GND | `L-COC` |
+| Luz de la sala de estar | GPIO21 | `L-SAL` |
+| Luz del comedor | GPIO23 | `L-COM` |
+| Luz del baño | GPIO19 | `L-BAN` |
+| Luz de la habitación | GPIO18 | `L-HAB` |
+| PIR AM312 | OUT → GPIO26; VCC → 3V3; GND → GND | `PIR` |
+| LED de estado | GPIO32 | — |
 
 ## 3. Puesta en marcha
 
 ### 3.1 AWS y Alexa (una sola vez)
 
-La configuración completa está en el [Informe §3.4–3.5](Informe.md) y en [aws/README.md](aws/README.md). En resumen:
+La configuración de AWS IoT Core, las reglas, las Lambdas, DynamoDB y la skill está en el [Informe_P4 §3.4–3.5](Informe_P4.md#34-configuración-en-aws) y en [aws/](aws/). ⟨A cargo de Ricardo.⟩
 
-1. **AWS IoT Core:** el Thing `monoambiente-739264` con Shadow clásico, su certificado activo y la política de IoT asociada.
-2. **DynamoDB:** la tabla `user_thing`, con clave de partición `userId` (String).
-3. **Lambda** `monoambiente-skill` (Python): código de [lambda/lambda_function.py](lambda/lambda_function.py), variables `IOT_ENDPOINT`, `IOT_REGION=us-east-2` y `TABLE_NAME=user_thing`, timeout de 7 s y disparador de Alexa.
-4. **Skill de Alexa** en *Spanish (US)*: modelo de [alexa/interaction-model.es-US.json](alexa/interaction-model.es-US.json) y, en **Build → Endpoint**, el ARN de la Lambda.
+Cada placa necesita su propio *Thing* y su propio certificado: `smartloft-739264-vent` (placa 1) y `smartloft-739264-lights` (placa 2).
 
-Para armar el `.zip` de la Lambda:
+### 3.2 Firmware de las placas
+
+1. Copia `include/secrets_vent.example.h` como `include/secrets_vent.h` y `include/secrets_lights.example.h` como `include/secrets_lights.h`. Completa en cada uno el WiFi, el endpoint de AWS IoT, el certificado raíz (`AmazonRootCA1.pem`) y **el certificado y la clave privada de esa placa**. **Nunca subas los `secrets_*.h` ni los certificados al repositorio**: están en `.gitignore`.
+2. Si usas otros *Things*, cambia `LINK_CODE` en [include/config_common.h](include/config_common.h) (`smartloft-<LINK_CODE>-vent` / `-lights`).
+3. Antes de la primera carga de la placa 1, pon en [include/config_vent.h](include/config_vent.h) los valores medidos: `gas::SUPPLY_MV` (tensión del bus de 5 V con carga), `gas::WARMUP_MS`, los umbrales por defecto y los ángulos de la ventana.
+4. Carga cada firmware en su placa y abre el monitor:
 
 ```bash
-python -m pip install -r lambda/requirements.txt -t lambda/package
+pio run -e vent -t upload -t monitor
 ```
 
 ```bash
-copy lambda\lambda_function.py lambda\package\
+pio run -e lights -t upload -t monitor
 ```
 
-```bash
-python -c "import shutil; shutil.make_archive('lambda/lambda_deployment', 'zip', 'lambda/package')"
-```
+Al arrancar, el monitor muestra `LINK_CODE 739264`. Cuando aparecen `MQTT_CONNECTED` y `GET_RX`, la placa está en línea. La placa 1 no da alarmas mientras el MQ-2 se calienta (`GAS_READY` marca el final); la placa 2 ignora el PIR los primeros 30 s (`PIR_READY`).
 
-Luego, en la Lambda: **Code → Upload from → .zip file** con `lambda/lambda_deployment.zip`.
-
-### 3.2 Firmware del ESP32
-
-1. Copia `include/secrets.example.h` como `include/secrets.h` y completa el WiFi, el endpoint de AWS IoT, el certificado raíz, el certificado del dispositivo y la clave privada. **Nunca subas `secrets.h` al repositorio**: está en `.gitignore`.
-2. Si usas otro Thing, cambia `LINK_CODE` en [include/config.h](include/config.h) para que coincida con su nombre (`monoambiente-<LINK_CODE>`).
-3. Carga el firmware y abre el monitor:
-
-```bash
-pio run -e esp32doit-devkit-v1 -t upload -t monitor
-```
-
-Al arrancar, el monitor muestra `LINK_CODE 739264`, el código que se le dice a Alexa. Cuando aparecen `MQTT_CONNECTED` y `GET_RX`, el objeto está en línea. Durante los primeros 30 s el PIR se calienta y no reporta presencia (`PIR_READY` marca el final).
+| Entorno | Placa | Para qué |
+|---|---|---|
+| `vent` | 1 | Firmware real, conectado a AWS |
+| `lights` | 2 | Firmware real, conectado a AWS |
+| `vent_local_test` | 1 | Sin AWS: los `delta` se escriben en el monitor serie; el gas se puede simular |
+| `lights_local_test` | 2 | Sin AWS: los `delta` se escriben en el monitor serie |
 
 ## 4. Cómo usarlo: frases para Alexa
 
-En la [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask), abre la skill → pestaña **Test** → **Development** → idioma **Spanish (US)**. Escribe las frases en el cuadro de texto (o mantén presionado el micrófono mientras hablas). Marca **Skill I/O** para ver el JSON.
+⟨A cargo de Ricardo: tabla de frases de la skill (luces, ventana, modo, umbrales, gas, presencia, vinculación).⟩
 
-| Para… | Escribe o di | Respuesta esperada |
+**Modos de la ventilación:**
+- **Automático** (por defecto): la placa abre la ventana con `gas_pct ≥` umbral alto y la cierra con `gas_pct ≤` umbral bajo. La ventana no se maneja por voz.
+- **Manual:** la ventana se abre y se cierra solo por voz; con alarma de gas no se puede cerrar. Si las alarmas se repiten (3 en 24 h), la Nube vuelve a automático.
+
+## 5. Probar sin AWS (firmware en `*_local_test`)
+
+Carga el firmware de prueba y escribe los `delta` en el monitor serie, una línea por orden:
+
+```bash
+pio run -e vent_local_test -t upload -t monitor
+```
+
+| Para… | Escribe | Qué debe pasar |
 |---|---|---|
-| Abrir la skill | `abre monoambiente inteligente` | Sin casa vinculada: "Bienvenido. Todavía no tienes una casa vinculada…" · Vinculada: "Bienvenido. Puedes abrir o cerrar la puerta…" |
-| Vincular tu casa | `vincula mi casa con el código siete tres nueve dos seis cuatro` | "Listo, tu casa con el código 739264 quedó vinculada." |
-| Cambiar de casa | `cambia mi casa al código cinco uno ocho tres cero seis` | "Listo, cambié tu vinculación al código 518306." |
-| Desvincular | `desvincula mi casa` | "Tu casa quedó desvinculada." |
-| ¿Hay alguien? | `hay alguien en la puerta` · `detectas a alguien en la entrada` · `hay presencia en la puerta` | "Sí, se detecta a alguien en la entrada." / "No, no se detecta a nadie en la entrada." |
-| Abrir la puerta | `abre la puerta` · `abrir la puerta` | El servo gira a 90° y Alexa dice "Listo, la puerta está abierta." |
-| Cerrar la puerta | `cierra la puerta` · `cerrar la puerta` | El servo vuelve a 0° y Alexa dice "Listo, la puerta está cerrada." |
-| Estado de la puerta | `cómo está la puerta` · `cuál es el estado de la puerta` | "La puerta está abierta/cerrada." (y menciona si hay una orden pendiente) |
-| Ayuda | `ayuda` | Lista de lo que puede hacer |
-| Salir | `detener` | "Hasta luego." |
+| Simular gas (solo `vent_local_test`) | `{"state":{"sim_gas_pct":45}}` | Termina el calentamiento; con 45 ≥ umbral alto: `GAS_ALARM_ON` y, en automático, la ventana se abre |
+| Volver al sensor real | `{"state":{"sim_gas_pct":-1}}` | `GAS_SIMULATION active=0` |
+| Modo manual | `{"state":{"mode":"manual","cmd_origin":"voice"}}` | `MODE_APPLIED mode=manual origin=voice` |
+| Abrir la ventana (en manual) | `{"state":{"window":"open","cmd_origin":"voice"}}` | El servo se mueve y el reporte trae `"desired":{"window":null,"cmd_origin":null}` |
+| Cambiar umbrales | `{"state":{"gas_high_pct":40,"gas_low_pct":25}}` | `THRESHOLDS_APPLIED` y se guardan en la NVS |
+| Encender una luz (`lights_local_test`) | `{"state":{"light_kitchen":"on","cmd_origin":"voice"}}` | Se enciende el LED de la cocina y sale `light_changed` |
 
-El código se dice dígito por dígito. Sin una casa vinculada, cualquier consulta o comando responde con las instrucciones para vincularla.
+## 6. Pruebas automáticas y herramientas
 
-## 5. Cómo probarlo (casos para la demo)
+Los scripts que hablan con la placa necesitan `pyserial`; el Python de PlatformIO ya lo trae (`%USERPROFILE%\.platformio\penv\Scripts\python.exe`).
 
-Cada caso indica qué hacer y qué debe pasar. Entre paréntesis está la prueba del informe que lo verificó.
-
-| # | Caso | Pasos | Resultado esperado |
-|---|---|---|---|
-| 1 | **Usuario nuevo** (A01) | `abre monoambiente inteligente` → `hay alguien en la puerta` | Alexa pide vincular la casa antes de responder |
-| 2 | **Código inválido** (A01) | `vincula mi casa con el código uno dos tres` | "El código debe tener seis dígitos…"; no se guarda nada |
-| 3 | **Casa inexistente** (A01) | `vincula mi casa con el código nueve nueve nueve nueve nueve nueve` | "No encontré ninguna casa con el código 999999…" |
-| 4 | **Vincular y persistir** (A01) | Vincular con 739264 → `detener` → `abre monoambiente inteligente` | En la sesión nueva recuerda la casa; DynamoDB muestra un ítem con `thingName` y `fechaVinculacion` |
-| 5 | **Sensor** (A03) | Pararse frente al PIR → `hay alguien en la puerta`; salir 15 s → preguntar otra vez | "Sí…" y luego "No…" |
-| 6 | **Comandos** (A04, A05) | `abre la puerta`, `cierra la puerta` | El servo se mueve y Alexa confirma en ~1 s |
-| 7 | **Orden repetida** (A04) | `abre la puerta` con la puerta ya abierta | "La puerta ya está abierta." y el servo no se mueve |
-| 8 | **Sin WiFi** (A07) | Apagar el WiFi 3 min → `hay alguien en la puerta` → `abre la puerta` → volver a encender el WiFi | Alexa avisa que la casa no se reporta y que la orden se aplicará al reconectar; la puerta se abre sola unos 4 s después de volver el WiFi |
-| 9 | **Corte de energía** (A08) | Desenchufar el USB → `abre la puerta` → enchufar | La puerta arranca cerrada y se abre sola unos 4 s después |
-| 10 | **Dos usuarios** (A02) | En la Lambda, un evento de prueba con otro `userId` vinculado a 518306 que pida abrir | Solo cambia el Shadow de `monoambiente-518306`; la puerta real no se mueve |
-| 11 | **Valor inválido desde AWS** (A09) | En **MQTT test client**, publicar en `$aws/things/monoambiente-739264/shadow/update` el mensaje `{"state":{"desired":{"door":"medio"}}}` | El monitor muestra `INVALID_VALUE door=medio` y el servo no se mueve |
-
-Para ver el Shadow: **AWS IoT → Things → monoambiente-739264 → Device Shadows → Classic Shadow**. Después de cada comando, `desired.door` y `reported.door` coinciden y no queda `delta`.
-
-## 6. Pruebas automáticas
-
-**Lambda (sin AWS ni Alexa):** 23 pruebas con DynamoDB y AWS IoT simulados. Necesitan la carpeta `lambda/package` (paso 3.1).
+**Firmware sin AWS (B02):** con el firmware `*_local_test` cargado y el monitor cerrado:
 
 ```bash
-python -m unittest discover -s lambda/tests -v
-```
-
-**Firmware sin AWS:** el entorno `local_test` reemplaza AWS por el puerto serie. Tapa el PIR, carga ese firmware y, con el monitor cerrado, ejecuta los 16 casos:
-
-```bash
-pio run -e local_test -t upload
+python tools/serial_check.py --board vent --port COM3 --log docs/evidencias_p4/B02/B02_vent_ESP32.log
 ```
 
 ```bash
-python tools/serial_check.py --port COM3 --log B02_ESP32.log
+python tools/serial_check.py --board lights --port COM4 --log docs/evidencias_p4/B02/B02_lights_ESP32.log
 ```
 
-También se puede probar a mano: abre el monitor y escribe `{"state":{"door":"open"}}`.
+Agrega `--skip-heartbeat` para no esperar los 60 s del último caso.
+
+**Grabar el log de una placa sin reiniciarla:**
+
+```bash
+python tools/serial_logger.py --port COM3 --out logs/A08_vent.log
+```
+
+**Medir los requisitos desde los logs** (una línea PASS/FAIL por requisito; con `--dynamo`, la integridad y la latencia del almacenamiento):
+
+```bash
+python tools/analyze_log.py logs/A08_vent.log logs/A08_lights.log --dynamo smartloft-data.csv -o analisis.txt
+```
 
 **Secretos en el repositorio:**
 
@@ -153,29 +150,23 @@ También se puede probar a mano: abre el monitor y escribe `{"state":{"door":"op
 python tools/check_secrets.py
 ```
 
-**Análisis de logs** (log de la ESP32 y/o exportación de CloudWatch → una línea PASS/FAIL por requisito):
-
-```bash
-python tools/analyze_log.py logs/archivo.log cloudwatch.csv -o analisis.txt
-```
-
-Para grabar el log de la ESP32 sin reiniciarla: `python tools/serial_logger.py --port COM3 --out logs/sesion.log`.
+**Calibración del MQ-2:** programa aparte en [tools/mq2_probe/](tools/mq2_probe/), que imprime una lectura por segundo y marca con el botón BOOT los momentos en que se acerca y se retira el humo.
 
 ## 7. Estructura del repositorio
 
 | Ruta | Contenido |
 |---|---|
-| [src/](src/) | Firmware del ESP32, una clase por archivo |
-| [include/config.h](include/config.h) | Todas las constantes: pines, tiempos, temas y contrato del Shadow |
-| [include/secrets.example.h](include/secrets.example.h) | Plantilla de credenciales, sin valores reales |
-| [lambda/](lambda/) | Backend de la skill y sus pruebas |
-| [alexa/](alexa/), [aws/](aws/) | Configuración exportada |
-| [tools/](tools/) | Scripts de prueba y análisis |
-| [docs/](docs/) | Plan de pruebas, evidencia y diagramas |
+| [lib/SmartObjectCore/](lib/SmartObjectCore/) | Código común a las dos placas: conexión, Shadow, reporte, log y salud |
+| [src/vent/](src/vent/) | Firmware de la placa 1: gas, ventana, lógica de ventilación y NVS |
+| [src/lights/](src/lights/) | Firmware de la placa 2: luces por zona y PIR |
+| [include/](include/) | `config_common.h`, `config_vent.h`, `config_lights.h` (todas las constantes) y las plantillas `secrets_*.example.h` |
+| [lambda/](lambda/), [alexa/](alexa/), [aws/](aws/) | Nube: Lambdas, modelo de la skill y configuración exportada |
+| [tools/](tools/) | Scripts de prueba, análisis y calibración |
+| [docs/](docs/) | Evidencias de la P4 y de la P3, diagramas y fotos |
 
-Para agregar un sensor o actuador, se implementa la interfaz `DeviceComponent` y se registra el objeto en [src/main.cpp](src/main.cpp); el código del Shadow no cambia.
+Para agregar un sensor o actuador, se implementa la interfaz `DeviceComponent` y se suma el objeto al arreglo `components[]` del `main.cpp` de su placa; el código del Shadow no cambia.
 
-## 8. Eventos del log del ESP32
+## 8. Eventos del log de las placas
 
 Cada línea tiene el formato `[t_ms|UTC] EVENTO detalle`: `t_ms` es el tiempo desde el arranque y `UTC`, la hora NTP (o `-` antes de sincronizar).
 
@@ -185,8 +176,13 @@ Cada línea tiene el formato `[t_ms|UTC] EVENTO detalle`: `t_ms` es el tiempo de
 | `WIFI_*`, `MQTT_*`, `TIME_SYNCED` | Estado de la conexión y del reloj |
 | `GET_TX`, `GET_RX` | Pedido del Shadow completo al conectarse |
 | `DELTA_RX version=N` | Orden recibida; `STALE_IGNORED` descarta versiones repetidas o viejas |
-| `ACTUATOR_START`, `ACTUATOR_DONE` | Movimiento del servo y su confirmación (400 ms) |
-| `PIR_READY`, `PRESENCE_ON`, `PRESENCE_OFF` | Fin del calentamiento y cambios de presencia |
-| `REPORT_TX reason=event\|heartbeat` | Reporte publicado en `reported` |
+| `GAS_SAMPLE`, `GAS_READY` | Lectura del MQ-2 cada 1 s y fin del calentamiento |
+| `GAS_ALARM_ON`, `GAS_ALARM_OFF`, `EDGE_ACTION` | Cambios de la alarma y movimientos de la regla automática |
+| `ACTUATOR_START`, `ACTUATOR_DONE` | Movimiento del servo (con su origen) y su confirmación (400 ms) |
+| `MODE_APPLIED`, `THRESHOLDS_APPLIED`, `COMMAND_REJECTED` | Órdenes de modo y umbrales aplicadas, u órdenes rechazadas y por qué |
+| `SETTINGS_LOADED`, `SETTINGS_SAVED` | Modo y umbrales leídos o guardados en la NVS |
+| `LIGHT_APPLIED` | Luz de una zona cambiada (con su origen) |
+| `PIR_READY`, `PRESENCE_DETECTED`, `PRESENCE_CLEARED` | Fin del calentamiento del PIR y cambios de presencia |
+| `REPORT_TX seq event origin`, `REPORT_TX_FAILED` | Reporte publicado, o perdido por falta de conexión |
 | `HEALTH` | Cada 60 s: tiempo encendido, memoria, señal WiFi, caídas y `loop()` más largo |
 | `INVALID_VALUE`, `JSON_ERROR`, `UPDATE_REJECTED` | Errores |
