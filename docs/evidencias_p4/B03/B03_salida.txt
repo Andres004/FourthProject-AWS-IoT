@@ -1,0 +1,10 @@
+Tracked files scanned: 236
+RNF6 secrets in tracked files: 0 (0) -> PASS
+Commits scanned: 66
+RNF6 secrets in git history: 0 (0) -> PASS
+Secret paths checked against .gitignore: 9
+RNF6 secret files ignored by git: 9/9 -> PASS
+RNF6 template include/secrets_vent.example.h published: yes -> PASS
+RNF6 template include/secrets_lights.example.h published: yes -> PASS
+Control: include/secrets_vent.h (not published) detected as ['private key', 'certificate'] -> FAIL
+Control: include/secrets_lights.h (not published) detected as ['private key', 'certificate'] -> FAIL
