@@ -1,0 +1,23 @@
+L01 [RF2/V1] PASS: first report event=boot origin=boot seq=1, missing keys=[]
+L02 [RF2] PASS: boot report: five light_* with on/off and presence=false
+L03 [RF3/RF12] PASS: light_kitchen=on: LIGHT_APPLIED, light_changed origin=voice, cmd_origin cleared and light kept in desired
+L04 [RF3/RF12] PASS: light_living=on: LIGHT_APPLIED, light_changed origin=voice, cmd_origin cleared and light kept in desired
+L05 [RF3/RF12] PASS: light_dining=on: LIGHT_APPLIED, light_changed origin=voice, cmd_origin cleared and light kept in desired
+L06 [RF3/RF12] PASS: light_bathroom=on: LIGHT_APPLIED, light_changed origin=voice, cmd_origin cleared and light kept in desired
+L07 [RF3/RF12] PASS: light_bedroom=on: LIGHT_APPLIED, light_changed origin=voice, cmd_origin cleared and light kept in desired
+L08 [RF3] PASS: light already on: no change, report sent to clear the delta
+L09 [RF3/RNF4] PASS: all lights off in one delta: 5 LIGHT_APPLIED, 1 report (expected 5 and 1)
+L10 [RF12] PASS: sent '{"version": 8, "state": {"light_living": "ON"}}': INVALID_VALUE logged (light_living=ON), moves=0
+L11 [RF12] PASS: sent '{"version": 9, "state": {"light_living": 1}}': INVALID_VALUE logged (light_living=<not a string>), moves=0
+L12 [RF12] PASS: sent '{"version": 10, "state": {"light_living": "half"}}': INVALID_VALUE logged (light_living=half), moves=0
+L90 [RF12] PASS: sent '{"version": 10, "state": {}}': STALE_IGNORED logged (source=delta version=10 last=10), moves=0
+L91 [RF12] PASS: sent '{"version": 99999, "state": {': JSON_ERROR logged (reason=IncompleteInput), moves=0
+L92 [RF12] PASS: sent '{"version": 99999, "foo": 1}': JSON_ERROR logged (reason=missing_state), moves=0
+L93 [RF12] PASS: sent 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx': JSON_ERROR logged (reason=line_too_long), moves=0
+L94 [V2] PASS: 8 reports with seq 1..8 without gaps
+L95 [RNF4/V3] PASS: minimum gap 999 ms (>= 1000), largest report 243 bytes (< 1024)
+L96 waiting for the heartbeat (60 s after the last report)...
+L96 [RF2/RNF4] PASS: heartbeat 59952 ms after the last report (expected 60000 +/- 1500)
+
+RESULT 19/19 cases PASS
+exit=0

@@ -1,0 +1,85 @@
+# RESET
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13232
+load:0x40080400,len:3028
+entry 0x400805e4
+[26|-] BOOT
+[27|-] RESET_REASON reason=power_on
+[27|-] LINK_CODE 739264
+[125|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[132|-] LOCAL_TEST_MODE send a delta line: {"state":{...}}
+[1001|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"boot","origin":"boot","seq":1,"device_ts":0}}}
+[1011|-] REPORT_TX seq=1 event=boot origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"boot","origin":"boot","seq":1,"device_ts":0}}}
+# TX {"version": 1, "state": {"light_kitchen": "on", "cmd_origin": "voice"}}
+[1160|-] DELTA_RX version=1 {"version": 1, "state": {"light_kitchen": "on", "cmd_origin": "voice"}}
+[1161|-] LIGHT_APPLIED zone=kitchen state=on origin=voice
+[2000|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"on","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":2,"device_ts":0},"desired":{"cmd_origin":null}}}
+[2021|-] REPORT_TX seq=2 event=light_changed origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":2,"device_ts":0},"desired":{"cmd_origin":null}}}
+# TX {"version": 2, "state": {"light_living": "on", "cmd_origin": "voice"}}
+[2123|-] DELTA_RX version=2 {"version": 2, "state": {"light_living": "on", "cmd_origin": "voice"}}
+[2123|-] LIGHT_APPLIED zone=living state=on origin=voice
+[3000|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"on","light_living":"on","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":3,"device_ts":0},"desired":{"cmd_origin":null}}}
+[3021|-] REPORT_TX seq=3 event=light_changed origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"on","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":3,"device_ts":0},"desired":{"cmd_origin":null}}}
+# TX {"version": 3, "state": {"light_dining": "on", "cmd_origin": "voice"}}
+[3162|-] DELTA_RX version=3 {"version": 3, "state": {"light_dining": "on", "cmd_origin": "voice"}}
+[3162|-] LIGHT_APPLIED zone=dining state=on origin=voice
+[4000|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"on","light_living":"on","light_dining":"on","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":4,"device_ts":0},"desired":{"cmd_origin":null}}}
+[4021|-] REPORT_TX seq=4 event=light_changed origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"on","light_dining":"on","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":4,"device_ts":0},"desired":{"cmd_origin":null}}}
+# TX {"version": 4, "state": {"light_bathroom": "on", "cmd_origin": "voice"}}
+[4125|-] DELTA_RX version=4 {"version": 4, "state": {"light_bathroom": "on", "cmd_origin": "voice"}}
+[4125|-] LIGHT_APPLIED zone=bathroom state=on origin=voice
+[5000|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"on","light_living":"on","light_dining":"on","light_bathroom":"on","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":5,"device_ts":0},"desired":{"cmd_origin":null}}}
+[5021|-] REPORT_TX seq=5 event=light_changed origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"on","light_dining":"on","light_bathroom":"on","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":5,"device_ts":0},"desired":{"cmd_origin":null}}}
+# TX {"version": 5, "state": {"light_bedroom": "on", "cmd_origin": "voice"}}
+[5100|-] DELTA_RX version=5 {"version": 5, "state": {"light_bedroom": "on", "cmd_origin": "voice"}}
+[5100|-] LIGHT_APPLIED zone=bedroom state=on origin=voice
+[6000|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"on","light_living":"on","light_dining":"on","light_bathroom":"on","light_bedroom":"on","presence":false,"event":"light_changed","origin":"voice","seq":6,"device_ts":0},"desired":{"cmd_origin":null}}}
+[6021|-] REPORT_TX seq=6 event=light_changed origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"on","light_dining":"on","light_bathroom":"on","light_bedroom":"on","presence":false,"event":"light_changed","origin":"voice","seq":6,"device_ts":0},"desired":{"cmd_origin":null}}}
+# TX {"version": 6, "state": {"light_kitchen": "on"}}
+[6143|-] DELTA_RX version=6 {"version": 6, "state": {"light_kitchen": "on"}}
+[7000|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"on","light_living":"on","light_dining":"on","light_bathroom":"on","light_bedroom":"on","presence":false,"event":"heartbeat","origin":"voice","seq":7,"device_ts":0},"desired":{"cmd_origin":null}}}
+[7021|-] REPORT_TX seq=7 event=heartbeat origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"on","light_dining":"on","light_bathroom":"on","light_bedroom":"on","presence":false,"event":"heartbeat","origin":"voice","seq":7,"device_ts":0},"desired":{"cmd_origin":null}}}
+# TX {"version": 7, "state": {"light_kitchen": "off", "light_living": "off", "light_dining": "off", "light_bathroom": "off", "light_bedroom": "off"}}
+[8691|-] DELTA_RX version=7 {"version": 7, "state": {"light_kitchen": "off", "light_living": "off", "light_dining": "off", "light_bathroom": "off", "light_bedroom": "off"}}
+[8701|-] LIGHT_APPLIED zone=kitchen state=off origin=voice
+[8702|-] LIGHT_APPLIED zone=living state=off origin=voice
+[8712|-] LIGHT_APPLIED zone=dining state=off origin=voice
+[8712|-] LIGHT_APPLIED zone=bathroom state=off origin=voice
+[8723|-] LIGHT_APPLIED zone=bedroom state=off origin=voice
+[8724|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":8,"device_ts":0},"desired":{"cmd_origin":null}}}
+[8745|-] REPORT_TX seq=8 event=light_changed origin=voice {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":8,"device_ts":0},"desired":{"cmd_origin":null}}}
+[10124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+# TX {"version": 8, "state": {"light_living": "ON"}}
+[10516|-] DELTA_RX version=8 {"version": 8, "state": {"light_living": "ON"}}
+[10517|-] INVALID_VALUE light_living=ON
+# TX {"version": 9, "state": {"light_living": 1}}
+[12261|-] DELTA_RX version=9 {"version": 9, "state": {"light_living": 1}}
+[12261|-] INVALID_VALUE light_living=<not a string>
+# TX {"version": 10, "state": {"light_living": "half"}}
+[14012|-] DELTA_RX version=10 {"version": 10, "state": {"light_living": "half"}}
+[14012|-] INVALID_VALUE light_living=half
+# TX {"version": 10, "state": {}}
+[15757|-] DELTA_RX version=10 {"version": 10, "state": {}}
+[15757|-] STALE_IGNORED source=delta version=10 last=10
+# TX {"version": 99999, "state": {
+[17507|-] JSON_ERROR reason=IncompleteInput
+# TX {"version": 99999, "foo": 1}
+[19257|-] DELTA_RX version=99999 {"version": 99999, "foo": 1}
+[19257|-] JSON_ERROR reason=missing_state
+[20124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+# TX xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+[21055|-] JSON_ERROR reason=line_too_long
+[30028|-] PIR_READY
+[30124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[40124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[50124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[60124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[60133|-] HEALTH uptime_s=60 heap=249400 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=89
+[68686|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"voice","seq":9,"device_ts":0}}}
+[68697|-] REPORT_TX seq=9 event=heartbeat origin=voice {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"voice","seq":9,"device_ts":0}}}
