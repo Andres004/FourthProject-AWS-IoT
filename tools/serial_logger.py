@@ -17,6 +17,11 @@ import serial  # pyserial
 BAUD_RATE = 115200
 REOPEN_DELAY_S = 0.2
 READ_TIMEOUT_S = 0.1
+# One read asks for this many bytes. At 115200 baud the board sends at most
+# about 1150 bytes per READ_TIMEOUT_S, so a read that comes back full can only
+# be the stale data the CP210x driver replays (thousands of repeated line
+# fragments) when the port is reopened after being closed for a while.
+READ_SIZE_BYTES = 4096
 
 
 def open_port(name):
@@ -49,25 +54,44 @@ def main():
             log.flush()
 
         port, pending = None, b""
+        discarding, synced, dropped = False, True, 0
         note(f"logger start on {arguments.port}")
         try:
             while deadline is None or time.monotonic() < deadline:
                 if port is None:
                     try:
                         port = open_port(arguments.port)
+                        discarding, dropped = True, 0
                         note("port open")
                     except serial.SerialException:
                         time.sleep(REOPEN_DELAY_S)
                         continue
                 try:
-                    pending += port.read(4096)
+                    chunk = port.read(READ_SIZE_BYTES)
                 except serial.SerialException:
                     note("port lost (board unplugged?)")
                     port.close()
                     port, pending = None, b""
                     continue
+                if discarding:
+                    # Stale data is replayed back to back. Once a full read
+                    # shows it is there, drop everything until the first
+                    # empty read (the board's real output has pauses).
+                    stale = len(chunk) == READ_SIZE_BYTES or (dropped and chunk)
+                    if stale:
+                        dropped += len(chunk)
+                        continue
+                    discarding = False
+                    if dropped:
+                        # Real output may resume in the middle of a line.
+                        synced = False
+                        note(f"dropped {dropped} stale bytes from the driver")
+                pending += chunk
                 while b"\n" in pending:
                     raw, pending = pending.split(b"\n", 1)
+                    if not synced:
+                        synced = True
+                        continue
                     log.write(raw.decode("utf-8", errors="replace").rstrip("\r") + "\n")
                     log.flush()
         except KeyboardInterrupt:
