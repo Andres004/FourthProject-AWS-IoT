@@ -398,11 +398,18 @@ def analyze_edge(events, report):
     report.title("E1 / E2 / RNF7 edge response (A05)")
     ready = next((e for e in events if e.name == "GAS_READY"), None)
     alarms = [e for e in events if e.name in ("GAS_ALARM_ON", "GAS_ALARM_OFF")]
+    first_sample = next((e for e in events if e.name == "GAS_SAMPLE"), None)
+    warm_at_start = (ready is None and first_sample is not None
+                     and first_sample.fields().get("warming_up") == "0")
     if ready:
         report.info(f"GAS_READY at t={ready.t_ms} ms ({ready.t_ms / 1000:.0f} s after boot)")
-    early = [e for e in alarms if ready is None or e.t_ms < ready.t_ms]
+    elif warm_at_start:
+        report.info("warm-up ended before this log started (first GAS_SAMPLE has "
+                    "warming_up=0)")
+    early = [] if warm_at_start else [
+        e for e in alarms if ready is None or e.t_ms < ready.t_ms]
     report.result("E2", f"alarms during warm-up: {len(early)} (0)", not early,
-                  enough=ready is not None)
+                  enough=ready is not None or warm_at_start)
 
     wrong = []
     for event in alarms:

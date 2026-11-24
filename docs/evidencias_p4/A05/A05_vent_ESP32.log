@@ -1,0 +1,896 @@
+# 2026-11-24T06:55:28.769 logger start on COM7
+# 2026-11-24T06:55:28.833 port open
+# 2026-11-24T06:55:29.749 dropped 111704 stale bytes from the driver
+[373042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[374042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[375042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[376042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[377042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[378042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[379042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[380042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[380131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[381042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[382042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[383042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[383043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"heartbeat","origin":"edge","seq":28,"device_ts":0}}}
+[383064|-] REPORT_TX seq=28 event=heartbeat origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"heartbeat","origin":"edge","seq":28,"device_ts":0}}}
+[384042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[385042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[386042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[387042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[388042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[389042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[390042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[390131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[391042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[392042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[393042|-] GAS_SAMPLE pin_mv=287 ao_mv=478 gas_pct=9.0 min_mv=237 max_mv=2198 n=20 warming_up=0 simulated=0
+[393043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":9,"gas_mv":478,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":29,"device_ts":0}}}
+[393064|-] REPORT_TX seq=29 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":9,"gas_mv":478,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":29,"device_ts":0}}}
+[394042|-] GAS_SAMPLE pin_mv=2197 ao_mv=3662 gas_pct=68.6 min_mv=2565 max_mv=4297 n=19 warming_up=0 simulated=0
+[394042|-] GAS_ALARM_ON gas_pct=68.6 gas_high_pct=15 mode=auto
+[394053|-] ACTUATOR_START window=open origin=edge
+[394053|-] EDGE_ACTION window=open gas_pct=68.6
+[394065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":68.6,"gas_mv":3662,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":30,"device_ts":0}}}
+[394085|-] REPORT_TX seq=30 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":68.6,"gas_mv":3662,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":30,"device_ts":0}}}
+[394453|-] ACTUATOR_DONE window=open angle=90
+[395042|-] GAS_SAMPLE pin_mv=2672 ao_mv=4453 gas_pct=83.4 min_mv=4128 max_mv=4533 n=19 warming_up=0 simulated=0
+[395043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":83.4,"gas_mv":4453,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":31,"device_ts":0}}}
+[395064|-] REPORT_TX seq=31 event=window_changed origin=edge {"state":{"reported":{"gas_pct":83.4,"gas_mv":4453,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":31,"device_ts":0}}}
+[396042|-] GAS_SAMPLE pin_mv=2719 ao_mv=4532 gas_pct=84.9 min_mv=4450 max_mv=4558 n=19 warming_up=0 simulated=0
+[396043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":84.9,"gas_mv":4532,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":32,"device_ts":0}}}
+[396064|-] REPORT_TX seq=32 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":84.9,"gas_mv":4532,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":32,"device_ts":0}}}
+[397042|-] GAS_SAMPLE pin_mv=1634 ao_mv=2723 gas_pct=51.0 min_mv=868 max_mv=4348 n=19 warming_up=0 simulated=0
+[397043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":51,"gas_mv":2723,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":33,"device_ts":0}}}
+[397064|-] REPORT_TX seq=33 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":51,"gas_mv":2723,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":33,"device_ts":0}}}
+[398042|-] GAS_SAMPLE pin_mv=385 ao_mv=642 gas_pct=12.0 min_mv=527 max_mv=795 n=19 warming_up=0 simulated=0
+[398043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":12,"gas_mv":642,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":34,"device_ts":0}}}
+[398064|-] REPORT_TX seq=34 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":12,"gas_mv":642,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":34,"device_ts":0}}}
+[399042|-] GAS_SAMPLE pin_mv=262 ao_mv=437 gas_pct=8.2 min_mv=388 max_mv=512 n=19 warming_up=0 simulated=0
+[399043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":8.2,"gas_mv":437,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":35,"device_ts":0}}}
+[399064|-] REPORT_TX seq=35 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":8.2,"gas_mv":437,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":35,"device_ts":0}}}
+[400042|-] GAS_SAMPLE pin_mv=197 ao_mv=328 gas_pct=6.1 min_mv=302 max_mv=367 n=19 warming_up=0 simulated=0
+[400042|-] GAS_ALARM_OFF gas_pct=6.1 gas_low_pct=8 mode=auto
+[400053|-] ACTUATOR_START window=closed origin=edge
+[400053|-] EDGE_ACTION window=closed gas_pct=6.1
+[400064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":6.1,"gas_mv":328,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":36,"device_ts":0}}}
+[400085|-] REPORT_TX seq=36 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6.1,"gas_mv":328,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":36,"device_ts":0}}}
+[400131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[400453|-] ACTUATOR_DONE window=closed angle=0
+[401042|-] GAS_SAMPLE pin_mv=161 ao_mv=268 gas_pct=5.0 min_mv=242 max_mv=303 n=19 warming_up=0 simulated=0
+[401043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":268,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":37,"device_ts":0}}}
+[401064|-] REPORT_TX seq=37 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5,"gas_mv":268,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":37,"device_ts":0}}}
+[402042|-] GAS_SAMPLE pin_mv=143 ao_mv=238 gas_pct=4.5 min_mv=237 max_mv=247 n=19 warming_up=0 simulated=0
+[402043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.5,"gas_mv":238,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":38,"device_ts":0}}}
+[402064|-] REPORT_TX seq=38 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.5,"gas_mv":238,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":38,"device_ts":0}}}
+[403042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[404042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[405042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[406042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[407042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[408042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[409042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[410042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[410131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[411042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[412042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[413042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[414042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[415042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[416042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[417042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[418042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[419042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[420042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[420131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[420141|-] HEALTH uptime_s=420 heap=247728 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=64
+[421042|-] GAS_SAMPLE pin_mv=143 ao_mv=238 gas_pct=4.5 min_mv=237 max_mv=260 n=20 warming_up=0 simulated=0
+[422042|-] GAS_SAMPLE pin_mv=290 ao_mv=483 gas_pct=9.0 min_mv=305 max_mv=563 n=20 warming_up=0 simulated=0
+[422043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":9,"gas_mv":483,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":39,"device_ts":0}}}
+[422064|-] REPORT_TX seq=39 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":9,"gas_mv":483,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":39,"device_ts":0}}}
+[423042|-] GAS_SAMPLE pin_mv=385 ao_mv=642 gas_pct=12.0 min_mv=592 max_mv=745 n=19 warming_up=0 simulated=0
+[423043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":12,"gas_mv":642,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":40,"device_ts":0}}}
+[423064|-] REPORT_TX seq=40 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":12,"gas_mv":642,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":40,"device_ts":0}}}
+[424042|-] GAS_SAMPLE pin_mv=539 ao_mv=898 gas_pct=16.8 min_mv=802 max_mv=1030 n=19 warming_up=0 simulated=0
+[424042|-] GAS_ALARM_ON gas_pct=16.8 gas_high_pct=15 mode=auto
+[424053|-] ACTUATOR_START window=open origin=edge
+[424053|-] EDGE_ACTION window=open gas_pct=16.8
+[424065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":16.8,"gas_mv":898,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":41,"device_ts":0}}}
+[424085|-] REPORT_TX seq=41 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":16.8,"gas_mv":898,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":41,"device_ts":0}}}
+[424453|-] ACTUATOR_DONE window=open angle=90
+[425042|-] GAS_SAMPLE pin_mv=681 ao_mv=1135 gas_pct=21.3 min_mv=995 max_mv=1178 n=19 warming_up=0 simulated=0
+[425043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":21.3,"gas_mv":1135,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":42,"device_ts":0}}}
+[425064|-] REPORT_TX seq=42 event=window_changed origin=edge {"state":{"reported":{"gas_pct":21.3,"gas_mv":1135,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":42,"device_ts":0}}}
+[426042|-] GAS_SAMPLE pin_mv=641 ao_mv=1068 gas_pct=20.0 min_mv=987 max_mv=1148 n=19 warming_up=0 simulated=0
+[426043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":43,"device_ts":0}}}
+[426064|-] REPORT_TX seq=43 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":43,"device_ts":0}}}
+[427042|-] GAS_SAMPLE pin_mv=433 ao_mv=722 gas_pct=13.5 min_mv=542 max_mv=932 n=19 warming_up=0 simulated=0
+[427043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":13.5,"gas_mv":722,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":44,"device_ts":0}}}
+[427064|-] REPORT_TX seq=44 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":13.5,"gas_mv":722,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":44,"device_ts":0}}}
+[428042|-] GAS_SAMPLE pin_mv=254 ao_mv=423 gas_pct=7.9 min_mv=347 max_mv=513 n=19 warming_up=0 simulated=0
+[428042|-] GAS_ALARM_OFF gas_pct=7.9 gas_low_pct=8 mode=auto
+[428053|-] ACTUATOR_START window=closed origin=edge
+[428053|-] EDGE_ACTION window=closed gas_pct=7.9
+[428064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":7.9,"gas_mv":423,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":45,"device_ts":0}}}
+[428085|-] REPORT_TX seq=45 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":7.9,"gas_mv":423,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":45,"device_ts":0}}}
+[428453|-] ACTUATOR_DONE window=closed angle=0
+[429042|-] GAS_SAMPLE pin_mv=178 ao_mv=297 gas_pct=5.6 min_mv=267 max_mv=328 n=19 warming_up=0 simulated=0
+[429043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5.6,"gas_mv":297,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":46,"device_ts":0}}}
+[429064|-] REPORT_TX seq=46 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5.6,"gas_mv":297,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":46,"device_ts":0}}}
+[430042|-] GAS_SAMPLE pin_mv=146 ao_mv=243 gas_pct=4.6 min_mv=237 max_mv=260 n=19 warming_up=0 simulated=0
+[430043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.6,"gas_mv":243,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":47,"device_ts":0}}}
+[430064|-] REPORT_TX seq=47 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.6,"gas_mv":243,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":47,"device_ts":0}}}
+[430131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[431042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[432042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[433042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[434042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[435042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[436042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[437042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[438042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[439042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[440042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[440131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[441042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[442042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[443042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[444042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[445042|-] GAS_SAMPLE pin_mv=146 ao_mv=243 gas_pct=4.6 min_mv=237 max_mv=295 n=20 warming_up=0 simulated=0
+[446042|-] GAS_SAMPLE pin_mv=196 ao_mv=327 gas_pct=6.1 min_mv=302 max_mv=345 n=20 warming_up=0 simulated=0
+[447042|-] GAS_SAMPLE pin_mv=173 ao_mv=288 gas_pct=5.4 min_mv=253 max_mv=320 n=20 warming_up=0 simulated=0
+[448042|-] GAS_SAMPLE pin_mv=187 ao_mv=312 gas_pct=5.8 min_mv=255 max_mv=403 n=20 warming_up=0 simulated=0
+[449042|-] GAS_SAMPLE pin_mv=260 ao_mv=433 gas_pct=8.1 min_mv=402 max_mv=455 n=20 warming_up=0 simulated=0
+[449043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":8.1,"gas_mv":433,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":48,"device_ts":0}}}
+[449064|-] REPORT_TX seq=48 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":8.1,"gas_mv":433,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":48,"device_ts":0}}}
+[450042|-] GAS_SAMPLE pin_mv=254 ao_mv=423 gas_pct=7.9 min_mv=408 max_mv=462 n=19 warming_up=0 simulated=0
+[450131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[451042|-] GAS_SAMPLE pin_mv=256 ao_mv=427 gas_pct=8.0 min_mv=410 max_mv=440 n=20 warming_up=0 simulated=0
+[452042|-] GAS_SAMPLE pin_mv=208 ao_mv=347 gas_pct=6.5 min_mv=307 max_mv=403 n=20 warming_up=0 simulated=0
+[453042|-] GAS_SAMPLE pin_mv=161 ao_mv=268 gas_pct=5.0 min_mv=240 max_mv=302 n=20 warming_up=0 simulated=0
+[453043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":268,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":49,"device_ts":0}}}
+[453064|-] REPORT_TX seq=49 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":5,"gas_mv":268,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":49,"device_ts":0}}}
+[454042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=240 n=19 warming_up=0 simulated=0
+[455042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[456042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[457042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[458042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[459042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[460042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[460131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[461042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[462042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[463042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[464042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[465042|-] GAS_SAMPLE pin_mv=899 ao_mv=1498 gas_pct=28.1 min_mv=310 max_mv=2180 n=20 warming_up=0 simulated=0
+[465042|-] GAS_ALARM_ON gas_pct=28.1 gas_high_pct=15 mode=auto
+[465053|-] ACTUATOR_START window=open origin=edge
+[465053|-] EDGE_ACTION window=open gas_pct=28.1
+[465064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":28.1,"gas_mv":1498,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":50,"device_ts":0}}}
+[465085|-] REPORT_TX seq=50 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":28.1,"gas_mv":1498,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":50,"device_ts":0}}}
+[465453|-] ACTUATOR_DONE window=open angle=90
+[466042|-] GAS_SAMPLE pin_mv=2352 ao_mv=3920 gas_pct=73.4 min_mv=2275 max_mv=4485 n=19 warming_up=0 simulated=0
+[466043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":73.4,"gas_mv":3920,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":51,"device_ts":0}}}
+[466064|-] REPORT_TX seq=51 event=window_changed origin=edge {"state":{"reported":{"gas_pct":73.4,"gas_mv":3920,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":51,"device_ts":0}}}
+[467042|-] GAS_SAMPLE pin_mv=2729 ao_mv=4548 gas_pct=85.2 min_mv=4517 max_mv=4577 n=19 warming_up=0 simulated=0
+[467043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":85.2,"gas_mv":4548,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":52,"device_ts":0}}}
+[467064|-] REPORT_TX seq=52 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":85.2,"gas_mv":4548,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":52,"device_ts":0}}}
+[468042|-] GAS_SAMPLE pin_mv=2753 ao_mv=4588 gas_pct=85.9 min_mv=4563 max_mv=4605 n=19 warming_up=0 simulated=0
+[469042|-] GAS_SAMPLE pin_mv=2168 ao_mv=3613 gas_pct=67.7 min_mv=1342 max_mv=4553 n=20 warming_up=0 simulated=0
+[469043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":67.7,"gas_mv":3613,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":53,"device_ts":0}}}
+[469064|-] REPORT_TX seq=53 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":67.7,"gas_mv":3613,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":53,"device_ts":0}}}
+[470042|-] GAS_SAMPLE pin_mv=475 ao_mv=792 gas_pct=14.8 min_mv=632 max_mv=1078 n=19 warming_up=0 simulated=0
+[470043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":14.8,"gas_mv":792,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":54,"device_ts":0}}}
+[470064|-] REPORT_TX seq=54 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":14.8,"gas_mv":792,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":54,"device_ts":0}}}
+[470131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[471042|-] GAS_SAMPLE pin_mv=310 ao_mv=517 gas_pct=9.7 min_mv=445 max_mv=607 n=19 warming_up=0 simulated=0
+[471043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":9.7,"gas_mv":517,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":55,"device_ts":0}}}
+[471064|-] REPORT_TX seq=55 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":9.7,"gas_mv":517,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":55,"device_ts":0}}}
+[472042|-] GAS_SAMPLE pin_mv=228 ao_mv=380 gas_pct=7.1 min_mv=338 max_mv=432 n=19 warming_up=0 simulated=0
+[472042|-] GAS_ALARM_OFF gas_pct=7.1 gas_low_pct=8 mode=auto
+[472053|-] ACTUATOR_START window=closed origin=edge
+[472053|-] EDGE_ACTION window=closed gas_pct=7.1
+[472065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":7.1,"gas_mv":380,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":56,"device_ts":0}}}
+[472085|-] REPORT_TX seq=56 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":7.1,"gas_mv":380,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":56,"device_ts":0}}}
+[472453|-] ACTUATOR_DONE window=closed angle=0
+[473042|-] GAS_SAMPLE pin_mv=180 ao_mv=300 gas_pct=5.6 min_mv=273 max_mv=323 n=19 warming_up=0 simulated=0
+[473043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5.6,"gas_mv":300,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":57,"device_ts":0}}}
+[473064|-] REPORT_TX seq=57 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5.6,"gas_mv":300,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":57,"device_ts":0}}}
+[474042|-] GAS_SAMPLE pin_mv=156 ao_mv=260 gas_pct=4.9 min_mv=247 max_mv=282 n=19 warming_up=0 simulated=0
+[474043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.9,"gas_mv":260,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":58,"device_ts":0}}}
+[474064|-] REPORT_TX seq=58 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.9,"gas_mv":260,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":58,"device_ts":0}}}
+[475042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=248 n=19 warming_up=0 simulated=0
+[476042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[477042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[478042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[479042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[480042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[480131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[480141|-] HEALTH uptime_s=480 heap=247728 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=64
+[481042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[482042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[483042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[484042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[485042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[486042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[487042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[488042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[489042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[490042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[490131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[491042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[492042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[493042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[494042|-] GAS_SAMPLE pin_mv=1843 ao_mv=3072 gas_pct=57.5 min_mv=237 max_mv=4235 n=20 warming_up=0 simulated=0
+[494042|-] GAS_ALARM_ON gas_pct=57.5 gas_high_pct=15 mode=auto
+[494053|-] ACTUATOR_START window=open origin=edge
+[494053|-] EDGE_ACTION window=open gas_pct=57.5
+[494064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":57.5,"gas_mv":3072,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":59,"device_ts":0}}}
+[494085|-] REPORT_TX seq=59 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":57.5,"gas_mv":3072,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":59,"device_ts":0}}}
+[494453|-] ACTUATOR_DONE window=open angle=90
+[495042|-] GAS_SAMPLE pin_mv=2666 ao_mv=4443 gas_pct=83.2 min_mv=4095 max_mv=4537 n=19 warming_up=0 simulated=0
+[495043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":83.2,"gas_mv":4443,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":60,"device_ts":0}}}
+[495064|-] REPORT_TX seq=60 event=window_changed origin=edge {"state":{"reported":{"gas_pct":83.2,"gas_mv":4443,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":60,"device_ts":0}}}
+[496042|-] GAS_SAMPLE pin_mv=2741 ao_mv=4568 gas_pct=85.5 min_mv=4548 max_mv=4585 n=19 warming_up=0 simulated=0
+[496043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":85.5,"gas_mv":4568,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":61,"device_ts":0}}}
+[496064|-] REPORT_TX seq=61 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":85.5,"gas_mv":4568,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":61,"device_ts":0}}}
+[497042|-] GAS_SAMPLE pin_mv=2224 ao_mv=3707 gas_pct=69.4 min_mv=1395 max_mv=4567 n=19 warming_up=0 simulated=0
+[497043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":69.4,"gas_mv":3707,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":62,"device_ts":0}}}
+[497064|-] REPORT_TX seq=62 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":69.4,"gas_mv":3707,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":62,"device_ts":0}}}
+[498042|-] GAS_SAMPLE pin_mv=444 ao_mv=740 gas_pct=13.9 min_mv=567 max_mv=1062 n=19 warming_up=0 simulated=0
+[498043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":13.9,"gas_mv":740,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":63,"device_ts":0}}}
+[498064|-] REPORT_TX seq=63 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":13.9,"gas_mv":740,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":63,"device_ts":0}}}
+[499042|-] GAS_SAMPLE pin_mv=280 ao_mv=467 gas_pct=8.7 min_mv=398 max_mv=550 n=19 warming_up=0 simulated=0
+[499043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":8.7,"gas_mv":467,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":64,"device_ts":0}}}
+[499064|-] REPORT_TX seq=64 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":8.7,"gas_mv":467,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":64,"device_ts":0}}}
+[500042|-] GAS_SAMPLE pin_mv=205 ao_mv=342 gas_pct=6.4 min_mv=302 max_mv=388 n=19 warming_up=0 simulated=0
+[500042|-] GAS_ALARM_OFF gas_pct=6.4 gas_low_pct=8 mode=auto
+[500053|-] ACTUATOR_START window=closed origin=edge
+[500053|-] EDGE_ACTION window=closed gas_pct=6.4
+[500064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":6.4,"gas_mv":342,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":65,"device_ts":0}}}
+[500085|-] REPORT_TX seq=65 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6.4,"gas_mv":342,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":65,"device_ts":0}}}
+[500131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[500453|-] ACTUATOR_DONE window=closed angle=0
+[501042|-] GAS_SAMPLE pin_mv=163 ao_mv=272 gas_pct=5.1 min_mv=243 max_mv=293 n=19 warming_up=0 simulated=0
+[501043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5.1,"gas_mv":272,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":66,"device_ts":0}}}
+[501064|-] REPORT_TX seq=66 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5.1,"gas_mv":272,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":66,"device_ts":0}}}
+[502042|-] GAS_SAMPLE pin_mv=144 ao_mv=240 gas_pct=4.5 min_mv=237 max_mv=253 n=19 warming_up=0 simulated=0
+[502043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.5,"gas_mv":240,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":67,"device_ts":0}}}
+[502064|-] REPORT_TX seq=67 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.5,"gas_mv":240,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":67,"device_ts":0}}}
+[503042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[504042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[505042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[506042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[507042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[508042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[509042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[510042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[510131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[511042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[512042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[513042|-] GAS_SAMPLE pin_mv=182 ao_mv=303 gas_pct=5.7 min_mv=237 max_mv=1112 n=20 warming_up=0 simulated=0
+[514042|-] GAS_SAMPLE pin_mv=1513 ao_mv=2522 gas_pct=47.2 min_mv=1373 max_mv=4185 n=20 warming_up=0 simulated=0
+[514042|-] GAS_ALARM_ON gas_pct=47.2 gas_high_pct=15 mode=auto
+[514053|-] ACTUATOR_START window=open origin=edge
+[514053|-] EDGE_ACTION window=open gas_pct=47.2
+[514064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":47.2,"gas_mv":2522,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":68,"device_ts":0}}}
+[514085|-] REPORT_TX seq=68 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":47.2,"gas_mv":2522,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":68,"device_ts":0}}}
+[514453|-] ACTUATOR_DONE window=open angle=90
+[515042|-] GAS_SAMPLE pin_mv=2664 ao_mv=4440 gas_pct=83.1 min_mv=4032 max_mv=4550 n=19 warming_up=0 simulated=0
+[515043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":83.1,"gas_mv":4440,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":69,"device_ts":0}}}
+[515064|-] REPORT_TX seq=69 event=window_changed origin=edge {"state":{"reported":{"gas_pct":83.1,"gas_mv":4440,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":69,"device_ts":0}}}
+[516042|-] GAS_SAMPLE pin_mv=2749 ao_mv=4582 gas_pct=85.8 min_mv=4560 max_mv=4613 n=19 warming_up=0 simulated=0
+[516043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":85.8,"gas_mv":4582,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":70,"device_ts":0}}}
+[516064|-] REPORT_TX seq=70 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":85.8,"gas_mv":4582,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":70,"device_ts":0}}}
+[517042|-] GAS_SAMPLE pin_mv=2751 ao_mv=4585 gas_pct=85.9 min_mv=4498 max_mv=4615 n=19 warming_up=0 simulated=0
+[518042|-] GAS_SAMPLE pin_mv=1709 ao_mv=2848 gas_pct=53.3 min_mv=953 max_mv=4460 n=20 warming_up=0 simulated=0
+[518043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":53.3,"gas_mv":2848,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":71,"device_ts":0}}}
+[518064|-] REPORT_TX seq=71 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":53.3,"gas_mv":2848,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":71,"device_ts":0}}}
+[519042|-] GAS_SAMPLE pin_mv=433 ao_mv=722 gas_pct=13.5 min_mv=593 max_mv=890 n=19 warming_up=0 simulated=0
+[519043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":13.5,"gas_mv":722,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":72,"device_ts":0}}}
+[519064|-] REPORT_TX seq=72 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":13.5,"gas_mv":722,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":72,"device_ts":0}}}
+[520042|-] GAS_SAMPLE pin_mv=292 ao_mv=487 gas_pct=9.1 min_mv=427 max_mv=577 n=19 warming_up=0 simulated=0
+[520043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":9.1,"gas_mv":487,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":73,"device_ts":0}}}
+[520064|-] REPORT_TX seq=73 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":9.1,"gas_mv":487,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":73,"device_ts":0}}}
+[520131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[521042|-] GAS_SAMPLE pin_mv=217 ao_mv=362 gas_pct=6.8 min_mv=328 max_mv=410 n=19 warming_up=0 simulated=0
+[521042|-] GAS_ALARM_OFF gas_pct=6.8 gas_low_pct=8 mode=auto
+[521053|-] ACTUATOR_START window=closed origin=edge
+[521053|-] EDGE_ACTION window=closed gas_pct=6.8
+[521065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":6.8,"gas_mv":362,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":74,"device_ts":0}}}
+[521085|-] REPORT_TX seq=74 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6.8,"gas_mv":362,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":74,"device_ts":0}}}
+[521453|-] ACTUATOR_DONE window=closed angle=0
+[522042|-] GAS_SAMPLE pin_mv=174 ao_mv=290 gas_pct=5.4 min_mv=268 max_mv=312 n=19 warming_up=0 simulated=0
+[522043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5.4,"gas_mv":290,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":75,"device_ts":0}}}
+[522064|-] REPORT_TX seq=75 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5.4,"gas_mv":290,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":75,"device_ts":0}}}
+[523042|-] GAS_SAMPLE pin_mv=149 ao_mv=248 gas_pct=4.6 min_mv=237 max_mv=263 n=19 warming_up=0 simulated=0
+[523043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.6,"gas_mv":248,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":76,"device_ts":0}}}
+[523064|-] REPORT_TX seq=76 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.6,"gas_mv":248,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":76,"device_ts":0}}}
+[524042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=240 n=19 warming_up=0 simulated=0
+[525042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[526042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[527042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[528042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[529042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[530042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[530131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[531042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[532042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[533042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[534042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[535042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[536042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[537042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[538042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[539042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[540042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[540131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[540141|-] HEALTH uptime_s=540 heap=247728 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=64
+[541042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[542042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[543042|-] GAS_SAMPLE pin_mv=803 ao_mv=1338 gas_pct=25.1 min_mv=237 max_mv=3553 n=20 warming_up=0 simulated=0
+[543042|-] GAS_ALARM_ON gas_pct=25.1 gas_high_pct=15 mode=auto
+[543053|-] ACTUATOR_START window=open origin=edge
+[543053|-] EDGE_ACTION window=open gas_pct=25.1
+[543064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":25.1,"gas_mv":1338,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":77,"device_ts":0}}}
+[543085|-] REPORT_TX seq=77 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":25.1,"gas_mv":1338,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":77,"device_ts":0}}}
+[543453|-] ACTUATOR_DONE window=open angle=90
+[544042|-] GAS_SAMPLE pin_mv=1966 ao_mv=3277 gas_pct=61.4 min_mv=2668 max_mv=3580 n=19 warming_up=0 simulated=0
+[544043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":61.4,"gas_mv":3277,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":78,"device_ts":0}}}
+[544064|-] REPORT_TX seq=78 event=window_changed origin=edge {"state":{"reported":{"gas_pct":61.4,"gas_mv":3277,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":78,"device_ts":0}}}
+[545042|-] GAS_SAMPLE pin_mv=743 ao_mv=1238 gas_pct=23.2 min_mv=778 max_mv=2422 n=19 warming_up=0 simulated=0
+[545043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":23.2,"gas_mv":1238,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":79,"device_ts":0}}}
+[545064|-] REPORT_TX seq=79 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":23.2,"gas_mv":1238,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":79,"device_ts":0}}}
+[546042|-] GAS_SAMPLE pin_mv=358 ao_mv=597 gas_pct=11.2 min_mv=473 max_mv=753 n=19 warming_up=0 simulated=0
+[546043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":11.2,"gas_mv":597,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":80,"device_ts":0}}}
+[546064|-] REPORT_TX seq=80 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":11.2,"gas_mv":597,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":80,"device_ts":0}}}
+[547042|-] GAS_SAMPLE pin_mv=219 ao_mv=365 gas_pct=6.8 min_mv=307 max_mv=453 n=19 warming_up=0 simulated=0
+[547042|-] GAS_ALARM_OFF gas_pct=6.8 gas_low_pct=8 mode=auto
+[547053|-] ACTUATOR_START window=closed origin=edge
+[547053|-] EDGE_ACTION window=closed gas_pct=6.8
+[547064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":6.8,"gas_mv":365,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":81,"device_ts":0}}}
+[547085|-] REPORT_TX seq=81 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6.8,"gas_mv":365,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":81,"device_ts":0}}}
+[547453|-] ACTUATOR_DONE window=closed angle=0
+[548042|-] GAS_SAMPLE pin_mv=152 ao_mv=253 gas_pct=4.7 min_mv=237 max_mv=288 n=19 warming_up=0 simulated=0
+[548043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.7,"gas_mv":253,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":82,"device_ts":0}}}
+[548064|-] REPORT_TX seq=82 event=window_changed origin=edge {"state":{"reported":{"gas_pct":4.7,"gas_mv":253,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":82,"device_ts":0}}}
+[549042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[549043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":83,"device_ts":0}}}
+[549064|-] REPORT_TX seq=83 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":83,"device_ts":0}}}
+[550042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[550131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[551042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[552042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[553042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[554042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[555042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[556042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[557042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[558042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[559042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[560042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[560131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[561042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[562042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[563042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[564042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[565042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[566042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[567042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[568042|-] GAS_SAMPLE pin_mv=1561 ao_mv=2602 gas_pct=48.7 min_mv=237 max_mv=4118 n=20 warming_up=0 simulated=0
+[568042|-] GAS_ALARM_ON gas_pct=48.7 gas_high_pct=15 mode=auto
+[568053|-] ACTUATOR_START window=open origin=edge
+[568053|-] EDGE_ACTION window=open gas_pct=48.7
+[568064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":48.7,"gas_mv":2602,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":84,"device_ts":0}}}
+[568085|-] REPORT_TX seq=84 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":48.7,"gas_mv":2602,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":84,"device_ts":0}}}
+[568453|-] ACTUATOR_DONE window=open angle=90
+[569042|-] GAS_SAMPLE pin_mv=2624 ao_mv=4373 gas_pct=81.9 min_mv=3955 max_mv=4497 n=19 warming_up=0 simulated=0
+[569043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":81.9,"gas_mv":4373,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":85,"device_ts":0}}}
+[569064|-] REPORT_TX seq=85 event=window_changed origin=edge {"state":{"reported":{"gas_pct":81.9,"gas_mv":4373,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":85,"device_ts":0}}}
+[570042|-] GAS_SAMPLE pin_mv=2488 ao_mv=4147 gas_pct=77.7 min_mv=3047 max_mv=4495 n=19 warming_up=0 simulated=0
+[570043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":77.7,"gas_mv":4147,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":86,"device_ts":0}}}
+[570064|-] REPORT_TX seq=86 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":77.7,"gas_mv":4147,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":86,"device_ts":0}}}
+[570131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[571042|-] GAS_SAMPLE pin_mv=533 ao_mv=888 gas_pct=16.6 min_mv=550 max_mv=2168 n=19 warming_up=0 simulated=0
+[571043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":16.6,"gas_mv":888,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":87,"device_ts":0}}}
+[571064|-] REPORT_TX seq=87 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":16.6,"gas_mv":888,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":87,"device_ts":0}}}
+[572042|-] GAS_SAMPLE pin_mv=256 ao_mv=427 gas_pct=8.0 min_mv=358 max_mv=512 n=19 warming_up=0 simulated=0
+[572042|-] GAS_ALARM_OFF gas_pct=8.0 gas_low_pct=8 mode=auto
+[572053|-] ACTUATOR_START window=closed origin=edge
+[572053|-] EDGE_ACTION window=closed gas_pct=8.0
+[572064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":8,"gas_mv":427,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":88,"device_ts":0}}}
+[572085|-] REPORT_TX seq=88 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":8,"gas_mv":427,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":88,"device_ts":0}}}
+[572453|-] ACTUATOR_DONE window=closed angle=0
+[573042|-] GAS_SAMPLE pin_mv=182 ao_mv=303 gas_pct=5.7 min_mv=270 max_mv=343 n=19 warming_up=0 simulated=0
+[573043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5.7,"gas_mv":303,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":89,"device_ts":0}}}
+[573064|-] REPORT_TX seq=89 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5.7,"gas_mv":303,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":89,"device_ts":0}}}
+[574042|-] GAS_SAMPLE pin_mv=147 ao_mv=245 gas_pct=4.6 min_mv=237 max_mv=268 n=19 warming_up=0 simulated=0
+[574043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.6,"gas_mv":245,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":90,"device_ts":0}}}
+[574064|-] REPORT_TX seq=90 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.6,"gas_mv":245,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":90,"device_ts":0}}}
+[575042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[576042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[577042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[578042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[579042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[580042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[580131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[581042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[582042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[583042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[584042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[585042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[586042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[587042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[588042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[589042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[590042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[590131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[591042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[592042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[593042|-] GAS_SAMPLE pin_mv=1927 ao_mv=3212 gas_pct=60.1 min_mv=237 max_mv=4350 n=20 warming_up=0 simulated=0
+[593042|-] GAS_ALARM_ON gas_pct=60.1 gas_high_pct=15 mode=auto
+[593053|-] ACTUATOR_START window=open origin=edge
+[593053|-] EDGE_ACTION window=open gas_pct=60.1
+[593065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":60.1,"gas_mv":3212,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":91,"device_ts":0}}}
+[593085|-] REPORT_TX seq=91 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":60.1,"gas_mv":3212,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":91,"device_ts":0}}}
+[593453|-] ACTUATOR_DONE window=open angle=90
+[594042|-] GAS_SAMPLE pin_mv=2680 ao_mv=4467 gas_pct=83.7 min_mv=4152 max_mv=4577 n=19 warming_up=0 simulated=0
+[594043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":83.7,"gas_mv":4467,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":92,"device_ts":0}}}
+[594064|-] REPORT_TX seq=92 event=window_changed origin=edge {"state":{"reported":{"gas_pct":83.7,"gas_mv":4467,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":92,"device_ts":0}}}
+[595042|-] GAS_SAMPLE pin_mv=2721 ao_mv=4535 gas_pct=84.9 min_mv=4337 max_mv=4587 n=19 warming_up=0 simulated=0
+[595043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":84.9,"gas_mv":4535,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":93,"device_ts":0}}}
+[595064|-] REPORT_TX seq=93 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":84.9,"gas_mv":4535,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":93,"device_ts":0}}}
+[596042|-] GAS_SAMPLE pin_mv=1137 ao_mv=1895 gas_pct=35.5 min_mv=670 max_mv=4170 n=19 warming_up=0 simulated=0
+[596043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":35.5,"gas_mv":1895,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":94,"device_ts":0}}}
+[596064|-] REPORT_TX seq=94 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":35.5,"gas_mv":1895,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":94,"device_ts":0}}}
+[597042|-] GAS_SAMPLE pin_mv=307 ao_mv=512 gas_pct=9.6 min_mv=418 max_mv=630 n=19 warming_up=0 simulated=0
+[597043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":9.6,"gas_mv":512,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":95,"device_ts":0}}}
+[597064|-] REPORT_TX seq=95 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":9.6,"gas_mv":512,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":95,"device_ts":0}}}
+[598042|-] GAS_SAMPLE pin_mv=214 ao_mv=357 gas_pct=6.7 min_mv=305 max_mv=410 n=19 warming_up=0 simulated=0
+[598042|-] GAS_ALARM_OFF gas_pct=6.7 gas_low_pct=8 mode=auto
+[598053|-] ACTUATOR_START window=closed origin=edge
+[598053|-] EDGE_ACTION window=closed gas_pct=6.7
+[598064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":6.7,"gas_mv":357,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":96,"device_ts":0}}}
+[598085|-] REPORT_TX seq=96 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6.7,"gas_mv":357,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":96,"device_ts":0}}}
+[598453|-] ACTUATOR_DONE window=closed angle=0
+[599042|-] GAS_SAMPLE pin_mv=164 ao_mv=273 gas_pct=5.1 min_mv=245 max_mv=305 n=19 warming_up=0 simulated=0
+[599043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5.1,"gas_mv":273,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":97,"device_ts":0}}}
+[599064|-] REPORT_TX seq=97 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5.1,"gas_mv":273,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":97,"device_ts":0}}}
+[600042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=245 n=19 warming_up=0 simulated=0
+[600043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":98,"device_ts":0}}}
+[600064|-] REPORT_TX seq=98 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":98,"device_ts":0}}}
+[600131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[600141|-] HEALTH uptime_s=600 heap=247916 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=64
+[601042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[602042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[603042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[604042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[605042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[606042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[607042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[608042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[609042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[610042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[610131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[611042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[612042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[613042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[614042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[615042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[616042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[617042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[618042|-] GAS_SAMPLE pin_mv=2146 ao_mv=3577 gas_pct=67.0 min_mv=237 max_mv=4232 n=20 warming_up=0 simulated=0
+[618042|-] GAS_ALARM_ON gas_pct=67.0 gas_high_pct=15 mode=auto
+[618053|-] ACTUATOR_START window=open origin=edge
+[618053|-] EDGE_ACTION window=open gas_pct=67.0
+[618064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":67,"gas_mv":3577,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":99,"device_ts":0}}}
+[618085|-] REPORT_TX seq=99 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":67,"gas_mv":3577,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":99,"device_ts":0}}}
+[618453|-] ACTUATOR_DONE window=open angle=90
+[619042|-] GAS_SAMPLE pin_mv=2340 ao_mv=3900 gas_pct=73.0 min_mv=3548 max_mv=4275 n=19 warming_up=0 simulated=0
+[619043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":73,"gas_mv":3900,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":100,"device_ts":0}}}
+[619064|-] REPORT_TX seq=100 event=window_changed origin=edge {"state":{"reported":{"gas_pct":73,"gas_mv":3900,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":100,"device_ts":0}}}
+[620042|-] GAS_SAMPLE pin_mv=2537 ao_mv=4228 gas_pct=79.2 min_mv=3508 max_mv=4402 n=19 warming_up=0 simulated=0
+[620043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":79.2,"gas_mv":4228,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":101,"device_ts":0}}}
+[620064|-] REPORT_TX seq=101 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":79.2,"gas_mv":4228,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":101,"device_ts":0}}}
+[620131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[621042|-] GAS_SAMPLE pin_mv=558 ao_mv=930 gas_pct=17.4 min_mv=520 max_mv=2730 n=19 warming_up=0 simulated=0
+[621043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":17.4,"gas_mv":930,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":102,"device_ts":0}}}
+[621064|-] REPORT_TX seq=102 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":17.4,"gas_mv":930,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":102,"device_ts":0}}}
+[622042|-] GAS_SAMPLE pin_mv=248 ao_mv=413 gas_pct=7.7 min_mv=343 max_mv=493 n=19 warming_up=0 simulated=0
+[622042|-] GAS_ALARM_OFF gas_pct=7.7 gas_low_pct=8 mode=auto
+[622053|-] ACTUATOR_START window=closed origin=edge
+[622053|-] EDGE_ACTION window=closed gas_pct=7.7
+[622065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":7.7,"gas_mv":413,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":103,"device_ts":0}}}
+[622085|-] REPORT_TX seq=103 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":7.7,"gas_mv":413,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":103,"device_ts":0}}}
+[622453|-] ACTUATOR_DONE window=closed angle=0
+[623042|-] GAS_SAMPLE pin_mv=176 ao_mv=293 gas_pct=5.5 min_mv=243 max_mv=328 n=19 warming_up=0 simulated=0
+[623043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5.5,"gas_mv":293,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":104,"device_ts":0}}}
+[623064|-] REPORT_TX seq=104 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5.5,"gas_mv":293,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":104,"device_ts":0}}}
+[624042|-] GAS_SAMPLE pin_mv=145 ao_mv=242 gas_pct=4.5 min_mv=237 max_mv=258 n=19 warming_up=0 simulated=0
+[624043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.5,"gas_mv":242,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":105,"device_ts":0}}}
+[624064|-] REPORT_TX seq=105 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.5,"gas_mv":242,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":105,"device_ts":0}}}
+[625042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[626042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[627042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[628042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[629042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[630042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[630131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[631042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[632042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[633042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[634042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[635042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[636042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[637042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[638042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[639042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[640042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[640131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[641042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[642042|-] GAS_SAMPLE pin_mv=396 ao_mv=660 gas_pct=12.4 min_mv=237 max_mv=1253 n=20 warming_up=0 simulated=0
+[642043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":12.4,"gas_mv":660,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":106,"device_ts":0}}}
+[642064|-] REPORT_TX seq=106 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":12.4,"gas_mv":660,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":106,"device_ts":0}}}
+[643042|-] GAS_SAMPLE pin_mv=1124 ao_mv=1873 gas_pct=35.1 min_mv=1237 max_mv=3402 n=19 warming_up=0 simulated=0
+[643043|-] GAS_ALARM_ON gas_pct=35.1 gas_high_pct=15 mode=auto
+[643053|-] ACTUATOR_START window=open origin=edge
+[643053|-] EDGE_ACTION window=open gas_pct=35.1
+[643065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":35.1,"gas_mv":1873,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":107,"device_ts":0}}}
+[643085|-] REPORT_TX seq=107 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":35.1,"gas_mv":1873,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":107,"device_ts":0}}}
+[643453|-] ACTUATOR_DONE window=open angle=90
+[644042|-] GAS_SAMPLE pin_mv=2620 ao_mv=4367 gas_pct=81.8 min_mv=3657 max_mv=4553 n=19 warming_up=0 simulated=0
+[644043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":81.8,"gas_mv":4367,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":108,"device_ts":0}}}
+[644064|-] REPORT_TX seq=108 event=window_changed origin=edge {"state":{"reported":{"gas_pct":81.8,"gas_mv":4367,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":108,"device_ts":0}}}
+[645042|-] GAS_SAMPLE pin_mv=2678 ao_mv=4463 gas_pct=83.6 min_mv=4002 max_mv=4590 n=19 warming_up=0 simulated=0
+[645043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":83.6,"gas_mv":4463,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":109,"device_ts":0}}}
+[645064|-] REPORT_TX seq=109 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":83.6,"gas_mv":4463,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":109,"device_ts":0}}}
+[646042|-] GAS_SAMPLE pin_mv=820 ao_mv=1367 gas_pct=25.6 min_mv=585 max_mv=3587 n=19 warming_up=0 simulated=0
+[646043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":25.6,"gas_mv":1367,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":110,"device_ts":0}}}
+[646064|-] REPORT_TX seq=110 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":25.6,"gas_mv":1367,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":110,"device_ts":0}}}
+[647042|-] GAS_SAMPLE pin_mv=272 ao_mv=453 gas_pct=8.5 min_mv=377 max_mv=563 n=19 warming_up=0 simulated=0
+[647043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":8.5,"gas_mv":453,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":111,"device_ts":0}}}
+[647064|-] REPORT_TX seq=111 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":8.5,"gas_mv":453,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":111,"device_ts":0}}}
+[648042|-] GAS_SAMPLE pin_mv=192 ao_mv=320 gas_pct=6.0 min_mv=283 max_mv=373 n=19 warming_up=0 simulated=0
+[648042|-] GAS_ALARM_OFF gas_pct=6.0 gas_low_pct=8 mode=auto
+[648053|-] ACTUATOR_START window=closed origin=edge
+[648053|-] EDGE_ACTION window=closed gas_pct=6.0
+[648064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":6,"gas_mv":320,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":112,"device_ts":0}}}
+[648085|-] REPORT_TX seq=112 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6,"gas_mv":320,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":112,"device_ts":0}}}
+[648453|-] ACTUATOR_DONE window=closed angle=0
+���������������������������������������������������������������� ao_mv=252 gas_pct=4.7 min_mv=237 max_mv=280 n=19 warming_up=0 simulated=0
+[649043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.7,"gas_mv":252,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":113,"device_ts":0}}}
+[649064|-] REPORT_TX seq=113 event=window_changed origin=edge {"state":{"reported":{"gas_pct":4.7,"gas_mv":252,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":113,"device_ts":0}}}
+[650042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[650043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":114,"device_ts":0}}}
+[650064|-] REPORT_TX seq=114 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":114,"device_ts":0}}}
+[650131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[651042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[652042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[653042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[654042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[655042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[656042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[657042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[658042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[659042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[660042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[660131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[660141|-] HEALTH uptime_s=660 heap=247728 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=64
+[661042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+���������������������������������������������������������������� ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[663042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[664042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[665042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[666042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[667042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[668042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[669042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[670042|-] GAS_SAMPLE pin_mv=147 ao_mv=245 gas_pct=4.6 min_mv=237 max_mv=432 n=20 warming_up=0 simulated=0
+[670131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[671042|-] GAS_SAMPLE pin_mv=1932 ao_mv=3220 gas_pct=60.3 min_mv=793 max_mv=4407 n=20 warming_up=0 simulated=0
+[671042|-] GAS_ALARM_ON gas_pct=60.3 gas_high_pct=15 mode=auto
+[671053|-] ACTUATOR_START window=open origin=edge
+[671053|-] EDGE_ACTION window=open gas_pct=60.3
+[671065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":60.3,"gas_mv":3220,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":115,"device_ts":0}}}
+[671085|-] REPORT_TX seq=115 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":60.3,"gas_mv":3220,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":115,"device_ts":0}}}
+[671453|-] ACTUATOR_DONE window=open angle=90
+[672042|-] GAS_SAMPLE pin_mv=2690 ao_mv=4483 gas_pct=84.0 min_mv=4183 max_mv=4565 n=19 warming_up=0 simulated=0
+[672043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":84,"gas_mv":4483,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":116,"device_ts":0}}}
+[672064|-] REPORT_TX seq=116 event=window_changed origin=edge {"state":{"reported":{"gas_pct":84,"gas_mv":4483,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":116,"device_ts":0}}}
+[673042|-] GAS_SAMPLE pin_mv=2750 ao_mv=4583 gas_pct=85.8 min_mv=4565 max_mv=4608 n=19 warming_up=0 simulated=0
+[673043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":85.8,"gas_mv":4583,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":117,"device_ts":0}}}
+[673064|-] REPORT_TX seq=117 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":85.8,"gas_mv":4583,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":117,"device_ts":0}}}
+[674042|-] GAS_SAMPLE pin_mv=2517 ao_mv=4195 gas_pct=78.6 min_mv=3030 max_mv=4593 n=19 warming_up=0 simulated=0
+[674043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":78.6,"gas_mv":4195,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":118,"device_ts":0}}}
+[674064|-] REPORT_TX seq=118 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":78.6,"gas_mv":4195,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":118,"device_ts":0}}}
+[675042|-] GAS_SAMPLE pin_mv=538 ao_mv=897 gas_pct=16.8 min_mv=590 max_mv=2157 n=19 warming_up=0 simulated=0
+[675043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":16.8,"gas_mv":897,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":119,"device_ts":0}}}
+[675064|-] REPORT_TX seq=119 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":16.8,"gas_mv":897,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":119,"device_ts":0}}}
+[676042|-] GAS_SAMPLE pin_mv=283 ao_mv=472 gas_pct=8.8 min_mv=395 max_mv=563 n=19 warming_up=0 simulated=0
+[676043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":8.8,"gas_mv":472,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":120,"device_ts":0}}}
+[676064|-] REPORT_TX seq=120 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":8.8,"gas_mv":472,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":120,"device_ts":0}}}
+[677042|-] GAS_SAMPLE pin_mv=207 ao_mv=345 gas_pct=6.5 min_mv=302 max_mv=410 n=19 warming_up=0 simulated=0
+[677042|-] GAS_ALARM_OFF gas_pct=6.5 gas_low_pct=8 mode=auto
+[677053|-] ACTUATOR_START window=closed origin=edge
+[677053|-] EDGE_ACTION window=closed gas_pct=6.5
+[677064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":6.5,"gas_mv":345,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":121,"device_ts":0}}}
+[677085|-] REPORT_TX seq=121 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6.5,"gas_mv":345,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":121,"device_ts":0}}}
+[677453|-] ACTUATOR_DONE window=closed angle=0
+[678042|-] GAS_SAMPLE pin_mv=161 ao_mv=268 gas_pct=5.0 min_mv=248 max_mv=293 n=19 warming_up=0 simulated=0
+[678043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":268,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":122,"device_ts":0}}}
+[678064|-] REPORT_TX seq=122 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5,"gas_mv":268,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":122,"device_ts":0}}}
+[679042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=238 n=19 warming_up=0 simulated=0
+[679043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":123,"device_ts":0}}}
+[679064|-] REPORT_TX seq=123 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":123,"device_ts":0}}}
+[680042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[680131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[681042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[682042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[683042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[684042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[685042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[686042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[687042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[688042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[689042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[690042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[690131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[691042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[692042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[693042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[694042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[695042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[696042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[697042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[698042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[699042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[700042|-] GAS_SAMPLE pin_mv=336 ao_mv=560 gas_pct=10.5 min_mv=237 max_mv=2197 n=20 warming_up=0 simulated=0
+[700043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":10.5,"gas_mv":560,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":124,"device_ts":0}}}
+[700064|-] REPORT_TX seq=124 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":10.5,"gas_mv":560,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":124,"device_ts":0}}}
+[700131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[701042|-] GAS_SAMPLE pin_mv=2280 ao_mv=3800 gas_pct=71.2 min_mv=2810 max_mv=4192 n=19 warming_up=0 simulated=0
+[701043|-] GAS_ALARM_ON gas_pct=71.2 gas_high_pct=15 mode=auto
+[701053|-] ACTUATOR_START window=open origin=edge
+[701053|-] EDGE_ACTION window=open gas_pct=71.2
+[701065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":71.2,"gas_mv":3800,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":125,"device_ts":0}}}
+[701085|-] REPORT_TX seq=125 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":71.2,"gas_mv":3800,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":125,"device_ts":0}}}
+[701453|-] ACTUATOR_DONE window=open angle=90
+[702042|-] GAS_SAMPLE pin_mv=2623 ao_mv=4372 gas_pct=81.9 min_mv=4013 max_mv=4498 n=19 warming_up=0 simulated=0
+[702043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":81.9,"gas_mv":4372,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":126,"device_ts":0}}}
+[702064|-] REPORT_TX seq=126 event=window_changed origin=edge {"state":{"reported":{"gas_pct":81.9,"gas_mv":4372,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":126,"device_ts":0}}}
+[703042|-] GAS_SAMPLE pin_mv=2660 ao_mv=4433 gas_pct=83.0 min_mv=3937 max_mv=4557 n=19 warming_up=0 simulated=0
+[703043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":83,"gas_mv":4433,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":127,"device_ts":0}}}
+[703064|-] REPORT_TX seq=127 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":83,"gas_mv":4433,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":127,"device_ts":0}}}
+[704042|-] GAS_SAMPLE pin_mv=807 ao_mv=1345 gas_pct=25.2 min_mv=612 max_mv=3488 n=19 warming_up=0 simulated=0
+[704043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":25.2,"gas_mv":1345,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":128,"device_ts":0}}}
+[704064|-] REPORT_TX seq=128 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":25.2,"gas_mv":1345,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":128,"device_ts":0}}}
+[705042|-] GAS_SAMPLE pin_mv=289 ao_mv=482 gas_pct=9.0 min_mv=403 max_mv=592 n=19 warming_up=0 simulated=0
+[705043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":9,"gas_mv":482,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":129,"device_ts":0}}}
+[705064|-] REPORT_TX seq=129 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":9,"gas_mv":482,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":129,"device_ts":0}}}
+[706042|-] GAS_SAMPLE pin_mv=203 ao_mv=338 gas_pct=6.3 min_mv=298 max_mv=392 n=19 warming_up=0 simulated=0
+[706042|-] GAS_ALARM_OFF gas_pct=6.3 gas_low_pct=8 mode=auto
+[706053|-] ACTUATOR_START window=closed origin=edge
+[706053|-] EDGE_ACTION window=closed gas_pct=6.3
+[706064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":6.3,"gas_mv":338,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":130,"device_ts":0}}}
+[706085|-] REPORT_TX seq=130 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6.3,"gas_mv":338,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":130,"device_ts":0}}}
+[706453|-] ACTUATOR_DONE window=closed angle=0
+[707042|-] GAS_SAMPLE pin_mv=156 ao_mv=260 gas_pct=4.9 min_mv=238 max_mv=292 n=19 warming_up=0 simulated=0
+[707043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.9,"gas_mv":260,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":131,"device_ts":0}}}
+[707064|-] REPORT_TX seq=131 event=window_changed origin=edge {"state":{"reported":{"gas_pct":4.9,"gas_mv":260,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":131,"device_ts":0}}}
+[708042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=238 n=19 warming_up=0 simulated=0
+[708043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":132,"device_ts":0}}}
+[708064|-] REPORT_TX seq=132 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":132,"device_ts":0}}}
+[709042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[710042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[710131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[711042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[712042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[713042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[714042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[715042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[716042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[717042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[718042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[719042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[720042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[720131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[720141|-] HEALTH uptime_s=720 heap=247728 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=64
+[721042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[722042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[723042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[724042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[725042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[726042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[727042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[728042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[729042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[730042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[730131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[731042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[732042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[733042|-] GAS_SAMPLE pin_mv=1306 ao_mv=2177 gas_pct=40.8 min_mv=237 max_mv=4195 n=20 warming_up=0 simulated=0
+[733042|-] GAS_ALARM_ON gas_pct=40.8 gas_high_pct=15 mode=auto
+[733053|-] ACTUATOR_START window=open origin=edge
+[733053|-] EDGE_ACTION window=open gas_pct=40.8
+[733065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":40.8,"gas_mv":2177,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":133,"device_ts":0}}}
+[733085|-] REPORT_TX seq=133 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":40.8,"gas_mv":2177,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":133,"device_ts":0}}}
+[733453|-] ACTUATOR_DONE window=open angle=90
+[734042|-] GAS_SAMPLE pin_mv=2657 ao_mv=4428 gas_pct=82.9 min_mv=4080 max_mv=4532 n=19 warming_up=0 simulated=0
+[734043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":82.9,"gas_mv":4428,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":134,"device_ts":0}}}
+[734064|-] REPORT_TX seq=134 event=window_changed origin=edge {"state":{"reported":{"gas_pct":82.9,"gas_mv":4428,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":134,"device_ts":0}}}
+[735042|-] GAS_SAMPLE pin_mv=2704 ao_mv=4507 gas_pct=84.4 min_mv=4295 max_mv=4562 n=19 warming_up=0 simulated=0
+[735043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":84.4,"gas_mv":4507,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":135,"device_ts":0}}}
+[735064|-] REPORT_TX seq=135 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":84.4,"gas_mv":4507,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":135,"device_ts":0}}}
+[736042|-] GAS_SAMPLE pin_mv=1092 ao_mv=1820 gas_pct=34.1 min_mv=585 max_mv=4088 n=19 warming_up=0 simulated=0
+[736043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":34.1,"gas_mv":1820,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":136,"device_ts":0}}}
+[736064|-] REPORT_TX seq=136 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":34.1,"gas_mv":1820,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":136,"device_ts":0}}}
+[737042|-] GAS_SAMPLE pin_mv=273 ao_mv=455 gas_pct=8.5 min_mv=380 max_mv=557 n=19 warming_up=0 simulated=0
+[737043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":8.5,"gas_mv":455,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":137,"device_ts":0}}}
+[737064|-] REPORT_TX seq=137 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":8.5,"gas_mv":455,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":137,"device_ts":0}}}
+[738042|-] GAS_SAMPLE pin_mv=187 ao_mv=312 gas_pct=5.8 min_mv=268 max_mv=360 n=19 warming_up=0 simulated=0
+[738042|-] GAS_ALARM_OFF gas_pct=5.8 gas_low_pct=8 mode=auto
+[738053|-] ACTUATOR_START window=closed origin=edge
+[738053|-] EDGE_ACTION window=closed gas_pct=5.8
+[738064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5.8,"gas_mv":312,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":138,"device_ts":0}}}
+[738085|-] REPORT_TX seq=138 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":5.8,"gas_mv":312,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":138,"device_ts":0}}}
+[738453|-] ACTUATOR_DONE window=closed angle=0
+[739042|-] GAS_SAMPLE pin_mv=144 ao_mv=240 gas_pct=4.5 min_mv=237 max_mv=258 n=19 warming_up=0 simulated=0
+[739043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.5,"gas_mv":240,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":139,"device_ts":0}}}
+[739064|-] REPORT_TX seq=139 event=window_changed origin=edge {"state":{"reported":{"gas_pct":4.5,"gas_mv":240,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":139,"device_ts":0}}}
+[740042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[740043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":140,"device_ts":0}}}
+[740064|-] REPORT_TX seq=140 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":140,"device_ts":0}}}
+[740131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[741042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[742042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[743042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[744042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[745042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[746042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[747042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[748042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[749042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[750042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[750131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[751042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[752042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[753042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[754042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[755042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[756042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[757042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[758042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[759042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[760042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[760131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[761042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[762042|-] GAS_SAMPLE pin_mv=217 ao_mv=362 gas_pct=6.8 min_mv=237 max_mv=2745 n=20 warming_up=0 simulated=0
+[763042|-] GAS_SAMPLE pin_mv=2505 ao_mv=4175 gas_pct=78.2 min_mv=3278 max_mv=4445 n=20 warming_up=0 simulated=0
+[763042|-] GAS_ALARM_ON gas_pct=78.2 gas_high_pct=15 mode=auto
+[763053|-] ACTUATOR_START window=open origin=edge
+[763053|-] EDGE_ACTION window=open gas_pct=78.2
+[763065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":78.2,"gas_mv":4175,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":141,"device_ts":0}}}
+[763085|-] REPORT_TX seq=141 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":78.2,"gas_mv":4175,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":141,"device_ts":0}}}
+[763453|-] ACTUATOR_DONE window=open angle=90
+[764042|-] GAS_SAMPLE pin_mv=2709 ao_mv=4515 gas_pct=84.6 min_mv=4232 max_mv=4583 n=19 warming_up=0 simulated=0
+[764043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":84.6,"gas_mv":4515,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":142,"device_ts":0}}}
+[764064|-] REPORT_TX seq=142 event=window_changed origin=edge {"state":{"reported":{"gas_pct":84.6,"gas_mv":4515,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":142,"device_ts":0}}}
+[765042|-] GAS_SAMPLE pin_mv=2405 ao_mv=4008 gas_pct=75.1 min_mv=2078 max_mv=4577 n=19 warming_up=0 simulated=0
+[765043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":75.1,"gas_mv":4008,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":143,"device_ts":0}}}
+[765064|-] REPORT_TX seq=143 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":75.1,"gas_mv":4008,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":143,"device_ts":0}}}
+[766042|-] GAS_SAMPLE pin_mv=401 ao_mv=668 gas_pct=12.5 min_mv=480 max_mv=1163 n=19 warming_up=0 simulated=0
+[766043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":12.5,"gas_mv":668,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":144,"device_ts":0}}}
+[766064|-] REPORT_TX seq=144 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":12.5,"gas_mv":668,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":144,"device_ts":0}}}
+[767042|-] GAS_SAMPLE pin_mv=235 ao_mv=392 gas_pct=7.3 min_mv=337 max_mv=472 n=19 warming_up=0 simulated=0
+[767042|-] GAS_ALARM_OFF gas_pct=7.3 gas_low_pct=8 mode=auto
+[767053|-] ACTUATOR_START window=closed origin=edge
+[767053|-] EDGE_ACTION window=closed gas_pct=7.3
+[767064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":7.3,"gas_mv":392,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":145,"device_ts":0}}}
+[767085|-] REPORT_TX seq=145 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":7.3,"gas_mv":392,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":145,"device_ts":0}}}
+[767453|-] ACTUATOR_DONE window=closed angle=0
+[768042|-] GAS_SAMPLE pin_mv=167 ao_mv=278 gas_pct=5.2 min_mv=237 max_mv=307 n=19 warming_up=0 simulated=0
+[768043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5.2,"gas_mv":278,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":146,"device_ts":0}}}
+[768064|-] REPORT_TX seq=146 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5.2,"gas_mv":278,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":146,"device_ts":0}}}
+[769042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=245 n=19 warming_up=0 simulated=0
+[769043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":147,"device_ts":0}}}
+[769064|-] REPORT_TX seq=147 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":147,"device_ts":0}}}
+[770042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[770131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[771042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[772042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[773042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[774042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[775042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[776042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[777042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[778042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[779042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[780042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[780131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[780141|-] HEALTH uptime_s=780 heap=247728 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=64
+[781042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[782042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[783042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[784042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[785042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[786042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[787042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[788042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[789042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[790042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[790131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[791042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[792042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[793042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[794042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[795042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[796042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[797042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[798042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[799042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[800042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[800131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[801042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[802042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[803042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[804042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[805042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[806042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[807042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[808042|-] GAS_SAMPLE pin_mv=1647 ao_mv=2745 gas_pct=51.4 min_mv=237 max_mv=4168 n=20 warming_up=0 simulated=0
+[808042|-] GAS_ALARM_ON gas_pct=51.4 gas_high_pct=15 mode=auto
+[808053|-] ACTUATOR_START window=open origin=edge
+[808053|-] EDGE_ACTION window=open gas_pct=51.4
+[808064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":51.4,"gas_mv":2745,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":148,"device_ts":0}}}
+[808085|-] REPORT_TX seq=148 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":51.4,"gas_mv":2745,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":148,"device_ts":0}}}
+[808453|-] ACTUATOR_DONE window=open angle=90
+[809042|-] GAS_SAMPLE pin_mv=2658 ao_mv=4430 gas_pct=83.0 min_mv=4007 max_mv=4547 n=19 warming_up=0 simulated=0
+[809043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":83,"gas_mv":4430,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":149,"device_ts":0}}}
+[809064|-] REPORT_TX seq=149 event=window_changed origin=edge {"state":{"reported":{"gas_pct":83,"gas_mv":4430,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":149,"device_ts":0}}}
+[810042|-] GAS_SAMPLE pin_mv=2524 ao_mv=4207 gas_pct=78.8 min_mv=2870 max_mv=4557 n=19 warming_up=0 simulated=0
+[810043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":78.8,"gas_mv":4207,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":150,"device_ts":0}}}
+[810064|-] REPORT_TX seq=150 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":78.8,"gas_mv":4207,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":150,"device_ts":0}}}
+[810131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[811042|-] GAS_SAMPLE pin_mv=438 ao_mv=730 gas_pct=13.7 min_mv=477 max_mv=1780 n=19 warming_up=0 simulated=0
+[811043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":13.7,"gas_mv":730,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":151,"device_ts":0}}}
+[811064|-] REPORT_TX seq=151 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":13.7,"gas_mv":730,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":151,"device_ts":0}}}
+[812042|-] GAS_SAMPLE pin_mv=225 ao_mv=375 gas_pct=7.0 min_mv=315 max_mv=452 n=19 warming_up=0 simulated=0
+[812042|-] GAS_ALARM_OFF gas_pct=7.0 gas_low_pct=8 mode=auto
+[812053|-] ACTUATOR_START window=closed origin=edge
+[812053|-] EDGE_ACTION window=closed gas_pct=7.0
+[812064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":7,"gas_mv":375,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":152,"device_ts":0}}}
+[812085|-] REPORT_TX seq=152 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":7,"gas_mv":375,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":152,"device_ts":0}}}
+[812453|-] ACTUATOR_DONE window=closed angle=0
+[813042|-] GAS_SAMPLE pin_mv=160 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=302 n=19 warming_up=0 simulated=0
+[813043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":153,"device_ts":0}}}
+[813064|-] REPORT_TX seq=153 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":153,"device_ts":0}}}
+[814042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=240 n=19 warming_up=0 simulated=0
+[814043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":154,"device_ts":0}}}
+[814064|-] REPORT_TX seq=154 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":154,"device_ts":0}}}
+[815042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[816042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[817042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[818042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[819042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[820042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[820131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[821042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[822042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[823042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[824042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[825042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[826042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[827042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[828042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[829042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[830042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[830131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[831042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[832042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[833042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[834042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[835042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[836042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[837042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[838042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0

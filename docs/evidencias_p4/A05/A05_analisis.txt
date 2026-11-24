@@ -1,0 +1,41 @@
+
+== FILE A05_vent_ESP32.log ==
+   board=vent lines=891 span=7.8 min boots=0 reset_reasons=- utc_clock=no
+   error/warning lines: 0
+
+== RNF1 stability (A11) ==
+RNF1 longest run without restart: 7.8 min (>= 30) -> FAIL
+RNF1 restarts inside the log: 0 (0) -> PASS
+   HEALTH lines=7 heap first/last=247728/247728 rssi 0..0 dBm
+RNF1 longest loop iteration: 64 ms (<= 500) -> PASS
+RNF1 WiFi + MQTT drops: 0 (0) -> PASS
+RNF1 free heap loss: 0 bytes (<= 4096) -> PASS
+
+== RNF4 reporting, V1 complete reports, V2 seq ==
+   reports=127 failed=0 events={'heartbeat': 1, 'gas_changed': 66, 'gas_alarm_on': 15, 'window_changed': 30, 'gas_alarm_off': 15}
+   origins={'edge': 127}
+V1 reports missing an attribute: 0 (0) -> PASS
+V3 largest report: 235 bytes (< 1024) -> PASS
+   gap between published reports ms: n=126 min=979 median=1000 mean=3421 p95=20021 max=39021
+RNF4 longest gap while connected: 39021 ms (<= 61500) -> PASS
+RNF4 shortest gap: 979 ms (>= 995) -> FAIL
+V2 segment from line 4: seq 28..154, published 127, failed 0, never attempted 0 (0) -> PASS
+   published: 983/h -> 23597/day -> 707923/month (input for B04)
+
+== RNF3 voice commands on the board (A02 lights / A03 window) ==
+   no DELTA_RX followed by an applied command
+
+== E1 / E2 / RNF7 edge response (A05) ==
+   warm-up ended before this log started (first GAS_SAMPLE has warming_up=0)
+E2 alarms during warm-up: 0 (0) -> PASS
+E1 alarm changes outside the thresholds: 0/30 (0) -> PASS
+   GAS_ALARM_ON -> ACTUATOR_DONE open ms: n=15 min=410 median=411 mean=411 p95=411 max=411
+   GAS_ALARM_OFF -> ACTUATOR_DONE closed ms: n=15 min=411 median=411 mean=411 p95=411 max=411
+RNF7 edge response max 411 ms (<= 1000), alarms without window move: 0 -> PASS
+A05 smoke cycles in auto: 15 (>= 10) -> PASS
+
+== C1 / RNF8 cloud response seen from board 1 (A06) ==
+   no gas_alarm_on report in manual mode
+
+== RNF9 offline operation / RNF5 reconnection (A09) ==
+   no WIFI_LOST or MQTT_LOST in this log

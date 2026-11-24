@@ -1,0 +1,401 @@
+# 2026-11-24T06:49:18.576 logger start on COM7
+# 2026-11-24T06:49:18.579 port open
+[132|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[140|-] LOCAL_TEST_MODE send a delta line: {"state":{...}}
+[1001|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":0,"gas_mv":0,"warming_up":true,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"boot","origin":"boot","seq":1,"device_ts":0}}}
+[1012|-] REPORT_TX seq=1 event=boot origin=boot {"state":{"reported":{"gas_pct":0,"gas_mv":0,"warming_up":true,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"boot","origin":"boot","seq":1,"device_ts":0}}}
+[1044|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=1 simulated=0
+[2042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[3042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[4042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[5042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[6042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[7042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[8042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[9042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[10042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[10131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[11042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[12042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[13042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[14042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[15042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[16042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[17042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[18042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[19042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[20042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[20131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[21042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[22042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[23042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[24042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[25042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[26042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[27042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[28042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[29042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[30042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[30131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[31042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[32042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[33042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[34042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[35042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[36042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[37042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[38042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[39042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[40042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[40131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[41042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[42042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[43042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[44042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[45042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[46042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[47042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[48042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[49042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[50042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[50131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[51042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[52042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[53042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[54042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[55042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[56042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[57042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[58042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[59042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[60042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=0
+[60042|-] GAS_READY gas_pct=4.4
+[60054|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"boot","seq":2,"device_ts":0}}}
+[60075|-] REPORT_TX seq=2 event=gas_changed origin=boot {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"boot","seq":2,"device_ts":0}}}
+[60131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[60141|-] HEALTH uptime_s=60 heap=247728 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=53
+[61042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[62042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[63042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[64042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[65042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[66042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[67042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[68042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[69042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[70042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[70131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[71042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[72042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[73042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[74042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[75042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[76042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[77042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[78042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[79042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[80042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[80131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[81042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[82042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[83042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[84042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[85042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[86042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[87042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[88042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[89042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[90042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[90131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[91042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[92042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[93042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[94042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[95042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[96042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[97042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[98042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[99042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[100042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[100131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[101042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[102042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[103042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[104042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[105042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[106042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[107042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[108042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[109042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[110042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[110131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[111042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[112042|-] GAS_SAMPLE pin_mv=251 ao_mv=418 gas_pct=7.8 min_mv=237 max_mv=518 n=20 warming_up=0 simulated=0
+[112043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":7.8,"gas_mv":418,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"boot","seq":3,"device_ts":0}}}
+[112064|-] REPORT_TX seq=3 event=gas_changed origin=boot {"state":{"reported":{"gas_pct":7.8,"gas_mv":418,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"boot","seq":3,"device_ts":0}}}
+[113042|-] GAS_SAMPLE pin_mv=288 ao_mv=480 gas_pct=9.0 min_mv=453 max_mv=497 n=19 warming_up=0 simulated=0
+[114042|-] GAS_SAMPLE pin_mv=221 ao_mv=368 gas_pct=6.9 min_mv=290 max_mv=450 n=20 warming_up=0 simulated=0
+[115042|-] GAS_SAMPLE pin_mv=154 ao_mv=257 gas_pct=4.8 min_mv=237 max_mv=315 n=20 warming_up=0 simulated=0
+[115043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.8,"gas_mv":257,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"boot","seq":4,"device_ts":0}}}
+[115064|-] REPORT_TX seq=4 event=gas_changed origin=boot {"state":{"reported":{"gas_pct":4.8,"gas_mv":257,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"boot","seq":4,"device_ts":0}}}
+[116042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[117042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[118042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[119042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[120042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[120131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[120141|-] HEALTH uptime_s=120 heap=247728 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=53
+[121042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[122042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[123042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[124042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[125042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[126042|-] GAS_SAMPLE pin_mv=639 ao_mv=1065 gas_pct=19.9 min_mv=237 max_mv=1338 n=20 warming_up=0 simulated=0
+[126042|-] GAS_ALARM_ON gas_pct=19.9 gas_high_pct=15 mode=auto
+[126053|-] ACTUATOR_START window=open origin=edge
+[126053|-] EDGE_ACTION window=open gas_pct=19.9
+[126065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":19.9,"gas_mv":1065,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":5,"device_ts":0}}}
+[126085|-] REPORT_TX seq=5 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":19.9,"gas_mv":1065,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":5,"device_ts":0}}}
+[126453|-] ACTUATOR_DONE window=open angle=90
+[127042|-] GAS_SAMPLE pin_mv=843 ao_mv=1405 gas_pct=26.3 min_mv=668 max_mv=2178 n=19 warming_up=0 simulated=0
+[127043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":26.3,"gas_mv":1405,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":6,"device_ts":0}}}
+[127064|-] REPORT_TX seq=6 event=window_changed origin=edge {"state":{"reported":{"gas_pct":26.3,"gas_mv":1405,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":6,"device_ts":0}}}
+[128042|-] GAS_SAMPLE pin_mv=272 ao_mv=453 gas_pct=8.5 min_mv=343 max_mv=607 n=19 warming_up=0 simulated=0
+[128043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":8.5,"gas_mv":453,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":7,"device_ts":0}}}
+[128064|-] REPORT_TX seq=7 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":8.5,"gas_mv":453,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":7,"device_ts":0}}}
+[129042|-] GAS_SAMPLE pin_mv=166 ao_mv=277 gas_pct=5.2 min_mv=237 max_mv=333 n=19 warming_up=0 simulated=0
+[129042|-] GAS_ALARM_OFF gas_pct=5.2 gas_low_pct=8 mode=auto
+[129053|-] ACTUATOR_START window=closed origin=edge
+[129053|-] EDGE_ACTION window=closed gas_pct=5.2
+[129064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5.2,"gas_mv":277,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":8,"device_ts":0}}}
+[129085|-] REPORT_TX seq=8 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":5.2,"gas_mv":277,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":8,"device_ts":0}}}
+[129453|-] ACTUATOR_DONE window=closed angle=0
+[130042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[130043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":9,"device_ts":0}}}
+[130064|-] REPORT_TX seq=9 event=window_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":9,"device_ts":0}}}
+[130131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[131042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[131043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":10,"device_ts":0}}}
+[131064|-] REPORT_TX seq=10 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":10,"device_ts":0}}}
+[132042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[133042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[134042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[135042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[136042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[137042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[138042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[139042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[140042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[140131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[141042|-] GAS_SAMPLE pin_mv=210 ao_mv=350 gas_pct=6.6 min_mv=237 max_mv=967 n=20 warming_up=0 simulated=0
+[142042|-] GAS_SAMPLE pin_mv=547 ao_mv=912 gas_pct=17.1 min_mv=817 max_mv=1042 n=20 warming_up=0 simulated=0
+[142042|-] GAS_ALARM_ON gas_pct=17.1 gas_high_pct=15 mode=auto
+[142053|-] ACTUATOR_START window=open origin=edge
+[142053|-] EDGE_ACTION window=open gas_pct=17.1
+[142064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":17.1,"gas_mv":912,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":11,"device_ts":0}}}
+[142085|-] REPORT_TX seq=11 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":17.1,"gas_mv":912,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":11,"device_ts":0}}}
+[142453|-] ACTUATOR_DONE window=open angle=90
+[143042|-] GAS_SAMPLE pin_mv=569 ao_mv=948 gas_pct=17.8 min_mv=802 max_mv=1035 n=19 warming_up=0 simulated=0
+[143043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":17.8,"gas_mv":948,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":12,"device_ts":0}}}
+[143064|-] REPORT_TX seq=12 event=window_changed origin=edge {"state":{"reported":{"gas_pct":17.8,"gas_mv":948,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":12,"device_ts":0}}}
+[144042|-] GAS_SAMPLE pin_mv=350 ao_mv=583 gas_pct=10.9 min_mv=452 max_mv=750 n=19 warming_up=0 simulated=0
+[144043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":10.9,"gas_mv":583,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":13,"device_ts":0}}}
+[144064|-] REPORT_TX seq=13 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":10.9,"gas_mv":583,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":13,"device_ts":0}}}
+[145042|-] GAS_SAMPLE pin_mv=205 ao_mv=342 gas_pct=6.4 min_mv=283 max_mv=425 n=19 warming_up=0 simulated=0
+[145042|-] GAS_ALARM_OFF gas_pct=6.4 gas_low_pct=8 mode=auto
+[145053|-] ACTUATOR_START window=closed origin=edge
+[145053|-] EDGE_ACTION window=closed gas_pct=6.4
+[145064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":6.4,"gas_mv":342,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":14,"device_ts":0}}}
+[145085|-] REPORT_TX seq=14 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6.4,"gas_mv":342,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":14,"device_ts":0}}}
+[145453|-] ACTUATOR_DONE window=closed angle=0
+[146042|-] GAS_SAMPLE pin_mv=144 ao_mv=240 gas_pct=4.5 min_mv=237 max_mv=258 n=19 warming_up=0 simulated=0
+[146043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.5,"gas_mv":240,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":15,"device_ts":0}}}
+[146064|-] REPORT_TX seq=15 event=window_changed origin=edge {"state":{"reported":{"gas_pct":4.5,"gas_mv":240,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":15,"device_ts":0}}}
+[147042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[147043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":16,"device_ts":0}}}
+[147064|-] REPORT_TX seq=16 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":16,"device_ts":0}}}
+[148042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[149042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[150042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[150131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[151042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[152042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[153042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[154042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[155042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[156042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[157042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[158042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[159042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[160042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[160131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[161042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[162042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[163042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[164042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[165042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[166042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[167042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[168042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[169042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[170042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[170131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[171042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[172042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[173042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[174042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[175042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[176042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[177042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[178042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[179042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[180042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[180131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[180141|-] HEALTH uptime_s=180 heap=247728 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=64
+[181042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[182042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[183042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[184042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[185042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[186042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[187042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[188042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[189042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[190042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[190131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[191042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[192042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[193042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[194042|-] GAS_SAMPLE pin_mv=146 ao_mv=243 gas_pct=4.6 min_mv=237 max_mv=397 n=20 warming_up=0 simulated=0
+[195042|-] GAS_SAMPLE pin_mv=1701 ao_mv=2835 gas_pct=53.1 min_mv=580 max_mv=4203 n=20 warming_up=0 simulated=0
+[195042|-] GAS_ALARM_ON gas_pct=53.1 gas_high_pct=15 mode=auto
+[195053|-] ACTUATOR_START window=open origin=edge
+[195053|-] EDGE_ACTION window=open gas_pct=53.1
+[195064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":53.1,"gas_mv":2835,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":17,"device_ts":0}}}
+[195085|-] REPORT_TX seq=17 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":53.1,"gas_mv":2835,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":17,"device_ts":0}}}
+[195453|-] ACTUATOR_DONE window=open angle=90
+[196042|-] GAS_SAMPLE pin_mv=2625 ao_mv=4375 gas_pct=81.9 min_mv=4015 max_mv=4448 n=19 warming_up=0 simulated=0
+[196043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":81.9,"gas_mv":4375,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":18,"device_ts":0}}}
+[196064|-] REPORT_TX seq=18 event=window_changed origin=edge {"state":{"reported":{"gas_pct":81.9,"gas_mv":4375,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":18,"device_ts":0}}}
+[197042|-] GAS_SAMPLE pin_mv=2527 ao_mv=4212 gas_pct=78.9 min_mv=4088 max_mv=4363 n=19 warming_up=0 simulated=0
+[197043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":78.9,"gas_mv":4212,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":19,"device_ts":0}}}
+[197064|-] REPORT_TX seq=19 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":78.9,"gas_mv":4212,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":19,"device_ts":0}}}
+[198042|-] GAS_SAMPLE pin_mv=1810 ao_mv=3017 gas_pct=56.5 min_mv=928 max_mv=4230 n=19 warming_up=0 simulated=0
+[198043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":56.5,"gas_mv":3017,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":20,"device_ts":0}}}
+[198064|-] REPORT_TX seq=20 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":56.5,"gas_mv":3017,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":20,"device_ts":0}}}
+[199042|-] GAS_SAMPLE pin_mv=392 ao_mv=653 gas_pct=12.2 min_mv=523 max_mv=823 n=19 warming_up=0 simulated=0
+[199043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":12.2,"gas_mv":653,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":21,"device_ts":0}}}
+[199064|-] REPORT_TX seq=21 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":12.2,"gas_mv":653,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":21,"device_ts":0}}}
+[200042|-] GAS_SAMPLE pin_mv=260 ao_mv=433 gas_pct=8.1 min_mv=352 max_mv=513 n=19 warming_up=0 simulated=0
+[200043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":8.1,"gas_mv":433,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":22,"device_ts":0}}}
+[200064|-] REPORT_TX seq=22 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":8.1,"gas_mv":433,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":22,"device_ts":0}}}
+[200131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[201042|-] GAS_SAMPLE pin_mv=193 ao_mv=322 gas_pct=6.0 min_mv=287 max_mv=363 n=19 warming_up=0 simulated=0
+[201042|-] GAS_ALARM_OFF gas_pct=6.0 gas_low_pct=8 mode=auto
+[201053|-] ACTUATOR_START window=closed origin=edge
+[201053|-] EDGE_ACTION window=closed gas_pct=6.0
+[201065|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":6,"gas_mv":322,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":23,"device_ts":0}}}
+[201085|-] REPORT_TX seq=23 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":6,"gas_mv":322,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":23,"device_ts":0}}}
+[201453|-] ACTUATOR_DONE window=closed angle=0
+[202042|-] GAS_SAMPLE pin_mv=155 ao_mv=258 gas_pct=4.8 min_mv=237 max_mv=315 n=19 warming_up=0 simulated=0
+[202043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.8,"gas_mv":258,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":24,"device_ts":0}}}
+[202064|-] REPORT_TX seq=24 event=window_changed origin=edge {"state":{"reported":{"gas_pct":4.8,"gas_mv":258,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":24,"device_ts":0}}}
+[203042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=245 n=19 warming_up=0 simulated=0
+[203043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":25,"device_ts":0}}}
+[203064|-] REPORT_TX seq=25 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":25,"device_ts":0}}}
+[204042|-] GAS_SAMPLE pin_mv=144 ao_mv=240 gas_pct=4.5 min_mv=237 max_mv=307 n=19 warming_up=0 simulated=0
+[205042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[206042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[207042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[208042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[209042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[210042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[210131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[211042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[212042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[213042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[214042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[215042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[216042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[217042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[218042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[219042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[220042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[220131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[221042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[222042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[223042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[224042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[225042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[226042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[227042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[228042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=258 n=20 warming_up=0 simulated=0
+[229042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[230042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[230131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[231042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[232042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[233042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[234042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[235042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[236042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[237042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[238042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[239042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[240042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[240131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[240141|-] HEALTH uptime_s=240 heap=247728 min_heap=244420 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=64
+[241042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[242042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[243042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[244042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[245042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[246042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[247042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[248042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[249042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[250042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[250131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[251042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[252042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[253042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[254042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[255042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[256042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[257042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[258042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[259042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[260042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[260131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[261042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[262042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[263042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[263043|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"heartbeat","origin":"edge","seq":26,"device_ts":0}}}
+[263064|-] REPORT_TX seq=26 event=heartbeat origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"heartbeat","origin":"edge","seq":26,"device_ts":0}}}
+[264042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[265042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[266042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[267042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[268042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[269042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[270042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[270131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[271042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[272042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[273042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[274042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[275042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[276042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[277042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[278042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[279042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[280042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[280131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[281042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[282042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[283042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[284042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[285042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[286042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[287042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[288042|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
