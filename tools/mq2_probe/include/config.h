@@ -14,7 +14,7 @@ namespace config {
 namespace pins {
 constexpr uint8_t GAS_SENSOR = 34;   // MQ-2 AO through the 10k/15k divider (ADC1)
 constexpr uint8_t MARK_BUTTON = 0;   // On-board BOOT button, active LOW
-constexpr uint8_t STATUS_LED = 32;   // Short pulse after each printed sample
+constexpr uint8_t STATUS_LED = 32;   // Gas LED on board 1; here it only pulses per sample
 }  // namespace pins
 
 /** Serial output. */
@@ -29,9 +29,9 @@ constexpr float DIVIDER_R_BOTTOM_OHM = 15000.0f;  // GPIO34 -> GND resistor [ohm
 // Pin voltage = AO voltage * gain = 15k / (10k + 15k) = 0.6 [-]
 constexpr float DIVIDER_GAIN =
     DIVIDER_R_BOTTOM_OHM / (DIVIDER_R_TOP_OHM + DIVIDER_R_BOTTOM_OHM);
-// MQ-2 supply measured on the 5 V bus WITH the servo and the MQ-2 connected
-// (execution guide step 0.6). Replace with the measured value before logging.
-constexpr float SUPPLY_MV = 5000.0f;         // [mV]
+// MQ-2 supply: external 5 V / 2 A adapter, measured 5.337 V without load
+// (UNI-T UT890D, 23/11). The loaded value is still pending (no multimeter).
+constexpr float SUPPLY_MV = 5340.0f;         // [mV]
 constexpr uint32_t SAMPLE_PERIOD_MS = 50;    // Between ADC reads [ms]
 constexpr uint32_t REPORT_PERIOD_MS = 1000;  // Averaging window and print period [ms]
 constexpr float PERCENT_SCALE = 100.0f;      // Ratio -> percent [-]
