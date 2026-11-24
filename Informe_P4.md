@@ -15,7 +15,7 @@
 
 > El informe de la Práctica 3 se conserva sin cambios en [Informe.md](Informe.md).
 
-> **Convención de este borrador** (se elimina antes de la entrega): `⟨…⟩` marca un valor que sale de una evidencia todavía no tomada; "**A cargo de Ricardo**" marca una sección de la Nube (AWS IoT Rules, Lambdas, DynamoDB, skill, costo y mockups).
+> **Convención de este borrador** (se elimina antes de la entrega): `⟨…⟩` marca un valor que sale de una evidencia todavía no tomada.
 
 ---
 ## Resumen ejecutivo
@@ -28,19 +28,19 @@
 
 | Requisito | Declarado | Medido | Veredicto |
 |---|---|---|---|
-| RF1–RF9 (P3, todos los sensores y actuadores) | §1.4 | ⟨A02, A03, A12, B02⟩ | ⟨⟩ |
+| RF1–RF9 (P3, todos los sensores y actuadores) | §1.4 | PIR 16/16 y 0 falsos positivos (A12); firmwares 29/29 y 19/19 (B02); Lambdas 86/86 (B01); voz: ⟨A02, A03⟩ | ⟨⟩ |
 | RF10–RF12 almacenamiento con validación y origen | §1.4 | ⟨A08⟩ | ⟨⟩ |
-| RF13 lógica Edge (E1–E3) y Nube (C1) | §2.6 | ⟨A05, A06, A09⟩ | ⟨⟩ |
+| RF13 lógica Edge (E1–E3) y Nube (C1) | §2.6 | Edge: 15/15 ciclos con gas real (A05); E1–E3 y C1 visto desde la placa: 29/29 (B02); C1 en la Nube: ⟨A06⟩ | ⟨⟩ |
 | RF14 modo y umbrales por voz | §1.4 | ⟨A04⟩ | ⟨⟩ |
 | RF15 mockups de reportes | §2.13 | ⟨⟩ | ⟨⟩ |
 | Integridad del almacenamiento | ≥ 99 % | ⟨A08⟩ | ⟨⟩ |
 | Latencia de almacenamiento | ≤ 5 s | ⟨A08⟩ | ⟨⟩ |
-| Respuesta automática Edge | ≤ 1000 ms | ⟨A05⟩ | ⟨⟩ |
+| Respuesta automática Edge | ≤ 1000 ms | 410–411 ms en 15 ciclos (A05) | Cumple |
 | Respuesta automática Nube | ≤ 5000 ms | ⟨A06⟩ | ⟨⟩ |
-| Operación sin conexión | E1 sigue; lo no enviado se cuenta | ⟨A09⟩ | ⟨⟩ |
+| Operación sin conexión | E1 sigue; lo no enviado se cuenta | E1 sin Internet: 15/15 (A05); reconexión: ⟨A09⟩ | ⟨⟩ |
 | Costo mensual | Dentro de la capa gratuita | ⟨B04⟩ | ⟨⟩ |
 
-**Hallazgos** (§4.4). ⟨Se completa con los defectos encontrados en B02, S1–S3 y las pruebas.⟩
+**Hallazgos** (§4.4). Se encontraron y corrigieron seis defectos: uno de diseño en la política de reporte (se perdía el evento `mode_changed` de la Nube cuando E1 actuaba en el mismo segundo), uno de montaje (un jumper sin contacto en el GND del MQ-2), un cambio de hardware (el LED de D32 pasó a indicar el gas) y tres en las herramientas de prueba. La respuesta automática en el Edge la domina el servo (400 ms); el tiempo total desde que llega el gas lo domina el sensor (1–3 s). ⟨Defectos de las pruebas con AWS.⟩
 
 **Cómo probarlo.** El [README](README.md) explica cómo compilar los dos firmwares y correr las pruebas; la evidencia de cada prueba está en [docs/evidencias_p4/](docs/evidencias_p4/).
 
@@ -116,23 +116,23 @@ RF1–RF9 son los de la P3, aplicados a todos los sensores y actuadores; RF10–
 | RF1 | Capturar los sensores (MQ-2 y PIR) | `GAS_SAMPLE` cada 1 s con `n=20` muestras; `PRESENCE_DETECTED` después del calentamiento de 30 s del PIR (`PIR_READY`) |
 | RF2 | Reportar el estado completo en `reported` | Cada reporte trae **todos** los atributos de su placa (§2.7) más `event`, `origin`, `seq` y `device_ts`; nunca pasan más de 61.5 s entre reportes con la conexión activa |
 | RF3 | Aplicar el `delta` en los actuadores y confirmarlo | Un `delta` válido cambia el LED o mueve el servo y el nuevo estado aparece en `reported` en ≤ 1.5 s desde `DELTA_RX` |
-| RF4 | Consultar por voz gas, presencia, luces y ventana | **A cargo de Ricardo** (skill) |
-| RF5 | Comandos por voz sobre luces y ventana | **A cargo de Ricardo** (skill) |
-| RF6 | Estado de los actuadores por voz | **A cargo de Ricardo** (skill) |
-| RF7–RF9 | Vinculación usuario ↔ *Things* (un código vincula los dos *Things* de la casa) | **A cargo de Ricardo** (skill) |
-| RF10 | Reglas de AWS IoT que invocan las Lambdas | **A cargo de Ricardo** |
-| RF11 | Validar, enriquecer y guardar las lecturas | **A cargo de Ricardo**; la placa entrega el reporte completo que la Lambda valida (contrato V1) |
+| RF4 | Consultar por voz gas, presencia, luces y ventana | La skill lee `reported` del *Thing* del usuario y responde con el valor; avisa si el sensor se calienta o si la placa no reporta hace más de 150 s (§2.12) |
+| RF5 | Comandos por voz sobre luces y ventana | La skill escribe `desired` con `cmd_origin = voice` en el *Thing* del usuario y espera la confirmación en `reported` hasta 3 s (§2.12) |
+| RF6 | Estado de los actuadores por voz | "La luz de la cocina está encendida", "la ventana está abierta", según `reported`; menciona si hay una orden pendiente |
+| RF7–RF9 | Vinculación usuario ↔ *Things* (un código vincula los dos *Things* de la casa) | El código se valida (6 dígitos, sin 0 inicial), se comprueba que existan los dos *Things* y se guardan dos ítems en `smartloft-user-thing`; persiste entre sesiones y se puede cambiar o borrar (§2.11) |
+| RF10 | Reglas de AWS IoT que invocan las Lambdas | `smartloft_data_rule` se dispara con cada reporte y `smartloft_control_rule` solo con `event = gas_alarm_on` (§2.10) |
+| RF11 | Validar, enriquecer y guardar las lecturas | La Lambda de datos valida tipos y rangos de todos los atributos (descarta el reporte incompleto o inválido con `DATA_DISCARDED`), agrega `thingName`, `timestamp`, `storedTs` y TTL, y hace `PutItem` (§2.10) |
 | RF12 | Guardar los eventos de los actuadores con su origen | La placa reporta `event` y `origin` (`voice`, `cloud`, `edge`, `boot`) en cada cambio; la Lambda de datos los guarda |
-| RF13 | Lógica automática en el Edge y en la Nube | E1–E3 en la placa 1 (§2.6); C1 en la Lambda de control (**Ricardo**) |
+| RF13 | Lógica automática en el Edge y en la Nube | E1–E3 en la placa 1; C1 en la Lambda de control, que actúa solo con `desired.mode = auto` (§2.6, §2.10) |
 | RF14 | Modo y umbrales en `reported`, consultables y modificables por voz | `mode`, `gas_high_pct` y `gas_low_pct` en `reported`; la placa los aplica desde `desired`, los valida y los guarda en la NVS |
-| RF15 | Mockups de reportes para la toma de decisiones | **A cargo de Ricardo** (§2.13) |
+| RF15 | Mockups de reportes para la toma de decisiones | 4 mockups, cada elemento con la consulta de DynamoDB que lo alimenta (§2.13) |
 
 ### 1.5 Requerimientos no funcionales
 
 | ID | Atributo | Valor declarado | Cómo se mide | Prueba |
 |---|---|---|---|---|
 | RNF1 | Estabilidad | ≥ 60 min por placa con 0 reinicios, 0 caídas, `loop()` ≤ 500 ms y pérdida de heap ≤ 4096 bytes | Líneas `HEALTH` y `BOOT` | A11 |
-| RNF2 | Exactitud | PIR: 15/15 pasadas y 0 falsos positivos en 5 min. Servo: ±5° en abierta y cerrada. MQ-2: repetibilidad declarada (no exactitud en ppm) | Conteo con video, transportador, `mq2_probe` | A12, A10 |
+| RNF2 | Exactitud | PIR: 100 % de las pasadas (≥ 15) y 0 falsos positivos en 5 min. Servo: ±5° en abierta y cerrada. MQ-2: repetibilidad declarada (no exactitud en ppm) | Conteo con video, transportador, `mq2_probe` | A12, A10 |
 | RNF3 | Respuesta por voz | ≤ 3 s Lambda → objeto confirmado, para luces y ventana (valor de la P3) | `DELTA_RX` → `LIGHT_APPLIED` / `ACTUATOR_DONE` y CloudWatch | A02, A03 |
 | RNF4 | Frecuencia de reporte | ≥ 1 s entre reportes; heartbeat de 60 s; `gas_changed` si `gas_pct` varía ≥ 3 puntos | `REPORT_TX` del log | B02, A08 |
 | RNF5 | Reconexión | Orden pendiente aplicada en ≤ 10 s desde `WIFI_CONNECTED` | `WIFI_CONNECTED` → `GET_RX` → orden aplicada | A09 |
@@ -142,7 +142,7 @@ RF1–RF9 son los de la P3, aplicados a todos los sensores y actuadores; RF10–
 | RNF9 | Respuesta de la lógica automática **Edge** | ≤ 1000 ms desde `GAS_ALARM_ON` hasta `ACTUATOR_DONE` | Un solo reloj: `millis()` de la placa 1 | A05 |
 | RNF10 | Respuesta de la lógica automática **Nube** | ≤ 5000 ms desde `REPORT_TX event=gas_alarm_on` hasta `MODE_APPLIED origin=cloud` | Un solo reloj: placa 1 | A06 |
 | RNF11 | Operación sin conexión | Sin Internet, E1 abre y cierra la ventana igual; los reportes que no salen se pierden (sin buffer) y quedan como huecos de `seq`; al volver se publica el estado completo | Log de la placa 1 contra DynamoDB | A09 |
-| RNF12 | Costo | Consumo mensual de mensajes, invocaciones y escrituras dentro de la capa gratuita | **A cargo de Ricardo** | B04 |
+| RNF12 | Costo | Consumo mensual de mensajes, invocaciones y escrituras dentro de la capa gratuita | Conteo real de A08 extrapolado a 30 días | B04 |
 
 **Dinámica del caso de uso.** El humo llega al sensor en segundos y se dispersa en decenas de segundos; abrir la ventana en ≤ 1 s es suficiente. La regla de la Nube (C1) depende de alarmas que ocurren pocas veces al día, por eso tolera unos segundos.
 
@@ -160,9 +160,18 @@ RF1–RF9 son los de la P3, aplicados a todos los sensores y actuadores; RF10–
 | RF14 modo y umbrales | §2.6, §2.7 | `VentilationController::applyMode()`, `applyThresholds()` | A04, B02 |
 | RNF1 | §3.9 | [SmartObjectApp.cpp](lib/SmartObjectCore/SmartObjectApp.cpp): `update()`; `HealthMonitor` | A11 |
 | RNF4 | §2.8 | `ShadowReporter::update()`; [ReportQueue.cpp](lib/SmartObjectCore/ReportQueue.cpp) | B02, A08 |
-| RNF9 | §2.5.1, §2.6 | `VentilationController::enforceEdgeRule()`; `WindowActuator` (`SETTLE_TIME_MS`) | A05 |
-| RNF11 | §2.5.2 | `ShadowReporter::update()` (sin buffer, `seq` sube igual); `ShadowClient` (`/get` al reconectar) | A09 |
-| RF4–RF11, RF13 C1, RF15, RNF7, RNF8, RNF10, RNF12 | **A cargo de Ricardo** | | |
+| RNF9 | §2.5.5, §2.6 | `VentilationController::enforceEdgeRule()`; `WindowActuator` (`SETTLE_TIME_MS`) | A05 |
+| RNF11 | §2.5.6 | `ShadowReporter::update()` (sin buffer, `seq` sube igual); `ShadowClient` (`/get` al reconectar) | A09 |
+| RF4–RF6 voz | §2.12 | [lambda/skill](lambda/skill/lambda_function.py): `GetGasLevelHandler`, `LightCommandHandler`, `WindowCommandHandler`, `send_command()` | A02, A03, B01 |
+| RF7–RF9 vinculación | §2.11 | `LinkThingHandler`, `UnlinkThingHandler`, `LinkRepository`, `ThingGateway.exists()` | A01, B01 |
+| RF10 reglas | §2.10 | [aws/iot-rules.md](aws/iot-rules.md) | A08 |
+| RF11 validación y almacenamiento | §2.9, §2.10 | [lambda/data](lambda/data/lambda_function.py): `ReportValidator`, `ItemBuilder`, `DataRecorder` | A08, B01 |
+| RF13 C1 | §2.6, §2.10 | [lambda/control](lambda/control/lambda_function.py): `GasControl`, `AlarmCounter`, `ShadowWriter` | A06, B01 |
+| RF14 modo y umbrales (voz) | §2.12 | `SetModeHandler`, `SetThresholdHandler`, `GetThresholdsHandler` | A04, B01 |
+| RF15 mockups | §2.13 | [docs/mockups/](docs/mockups/README.md) | — |
+| RNF7, RNF8 | §2.9 | `seq`, `deviceTs`, `storedTs` en cada ítem | A08 |
+| RNF10 | §2.10 | `smartloft_control_rule` → `GasControl.handle()` | A06 |
+| RNF12 | §2.8 | — | B04 |
 
 ---
 ## 2. Análisis y diseño
@@ -197,7 +206,55 @@ Las placas **no se comunican entre sí ni comparten GND**: todo pasa por sus Sha
 
 ### 2.2 Diagrama de arquitectura del sistema
 
-**A cargo de Ricardo:** arquitectura completa (objetos, Shadows, reglas de AWS IoT, Lambdas, tablas de DynamoDB y skill) y por qué las reglas y Lambdas están separadas.
+```mermaid
+flowchart TB
+    U(["Usuario"])
+    AX["Skill de Alexa<br/>monoambiente inteligente<br/>(simulador)"]
+    LSK["smartloft_skill_lambda"]
+    DBU[("DynamoDB<br/>smartloft-user-thing")]
+    subgraph IOT["AWS IoT Core (us-east-2)"]
+        SHV[("Shadow<br/>smartloft-739264-vent")]
+        SHL[("Shadow<br/>smartloft-739264-lights")]
+        RD{{"smartloft_data_rule"}}
+        RC{{"smartloft_control_rule"}}
+    end
+    LD["smartloft_data_lambda"]
+    LC["smartloft_control_lambda"]
+    DBD[("DynamoDB<br/>smartloft-data<br/>+ event-index")]
+    P1["Placa 1 ventilación<br/>MQ-2 + servo + LED de gas<br/>Lógica Edge E1–E3"]
+    P2["Placa 2 luces y entrada<br/>5 LEDs + PIR"]
+
+    U -->|"texto en el simulador"| AX
+    AX -->|"intent + slots + userId"| LSK
+    LSK -->|"Query / PutItem / DeleteItem"| DBU
+    LSK -->|"Get / UpdateThingShadow<br/>desired + cmd_origin = voice"| SHV
+    LSK -->|"Get / UpdateThingShadow"| SHL
+    P1 <-->|"MQTT/TLS 8883: reported / delta"| SHV
+    P2 <-->|"MQTT/TLS 8883: reported / delta"| SHL
+    SHV -->|"update/accepted"| RD
+    SHL -->|"update/accepted"| RD
+    RD --> LD
+    LD -->|"PutItem"| DBD
+    SHV -->|"update/accepted<br/>solo event = gas_alarm_on"| RC
+    RC --> LC
+    LC -->|"Query event-index"| DBD
+    LC -->|"UpdateThingShadow<br/>desired.mode = auto, cmd_origin = cloud"| SHV
+```
+
+Tres flujos, como en el ejemplo del docente:
+
+| Flujo | Recorrido |
+|---|---|
+| **Voz** | Usuario → skill → `smartloft_skill_lambda` resuelve los *Things* del `userId` en `smartloft-user-thing` → lee `reported` o escribe `desired` en el Shadow → `delta` a la placa → la placa aplica y reporta → la Lambda ve la confirmación y responde |
+| **Almacenamiento** | Cada reporte aceptado por el Shadow → `smartloft_data_rule` → `smartloft_data_lambda` valida, enriquece y guarda en `smartloft-data` |
+| **Control en la Nube (C1)** | El reporte del inicio de una alarma → `smartloft_control_rule` → `smartloft_control_lambda` cuenta las alarmas de 24 h en `event-index` → si son ≥ 3 y el modo es `manual`, escribe `desired.mode = auto` → la placa lo aplica y E1 abre la ventana si el gas sigue alto |
+
+**Alexa y la Nube nunca hablan con las placas:** todo pasa por los Shadows. Las placas no se comunican entre sí.
+
+**Por qué esta arquitectura:**
+- **Lo urgente en el Edge, lo que necesita historia en la Nube.** Gas → ventana se decide en la placa en ≈ 0.4 s y funciona sin Internet (A05). Contar alarmas del día necesita el histórico de DynamoDB, que la placa no tiene.
+- **Dos reglas y dos Lambdas, no una.** La de datos se dispara con cada reporte (~1 por minuto por placa) y solo necesita `dynamodb:PutItem`; la de control se dispara pocas veces al día y necesita `dynamodb:Query` e `iot:UpdateThingShadow`. Juntas, la función que guarda cada heartbeat tendría permiso para mover la ventana y la lógica de C1 correría con cada mensaje (más costo y más riesgo).
+- **Un *Thing* por placa.** Cada placa tiene su certificado y su Shadow; un usuario tiene dos *Things*, uno por `place`.
 
 ### 2.3 Diagrama de circuito
 
@@ -334,13 +391,199 @@ classDiagram
 
 #### 2.4.2 Funciones Lambda
 
-**A cargo de Ricardo.**
+Cada Lambda separa la lógica (clases y funciones puras) de los clientes de AWS, que se crean una vez por contenedor y se inyectan; así las pruebas unitarias (B01) reemplazan DynamoDB, AWS IoT y el reloj por dobles.
+
+```mermaid
+classDiagram
+    direction LR
+    class ReportValidator {
+      +validate(payload)
+      -_check_common()
+      -_check_vent()
+      -_check_lights()
+    }
+    class ItemBuilder {
+      +build(thing_parts, timestamp, reported, stored_ms) item
+    }
+    class DataRecorder {
+      +record(payload)
+    }
+    DataRecorder --> ReportValidator
+    DataRecorder --> ItemBuilder
+
+    class AlarmCounter {
+      +stored_alarms(thing, from_ms, to_ms)
+    }
+    class ShadowWriter {
+      +force_auto(thing)
+    }
+    class GasControl {
+      +handle(payload)
+      -_decide(fields, action, reason)
+    }
+    GasControl --> AlarmCounter
+    GasControl --> ShadowWriter
+
+    class LinkRepository {
+      +find_things(user_id)
+      +save(user_id, code)
+      +delete(user_id)
+    }
+    class ThingGateway {
+      +exists(name)
+      +get_state(name) ShadowState
+      +set_desired(name, attributes)
+      +wait_for(name, expected)
+    }
+    class ShadowState {
+      +reported
+      +desired
+      +online
+      +wanted(key)
+      +offline_note()
+    }
+    class LinkedHandler {
+      <<abstract>>
+      +handle(handler_input)
+      +handle_thing(handler_input, name, record)*
+    }
+    LinkedHandler --> LinkRepository
+    LinkedHandler --> ThingGateway
+    ThingGateway --> ShadowState
+    LinkedHandler <|-- LightCommandHandler
+    LinkedHandler <|-- WindowCommandHandler
+    LinkedHandler <|-- GetGasLevelHandler
+    LinkedHandler <|-- SetModeHandler
+    LinkedHandler <|-- SetThresholdHandler
+    LinkedHandler <|-- GetPresenceHandler
+```
+
+| Lambda | Clase | Responsabilidad |
+|---|---|---|
+| [data](lambda/data/lambda_function.py) | `ReportValidator` | Tipos y rangos de cada atributo según la placa; lanza `InvalidReport` con el motivo |
+| | `ItemBuilder` | Clasifica (`reading` / `event`), arma `eventKey` solo en eventos, calcula `expiresAt` (TTL) |
+| | `DataRecorder` | Coordina: valida, arma, `PutItem` y una línea `DATA_STORED` o `DATA_DISCARDED` |
+| [control](lambda/control/lambda_function.py) | `AlarmCounter` | `Query` en `event-index` de las `gas_alarm_on` de la ventana de tiempo |
+| | `ShadowWriter` | `UpdateThingShadow` con `{"desired": {"mode": "auto", "cmd_origin": "cloud"}}` |
+| | `GasControl` | Decide C1 y escribe una línea `CONTROL_DECISION` |
+| [skill](lambda/skill/lambda_function.py) | `LinkRepository` | Los dos ítems del usuario en `smartloft-user-thing` |
+| | `ThingGateway`, `ShadowState` | `DescribeThing`, `GetThingShadow`, `UpdateThingShadow`; lectura del documento, antigüedad del último reporte y orden pendiente |
+| | `LinkedHandler` y un handler por intent | Resuelve los *Things* del usuario antes de cada consulta o comando; un handler por intent |
+| | `RequestTimer`, `RequestLogger` | Una línea `SKILL_REQUEST` por solicitud, con el `userId` reducido a un hash |
 
 ### 2.5 Diagramas de secuencia
 
-Consulta del sensor, comando sobre un actuador desde el usuario, almacenamiento (objeto → regla → Lambda → DynamoDB) y regla C1: **a cargo de Ricardo**. Las dos secuencias siguientes ocurren dentro del objeto.
+#### 2.5.1 Consulta del sensor: "¿hay gas en la cocina?"
 
-#### 2.5.1 Regla E1: gas en modo automático (Edge)
+```mermaid
+sequenceDiagram
+    actor U as Usuario
+    participant AX as Alexa
+    participant SK as smartloft_skill_lambda
+    participant DB as smartloft-user-thing
+    participant SH as Shadow -vent
+
+    U->>AX: "hay gas en la cocina"
+    AX->>SK: GetGasLevel + userId
+    SK->>DB: Query userId
+    DB-->>SK: {vent: smartloft-739264-vent, lights: …}
+    SK->>SH: GetThingShadow
+    SH-->>SK: reported (gas_pct, gas_alarm, warming_up) + metadata
+    alt warming_up = true
+        SK-->>AX: "El sensor se está calentando…"
+    else último reporte hace > 150 s
+        SK-->>AX: valor + aviso de que la casa no reporta
+    else
+        SK-->>AX: "El índice de gas es N por ciento, sin alarma / con alarma"
+    end
+    AX-->>U: respuesta
+```
+
+#### 2.5.2 Comando sobre un actuador: "enciende la luz de la cocina"
+
+```mermaid
+sequenceDiagram
+    actor U as Usuario
+    participant SK as smartloft_skill_lambda
+    participant SH as Shadow -lights
+    participant P2 as Placa 2
+    participant R as smartloft_data_rule
+    participant LD as smartloft_data_lambda
+    participant DD as smartloft-data
+
+    U->>SK: TurnOnLight(zone = kitchen)
+    SK->>SH: UpdateThingShadow desired {light_kitchen: on, cmd_origin: voice}
+    SH-->>P2: delta (MQTT)
+    P2->>P2: LIGHT_APPLIED zone=kitchen origin=voice
+    P2->>SH: reported {…, light_kitchen: on, event: light_changed, origin: voice}<br/>+ desired {cmd_origin: null}
+    loop cada 0.25 s, hasta 3 s
+        SK->>SH: GetThingShadow
+    end
+    SK-->>U: "Listo, la luz de la cocina está encendida"
+    SH->>R: update/accepted
+    R->>LD: thingName, timestamp, reported
+    LD->>DD: PutItem (event light_changed, origin voice)
+```
+
+#### 2.5.3 Almacenamiento de un dato
+
+```mermaid
+sequenceDiagram
+    participant P as Placa
+    participant SH as Shadow
+    participant R as smartloft_data_rule
+    participant LD as smartloft_data_lambda
+    participant DD as smartloft-data
+    participant CW as CloudWatch
+
+    P->>SH: shadow/update con state.reported completo (seq, device_ts)
+    SH->>R: update/accepted (solo si trae state.reported)
+    R->>LD: thingName, timestamp (AWS), thingType, serialNumber, place, reported
+    LD->>LD: ReportValidator.validate()
+    alt reporte inválido o incompleto
+        LD->>CW: DATA_DISCARDED reason=…
+    else válido
+        LD->>LD: ItemBuilder.build(): recordType, eventKey, storedTs, expiresAt
+        LD->>DD: PutItem
+        LD->>CW: DATA_STORED
+    end
+```
+
+#### 2.5.4 Regla C1: alarmas repetidas en modo manual
+
+```mermaid
+sequenceDiagram
+    participant P1 as Placa 1
+    participant SH as Shadow -vent
+    participant RC as smartloft_control_rule
+    participant LC as smartloft_control_lambda
+    participant IX as event-index
+
+    P1->>SH: reported {event: gas_alarm_on, mode: manual, seq, device_ts}
+    SH->>RC: update/accepted, event = gas_alarm_on
+    RC->>LC: thingName, timestamp, reported
+    alt mode ≠ manual
+        LC->>LC: CONTROL_DECISION action=none reason=auto_mode
+    else
+        LC->>IX: Query eventKey = thingName#gas_alarm_on, últimas 24 h
+        IX-->>LC: alarmas guardadas (seq, deviceTs)
+        LC->>LC: excluye la actual y la suma una vez
+        alt total ≥ 3
+            LC->>SH: UpdateThingShadow desired {mode: auto, cmd_origin: cloud}
+            SH-->>P1: delta
+            P1->>P1: MODE_APPLIED origin=cloud → E1 abre la ventana si el gas sigue alto
+            P1->>SH: reported {event: mode_changed, origin: cloud}, luego {event: window_changed, origin: edge}
+        else
+            LC->>LC: CONTROL_DECISION action=none count=N
+        end
+    end
+```
+
+El reporte que produce la orden de la Nube trae `event = mode_changed`, que no pasa el filtro de la regla de control: no hay bucle.
+
+Las dos secuencias siguientes ocurren dentro del objeto.
+
+#### 2.5.5 Regla E1: gas en modo automático (Edge)
 
 ```mermaid
 sequenceDiagram
@@ -362,7 +605,7 @@ sequenceDiagram
     Note over SH: Las reglas de datos y de control reciben ambos reportes; en modo auto C1 no actúa
 ```
 
-#### 2.5.2 Operación sin conexión y reconexión
+#### 2.5.6 Operación sin conexión y reconexión
 
 ```mermaid
 sequenceDiagram
@@ -417,7 +660,7 @@ stateDiagram-v2
     Manual --> Auto : desired.mode = auto (voz o Nube C1) / borra desired.window y aplica E1 al instante
 ```
 
-**Convivencia de la voz con la lógica automática.** La skill aplica estas reglas con una respuesta explicativa (**Ricardo**); la placa las vuelve a aplicar como **defensa en profundidad**, de modo que tampoco un `desired` publicado a mano desde el MQTT test client puede saltárselas:
+**Convivencia de la voz con la lógica automática.** La skill aplica estas reglas con una respuesta explicativa (§2.12); la placa las vuelve a aplicar como **defensa en profundidad**, de modo que tampoco un `desired` publicado a mano desde el MQTT test client puede saltárselas:
 
 | Situación | Qué hace la placa | Log |
 |---|---|---|
@@ -490,27 +733,173 @@ stateDiagram-v2
 - **El mismo evento repetido se agrupa:** "apaga todas las luces" produce un solo `light_changed`.
 - **Muestreo del MQ-2:** cada 50 ms, promedio de 1 s (20 muestras); la histéresis usa el promedio.
 - **Justificación:** el gas cambia en segundos y un umbral de 3 puntos filtra el ruido del sensor (⟨desviación medida en A10⟩) sin perder una subida real; las luces y el PIR solo cambian por acciones de personas.
-- **Volumen en reposo:** 1 mensaje por minuto por placa ≈ 2 × 1440 = 2880 mensajes por día. El volumen real, con eventos, sale de A08 y alimenta el cálculo de costo (B04, **Ricardo**).
+- **Volumen en reposo:** 1 mensaje por minuto por placa ≈ 2 × 1440 = 2880 mensajes por día. El volumen real, con eventos, sale de A08 y alimenta el cálculo de costo (B04).
 
 ### 2.9 Modelo de datos de DynamoDB
 
-**A cargo de Ricardo.**
+Región `us-east-2`, capacidad **on-demand**. Definición completa en [aws/dynamodb-tables.md](aws/dynamodb-tables.md).
+
+**`smartloft-user-thing`** — qué *Things* tiene cada usuario de Alexa:
+
+| Atributo | Tipo | Clave | Ejemplo |
+|---|---|---|---|
+| `userId` | S | Partición | `amzn1.ask.account.…` |
+| `place` | S | Ordenamiento | `vent` / `lights` |
+| `thingName` | S | | `smartloft-739264-vent` |
+| `homeCode` | S | | `739264` |
+| `linkedAt` | S | | `2026-11-24T05:57:12+00:00` |
+
+**`smartloft-data`** — lecturas y eventos de las placas:
+
+| Atributo | Tipo | Clave / nota |
+|---|---|---|
+| `thingName` | S | **Partición**: distingue los datos por *Thing* |
+| `timestamp` | N | **Ordenamiento**: `timestamp()` de la regla, ms, reloj de AWS |
+| `thingType`, `serialNumber`, `place` | S | Del tema MQTT |
+| `recordType` | S | `reading` (`heartbeat`, `gas_changed`) o `event` |
+| `event`, `origin` | S | Qué pasó y quién lo causó (RF12) |
+| `eventKey` | S | `<thingName>#<event>`, **solo en eventos** → índice disperso |
+| `gasPct`, `gasMv`, `gasAlarm`, `warmingUp`, `window`, `servoAngle`, `mode`, `gasHighPct`, `gasLowPct` | N / BOOL / S | Ítems de `vent` |
+| `lightKitchen`, `lightLiving`, `lightDining`, `lightBathroom`, `lightBedroom`, `presence` | S / BOOL | Ítems de `lights` |
+| `seq`, `deviceTs`, `storedTs` | N | Integridad y latencia (A08) |
+| `expiresAt` | N | **TTL** (epoch en s): lecturas 30 días, eventos 365 días |
+
+**Índice secundario global `event-index`:** partición `eventKey`, ordenamiento `timestamp`, proyección ALL. Como solo los eventos tienen `eventKey`, el índice no carga los heartbeats.
+
+| # | Patrón de acceso | Consulta | Lo usa |
+|---|---|---|---|
+| P1 | Registros de un *Thing* en un rango | `thingName = :t AND #ts BETWEEN :a AND :b` | Mockups (curva de gas, uso de luces), A08 |
+| P2 | Eventos de un tipo en un rango | `event-index`: `eventKey = :k AND #ts BETWEEN :a AND :b` | **C1** (alarmas de 24 h), mockups de alarmas y presencia |
+| P3 | Últimos N registros de un *Thing* | `thingName = :t`, `ScanIndexForward = false`, `Limit = N` | Demo, depuración |
+| P4 | *Things* de un usuario | `smartloft-user-thing`: `userId = :u` | Skill |
+
+**Decisiones:**
+- **Por qué `thingName` + `timestamp`:** todas las consultas son "un *Thing* en un rango de tiempo"; las placas reportan como mucho uno por segundo, así que la clave no se repite.
+- **Por qué un índice disperso:** C1 y los mockups preguntan por **eventos** de un tipo (alarmas, cambios de luz); con `eventKey` solo en eventos, esa consulta no recorre las ~1440 lecturas diarias de cada placa.
+- **Por qué TTL distinto:** las lecturas sirven para la curva reciente (30 días); los eventos alimentan los reportes de tendencia (365 días). Limita el volumen almacenado.
+- `timestamp` es palabra reservada de DynamoDB: en expresiones escritas a mano se usa `#ts`. Ninguna Lambda hace `Scan`.
 
 ### 2.10 Reglas de AWS IoT y funciones Lambda
 
-**A cargo de Ricardo.**
+SQL versión 2016-03-23. Las dos reglas escuchan `update/accepted`: solo los reportes que el servicio del Shadow ya aceptó. Exportadas en [aws/iot-rules.md](aws/iot-rules.md).
+
+**`smartloft_data_rule` → `smartloft_data_lambda`**
+
+```sql
+SELECT topic(3) AS thingName,
+       timestamp() AS timestamp,
+       substring(topic(3), 0, 9) AS thingType,
+       substring(topic(3), 10, 16) AS serialNumber,
+       substring(topic(3), 17) AS place,
+       state.reported AS reported
+FROM '$aws/things/+/shadow/update/accepted'
+WHERE substring(topic(3), 0, 9) = 'smartloft'
+  AND NOT isUndefined(state.reported)
+```
+
+**`smartloft_control_rule` → `smartloft_control_lambda`**
+
+```sql
+SELECT topic(3) AS thingName,
+       timestamp() AS timestamp,
+       state.reported AS reported
+FROM '$aws/things/+/shadow/update/accepted'
+WHERE substring(topic(3), 0, 9) = 'smartloft'
+  AND NOT isUndefined(state.reported)
+  AND state.reported.event = 'gas_alarm_on'
+```
+
+| Función | Disparador | Responsabilidad | Recursos | Permisos mínimos |
+|---|---|---|---|---|
+| `smartloft_data_lambda` | `smartloft_data_rule` (cada reporte) | Validar, descartar, clasificar, enriquecer y guardar (RF11, RF12) | `smartloft-data` | `dynamodb:PutItem` |
+| `smartloft_control_lambda` | `smartloft_control_rule` (solo `gas_alarm_on`) | C1 (RF13) | `event-index`; Shadow `-vent` | `dynamodb:Query` en el índice; `iot:UpdateThingShadow` en `thing/smartloft-*-vent` |
+| `smartloft_skill_lambda` | Alexa Skills Kit (Skill ID verificado) | Vinculación, consultas, comandos, modo, umbrales, convivencia | `smartloft-user-thing`; Shadows `smartloft-*` | `dynamodb:Query/PutItem/DeleteItem`; `iot:DescribeThing/GetThingShadow/UpdateThingShadow` |
+
+**Validación de la Lambda de datos.** Todos los atributos de la placa tienen que estar presentes (contrato V1) con su tipo y rango: `seq` y `device_ts` enteros ≥ 0; `event` y `origin` de su lista; `gas_pct` 0–100; `gas_mv` 0–5000; `window`, `mode`, luces de sus valores; umbrales 1–99 con bajo < alto; `presence` y `gas_alarm` booleanos. Si algo falla, el reporte no se guarda y se registra `DATA_DISCARDED` con el motivo.
+
+**Cómo se evitan los bucles:**
+
+| Trampa | Cómo se evita |
+|---|---|
+| La Lambda de control escribe `desired` → AWS publica otro `update/accepted` | Las dos reglas exigen `NOT isUndefined(state.reported)`: un mensaje solo con `desired` no pasa |
+| Los heartbeats repiten `gas_alarm = true` mientras dura la alarma | La regla de control filtra por **evento** (`gas_alarm_on`), que aparece una sola vez por alarma, y no por estado |
+| La placa reporta el cambio que pidió la Nube | Ese reporte trae `event = mode_changed`, que no pasa el filtro |
+| Un `desired.window` viejo deshace lo que hizo E1 | La placa borra `desired.window` al aplicarlo y al pasar a `auto` (§2.7) |
+
+**Carrera entre reglas.** Las dos reglas se disparan en paralelo con el mismo mensaje, así que cuando corre la Lambda de control la alarma actual puede estar guardada o no. Cuenta las alarmas guardadas por su par (`seq`, `deviceTs`), excluye la actual y la suma una vez.
+
+**Configuración** (`GAS_EVENTS_LIMIT = 3`, `GAS_EVENTS_WINDOW_H = 24`, nombres de tablas e índice, endpoint) en variables de entorno: el límite de C1 se cambia sin reprogramar nada.
 
 ### 2.11 Vinculación usuario ↔ Things
 
-**A cargo de Ricardo.** Del lado del objeto, las dos placas imprimen `LINK_CODE 739264` al arrancar y su *Thing* se llama `smartloft-<código>-vent` o `smartloft-<código>-lights` ([config_common.h](include/config_common.h), [config_vent.h](include/config_vent.h), [config_lights.h](include/config_lights.h)).
+Las dos placas imprimen `LINK_CODE 739264` al arrancar y su *Thing* se llama `smartloft-<código>-vent` o `smartloft-<código>-lights` ([config_common.h](include/config_common.h), [config_vent.h](include/config_vent.h), [config_lights.h](include/config_lights.h)).
+
+| Operación | Qué hace la skill |
+|---|---|
+| Vincular ("vincula mi casa con el código 739264") | Valida 6 dígitos sin 0 inicial; comprueba con `DescribeThing` que existan **los dos** *Things* del código; guarda dos ítems (`place = vent` y `place = lights`) |
+| Cambiar ("cambia mi casa al código 518306") | Reemplaza los dos ítems |
+| Desvincular | Borra los ítems del usuario |
+| Cualquier consulta o comando | `LinkedHandler` busca los *Things* del `userId`; sin vinculación, responde cómo vincular |
+
+Un mismo usuario solo actúa sobre sus *Things*; dos usuarios con códigos distintos no se mezclan (A01, con los *Things* de prueba `smartloft-518306-*`). El `userId` completo no se escribe en los logs: se registra un hash de 10 caracteres.
 
 ### 2.12 Diseño de la skill de Alexa
 
-**A cargo de Ricardo.**
+- **Nombre de invocación:** `monoambiente inteligente` (Spanish US). Modelo exportado en [alexa/interaction-model.es-US.json](alexa/interaction-model.es-US.json).
+- **Endpoint:** ARN de `smartloft_skill_lambda`, en la cuenta de AWS del grupo (no Alexa-hosted).
+
+| Intent | Slots | Frases de ejemplo |
+|---|---|---|
+| `LinkThing` | `code` (AMAZON.NUMBER) | "vincula mi casa con el código {code}", "cambia mi casa al código {code}" |
+| `UnlinkThing` | — | "desvincula mi casa" |
+| `TurnOnLight` / `TurnOffLight` | `zone` (`ZoneType`) | "enciende la luz de la {zone}", "apaga la luz del {zone}", "apaga todas las luces" |
+| `GetLightState` | `zone` (`ZoneType`) | "está encendida la luz de la {zone}", "cómo está la luz de la {zone}" |
+| `OpenWindow` / `CloseWindow` | — | "abre la ventana", "cierra la ventana" |
+| `GetWindowState` | — | "cómo está la ventana", "está abierta la ventana" |
+| `GetGasLevel` | — | "hay gas en la cocina", "hay humo en la cocina" |
+| `SetMode` | `mode` (`ModeType`) | "activa el modo {mode}", "pon la ventilación en {mode}" |
+| `GetMode` | — | "en qué modo está la ventilación" |
+| `SetThreshold` | `level` (`LevelType`), `value` (AMAZON.NUMBER) | "cambia el umbral {level} a {value} por ciento" |
+| `GetThresholds` | — | "cuáles son los umbrales de gas" |
+| `GetPresence` | — | "hay alguien en la puerta", "hay alguien en la entrada" |
+| Ayuda, Cancelar, Detener, Fallback, NavigateHome | — | — |
+
+| Tipo de slot | Valores (id → frases) |
+|---|---|
+| `ZoneType` | `kitchen` → cocina; `living` → sala, sala de estar, living; `dining` → comedor; `bathroom` → baño; `bedroom` → habitación, dormitorio, cuarto; `all` → todas, toda la casa |
+| `ModeType` | `auto` → automático; `manual` → manual |
+| `LevelType` | `high` → alto, de alarma; `low` → bajo, de cierre |
+
+**Convivencia y respuestas** (la placa repite las mismas reglas, §2.6):
+
+| Situación | Respuesta | ¿Escribe `desired`? |
+|---|---|---|
+| "abre/cierra la ventana" en `auto` | "La ventilación está en modo automático. Si quieres manejar la ventana, di: activa el modo manual." | No |
+| "cierra la ventana" con alarma | "No puedo cerrarla: el índice de gas es N por ciento, por encima del umbral de M." | No |
+| Ventana en `manual`, sin alarma | Escribe y espera la confirmación en `reported` (hasta 3 s): "Listo, la ventana está abierta." | Sí |
+| Umbral fuera de 1–99, o bajo ≥ alto | "El umbral tiene que ser un número entero entre 1 y 99 por ciento." / "El umbral bajo tiene que ser menor que el alto…" | No |
+| "¿hay gas?" durante el calentamiento | "El sensor se está calentando; todavía no hay lecturas confiables." | — |
+| Placa sin reportar > 150 s | Avisa que la casa no se reporta y que la orden se aplicará al reconectar | Sí |
+| Sin confirmación en 3 s | "Envié la orden, pero todavía no recibo la confirmación. Pregúntame en unos segundos." | Sí |
 
 ### 2.13 Diseño de reportes (mockups)
 
-**A cargo de Ricardo.**
+Cuatro reportes para la toma de decisiones, construidos solo con los datos de `smartloft-data`. Cada elemento del mockup indica, en un recuadro punteado, la consulta que lo alimenta. **Los números son ilustrativos**: los reportes no se implementan en esta práctica. Fuentes en [docs/mockups/](docs/mockups/README.md).
+
+| Mockup | Decisión que apoya | Datos (patrones de §2.9) |
+|---|---|---|
+| **Seguridad de gas** (7 días): alarmas por día, duración de cada apertura, pico de `gasPct`, origen de cada apertura | ¿Hay una fuga recurrente? ¿Revisar la instalación? ¿Los umbrales están bien? | P2 `gas_alarm_on/off`, `window_changed`, `mode_changed`; P1 pico de `gasPct` |
+| **Uso de luces por zona** (horas encendidas por día) | Qué zona queda encendida sin uso (ahorro) | P2 `light_changed`, sumando intervalos on → off |
+| **Actividad en la entrada** (detecciones por día × franja horaria) | Horarios de ocupación; movimiento cuando la casa debería estar vacía | P2 `presence_detected`; P3 última detección |
+| **Modo de la ventilación** (tiempo en `manual` vs `auto`; veces que la Nube volvió a `auto`) | ¿La ventilación queda en manual demasiado tiempo? ¿Cuántas veces intervino C1? | P2 `mode_changed` con su `origin` |
+
+![Seguridad de gas](docs/mockups/01_seguridad_gas.png)
+
+![Uso de luces por zona](docs/mockups/02_uso_luces.png)
+
+![Actividad en la entrada](docs/mockups/03_actividad_entrada.png)
+
+![Modo de la ventilación](docs/mockups/04_modo_ventilacion.png)
 
 ---
 ## 3. Desarrollo e implementación
@@ -526,7 +915,11 @@ stateDiagram-v2
 | Entornos | `vent` y `lights`, los firmwares reales; `vent_local_test` y `lights_local_test`, los mismos con el Shadow reemplazado por el puerto serie (`-D LOCAL_TEST_MODE`) | — |
 | Monitor y logs | Serie a 115200 baud con el filtro `log2file`; `monitor_dtr = 0` y `monitor_rts = 0`, para que abrir el monitor no reinicie la placa | Los scripts de [tools/](tools/) |
 
-Las herramientas de la Nube (Lambdas, pruebas unitarias de Python) están en §3.4 (**Ricardo**).
+| Elemento | Funciones Lambda |
+|---|---|
+| Runtime | Python 3.13, x86_64, región `us-east-2`; handler `lambda_function.lambda_handler` en las tres |
+| Librerías | `boto3` (incluida en el runtime); la skill empaqueta `ask-sdk-core` ([requirements.txt](lambda/skill/requirements.txt)) |
+| Pruebas | `unittest` con dobles de DynamoDB, AWS IoT y el reloj (B01) |
 
 ### 3.2 Estructura del repositorio
 
@@ -571,7 +964,14 @@ FourthProject-AWS-IoT/
 │   ├── main.cpp                 Componentes y credenciales de la placa
 │   ├── ZoneLight.*              Luz de una zona
 │   └── PresenceSensor.*         PIR AM312
-├── lambda/, alexa/, aws/        Nube (§3.4, §3.5): a cargo de Ricardo
+├── lambda/
+│   ├── data/lambda_function.py      smartloft_data_lambda (validar y guardar)
+│   ├── control/lambda_function.py   smartloft_control_lambda (C1)
+│   ├── skill/lambda_function.py     smartloft_skill_lambda (+ requirements.txt)
+│   └── tests/                       86 pruebas unitarias de las tres (B01)
+├── alexa/interaction-model.es-US.json   Modelo de interacción de la skill
+├── aws/                         Reglas, tablas, políticas usadas y mínimas, permisos de invocación
+├── docs/mockups/                Los 4 mockups (HTML fuente y PNG)
 ├── tools/                       Herramientas (Python)
 │   ├── serial_check.py          Prueba automática de los dos firmwares por el puerto serie (B02)
 │   ├── analyze_log.py           Mide los requerimientos desde los logs de las placas y DynamoDB
@@ -616,11 +1016,43 @@ FourthProject-AWS-IoT/
 
 ### 3.4 Configuración en AWS
 
-**A cargo de Ricardo:** *Things*, certificados, política de AWS IoT, reglas, Lambdas, tablas, roles IAM y permisos usados vs. mínimos.
+Todo en `us-east-2`. Exportado en [aws/](aws/README.md), con `<account-id>` y `<skill-id>` en lugar de los identificadores reales.
+
+| Recurso | Configuración |
+|---|---|
+| *Things* (Shadow clásico) | `smartloft-739264-vent` y `smartloft-739264-lights` (placas reales, un certificado X.509 cada uno); `smartloft-518306-vent` y `-lights` (sin hardware, para probar un segundo usuario) |
+| Política de IoT | `smartloft-policy`, asociada a los dos certificados; el *client ID* de MQTT es el nombre del *Thing* |
+| Reglas | `smartloft_data_rule` y `smartloft_control_rule` (§2.10), acción Lambda `$LATEST` |
+| Tablas | `smartloft-user-thing` y `smartloft-data` con `event-index` y TTL en `expiresAt`, on-demand (§2.9) |
+
+| Lambda | Disparador | Timeout | Memoria | Variables de entorno |
+|---|---|---|---|---|
+| `smartloft_data_lambda` | `smartloft_data_rule` | 15 s | 256 MB | Valores por defecto del código (`TABLE_NAME`, `READING_TTL_DAYS = 30`, `EVENT_TTL_DAYS = 365`) |
+| `smartloft_control_lambda` | `smartloft_control_rule` | 15 s | 256 MB | `IOT_ENDPOINT`; por defecto `GAS_EVENTS_LIMIT = 3`, `GAS_EVENTS_WINDOW_H = 24` |
+| `smartloft_skill_lambda` | Alexa Skills Kit, con verificación del Skill ID | 10 s | 256 MB | `IOT_ENDPOINT`, `IOT_REGION`, `USER_TABLE` |
+
+**Timeout de 15 s en las Lambdas de las reglas.** Con el valor por defecto (3 s), la primera invocación de la Lambda de datos se cortó dos veces: el arranque en frío tardó 3147 ms. Con 15 s guardó a la primera; las siguientes tardan 8–19 ms. Como las reglas las invocan de forma asíncrona, un timeout mayor no demora a nadie.
+
+#### Permisos asignados y permisos mínimos
+
+| Recurso | Asignado | Motivo | Mínimo ([aws/](aws/README.md)) |
+|---|---|---|---|
+| Política de IoT de los certificados | `Allow` `*` sobre `*` ([iot-policy-usada.json](aws/iot-policy-usada.json)) | Configuración inicial y pruebas con el MQTT test client; la consigna lo acepta si se documenta | Cada certificado solo se conecta con el *client ID* de su *Thing* y usa su propio Shadow, con `${iot:Connection.Thing.ThingName}` ([iot-policy.json](aws/iot-policy.json)) |
+| Rol de las tres Lambdas | PowerUserAccess (lo asigna la consola al crear el rol) más los permisos de logs | Lo creó la consola; se aceptan permisos amplios en desarrollo | Datos: `PutItem` ([lambda-data-policy.json](aws/lambda-data-policy.json)); control: `Query` en el índice y `UpdateThingShadow` en `-vent` ([lambda-control-policy.json](aws/lambda-control-policy.json)); skill: su tabla y los Shadows `smartloft-*` ([lambda-skill-policy.json](aws/lambda-skill-policy.json)) |
+| Invocación de cada Lambda | Solo `iot.amazonaws.com` desde su regla, y Alexa con el Skill ID | Lo agrega la consola al elegir el disparador | Igual ([lambda-invoke-permissions.json](aws/lambda-invoke-permissions.json)) |
+
+**Riesgo de los permisos amplios.** Con `Allow * *`, quien robe el certificado de una placa puede publicar en el Shadow de cualquier *Thing* de la cuenta; con PowerUserAccess, un error en una Lambda podría borrar tablas o funciones. Con los mínimos, el certificado de la placa 1 solo toca `smartloft-739264-vent` y la Lambda de datos solo puede **agregar** ítems: no puede leer, borrar ni mover un actuador. Por eso C1 vive en una Lambda aparte: si tuviera un error, solo podría cambiar el modo de la ventilación.
 
 ### 3.5 Configuración en Alexa
 
-**A cargo de Ricardo.**
+| Paso | Configuración |
+|---|---|
+| Skill | `monoambiente inteligente`, Spanish (US), modelo personalizado (la de la P3, con los intents de la puerta reemplazados) |
+| Modelo | **Build → JSON Editor** con [alexa/interaction-model.es-US.json](alexa/interaction-model.es-US.json) → **Build skill** |
+| Endpoint | **Build → Endpoint → AWS Lambda ARN** = ARN de `smartloft_skill_lambda` |
+| Disparador en la Lambda | Alexa Skills Kit con la verificación del Skill ID activada: solo esta skill puede invocarla |
+| Paquete de la Lambda | `pip install -r lambda/skill/requirements.txt -t lambda/skill/package`, se comprime con `lambda_function.py` en la raíz del zip y se sube con **Upload from → .zip file** (`package/` y `*.zip` están en `.gitignore`) |
+| Pruebas | Pestaña **Test** → **Development**; las frases se escriben en el simulador (Skill I/O muestra el JSON) |
 
 ### 3.6 Credenciales y secretos
 
@@ -840,52 +1272,87 @@ Cada prueba guarda su evidencia en `docs/evidencias_p4/<ID>/` (log, captura, CSV
 | A02 | Las 5 luces por voz (≥ 10 comandos) y consulta | Log de la placa 2 (`DELTA_RX` → `LIGHT_APPLIED`) + CloudWatch | RF3–RF6, RNF3 | Ricardo + Dabner |
 | A03 | Gas y ventana por voz (consulta; abrir/cerrar en `manual`) | Log de la placa 1 + Skill I/O | RF3–RF6, RNF3 | Ricardo + Dabner |
 | A04 | Modo y umbrales por voz, incluidos inválidos | `reported` antes y después | RF14 | Ricardo |
-| A05 | E1 con humo en `auto`, ≥ 10 ciclos, y respuesta Edge | `millis()` de la placa 1: `GAS_ALARM_ON` → `ACTUATOR_DONE`; video para el tiempo físico | RF13, RNF9 | Dabner |
+| A05 | E1 con gas real en `auto`, ≥ 10 ciclos, y respuesta Edge | `millis()` de la placa 1: `GAS_ALARM_ON` → `ACTUATOR_DONE`; video para el tiempo físico | RF13, RNF9 | Dabner |
 | A06 | C1 (3 alarmas en `manual` → `auto`) y respuesta Nube | Placa 1: `REPORT_TX event=gas_alarm_on` → `DELTA_RX` → `MODE_APPLIED` | RF13, RNF10 | Ricardo + Dabner |
 | A07 | Convivencia voz / automático, una frase por situación | Respuesta exacta (Skill I/O) | §2.6 | Ricardo |
 | A08 | Integridad y latencia del almacenamiento; descarte de inválidos | ≥ 60 min con las dos placas, sin reinicios; ítems exportados a CSV | RF10–RF12, RNF7, RNF8 | Ricardo |
 | A09 | Sin conexión: E1 sin Internet; orden pendiente al volver; `seq` perdidos | Log de la placa 1 contra DynamoDB | RNF5, RNF11 | Dabner |
 | A10 | Hardware (voltajes, divisor, PIR, servo) y calibración del MQ-2 | Multímetro, `mq2_probe`, fotos | RNF2 | Ricardo (MQ-2) + Dabner |
 | A11 | Estabilidad de las dos placas (puede ser la corrida de A08) | Sin `BOOT` nuevo; líneas `HEALTH` | RNF1 | Dabner |
-| A12 | Exactitud del PIR: 15 pasadas y 5 min sin nadie | Log + video | RNF2 | Dabner |
-| B01 | Pruebas unitarias de las Lambdas | `unittest` | RF10–RF14 | Ricardo |
+| A12 | Exactitud del PIR: ≥ 15 pasadas y 5 min sin nadie | Log + video | RNF2 | Dabner |
+| B01 | Pruebas unitarias de las Lambdas | `unittest` | RF4–RF14 | Ricardo (código), Dabner (ejecución) |
 | B02 | Firmwares en `*_local_test` | [serial_check.py](tools/serial_check.py) | RF1–RF3, RF12–RF14, RNF4 | Dabner |
-| B03 | Secretos en el repositorio y el historial | [check_secrets.py](tools/check_secrets.py) | RNF6 | Ricardo |
+| B03 | Secretos en el repositorio y el historial | [check_secrets.py](tools/check_secrets.py) | RNF6 | Dabner |
 | B04 | Costo mensual extrapolado de A08 | Tabla de cálculo | RNF12 | Ricardo |
 
 ### 4.2 A. Pruebas físicas y de entorno
 
-#### A01–A04, A06–A08, A10. Pruebas de la Nube y de la skill
+#### A01–A04, A06–A08. Pruebas de la Nube y de la skill
 
-**A cargo de Ricardo** (A02, A03 y A06 se hacen juntos: la parte de la placa se mide con [analyze_log.py](tools/analyze_log.py)).
+Necesitan la cuenta de AWS y la skill. Hay capturas de Ricardo en [docs/evidencias_p4/](docs/evidencias_p4/) (A01, A02, A03, A04 y A06). ⟨Se completan con las pruebas sobre las placas conectadas a AWS.⟩
 
-#### A05. Regla E1 y tiempo de respuesta Edge
+#### A05. Regla E1 con gas real y tiempo de respuesta Edge
 
-- **Procedimiento:** placa 1 en `auto`, ya calentada; humo (incienso o fósforo recién apagado, sin llama) a ⟨distancia⟩ cm, ≥ 10 ciclos humo → aire limpio. Log con `serial_logger.py` y video.
-- **Medición:** `python tools/analyze_log.py A05_vent_ESP32.log -o A05_analisis.txt` (sección "E1 / E2 / RNF7").
+- **Procedimiento:** placa 1 en `auto` y ya caliente, umbrales calibrados 15 / 8. Gas de un encendedor **sin llama**, a 2–3 cm del MQ-2, hasta que se encendía el LED de gas (3–5 s); 20 s de espera entre ciclos. Sin conexión a Internet: la regla se decide en la placa.
+- **Medición:** `millis()` de la placa 1, un solo reloj. [analyze_log.py](tools/analyze_log.py), sección "E1 / E2 / RNF7". Evidencia: [docs/evidencias_p4/A05/](docs/evidencias_p4/A05/README.md) (log, análisis y dos videos).
 
 | Medida | Valor | Criterio | Veredicto |
 |---|---|---|---|
-| Ciclos | ⟨⟩ | ≥ 10 | ⟨⟩ |
-| `GAS_ALARM_ON` → `ACTUATOR_DONE` (abrir) | mín. ⟨⟩ / mediana ⟨⟩ / máx. ⟨⟩ ms | ≤ 1000 ms | ⟨⟩ |
-| `GAS_ALARM_OFF` → `ACTUATOR_DONE` (cerrar) | ⟨⟩ | ≤ 1000 ms | ⟨⟩ |
-| Cambios de alarma fuera de los umbrales | ⟨⟩ | 0 | ⟨⟩ |
-| Alarmas durante el calentamiento | ⟨⟩ | 0 | ⟨⟩ |
+| Ciclos completos (abre y cierra) | 15 de 15 | ≥ 10 | PASS |
+| `GAS_ALARM_ON` → `ACTUATOR_DONE` (abrir) | mín. 410 / mediana 411 / máx. 411 ms | ≤ 1000 ms | PASS |
+| `GAS_ALARM_OFF` → `ACTUATOR_DONE` (cerrar) | mín. 411 / mediana 411 / máx. 411 ms | ≤ 1000 ms | PASS |
+| Cambios de alarma fuera de los umbrales | 0 de 30 | 0 | PASS |
+| Índice al encender / al apagar la alarma | 16.8–78.2 % / 5.8–8.0 % | ≥ 15 % / ≤ 8 % | PASS |
+| Soplos débiles (picos de 6.1 % y 8.1 %) | Sin alarma | Sin alarma | PASS |
+| Respuesta del sensor (línea base → alarma) | 1.0–3.0 s (promedio 1.5 s) | — | INFO |
+| Recuperación (fin de la alarma → línea base) | 1.0–2.0 s (promedio 1.3 s) | — | INFO |
+
+Los ≈ 411 ms son el movimiento del servo (`SETTLE_TIME_MS = 400`) más ≈ 11 ms del bucle y del log. Lo que más tarda, desde que llega el gas hasta que la ventana está abierta, es la química del sensor (1–3 s), no la decisión.
 
 #### A09. Operación sin conexión y reconexión
 
-- **Procedimiento:** con la placa 1 en `auto` y conectada, apagar el hotspot; aplicar humo y retirarlo; mientras tanto, cambiar un umbral por voz; encender el hotspot.
+- **Procedimiento:** con la placa 1 en `auto` y conectada, apagar el hotspot; aplicar gas y retirarlo; mientras tanto, cambiar un umbral por voz; encender el hotspot.
 - **Medición:** `analyze_log.py` (sección "RNF9 / RNF5") y comparación de los `seq` del log con los guardados en DynamoDB (`--dynamo`).
+
+La parte de la regla sin Internet ya quedó demostrada en A05, que se hizo con la placa sin conexión: 15 de 15 ciclos. ⟨La reconexión con una orden pendiente necesita AWS.⟩
 
 | Medida | Valor | Criterio | Veredicto |
 |---|---|---|---|
-| Movimientos de E1 sin conexión | ⟨⟩ | ≥ 1 por cambio de alarma | ⟨⟩ |
+| Movimientos de E1 sin conexión | 15 de 15 ciclos (A05) | ≥ 1 por cambio de alarma | PASS |
 | `seq` perdidos (`REPORT_TX_FAILED`) | ⟨⟩ | Se declaran; no hay buffer | INFO |
 | `WIFI_CONNECTED` → orden pendiente aplicada | ⟨⟩ ms | ≤ 10 000 ms | ⟨⟩ |
 
+#### A10. Hardware y calibración del MQ-2
+
+**Calibración del MQ-2** (Ricardo, con [mq2_probe](tools/mq2_probe/); capturas en [docs/evidencias_p4/A10/](docs/evidencias_p4/A10/)):
+
+| Medida | Valor |
+|---|---|
+| Precalentamiento previo | ≈ 24 h continuas (22/11 19:27 → 23/11 ≈ 19:25) |
+| Alimentación del MQ-2 | 5.337 V sin carga (multímetro UNI-T UT890D) → `SUPPLY_MV = 5340` |
+| Aire limpio | < 4.4 %, en el piso del ADC: 720 muestras planas |
+| Gas de encendedor | 11 ciclos, picos de 9 % a 73 %; respuesta 2–3.5 s; recuperación 3–5 s |
+| Arranque en frío (15 min apagado) | Sin transitorio; `WARMUP_MS = 60 000` queda como margen |
+| Umbrales elegidos | `gas_high_pct = 15`, `gas_low_pct = 8`: la banda de 7 puntos es mayor que el ruido (nulo en aire limpio) y el umbral alto queda por debajo de casi todos los picos de gas |
+
+**Comprobaciones con la placa (Dabner):**
+
+| Medida | Valor | Fuente |
+|---|---|---|
+| Lectura en D34 con aire limpio | `pin_mv = 142`, `ao_mv = 237`, `gas_pct = 4.4` | `GAS_SAMPLE` de B02 y A05 |
+| Muestras por ventana de 1 s | 20 | `GAS_SAMPLE n=20` |
+| Movimiento del servo | 400 ms en todos los casos | B02 (V10, V11) y A05 |
+| PIR: salida activa sin movimiento / con movimiento | `PRESENCE_DETECTED` solo con movimiento; 0 en 5 min sin nadie | A12 |
+| Ángulos de la ventana | ⟨`CLOSED_ANGLE_DEG`, `OPEN_ANGLE_DEG` calibrados en la maqueta⟩ | — |
+| Bus de 5 V con carga | ⟨pendiente: requiere multímetro⟩ | — |
+
+**Limitación del ADC.** El aire limpio da 142 mV en D34, por debajo de ~150 mV, donde el ADC del ESP32 con 11 dB es poco lineal; por eso la línea base queda plana en 4.4 % y no se puede medir una deriva menor que eso. No afecta la detección, porque el gas da tensiones mucho mayores (16–86 %).
+
 #### A11. Estabilidad
 
-Misma corrida que A08 (≥ 60 min, las dos placas conectadas, sin tocar). `analyze_log.py` sección "RNF1".
+Misma corrida que A08 (≥ 60 min, las dos placas conectadas, sin tocar). `analyze_log.py` sección "RNF1". ⟨Necesita AWS.⟩
+
+Mientras tanto, los logs sin conexión de esta sesión dan una referencia del bucle: `max_loop_ms` de 53–64 ms en la placa 1 (A05) con la placa intentando conectarse al WiFi cada 10 s, muy por debajo del límite de 500 ms.
 
 | Placa | Tiempo sin reinicio | Caídas | `loop()` máx. | Heap perdido | Veredicto |
 |---|---|---|---|---|---|
@@ -894,40 +1361,62 @@ Misma corrida que A08 (≥ 60 min, las dos placas conectadas, sin tocar). `analy
 
 #### A12. Exactitud del PIR
 
-15 pasadas frente al sensor (contadas en video) y 5 min sin nadie. `analyze_log.py` sección "RNF2", con `--from-ms/--to-ms` para el tramo sin personas.
+- **Procedimiento:** pasadas de la mano frente al PIR a unos 20 cm (en la maqueta el sensor mira una entrada pequeña), una cada 25 s, contadas en video; y 5 min sin nadie frente al sensor.
+- **Medición:** `millis()` de la placa 2; `analyze_log.py` sección "RNF2" con `--from-ms/--to-ms` para cada tramo. Evidencia: [docs/evidencias_p4/A12/](docs/evidencias_p4/A12/README.md).
 
 | Medida | Valor | Criterio | Veredicto |
 |---|---|---|---|
-| Detecciones / pasadas | ⟨⟩ / 15 | 15 / 15 | ⟨⟩ |
-| Falsos positivos en 5 min | ⟨⟩ | 0 | ⟨⟩ |
-| `PIR_READY` | ⟨⟩ ms | ≥ 30 000 ms | ⟨⟩ |
+| Detecciones / pasadas | 16 / 16 | 100 % | PASS |
+| Falsos positivos en 5 min sin nadie | 0 | 0 | PASS |
+| `PIR_READY` | 30 028 ms | ≥ 30 000 ms | PASS |
+| Duración de cada detección | 13 250–14 050 ms (mediana 13 700) | ≥ 10 000 ms (retención) | PASS |
+
+Cada detección dura ≈ 13.7 s: unos 3.7 s de la salida del AM312 más los 10 s de retención del firmware. Es decir, el PIR distingue una persona cada ~14 s, suficiente para "¿hay alguien en la puerta?", que es su único uso.
 
 ### 4.3 B. Pruebas automáticas
 
 #### B01. Pruebas unitarias de las Lambdas
 
-**A cargo de Ricardo.**
+`python -m unittest discover -s lambda/tests -v`, con DynamoDB, AWS IoT y el reloj reemplazados por dobles (no usa AWS). Evidencia: [docs/evidencias_p4/B01/](docs/evidencias_p4/B01/README.md).
+
+| Lambda | Casos | Resultado |
+|---|---|---|
+| `smartloft_data_lambda` | 34 | 34 OK |
+| `smartloft_control_lambda` | 13 | 13 OK |
+| `smartloft_skill_lambda` (vinculación, luces, ventana, gas, modo y umbrales, generales) | 39 | 39 OK |
+| **Total** | **86** | **86 OK** |
 
 #### B02. Firmwares con transporte serie
 
-[serial_check.py](tools/serial_check.py) reinicia la placa en `*_local_test`, le envía órdenes por el puerto serie y comprueba la respuesta en el log. En la placa 1 el gas se simula con `sim_gas_pct` (solo existe en `vent_local_test`), así se prueban las fronteras de la histéresis sin humo.
+[serial_check.py](tools/serial_check.py) reinicia la placa en `*_local_test`, le envía órdenes por el puerto serie y comprueba la respuesta en el log. En la placa 1 el gas se simula con `sim_gas_pct` (solo existe en `vent_local_test`), así se prueban las dos fronteras de la histéresis sin humo. Evidencia: [docs/evidencias_p4/B02/](docs/evidencias_p4/B02/README.md) (logs, salidas y video de la placa 1).
 
-| Casos | Qué comprueban |
-|---|---|
-| V01–V03, L01–L02 | Reporte de arranque completo (`event=boot`, `seq=1`, todos los atributos); calentamiento |
-| V04–V07 | E1: justo por debajo del umbral alto (sin alarma), en el umbral (abre, `origin=edge`), dentro de la banda (sigue abierta) y en el umbral bajo (cierra) |
-| V08–V13 | Convivencia: ventana en `auto` rechazada y borrada de `desired`; modo manual; abrir y cerrar por voz (400 ± 60 ms); con alarma en manual la ventana no se mueve sola y no se puede cerrar |
-| V14 | `auto` puesto por la Nube con gas alto: `mode_changed` (origen `cloud`) y `window_changed` (origen `edge`) en dos reportes |
-| V15–V21 | Umbrales válidos e inválidos (orden, rango, tipo); modo y ventana con valores desconocidos |
-| V22 | E3: manual y 40/25 sobreviven a un reinicio |
-| L03–L12 | Las 5 zonas, orden repetida, "todas" en un solo reporte, valores inválidos |
-| V/L 90–96 | Versiones repetidas, JSON roto, línea demasiado larga, `seq` sin huecos, tamaño de los reportes, ≥ 1 s entre reportes y heartbeat de 60 s |
+| Casos | Qué comprueban | Resultado |
+|---|---|---|
+| V01–V03, L01–L02 | Reporte de arranque completo (`event=boot`, `seq=1`, todos los atributos); calentamiento | PASS |
+| V04–V07 | E1: justo por debajo del umbral alto (sin alarma), en el umbral (abre, `origin=edge`, 411 ms), dentro de la banda (sigue abierta) y en el umbral bajo (cierra) | PASS |
+| V08–V13 | Convivencia: ventana en `auto` rechazada y borrada de `desired`; modo manual; abrir y cerrar por voz (400 ms); con alarma en manual la ventana no se mueve sola y no se puede cerrar | PASS |
+| V14 | `auto` puesto por la Nube con gas alto: `mode_changed` (origen `cloud`) y `window_changed` (origen `edge`) en dos reportes | PASS |
+| V15–V21 | Umbrales válidos e inválidos (orden, rango, tipo); modo y ventana con valores desconocidos | PASS |
+| V22 | E3: manual y 40/25 sobreviven a un reinicio | PASS |
+| L03–L12 | Las 5 zonas, orden repetida, "todas" en un solo reporte, valores inválidos | PASS |
+| V/L 90–96 | Versiones repetidas, JSON roto, línea demasiado larga, `seq` sin huecos, tamaño de los reportes (máx. 275 bytes), ≥ 1 s entre reportes y heartbeat de 60 s | PASS |
 
-Resultado: ⟨vent: n/n; lights: n/n⟩. Salida y log en `docs/evidencias_p4/B02/`.
+| Placa | Casos | Heartbeat | Reporte más grande | Veredicto |
+|---|---|---|---|---|
+| 1 (`vent_local_test`) | 29 / 29 | 60 000 ms | 275 bytes | PASS |
+| 2 (`lights_local_test`) | 19 / 19 | 59 952 ms | 243 bytes | PASS |
 
 #### B03. Secretos en el repositorio
 
-**A cargo de Ricardo.** [check_secrets.py](tools/check_secrets.py) ya revisa los dos `secrets_*.h` y las carpetas `certificados-*`.
+[check_secrets.py](tools/check_secrets.py) busca claves, certificados, access keys, números de cuenta, endpoints y contraseñas en los archivos publicados y en el diff de cada commit. Evidencia: [docs/evidencias_p4/B03/](docs/evidencias_p4/B03/README.md).
+
+| Comprobación | Resultado | Veredicto |
+|---|---|---|
+| Secretos en los archivos publicados | 0 en 236 archivos | PASS |
+| Secretos en el historial | 0 en 66 commits | PASS |
+| Rutas de secretos ignoradas por git | 9 / 9 | PASS |
+| Plantillas `secrets_*.example.h` publicadas | 2 / 2 | PASS |
+| Control positivo sobre los `secrets_*.h` reales (no publicados) | Detecta la clave y el certificado de cada placa; ⟨endpoint y WiFi cuando se completen⟩ | ⟨⟩ |
 
 ### 4.4 Defectos encontrados y corregidos
 
@@ -936,28 +1425,119 @@ Resultado: ⟨vent: n/n; lights: n/n⟩. Salida y log en `docs/evidencias_p4/B02
 | D-01 | En el diseño de la política de reporte: cuando la Nube pone `auto` y E1 abre la ventana medio segundo después, solo se reportaba `window_changed` y se perdía el evento `mode_changed` con origen `cloud`, que es justamente el que cuenta el reporte de "veces que la Nube volvió a automático" | El reporte guardaba un solo evento pendiente y el de mayor prioridad reemplazaba al otro dentro del mínimo de 1 s | Cola de eventos por prioridad ([ReportQueue](lib/SmartObjectCore/ReportQueue.h)): los eventos distintos salen uno por segundo; el caso V14 de B02 lo comprueba | `2b012b7` |
 | D-02 | Herramienta: en los logs de `*_local_test`, `analyze_log.py` contaba cada reporte dos veces y daba 0 ms entre reportes | En prueba local cada reporte aparece como `LOCAL_REPORT` y como `REPORT_TX` | Se usa `REPORT_TX` cuando está presente | `7a525d8` |
 | D-03 | Montaje: el módulo MQ-2 no encendía en la fuente externa | Un jumper macho-hembra usado como extensión del GND del módulo no hacía contacto | Se diagnosticó moviendo un LED de prueba a las filas de VCC y GND del módulo; se cambió el jumper y se descartó el defectuoso | — (hardware) |
-| ⟨D-04…⟩ | ⟨defectos de B02, S1–S3 y las pruebas⟩ | | | |
+| D-04 | Diseño: el LED de D32 de la placa 1 se usaba como LED de conexión, pero en el hardware final indica el gas | Cambio de hardware del 23/11 (el LED de gas muestra la decisión del Edge en la demo) | `GasIndicatorLed` en la placa 1; el LED de conexión queda solo en la placa 2 | `435c9fb` |
+| D-05 | Herramienta: con un log que empieza con la placa ya caliente (A05), `analyze_log.py` contaba todas las alarmas como "durante el calentamiento" | Buscaba la línea `GAS_READY`, que estaba antes del inicio del log | Si el primer `GAS_SAMPLE` tiene `warming_up=0`, el calentamiento terminó antes del log | `e7f4672` |
+| D-06 | Herramienta: después de B02, la placa 1 quedaba con los umbrales de prueba (30 / 20) guardados en la NVS | `serial_check.py` dejaba la placa con los valores de la prueba | La prueba termina restaurando los calibrados (15 / 8) | `435c9fb` |
 
 ### 4.5 Análisis de errores
 
-⟨Se completa con las pruebas: fuentes de error de cada medición (granularidad de 1 s del promedio del gas, reloj NTP de la placa contra el de AWS, deriva de la línea base del MQ-2, no linealidad del ADC por debajo de ~150 mV), y resultados negativos con su causa.⟩
+| Medida | Fuente de error | Efecto |
+|---|---|---|
+| Índice de gas | Promedio de 1 s (20 muestras): un soplo de menos de 1 s se diluye | En A05, dos soplos breves no superaron el umbral (picos de 6.1 % y 8.1 %); es el comportamiento buscado, pero el tiempo del sensor se mide con una resolución de 1 s |
+| Índice de gas en aire limpio | No linealidad del ADC del ESP32 por debajo de ~150 mV (142 mV en D34) | La línea base queda plana en 4.4 % y no se puede medir una deriva menor; no afecta la detección (16–86 %) |
+| `gas_pct` absoluto | `SUPPLY_MV` medido sin carga (5.337 V); con el servo moviéndose la tensión real puede ser algo menor | Un error de unos 0.1 V cambia el índice en ≈ 2 % relativo; los umbrales se eligieron con el mismo valor, así que la decisión no cambia |
+| Respuesta Edge | Mide la orden al servo más `SETTLE_TIME_MS` (400 ms fijo), no la posición real del eje | `servo_angle` es el ángulo ordenado; el tiempo físico se ve en los videos de A05 |
+| Detecciones del PIR | Cada detección dura ≈ 13.7 s; un movimiento dentro de ese tiempo se une a la detección anterior | Las pasadas se separaron 25 s para contar 1 detección por pasada |
+
+**Resultados negativos y su causa:**
+- **A05, primer intento** ([log](docs/evidencias_p4/A05/A05_intento1_ESP32.log)): con el gas soltado a distinta distancia y durante tiempos distintos, 3 de 4 intentos abrieron la ventana; el cuarto llegó solo a 9 % (bajo el umbral de 15 %). El firmware actuó bien en los 4; se estandarizó el estímulo y se repitió (15 de 15).
+- **A12, primera tanda:** con pasadas cada ~15 s, 15 pasadas dieron 12 detecciones porque algunas cayeron dentro de la detección anterior. Se repitió con 25 s entre pasadas (16 de 16).
+- **A12, primera fase sin nadie:** 1 detección causada por un movimiento que se ve en el video; se repitió alejándose del escritorio (0 en 5 min).
 
 ---
 ## 5. Resultados
 
-⟨RNF declarado contra medido, con los datos sacados de DynamoDB (Ricardo y Dabner).⟩
+### 5.1 Requisitos no funcionales: declarado frente a medido
+
+| ID | Atributo | Declarado | Medido | Prueba | Veredicto |
+|---|---|---|---|---|---|
+| RNF1 | Estabilidad | ≥ 60 min, 0 reinicios, `loop()` ≤ 500 ms | Referencia sin conexión: `max_loop_ms` 53–64 ms (placa 1, intentando conectarse cada 10 s); corrida larga ⟨A11⟩ | A11 | ⟨⟩ |
+| RNF2 | Exactitud del PIR | 100 % de las pasadas; 0 falsos positivos en 5 min | 16/16 pasadas; 0 en 5 min | A12 | Cumple |
+| RNF2 | Exactitud del MQ-2 | Índice repetible; umbral elegido con datos | Aire limpio plano en 4.4 % (720 muestras); 11 + 15 ciclos de gas con picos de 9–86 % | A10, A05 | Cumple |
+| RNF2 | Servo | 400 ms por movimiento; ±5° | 400 ms en todos los movimientos (B02, A05); ángulo ⟨⟩ | B02, A05 | ⟨⟩ |
+| RNF3 | Respuesta por voz | ≤ 3 s Lambda → objeto confirmado | ⟨A02, A03⟩ | A02, A03 | ⟨⟩ |
+| RNF4 | Frecuencia de reporte | ≥ 1 s entre reportes; heartbeat 60 s | Mínimo 999 ms (1 ms de registro); heartbeat 60 000 y 59 952 ms | B02 | Cumple |
+| RNF5 | Reconexión | Orden pendiente ≤ 10 s desde `WIFI_CONNECTED` | ⟨A09⟩ | A09 | ⟨⟩ |
+| RNF6 | Seguridad | 0 secretos publicados | 0 en 236 archivos y 66 commits | B03 | Cumple |
+| RNF7 | Integridad del almacenamiento | ≥ 99 % | ⟨A08⟩ | A08 | ⟨⟩ |
+| RNF8 | Latencia del almacenamiento | ≤ 5 s | ⟨A08⟩ | A08 | ⟨⟩ |
+| RNF9 | Respuesta automática Edge | ≤ 1000 ms | 410–411 ms (15 ciclos con gas real); 411 ms con gas simulado | A05, B02 | Cumple |
+| RNF10 | Respuesta automática Nube | ≤ 5000 ms | ⟨A06⟩ | A06 | ⟨⟩ |
+| RNF11 | Operación sin conexión | E1 sigue sin Internet; lo no enviado se declara | E1 sin Internet: 15/15 ciclos (A05 se hizo sin conexión); `seq` perdidos ⟨A09⟩ | A05, A09 | ⟨⟩ |
+| RNF12 | Costo | Dentro de la capa gratuita | ⟨B04⟩ | B04 | ⟨⟩ |
+
+### 5.2 Requisitos funcionales
+
+| Requisito | Evidencia | Resultado |
+|---|---|---|
+| RF1 captura de sensores | `GAS_SAMPLE` cada 1 s con `n=20` (A05, B02); `PRESENCE_DETECTED` tras 30 s (A12) | Cumple |
+| RF2 reporte completo | V01 y L01 de B02: todos los atributos en cada reporte; reportes de 243–275 bytes | Cumple |
+| RF3 aplicar el `delta` | 5 zonas (L03–L09) y ventana en manual (V10–V11), con confirmación en `reported` | Cumple (en `local_test`); por voz ⟨A02, A03⟩ |
+| RF4–RF9 voz y vinculación | 39 pruebas unitarias de la skill (B01); con la skill real ⟨A01–A04⟩ | ⟨⟩ |
+| RF10–RF11 reglas y validación | 34 pruebas unitarias de la Lambda de datos (B01); con los datos reales ⟨A08⟩ | ⟨⟩ |
+| RF12 eventos con origen | `origin` = `boot`, `voice`, `cloud` y `edge` en los reportes de B02 y A05 | Cumple en la placa; guardado en DynamoDB ⟨A08⟩ |
+| RF13 lógica Edge y Nube | E1: 15/15 con gas real (A05); E2, E3: B02 (V02, V22); C1: 13 pruebas unitarias (B01) y la reacción de la placa (V14); C1 de punta a punta ⟨A06⟩ | Edge cumple; Nube ⟨A06⟩ |
+| RF14 modo y umbrales | Aplicar, rechazar inválidos y recordar tras un reinicio: V09, V15–V22 de B02; por voz ⟨A04⟩ | Cumple en la placa; por voz ⟨A04⟩ |
+| RF15 mockups | 4 mockups, cada elemento con su consulta (§2.13) | Cumple |
+
+### 5.3 Datos sacados de las placas y de DynamoDB
+
+| Dato | Valor | Fuente |
+|---|---|---|
+| Índice de gas en aire limpio | 4.4 % (`pin_mv = 142`, `ao_mv = 237`), sin variación | A05, A10 |
+| Picos del índice con gas de encendedor | 16.8–85.9 % (15 ciclos estandarizados) | A05 |
+| Tiempo desde que llega el gas hasta la alarma | 1.0–3.0 s (promedio 1.5 s), dominado por el sensor | A05 |
+| Tiempo de la decisión del Edge hasta la ventana abierta | 410–411 ms | A05 |
+| Duración de una detección del PIR | 13.2–14.0 s | A12 |
+| Mensajes por día y por placa | ⟨A08⟩ (en reposo: 1440) | A08 |
+| Ítems guardados por tipo (`reading` / `event`) y por origen | ⟨A08⟩ | A08 |
+
+### 5.4 Análisis crítico
+
+- **La decisión Edge / Nube se comportó como se diseñó.** La regla que protege (gas → ventana) respondió en 411 ms sin Internet, 15 de 15 veces. Si esa regla viviera en la Nube, el tiempo de respuesta dependería del WiFi, del broker MQTT y de dos invocaciones de Lambda, y no funcionaría con la red caída. La regla que necesita historia (C1) no se puede hacer en la placa, que no guarda las alarmas pasadas: la Nube tarda más, pero su decisión no es urgente.
+- **El cuello de botella es el sensor, no el software.** De los ≈ 2–3.5 s totales entre que llega el gas y la ventana está abierta, 1–3 s son la respuesta química del MQ-2 y 1 s es el promedio; el firmware y el servo aportan ≈ 0.4 s.
+- **El umbral filtra lo que debe filtrar.** Con 15 / 8, los soplos breves (6–9 %) no dispararon alarmas y ninguna alarma osciló. El precio es que una fuga muy pequeña tarda en detectarse; el umbral se puede bajar por voz sin reprogramar (RF14).
+- **Limitación de la medición.** El aire limpio queda en el piso no lineal del ADC (142 mV en D34): el sistema no puede medir una deriva menor de 4.4 %, y el índice no es una concentración en ppm.
+- **Qué no se pudo medir.** ⟨Las pruebas con AWS (A01–A04, A06–A09, A11, B04) se completan cuando las placas estén conectadas a la cuenta; mientras tanto, la lógica de la Nube está cubierta por 86 pruebas unitarias (B01) y por la reacción de la placa a las órdenes de la Nube (V14).⟩
 
 ---
 ## 6. Conclusiones
 
-⟨Basadas en la evidencia, con un análisis crítico de la decisión Edge / Nube (los dos).⟩
+1. **La lógica de seguridad pertenece al Edge.** E1 abrió la ventana en 410–411 ms en 15 de 15 ciclos con gas real y sin conexión a Internet (A05). La misma regla en la Nube habría dependido de la red justo en la situación en la que más importa.
+2. **La lógica que necesita memoria pertenece a la Nube.** C1 cuenta las alarmas de 24 h con una consulta al índice disperso `event-index`; la placa no tiene ese histórico. Separarla en su propia regla y su propia Lambda permitió darle solo los permisos que usa y que se ejecute solo con `gas_alarm_on`, no con cada heartbeat.
+3. **Filtrar por evento y no por estado evita bucles y costo.** Gracias a los campos `event` y `origin` del firmware, la regla de control se dispara una vez por alarma y el reporte que produce la orden de la Nube (`mode_changed`) no la vuelve a disparar.
+4. **Las pruebas encontraron defectos que el uso normal no mostraba.** La pérdida del evento `mode_changed` cuando E1 actuaba en el mismo segundo (D-01) apareció al diseñar la prueba V14; se corrigió con una cola de eventos y la prueba la confirma. Tres defectos de las herramientas de medición (D-02, D-05, D-06) se encontraron al usarlas con datos reales.
+5. **La arquitectura del firmware de la P3 escaló sin rediseño.** Pasar de una placa a dos y de 2 a 9 componentes solo agregó clases `DeviceComponent`; el código común está una sola vez en `lib/SmartObjectCore/`.
+6. **Un índice relativo y bien calibrado basta para decidir.** No se necesitan ppm para abrir una ventana: un índice repetible (aire limpio plano en 4.4 %) y umbrales elegidos con 11 ciclos de calibración separaron sin errores los 15 ciclos de A05 de los soplos débiles.
+
+⟨Conclusión sobre el almacenamiento (integridad y latencia, A08) y sobre C1 de punta a punta (A06).⟩
 
 ---
 ## 7. Recomendaciones
 
-⟨Cada una ligada a la prueba que la motiva. Candidatas: buffer de eventos sin conexión (A09), detección de placas que dejaron de reportar con una Lambda programada, notificación al usuario cuando la Nube vuelve a automático, detector de gas certificado y válvula de corte para un uso real, conexión MQTT no bloqueante.⟩
+| Recomendación | Motiva | Por qué |
+|---|---|---|
+| **Buffer de eventos sin conexión** en la placa (guardar los eventos importantes en la NVS o en RAM y enviarlos al reconectar) | A09, RNF11 | Hoy un reporte que no sale se pierde; E1 actúa igual, pero la alarma no queda en el histórico ni la cuenta C1 |
+| **Lambda programada (EventBridge) que detecte placas que dejaron de reportar** | §2.6 (descartado por tiempo) | El objeto no puede reportar su propia desconexión; hoy solo la skill lo advierte cuando se le pregunta |
+| **Notificar al usuario cuando la Nube vuelve a `auto`** (Alexa Proactive Events o un mensaje) | C1, V14 | El usuario eligió `manual` y la Nube lo cambia sin avisar; en un producto real debería saberlo |
+| **Promediar menos o usar el máximo de la ventana para la alarma** | A05 (soplos de 6–9 % sin alarma) | El promedio de 1 s diluye una fuga breve; el máximo (ya se calcula como `max_mv`) reaccionaría antes, a costa de más falsas alarmas |
+| **Medir el bus de 5 V con el servo en movimiento** y usar ese valor en `SUPPLY_MV` | A10 | El índice se calcula con la tensión sin carga (5.34 V) |
+| **Separar los rangos de lectura del ADC** (atenuación de 6 dB para el aire limpio) o un ADC externo | A10 (142 mV en el piso no lineal) | Permitiría medir la deriva de la línea base y bajar el umbral con seguridad |
+| **Aplicar los permisos mínimos documentados** en `aws/` en lugar de `Allow * *` y PowerUserAccess | §3.4 | Un certificado robado o un error en una Lambda hoy alcanzan toda la cuenta |
+| **Conexión MQTT no bloqueante** (cliente asíncrono) | P3 A07, `max_loop_ms` | PubSubClient puede bloquear el bucle hasta 21 s al conectar; E1 no responde durante ese tiempo |
+| **Para un uso real:** detector de gas certificado y válvula de corte; la ventana como medida adicional | §1.1 | SmartLoft es un prototipo educativo |
 
 ---
 ## 8. Anexos
 
-⟨Evidencias, exportaciones, fotos del montaje y esquemáticos.⟩
+| Anexo | Contenido |
+|---|---|
+| [docs/evidencias_p4/](docs/evidencias_p4/README.md) | Evidencia de cada prueba: logs, salidas de los scripts, capturas y videos, con un `README.md` por prueba |
+| [docs/evidencias_p4/A05/](docs/evidencias_p4/A05/README.md) | E1 con gas real: log, análisis, dos videos y el primer intento |
+| [docs/evidencias_p4/A12/](docs/evidencias_p4/A12/README.md) | PIR: log de todas las fases y video |
+| [docs/evidencias_p4/B01/](docs/evidencias_p4/B01/README.md), [B02/](docs/evidencias_p4/B02/README.md), [B03/](docs/evidencias_p4/B03/README.md) | Salidas de las pruebas automáticas y el video de B02 |
+| [docs/mockups/](docs/mockups/README.md) | Los 4 mockups (HTML fuente y PNG) |
+| [aws/](aws/README.md), [alexa/](alexa/interaction-model.es-US.json) | Configuración exportada: reglas, tablas, políticas usadas y mínimas, permisos de invocación y modelo de la skill |
+| [tools/](tools/) | Scripts de prueba y medición: `serial_check.py`, `analyze_log.py`, `serial_logger.py`, `check_secrets.py`, `mq2_probe/` |
+| ⟨docs/img/⟩ | ⟨Esquemáticos de las dos placas y fotos del montaje⟩ |
+| [Informe.md](Informe.md) | Informe de la Práctica 3, base de esta práctica |
