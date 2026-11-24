@@ -1,0 +1,372 @@
+# 2026-11-24T07:08:06.467 logger start on COM5
+# 2026-11-24T07:08:06.525 port open
+[26|-] BOOT
+[27|-] RESET_REASON reason=power_on
+[27|-] LINK_CODE 739264
+[125|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[132|-] LOCAL_TEST_MODE send a delta line: {"state":{...}}
+[1001|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"boot","origin":"boot","seq":1,"device_ts":0}}}
+[1011|-] REPORT_TX seq=1 event=boot origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"boot","origin":"boot","seq":1,"device_ts":0}}}
+[10124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[20124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[30028|-] PIR_READY
+[30124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[39530|-] PRESENCE_DETECTED
+[39531|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":2,"device_ts":0}}}
+[39551|-] REPORT_TX seq=2 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":2,"device_ts":0}}}
+[40124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[50124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[60124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[60133|-] HEALTH uptime_s=60 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[70124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[75430|-] PRESENCE_CLEARED
+[75431|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":3,"device_ts":0}}}
+[75451|-] REPORT_TX seq=3 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":3,"device_ts":0}}}
+[80124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[90124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[99430|-] PRESENCE_DETECTED
+[99431|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":4,"device_ts":0}}}
+[99451|-] REPORT_TX seq=4 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":4,"device_ts":0}}}
+[100124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[110124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[112080|-] PRESENCE_CLEARED
+[112081|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":5,"device_ts":0}}}
+[112101|-] REPORT_TX seq=5 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":5,"device_ts":0}}}
+[112230|-] PRESENCE_DETECTED
+[113080|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":6,"device_ts":0}}}
+[113091|-] REPORT_TX seq=6 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":6,"device_ts":0}}}
+[120124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[120133|-] HEALTH uptime_s=120 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[130124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[140124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[144980|-] PRESENCE_CLEARED
+[144981|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":7,"device_ts":0}}}
+[145001|-] REPORT_TX seq=7 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":7,"device_ts":0}}}
+[149430|-] PRESENCE_DETECTED
+[149430|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":8,"device_ts":0}}}
+[149451|-] REPORT_TX seq=8 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":8,"device_ts":0}}}
+[150124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[160124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[162930|-] PRESENCE_CLEARED
+[162931|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":9,"device_ts":0}}}
+[162951|-] REPORT_TX seq=9 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":9,"device_ts":0}}}
+[164030|-] PRESENCE_DETECTED
+[164030|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":10,"device_ts":0}}}
+[164051|-] REPORT_TX seq=10 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":10,"device_ts":0}}}
+[170124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[177630|-] PRESENCE_CLEARED
+[177631|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":11,"device_ts":0}}}
+[177651|-] REPORT_TX seq=11 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":11,"device_ts":0}}}
+[178780|-] PRESENCE_DETECTED
+[178780|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":12,"device_ts":0}}}
+[178801|-] REPORT_TX seq=12 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":12,"device_ts":0}}}
+[180124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[180133|-] HEALTH uptime_s=180 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[190124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[200124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[203580|-] PRESENCE_CLEARED
+[203581|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":13,"device_ts":0}}}
+[203601|-] REPORT_TX seq=13 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":13,"device_ts":0}}}
+[203830|-] PRESENCE_DETECTED
+[204580|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":14,"device_ts":0}}}
+[204591|-] REPORT_TX seq=14 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":14,"device_ts":0}}}
+[210124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[217630|-] PRESENCE_CLEARED
+[217631|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":15,"device_ts":0}}}
+[217651|-] REPORT_TX seq=15 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":15,"device_ts":0}}}
+[219630|-] PRESENCE_DETECTED
+[219630|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":16,"device_ts":0}}}
+[219651|-] REPORT_TX seq=16 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":16,"device_ts":0}}}
+[220124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[230124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[233280|-] PRESENCE_CLEARED
+[233281|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":17,"device_ts":0}}}
+[233301|-] REPORT_TX seq=17 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":17,"device_ts":0}}}
+[233680|-] PRESENCE_DETECTED
+[234280|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":18,"device_ts":0}}}
+[234291|-] REPORT_TX seq=18 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":18,"device_ts":0}}}
+[240124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[240133|-] HEALTH uptime_s=240 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[247380|-] PRESENCE_CLEARED
+[247381|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":19,"device_ts":0}}}
+[247401|-] REPORT_TX seq=19 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":19,"device_ts":0}}}
+[249130|-] PRESENCE_DETECTED
+[249130|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":20,"device_ts":0}}}
+[249151|-] REPORT_TX seq=20 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":20,"device_ts":0}}}
+[250124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[260124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[262880|-] PRESENCE_CLEARED
+[262881|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":21,"device_ts":0}}}
+[262901|-] REPORT_TX seq=21 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":21,"device_ts":0}}}
+[263630|-] PRESENCE_DETECTED
+[263880|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":22,"device_ts":0}}}
+[263891|-] REPORT_TX seq=22 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":22,"device_ts":0}}}
+[270124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[276280|-] PRESENCE_CLEARED
+[276281|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":23,"device_ts":0}}}
+[276301|-] REPORT_TX seq=23 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":23,"device_ts":0}}}
+[278680|-] PRESENCE_DETECTED
+[278680|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":24,"device_ts":0}}}
+[278701|-] REPORT_TX seq=24 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":24,"device_ts":0}}}
+[280124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[290124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[291630|-] PRESENCE_CLEARED
+[291631|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":25,"device_ts":0}}}
+[291651|-] REPORT_TX seq=25 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":25,"device_ts":0}}}
+[300124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[300133|-] HEALTH uptime_s=300 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[310124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[320124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[330124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[340124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[350124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[351630|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":26,"device_ts":0}}}
+[351641|-] REPORT_TX seq=26 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":26,"device_ts":0}}}
+[356430|-] PRESENCE_DETECTED
+[356430|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":27,"device_ts":0}}}
+[356451|-] REPORT_TX seq=27 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":27,"device_ts":0}}}
+[360124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[360133|-] HEALTH uptime_s=360 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[370124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[380124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[381830|-] PRESENCE_CLEARED
+[381831|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":28,"device_ts":0}}}
+[381851|-] REPORT_TX seq=28 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":28,"device_ts":0}}}
+[390124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[400124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[410124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[420124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[420133|-] HEALTH uptime_s=420 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[430124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[440124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[441830|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":29,"device_ts":0}}}
+[441841|-] REPORT_TX seq=29 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":29,"device_ts":0}}}
+[450124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[460124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[470124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[480124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[480133|-] HEALTH uptime_s=480 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[490124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[500124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[501830|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":30,"device_ts":0}}}
+[501841|-] REPORT_TX seq=30 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":30,"device_ts":0}}}
+[510124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[520124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[530124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[540124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[540133|-] HEALTH uptime_s=540 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[550124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[560124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[561830|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":31,"device_ts":0}}}
+[561841|-] REPORT_TX seq=31 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":31,"device_ts":0}}}
+[570124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[580124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[590124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[600124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[600133|-] HEALTH uptime_s=600 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[610124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[620124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[621830|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":32,"device_ts":0}}}
+[621841|-] REPORT_TX seq=32 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":32,"device_ts":0}}}
+[630124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[640124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[650124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[660124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[660133|-] HEALTH uptime_s=660 heap=249400 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[670124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[680124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[681830|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":33,"device_ts":0}}}
+[681841|-] REPORT_TX seq=33 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":33,"device_ts":0}}}
+[690124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[700124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[710124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[720124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[720133|-] HEALTH uptime_s=720 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[730124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[740124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[741830|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":34,"device_ts":0}}}
+[741841|-] REPORT_TX seq=34 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":34,"device_ts":0}}}
+[750124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[760124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[770124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[780124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[780133|-] HEALTH uptime_s=780 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[790124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[800124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[801830|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":35,"device_ts":0}}}
+[801841|-] REPORT_TX seq=35 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":35,"device_ts":0}}}
+[810124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[820124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[830124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[840124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[840133|-] HEALTH uptime_s=840 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[850124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[860124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[861830|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":36,"device_ts":0}}}
+[861841|-] REPORT_TX seq=36 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":36,"device_ts":0}}}
+[870124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[880124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[890124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[900124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[900133|-] HEALTH uptime_s=900 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[910124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[920124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[921830|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":37,"device_ts":0}}}
+[921841|-] REPORT_TX seq=37 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":37,"device_ts":0}}}
+[930124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[940124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[950124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[960124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[960133|-] HEALTH uptime_s=960 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[970124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[980124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[981830|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":38,"device_ts":0}}}
+[981841|-] REPORT_TX seq=38 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":38,"device_ts":0}}}
+[990124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1000124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1010124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1020124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1020133|-] HEALTH uptime_s=1020 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[1022930|-] PRESENCE_DETECTED
+[1022931|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":39,"device_ts":0}}}
+[1022951|-] REPORT_TX seq=39 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":39,"device_ts":0}}}
+[1030124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1036430|-] PRESENCE_CLEARED
+[1036431|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":40,"device_ts":0}}}
+[1036451|-] REPORT_TX seq=40 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":40,"device_ts":0}}}
+[1040124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1049080|-] PRESENCE_DETECTED
+[1049081|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":41,"device_ts":0}}}
+[1049101|-] REPORT_TX seq=41 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":41,"device_ts":0}}}
+[1050124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1060124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1062630|-] PRESENCE_CLEARED
+[1062631|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":42,"device_ts":0}}}
+[1062651|-] REPORT_TX seq=42 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":42,"device_ts":0}}}
+[1070124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1074180|-] PRESENCE_DETECTED
+[1074181|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":43,"device_ts":0}}}
+[1074201|-] REPORT_TX seq=43 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":43,"device_ts":0}}}
+[1080124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1080133|-] HEALTH uptime_s=1080 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[1087930|-] PRESENCE_CLEARED
+[1087931|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":44,"device_ts":0}}}
+[1087951|-] REPORT_TX seq=44 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":44,"device_ts":0}}}
+[1090124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1099280|-] PRESENCE_DETECTED
+[1099281|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":45,"device_ts":0}}}
+[1099301|-] REPORT_TX seq=45 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":45,"device_ts":0}}}
+[1100124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1110124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1113080|-] PRESENCE_CLEARED
+[1113081|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":46,"device_ts":0}}}
+[1113101|-] REPORT_TX seq=46 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":46,"device_ts":0}}}
+[1120124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1124430|-] PRESENCE_DETECTED
+[1124431|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":47,"device_ts":0}}}
+[1124451|-] REPORT_TX seq=47 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":47,"device_ts":0}}}
+[1130124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1138130|-] PRESENCE_CLEARED
+[1138131|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":48,"device_ts":0}}}
+[1138151|-] REPORT_TX seq=48 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":48,"device_ts":0}}}
+[1140124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1140133|-] HEALTH uptime_s=1140 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[1150124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1151130|-] PRESENCE_DETECTED
+[1151131|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":49,"device_ts":0}}}
+[1151151|-] REPORT_TX seq=49 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":49,"device_ts":0}}}
+[1160124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1164380|-] PRESENCE_CLEARED
+[1164381|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":50,"device_ts":0}}}
+[1164401|-] REPORT_TX seq=50 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":50,"device_ts":0}}}
+[1170124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1174380|-] PRESENCE_DETECTED
+[1174381|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":51,"device_ts":0}}}
+[1174401|-] REPORT_TX seq=51 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":51,"device_ts":0}}}
+[1180124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1188380|-] PRESENCE_CLEARED
+[1188381|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":52,"device_ts":0}}}
+[1188401|-] REPORT_TX seq=52 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":52,"device_ts":0}}}
+[1190124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1199630|-] PRESENCE_DETECTED
+[1199631|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":53,"device_ts":0}}}
+[1199651|-] REPORT_TX seq=53 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":53,"device_ts":0}}}
+[1200124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1200133|-] HEALTH uptime_s=1200 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[1210124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1213030|-] PRESENCE_CLEARED
+[1213031|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":54,"device_ts":0}}}
+[1213051|-] REPORT_TX seq=54 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":54,"device_ts":0}}}
+[1220124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1224380|-] PRESENCE_DETECTED
+[1224381|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":55,"device_ts":0}}}
+[1224401|-] REPORT_TX seq=55 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":55,"device_ts":0}}}
+[1230124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1238080|-] PRESENCE_CLEARED
+[1238081|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":56,"device_ts":0}}}
+[1238101|-] REPORT_TX seq=56 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":56,"device_ts":0}}}
+[1240124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1249930|-] PRESENCE_DETECTED
+[1249931|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":57,"device_ts":0}}}
+[1249951|-] REPORT_TX seq=57 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":57,"device_ts":0}}}
+[1250124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1260124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1260133|-] HEALTH uptime_s=1260 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[1263280|-] PRESENCE_CLEARED
+[1263281|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":58,"device_ts":0}}}
+[1263301|-] REPORT_TX seq=58 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":58,"device_ts":0}}}
+[1270124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1275280|-] PRESENCE_DETECTED
+[1275281|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":59,"device_ts":0}}}
+[1275301|-] REPORT_TX seq=59 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":59,"device_ts":0}}}
+[1280124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1288830|-] PRESENCE_CLEARED
+[1288831|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":60,"device_ts":0}}}
+[1288851|-] REPORT_TX seq=60 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":60,"device_ts":0}}}
+[1290124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1300124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1304030|-] PRESENCE_DETECTED
+[1304031|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":61,"device_ts":0}}}
+[1304051|-] REPORT_TX seq=61 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":61,"device_ts":0}}}
+[1310124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1317780|-] PRESENCE_CLEARED
+[1317781|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":62,"device_ts":0}}}
+[1317801|-] REPORT_TX seq=62 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":62,"device_ts":0}}}
+[1320124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1320133|-] HEALTH uptime_s=1320 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[1329830|-] PRESENCE_DETECTED
+[1329831|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":63,"device_ts":0}}}
+[1329851|-] REPORT_TX seq=63 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":63,"device_ts":0}}}
+[1330124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1340124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1343530|-] PRESENCE_CLEARED
+[1343531|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":64,"device_ts":0}}}
+[1343551|-] REPORT_TX seq=64 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":64,"device_ts":0}}}
+[1350124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1356130|-] PRESENCE_DETECTED
+[1356131|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":65,"device_ts":0}}}
+[1356151|-] REPORT_TX seq=65 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":65,"device_ts":0}}}
+[1360124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1369730|-] PRESENCE_CLEARED
+[1369731|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":66,"device_ts":0}}}
+[1369751|-] REPORT_TX seq=66 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":66,"device_ts":0}}}
+[1370124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1379830|-] PRESENCE_DETECTED
+[1379831|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":67,"device_ts":0}}}
+[1379851|-] REPORT_TX seq=67 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":67,"device_ts":0}}}
+[1380124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1380133|-] HEALTH uptime_s=1380 heap=249588 min_heap=247168 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=42
+[1390124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1393880|-] PRESENCE_CLEARED
+[1393881|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":68,"device_ts":0}}}
+[1393901|-] REPORT_TX seq=68 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":68,"device_ts":0}}}
+[1400124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1409380|-] PRESENCE_DETECTED
+[1409381|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":69,"device_ts":0}}}
+[1409401|-] REPORT_TX seq=69 event=presence_detected origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":true,"event":"presence_detected","origin":"boot","seq":69,"device_ts":0}}}
+[1410124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1420124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[1423080|-] PRESENCE_CLEARED
+[1423081|-] LOCAL_REPORT {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":70,"device_ts":0}}}
+[1423101|-] REPORT_TX seq=70 event=presence_cleared origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"presence_cleared","origin":"boot","seq":70,"device_ts":0}}}
+[1430124|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
