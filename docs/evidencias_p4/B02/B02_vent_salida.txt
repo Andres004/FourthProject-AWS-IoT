@@ -1,0 +1,33 @@
+V01 [RF2/V1] PASS: first report event=boot origin=boot seq=1, missing keys=[]
+V02 [E2] PASS: boot report during warm-up: warming_up=true, gas_alarm=false
+V03 [E2/RF14] PASS: auto, 30/20, simulated 5 %: warm-up ends, no alarm, window closed
+V04 [E1] PASS: gas 29 % (< high): no alarm
+V05 [E1/RF12] PASS: gas 30 % (= high): GAS_ALARM_ON -> ACTUATOR_DONE 411 ms; reports gas_alarm_on and window_changed, origin=edge
+V06 [E1] PASS: gas 21 % (inside the band): alarm stays on
+V07 [E1] PASS: gas 20 % (= low): alarm off, window closes (origin=edge)
+V08 [5.6] PASS: window=open in auto: COMMAND_REJECTED auto_mode, no move, desired.window=null
+V09 [RF14] PASS: mode=manual by voice: MODE_APPLIED, mode_changed, desired.cmd_origin=null
+V10 [RF3/RF12] PASS: manual, window=open: move 400 ms (expected 400 +/- 60), report origin=voice, desired.window=null
+V11 [RF3/RF12] PASS: manual, window=closed: move 400 ms (expected 400 +/- 60), report origin=voice, desired.window=null
+V12 [5.5] PASS: manual + gas: alarm reported, window stays closed
+V13 [5.6] PASS: manual + alarm, window=closed: COMMAND_REJECTED gas_alarm
+V14 [C1/E1] PASS: auto from the Cloud with gas high: mode_changed origin=cloud, then window_changed origin=edge (2 reports)
+V15 [RF14/E3] PASS: thresholds 40/25: THRESHOLDS_APPLIED and thresholds_changed
+V16 [RF14] PASS: sent '{"version": 20, "state": {"gas_low_pct": 40}}': COMMAND_REJECTED logged (reason=invalid_thresholds gas_high_pct=40 gas_low_pct=40), moves=0
+V17 [RF14] PASS: sent '{"version": 21, "state": {"gas_high_pct": 100}}': COMMAND_REJECTED logged (reason=invalid_thresholds gas_high_pct=100 gas_low_pct=25), moves=0
+V18 [RF14] PASS: sent '{"version": 22, "state": {"gas_low_pct": 0}}': COMMAND_REJECTED logged (reason=invalid_thresholds gas_high_pct=40 gas_low_pct=0), moves=0
+V19 [RF14] PASS: sent '{"version": 23, "state": {"gas_high_pct": "abc"}}': COMMAND_REJECTED logged (reason=invalid_thresholds gas_high_pct=0 gas_low_pct=25), moves=0
+V20 [RF12] PASS: sent '{"version": 24, "state": {"mode": "turbo"}}': INVALID_VALUE logged (mode=turbo), moves=0
+V21 [RF12] PASS: sent '{"version": 25, "state": {"window": "half"}}': INVALID_VALUE logged (window=half), moves=0
+V22 [E3] PASS: after a restart: SETTINGS_LOADED manual 40/25 and boot report with those values
+V90 [RF12] PASS: sent '{"version": 1, "state": {}}': STALE_IGNORED logged (source=delta version=1 last=1), moves=0
+V91 [RF12] PASS: sent '{"version": 99999, "state": {': JSON_ERROR logged (reason=IncompleteInput), moves=0
+V92 [RF12] PASS: sent '{"version": 99999, "foo": 1}': JSON_ERROR logged (reason=missing_state), moves=0
+V93 [RF12] PASS: sent 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx': JSON_ERROR logged (reason=line_too_long), moves=0
+V94 [V2] PASS: 4 reports with seq 1..4 without gaps
+V95 [RNF4/V3] PASS: minimum gap 999 ms (>= 1000), largest report 275 bytes (< 1024)
+V96 waiting for the heartbeat (60 s after the last report)...
+V96 [RF2/RNF4] PASS: heartbeat 60000 ms after the last report (expected 60000 +/- 1500)
+
+RESULT 29/29 cases PASS
+exit=0

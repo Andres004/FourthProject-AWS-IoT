@@ -1,0 +1,349 @@
+# RESET
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13232
+load:0x40080400,len:3028
+entry 0x400805e4
+[27|-] BOOT
+[28|-] RESET_REASON reason=power_on
+[28|-] LINK_CODE 739264
+[29|-] GAS_WARMUP_START warmup_ms=60000 supply_mv=5340
+[    31][E][Preferences.cpp:50] begin(): nvs_open failed: NOT_FOUND
+[45|-] SETTINGS_DEFAULTS reason=empty_nvs
+[142|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[150|-] LOCAL_TEST_MODE send a delta line: {"state":{...}}
+[1001|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":0,"gas_mv":0,"warming_up":true,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"boot","origin":"boot","seq":1,"device_ts":0}}}
+[1012|-] REPORT_TX seq=1 event=boot origin=boot {"state":{"reported":{"gas_pct":0,"gas_mv":0,"warming_up":true,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"boot","origin":"boot","seq":1,"device_ts":0}}}
+[1044|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=18 warming_up=1 simulated=0
+# TX {"version": 1, "state": {"mode": "auto", "gas_high_pct": 30, "gas_low_pct": 20, "cmd_origin": "voice"}}
+# TX {"version": 2, "state": {"sim_gas_pct": 5}}
+[1150|-] DELTA_RX version=1 {"version": 1, "state": {"mode": "auto", "gas_high_pct": 30, "gas_low_pct": 20, "cmd_origin": "voice"}}
+[1166|-] SETTINGS_SAVED mode=auto gas_high_pct=30 gas_low_pct=20
+[1166|-] THRESHOLDS_APPLIED gas_high_pct=30 gas_low_pct=20 origin=voice
+[1178|-] DELTA_RX version=2 {"version": 2, "state": {"sim_gas_pct": 5}}
+[1178|-] GAS_SIMULATION active=1 gas_pct=5.0
+[2001|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":true,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"thresholds_changed","origin":"voice","seq":2,"device_ts":0},"desired":{"cmd_origin":null}}}
+[2022|-] REPORT_TX seq=2 event=thresholds_changed origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":true,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"thresholds_changed","origin":"voice","seq":2,"device_ts":0},"desired":{"cmd_origin":null}}}
+[2054|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=1
+[2054|-] GAS_READY gas_pct=5.0
+[3001|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_changed","origin":"voice","seq":3,"device_ts":0}}}
+[3021|-] REPORT_TX seq=3 event=gas_changed origin=voice {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_changed","origin":"voice","seq":3,"device_ts":0}}}
+[3052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+# TX {"version": 3, "state": {"sim_gas_pct": 29}}
+[3120|-] DELTA_RX version=3 {"version": 3, "state": {"sim_gas_pct": 29}}
+[3120|-] GAS_SIMULATION active=1 gas_pct=29.0
+[4000|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"heartbeat","origin":"voice","seq":4,"device_ts":0}}}
+[4021|-] REPORT_TX seq=4 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"heartbeat","origin":"voice","seq":4,"device_ts":0}}}
+[4052|-] GAS_SAMPLE pin_mv=142 ao_mv=1549 gas_pct=29.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[5001|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":29,"gas_mv":1549,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_changed","origin":"voice","seq":5,"device_ts":0}}}
+[5021|-] REPORT_TX seq=5 event=gas_changed origin=voice {"state":{"reported":{"gas_pct":29,"gas_mv":1549,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_changed","origin":"voice","seq":5,"device_ts":0}}}
+[5052|-] GAS_SAMPLE pin_mv=142 ao_mv=1549 gas_pct=29.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+# TX {"version": 4, "state": {"sim_gas_pct": 30}}
+[5243|-] DELTA_RX version=4 {"version": 4, "state": {"sim_gas_pct": 30}}
+[5244|-] GAS_SIMULATION active=1 gas_pct=30.0
+[6052|-] GAS_SAMPLE pin_mv=142 ao_mv=1602 gas_pct=30.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[6052|-] GAS_ALARM_ON gas_pct=30.0 gas_high_pct=30 mode=auto
+[6063|-] ACTUATOR_START window=open origin=edge
+[6063|-] EDGE_ACTION window=open gas_pct=30.0
+[6075|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":30,"gas_mv":1602,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_on","origin":"edge","seq":6,"device_ts":0}}}
+[6095|-] REPORT_TX seq=6 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":30,"gas_mv":1602,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_on","origin":"edge","seq":6,"device_ts":0}}}
+[6463|-] ACTUATOR_DONE window=open angle=90
+[7052|-] GAS_SAMPLE pin_mv=142 ao_mv=1602 gas_pct=30.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[7053|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":30,"gas_mv":1602,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"edge","seq":7,"device_ts":0}}}
+[7074|-] REPORT_TX seq=7 event=window_changed origin=edge {"state":{"reported":{"gas_pct":30,"gas_mv":1602,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"edge","seq":7,"device_ts":0}}}
+# TX {"version": 5, "state": {"sim_gas_pct": 21}}
+[7178|-] DELTA_RX version=5 {"version": 5, "state": {"sim_gas_pct": 21}}
+[7178|-] GAS_SIMULATION active=1 gas_pct=21.0
+[8052|-] GAS_SAMPLE pin_mv=142 ao_mv=1121 gas_pct=21.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[8053|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":21,"gas_mv":1121,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_changed","origin":"edge","seq":8,"device_ts":0}}}
+[8074|-] REPORT_TX seq=8 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":21,"gas_mv":1121,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_changed","origin":"edge","seq":8,"device_ts":0}}}
+[9052|-] GAS_SAMPLE pin_mv=142 ao_mv=1121 gas_pct=21.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+# TX {"version": 6, "state": {"sim_gas_pct": 20}}
+[9298|-] DELTA_RX version=6 {"version": 6, "state": {"sim_gas_pct": 20}}
+[9299|-] GAS_SIMULATION active=1 gas_pct=20.0
+[10052|-] GAS_SAMPLE pin_mv=142 ao_mv=1068 gas_pct=20.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[10052|-] GAS_ALARM_OFF gas_pct=20.0 gas_low_pct=20 mode=auto
+[10063|-] ACTUATOR_START window=closed origin=edge
+[10063|-] EDGE_ACTION window=closed gas_pct=20.0
+[10074|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_off","origin":"edge","seq":9,"device_ts":0}}}
+[10095|-] REPORT_TX seq=9 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_off","origin":"edge","seq":9,"device_ts":0}}}
+[10142|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[10463|-] ACTUATOR_DONE window=closed angle=0
+[11052|-] GAS_SAMPLE pin_mv=142 ao_mv=1068 gas_pct=20.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[11053|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"edge","seq":10,"device_ts":0}}}
+[11074|-] REPORT_TX seq=10 event=window_changed origin=edge {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"edge","seq":10,"device_ts":0}}}
+# TX {"version": 7, "state": {"window": "open", "cmd_origin": "voice"}}
+[11206|-] DELTA_RX version=7 {"version": 7, "state": {"window": "open", "cmd_origin": "voice"}}
+[11206|-] COMMAND_REJECTED reason=auto_mode window=open
+[12052|-] GAS_SAMPLE pin_mv=142 ao_mv=1068 gas_pct=20.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[12053|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"heartbeat","origin":"edge","seq":11,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[12084|-] REPORT_TX seq=11 event=heartbeat origin=edge {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"heartbeat","origin":"edge","seq":11,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[13052|-] GAS_SAMPLE pin_mv=142 ao_mv=1068 gas_pct=20.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+# TX {"version": 8, "state": {"mode": "manual", "cmd_origin": "voice"}}
+[13733|-] DELTA_RX version=8 {"version": 8, "state": {"mode": "manual", "cmd_origin": "voice"}}
+[13739|-] SETTINGS_SAVED mode=manual gas_high_pct=30 gas_low_pct=20
+[13739|-] MODE_APPLIED mode=manual origin=voice
+[13751|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"mode_changed","origin":"voice","seq":12,"device_ts":0},"desired":{"cmd_origin":null}}}
+[13771|-] REPORT_TX seq=12 event=mode_changed origin=voice {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"mode_changed","origin":"voice","seq":12,"device_ts":0},"desired":{"cmd_origin":null}}}
+# TX {"version": 9, "state": {"window": "open", "cmd_origin": "voice"}}
+[13918|-] DELTA_RX version=9 {"version": 9, "state": {"window": "open", "cmd_origin": "voice"}}
+[13918|-] ACTUATOR_START window=open origin=voice
+[14052|-] GAS_SAMPLE pin_mv=142 ao_mv=1068 gas_pct=20.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[14318|-] ACTUATOR_DONE window=open angle=90
+[14731|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"voice","seq":13,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[14751|-] REPORT_TX seq=13 event=window_changed origin=voice {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"voice","seq":13,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+# TX {"version": 10, "state": {"window": "closed", "cmd_origin": "voice"}}
+[14860|-] DELTA_RX version=10 {"version": 10, "state": {"window": "closed", "cmd_origin": "voice"}}
+[14860|-] ACTUATOR_START window=closed origin=voice
+[15052|-] GAS_SAMPLE pin_mv=142 ao_mv=1068 gas_pct=20.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[15260|-] ACTUATOR_DONE window=closed angle=0
+[15731|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"voice","seq":14,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[15751|-] REPORT_TX seq=14 event=window_changed origin=voice {"state":{"reported":{"gas_pct":20,"gas_mv":1068,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"voice","seq":14,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+# TX {"version": 11, "state": {"sim_gas_pct": 40}}
+[15878|-] DELTA_RX version=11 {"version": 11, "state": {"sim_gas_pct": 40}}
+[15878|-] GAS_SIMULATION active=1 gas_pct=40.0
+[16052|-] GAS_SAMPLE pin_mv=142 ao_mv=2136 gas_pct=40.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[16052|-] GAS_ALARM_ON gas_pct=40.0 gas_high_pct=30 mode=manual
+[16731|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_on","origin":"voice","seq":15,"device_ts":0}}}
+[16751|-] REPORT_TX seq=15 event=gas_alarm_on origin=voice {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_on","origin":"voice","seq":15,"device_ts":0}}}
+[17052|-] GAS_SAMPLE pin_mv=142 ao_mv=2136 gas_pct=40.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[17730|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"gas_changed","origin":"voice","seq":16,"device_ts":0}}}
+[17751|-] REPORT_TX seq=16 event=gas_changed origin=voice {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"gas_changed","origin":"voice","seq":16,"device_ts":0}}}
+[18052|-] GAS_SAMPLE pin_mv=142 ao_mv=2136 gas_pct=40.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+# TX {"version": 12, "state": {"window": "open", "cmd_origin": "voice"}}
+[18335|-] DELTA_RX version=12 {"version": 12, "state": {"window": "open", "cmd_origin": "voice"}}
+[18335|-] ACTUATOR_START window=open origin=voice
+[18735|-] ACTUATOR_DONE window=open angle=90
+[18736|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"voice","seq":17,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[18757|-] REPORT_TX seq=17 event=window_changed origin=voice {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"voice","seq":17,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[19052|-] GAS_SAMPLE pin_mv=142 ao_mv=2136 gas_pct=40.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+# TX {"version": 13, "state": {"window": "closed", "cmd_origin": "voice"}}
+[19906|-] DELTA_RX version=13 {"version": 13, "state": {"window": "closed", "cmd_origin": "voice"}}
+[19906|-] COMMAND_REJECTED reason=gas_alarm window=closed gas_pct=40.0 gas_high_pct=30
+[19918|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"heartbeat","origin":"voice","seq":18,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[19938|-] REPORT_TX seq=18 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"heartbeat","origin":"voice","seq":18,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[20052|-] GAS_SAMPLE pin_mv=142 ao_mv=2136 gas_pct=40.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[20142|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[21052|-] GAS_SAMPLE pin_mv=142 ao_mv=2136 gas_pct=40.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+# TX {"version": 14, "state": {"sim_gas_pct": 15}}
+[21526|-] DELTA_RX version=14 {"version": 14, "state": {"sim_gas_pct": 15}}
+[21526|-] GAS_SIMULATION active=1 gas_pct=15.0
+[22052|-] GAS_SAMPLE pin_mv=142 ao_mv=801 gas_pct=15.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[22052|-] GAS_ALARM_OFF gas_pct=15.0 gas_low_pct=20 mode=manual
+[22064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":15,"gas_mv":801,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_off","origin":"voice","seq":19,"device_ts":0}}}
+# TX {"version": 15, "state": {"window": "closed", "cmd_origin": "voice"}}
+# TX {"version": 16, "state": {"sim_gas_pct": 40}}
+[22085|-] REPORT_TX seq=19 event=gas_alarm_off origin=voice {"state":{"reported":{"gas_pct":15,"gas_mv":801,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_off","origin":"voice","seq":19,"device_ts":0}}}
+[22122|-] DELTA_RX version=15 {"version": 15, "state": {"window": "closed", "cmd_origin": "voice"}}
+[22122|-] ACTUATOR_START window=closed origin=voice
+[22522|-] ACTUATOR_DONE window=closed angle=0
+[23052|-] GAS_SAMPLE pin_mv=142 ao_mv=801 gas_pct=15.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[23053|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":15,"gas_mv":801,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"voice","seq":20,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[23084|-] REPORT_TX seq=20 event=window_changed origin=voice {"state":{"reported":{"gas_pct":15,"gas_mv":801,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"voice","seq":20,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[23626|-] DELTA_RX version=16 {"version": 16, "state": {"sim_gas_pct": 40}}
+[23626|-] GAS_SIMULATION active=1 gas_pct=40.0
+[24052|-] GAS_SAMPLE pin_mv=142 ao_mv=2136 gas_pct=40.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[24052|-] GAS_ALARM_ON gas_pct=40.0 gas_high_pct=30 mode=manual
+[24064|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_on","origin":"voice","seq":21,"device_ts":0}}}
+[24085|-] REPORT_TX seq=21 event=gas_alarm_on origin=voice {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_on","origin":"voice","seq":21,"device_ts":0}}}
+[25052|-] GAS_SAMPLE pin_mv=142 ao_mv=2136 gas_pct=40.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[25053|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"gas_changed","origin":"voice","seq":22,"device_ts":0}}}
+[25074|-] REPORT_TX seq=22 event=gas_changed origin=voice {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"manual","gas_high_pct":30,"gas_low_pct":20,"event":"gas_changed","origin":"voice","seq":22,"device_ts":0}}}
+# TX {"version": 17, "state": {"mode": "auto", "cmd_origin": "cloud"}}
+[25689|-] DELTA_RX version=17 {"version": 17, "state": {"mode": "auto", "cmd_origin": "cloud"}}
+[25696|-] SETTINGS_SAVED mode=auto gas_high_pct=30 gas_low_pct=20
+[25696|-] MODE_APPLIED mode=auto origin=cloud
+[25697|-] ACTUATOR_START window=open origin=edge
+[25707|-] EDGE_ACTION window=open gas_pct=40.0
+[26052|-] GAS_SAMPLE pin_mv=142 ao_mv=2136 gas_pct=40.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[26054|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"mode_changed","origin":"cloud","seq":23,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[26084|-] REPORT_TX seq=23 event=mode_changed origin=cloud {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"mode_changed","origin":"cloud","seq":23,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[26116|-] ACTUATOR_DONE window=open angle=90
+[27052|-] GAS_SAMPLE pin_mv=142 ao_mv=2136 gas_pct=40.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[27053|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"edge","seq":24,"device_ts":0}}}
+# TX {"version": 18, "state": {"sim_gas_pct": 5}}
+[27074|-] REPORT_TX seq=24 event=window_changed origin=edge {"state":{"reported":{"gas_pct":40,"gas_mv":2136,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"edge","seq":24,"device_ts":0}}}
+[27115|-] DELTA_RX version=18 {"version": 18, "state": {"sim_gas_pct": 5}}
+[27116|-] GAS_SIMULATION active=1 gas_pct=5.0
+[28052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[28052|-] GAS_ALARM_OFF gas_pct=5.0 gas_low_pct=20 mode=auto
+[28063|-] ACTUATOR_START window=closed origin=edge
+[28063|-] EDGE_ACTION window=closed gas_pct=5.0
+[28075|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_off","origin":"edge","seq":25,"device_ts":0}}}
+[28095|-] REPORT_TX seq=25 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"gas_alarm_off","origin":"edge","seq":25,"device_ts":0}}}
+[28463|-] ACTUATOR_DONE window=closed angle=0
+[29052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[29053|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"edge","seq":26,"device_ts":0}}}
+[29074|-] REPORT_TX seq=26 event=window_changed origin=edge {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":30,"gas_low_pct":20,"event":"window_changed","origin":"edge","seq":26,"device_ts":0}}}
+# TX {"version": 19, "state": {"gas_high_pct": 40, "gas_low_pct": 25, "cmd_origin": "voice"}}
+[29681|-] DELTA_RX version=19 {"version": 19, "state": {"gas_high_pct": 40, "gas_low_pct": 25, "cmd_origin": "voice"}}
+[29690|-] SETTINGS_SAVED mode=auto gas_high_pct=40 gas_low_pct=25
+[29690|-] THRESHOLDS_APPLIED gas_high_pct=40 gas_low_pct=25 origin=voice
+[30052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[30054|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"thresholds_changed","origin":"voice","seq":27,"device_ts":0},"desired":{"cmd_origin":null}}}
+[30085|-] REPORT_TX seq=27 event=thresholds_changed origin=voice {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"thresholds_changed","origin":"voice","seq":27,"device_ts":0},"desired":{"cmd_origin":null}}}
+[30142|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+# TX {"version": 20, "state": {"gas_low_pct": 40}}
+[30177|-] DELTA_RX version=20 {"version": 20, "state": {"gas_low_pct": 40}}
+[30177|-] COMMAND_REJECTED reason=invalid_thresholds gas_high_pct=40 gas_low_pct=40
+[31052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[31054|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"gas_changed","origin":"voice","seq":28,"device_ts":0},"desired":{"cmd_origin":null}}}
+[31084|-] REPORT_TX seq=28 event=gas_changed origin=voice {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"gas_changed","origin":"voice","seq":28,"device_ts":0},"desired":{"cmd_origin":null}}}
+# TX {"version": 21, "state": {"gas_high_pct": 100}}
+[31926|-] DELTA_RX version=21 {"version": 21, "state": {"gas_high_pct": 100}}
+[31926|-] COMMAND_REJECTED reason=invalid_thresholds gas_high_pct=100 gas_low_pct=25
+[32052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[32053|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"heartbeat","origin":"voice","seq":29,"device_ts":0},"desired":{"cmd_origin":null}}}
+[32084|-] REPORT_TX seq=29 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"heartbeat","origin":"voice","seq":29,"device_ts":0},"desired":{"cmd_origin":null}}}
+[33052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+# TX {"version": 22, "state": {"gas_low_pct": 0}}
+[33673|-] DELTA_RX version=22 {"version": 22, "state": {"gas_low_pct": 0}}
+[33673|-] COMMAND_REJECTED reason=invalid_thresholds gas_high_pct=40 gas_low_pct=0
+[33685|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"heartbeat","origin":"voice","seq":30,"device_ts":0},"desired":{"cmd_origin":null}}}
+[33705|-] REPORT_TX seq=30 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"heartbeat","origin":"voice","seq":30,"device_ts":0},"desired":{"cmd_origin":null}}}
+[34052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[35052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+# TX {"version": 23, "state": {"gas_high_pct": "abc"}}
+[35429|-] DELTA_RX version=23 {"version": 23, "state": {"gas_high_pct": "abc"}}
+[35429|-] COMMAND_REJECTED reason=invalid_thresholds gas_high_pct=0 gas_low_pct=25
+[35440|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"heartbeat","origin":"voice","seq":31,"device_ts":0},"desired":{"cmd_origin":null}}}
+[35461|-] REPORT_TX seq=31 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"heartbeat","origin":"voice","seq":31,"device_ts":0},"desired":{"cmd_origin":null}}}
+[36052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[37052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+# TX {"version": 24, "state": {"mode": "turbo"}}
+[37168|-] DELTA_RX version=24 {"version": 24, "state": {"mode": "turbo"}}
+[37168|-] INVALID_VALUE mode=turbo
+[37169|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"heartbeat","origin":"voice","seq":32,"device_ts":0},"desired":{"cmd_origin":null}}}
+[37200|-] REPORT_TX seq=32 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"heartbeat","origin":"voice","seq":32,"device_ts":0},"desired":{"cmd_origin":null}}}
+[38052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+# TX {"version": 25, "state": {"window": "half"}}
+[38913|-] DELTA_RX version=25 {"version": 25, "state": {"window": "half"}}
+[38913|-] INVALID_VALUE window=half
+[38915|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"heartbeat","origin":"voice","seq":33,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[38945|-] REPORT_TX seq=33 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":5,"gas_mv":267,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":40,"gas_low_pct":25,"event":"heartbeat","origin":"voice","seq":33,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[39052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[40052|-] GAS_SAMPLE pin_mv=142 ao_mv=267 gas_pct=5.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[40142|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+# TX {"version": 26, "state": {"mode": "manual", "cmd_origin": "voice"}}
+# RESET
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:1184
+load:0x40078000,len:13232
+load:0x40080400,len:3028
+entry 0x400805e4
+[29|-] BOOT
+[30|-] RESET_REASON reason=power_on
+[30|-] LINK_CODE 739264
+[31|-] GAS_WARMUP_START warmup_ms=60000 supply_mv=5340
+[35|-] SETTINGS_LOADED mode=manual gas_high_pct=40 gas_low_pct=25
+[131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[140|-] LOCAL_TEST_MODE send a delta line: {"state":{...}}
+[1001|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":0,"gas_mv":0,"warming_up":true,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"manual","gas_high_pct":40,"gas_low_pct":25,"event":"boot","origin":"boot","seq":1,"device_ts":0}}}
+[1012|-] REPORT_TX seq=1 event=boot origin=boot {"state":{"reported":{"gas_pct":0,"gas_mv":0,"warming_up":true,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"manual","gas_high_pct":40,"gas_low_pct":25,"event":"boot","origin":"boot","seq":1,"device_ts":0}}}
+[1044|-] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=1 simulated=0
+# TX {"version": 1, "state": {"mode": "auto", "gas_high_pct": 15, "gas_low_pct": 8, "cmd_origin": "voice", "sim_gas_pct": 2}}
+[1103|-] DELTA_RX version=1 {"version": 1, "state": {"mode": "auto", "gas_high_pct": 15, "gas_low_pct": 8, "cmd_origin": "voice", "sim_gas_pct": 2}}
+[1114|-] GAS_SIMULATION active=1 gas_pct=2.0
+[1121|-] SETTINGS_SAVED mode=auto gas_high_pct=40 gas_low_pct=25
+[1121|-] MODE_APPLIED mode=auto origin=voice
+[1126|-] SETTINGS_SAVED mode=auto gas_high_pct=15 gas_low_pct=8
+[1126|-] THRESHOLDS_APPLIED gas_high_pct=15 gas_low_pct=8 origin=voice
+[2001|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":true,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"mode_changed","origin":"voice","seq":2,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[2022|-] REPORT_TX seq=2 event=mode_changed origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":true,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"mode_changed","origin":"voice","seq":2,"device_ts":0},"desired":{"window":null,"cmd_origin":null}}}
+[2054|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=1 simulated=1
+[2054|-] GAS_READY gas_pct=2.0
+# TX {"version": 1, "state": {}}
+[2660|-] DELTA_RX version=1 {"version": 1, "state": {}}
+[2661|-] STALE_IGNORED source=delta version=1 last=1
+[3001|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":2,"gas_mv":107,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"thresholds_changed","origin":"voice","seq":3,"device_ts":0}}}
+[3021|-] REPORT_TX seq=3 event=thresholds_changed origin=voice {"state":{"reported":{"gas_pct":2,"gas_mv":107,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"thresholds_changed","origin":"voice","seq":3,"device_ts":0}}}
+[3052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=1
+[4000|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":2,"gas_mv":107,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"voice","seq":4,"device_ts":0}}}
+[4021|-] REPORT_TX seq=4 event=gas_changed origin=voice {"state":{"reported":{"gas_pct":2,"gas_mv":107,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"voice","seq":4,"device_ts":0}}}
+[4052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+# TX {"version": 99999, "state": {
+[4401|-] JSON_ERROR reason=IncompleteInput
+[5052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[6052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+# TX {"version": 99999, "foo": 1}
+[6153|-] DELTA_RX version=99999 {"version": 99999, "foo": 1}
+[6153|-] JSON_ERROR reason=missing_state
+[7052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+# TX xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+[7937|-] JSON_ERROR reason=line_too_long
+[8052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[9052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[10052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[10131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[11052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[12052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[13052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[14052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[15052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[16052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[17052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[18052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[19052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[20052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[20131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[21052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[22052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[23052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[24052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[25052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[26052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[27052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[28052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[29052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[30052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[30131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[31052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[32052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[33052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+����������������������������������������������������������������|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[35052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[36052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[37052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[38052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[39052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[40052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[40131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[41052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[42052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[43052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[44052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[45052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[46052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[47052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[48052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[49052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[50052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[50131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[51052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[52052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[53052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[54052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[55052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[56052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[57052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[58052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[59052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[60052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[60131|-] WIFI_CONNECTING ssid=YOUR_WIFI_SSID
+[60140|-] HEALTH uptime_s=60 heap=247728 min_heap=244396 rssi=0 wifi_drops=0 mqtt_drops=0 max_loop_ms=52
+[61052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[62052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[63052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
+[64001|-] LOCAL_REPORT {"state":{"reported":{"gas_pct":2,"gas_mv":107,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"heartbeat","origin":"voice","seq":5,"device_ts":0}}}
+[64021|-] REPORT_TX seq=5 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":2,"gas_mv":107,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"heartbeat","origin":"voice","seq":5,"device_ts":0}}}
+[64052|-] GAS_SAMPLE pin_mv=142 ao_mv=107 gas_pct=2.0 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=1
