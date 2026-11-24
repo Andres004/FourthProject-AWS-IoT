@@ -64,7 +64,7 @@ El divisor deja 5 V × 15 / 25 = **3.0 V** en GPIO34. **Antes de conectar el AO 
 
 ### 3.1 AWS y Alexa (una sola vez)
 
-La configuración de AWS IoT Core, las reglas, las Lambdas, DynamoDB y la skill está en el [Informe_P4 §3.4–3.5](Informe_P4.md#34-configuración-en-aws) y en [aws/](aws/). ⟨A cargo de Ricardo.⟩
+La configuración de AWS IoT Core, las reglas, las Lambdas, DynamoDB y la skill está en el [Informe_P4 §3.4–3.5](Informe_P4.md#34-configuración-en-aws) y en [aws/](aws/).
 
 Cada placa necesita su propio *Thing* y su propio certificado: `smartloft-739264-vent` (placa 1) y `smartloft-739264-lights` (placa 2).
 
@@ -94,7 +94,20 @@ Al arrancar, el monitor muestra `LINK_CODE 739264`. Cuando aparecen `MQTT_CONNEC
 
 ## 4. Cómo usarlo: frases para Alexa
 
-⟨A cargo de Ricardo: tabla de frases de la skill (luces, ventana, modo, umbrales, gas, presencia, vinculación).⟩
+En la [Alexa Developer Console](https://developer.amazon.com/alexa/console/ask), abre la skill → pestaña **Test** → **Development** → **Spanish (US)** y escribe las frases. **Empieza siempre con `abre monoambiente inteligente`**: sin abrir la skill, responde Alexa general.
+
+| Para… | Escribe | Respuesta esperada |
+|---|---|---|
+| Vincular la casa | `vincula mi casa con el código siete tres nueve dos seis cuatro` | "Listo, tu casa con el código 739264 quedó vinculada." |
+| Cambiar / desvincular | `cambia mi casa al código cinco uno ocho tres cero seis` · `desvincula mi casa` | Confirma el cambio o el borrado |
+| Luces | `enciende la luz de la cocina` · `apaga la luz del baño` · `apaga todas las luces` | "Listo, la luz de la cocina quedó encendida." |
+| Estado de una luz | `está encendida la luz de la sala` | "La luz de la sala está apagada." |
+| Gas | `hay gas en la cocina` | Índice de gas, umbral y si hay alarma |
+| Ventana (solo en manual) | `abre la ventana` · `cierra la ventana` · `cómo está la ventana` | En automático, explica que hay que pasar a manual |
+| Modo | `activa el modo manual` · `activa el modo automático` · `en qué modo está la ventilación` | Confirma el modo |
+| Umbrales | `cuáles son los umbrales de gas` · `cambia el umbral alto a veinte por ciento` | Valida 1–99 y bajo < alto |
+| Presencia | `hay alguien en la puerta` | Según el PIR |
+| Salir | `detener` | "Hasta luego." |
 
 **Modos de la ventilación:**
 - **Automático** (por defecto): la placa abre la ventana con `gas_pct ≥` umbral alto y la cierra con `gas_pct ≤` umbral bajo. La ventana no se maneja por voz.

@@ -15,7 +15,6 @@
 
 > El informe de la Práctica 3 se conserva sin cambios en [Informe.md](Informe.md).
 
-> **Convención de este borrador** (se elimina antes de la entrega): `⟨…⟩` marca un valor que sale de una evidencia todavía no tomada.
 
 ---
 ## Resumen ejecutivo
@@ -29,16 +28,16 @@
 | Requisito | Declarado | Medido | Veredicto |
 |---|---|---|---|
 | RF1–RF9 (P3, todos los sensores y actuadores) | §1.4 | Vinculación 10/10 (A01); luces 11/11 (A02); gas y ventana 6/6 (A03); PIR 16/16 y 0 falsos positivos (A12); firmwares 29/29 y 19/19 (B02); Lambdas 86/86 (B01) | Cumple |
-| RF10–RF12 almacenamiento con validación y origen | §1.4 | ⟨A08⟩ | ⟨⟩ |
+| RF10–RF12 almacenamiento con validación y origen | §1.4 | 176 reportes de 66 min guardados con su `origin` (A08); 2/2 inválidos descartados | Cumple |
 | RF13 lógica Edge (E1–E3) y Nube (C1) | §2.6 | Edge: 15/15 ciclos con gas real (A05); Nube: C1 actuó en la tercera alarma en `manual` y no en las dos primeras (A06); convivencia 7/7 (A07) | Cumple |
 | RF14 modo y umbrales por voz | §1.4 | 7/7 frases, incluidos 2 umbrales inválidos rechazados (A04) | Cumple |
 | RF15 mockups de reportes | §2.13 | 4 mockups, cada elemento con su consulta de DynamoDB | Cumple |
-| Integridad del almacenamiento | ≥ 99 % | ⟨A08⟩ | ⟨⟩ |
-| Latencia de almacenamiento | ≤ 5 s | ⟨A08⟩ | ⟨⟩ |
+| Integridad del almacenamiento | ≥ 99 % | 100 % en las dos placas (96/96 y 80/80) (A08) | Cumple |
+| Latencia de almacenamiento | ≤ 5 s | Mediana 325 ms, máx. 655 ms (A08) | Cumple |
 | Respuesta automática Edge | ≤ 1000 ms | 410–411 ms en 15 ciclos (A05) | Cumple |
 | Respuesta automática Nube | ≤ 5000 ms | 591 ms del reporte de la alarma al cambio de modo (A06) | Cumple |
-| Operación sin conexión | E1 sigue; lo no enviado se cuenta | E1 sin Internet: 15/15 (A05); reconexión: ⟨A09⟩ | ⟨⟩ |
-| Costo mensual | Dentro de la capa gratuita | ⟨B04⟩ | ⟨⟩ |
+| Operación sin conexión | E1 sigue; lo no enviado se cuenta | E1 sin Internet: 15/15 (A05) y 3/3 (A09); órdenes de voz encoladas aplicadas 1.2–3.1 s después de reconectar (A09) | Cumple |
+| Costo mensual | Dentro de la capa gratuita | ≈ 0.10 USD/mes con la capa gratuita, ≈ 0.46 USD sin ella (B04) | Cumple |
 
 **Hallazgos** (§4.4). Se encontraron y corrigieron siete defectos: uno de diseño en la política de reporte (se perdía el evento `mode_changed` de la Nube cuando E1 actuaba en el mismo segundo), uno de montaje (un jumper sin contacto en el GND del MQ-2), un cambio de hardware (el LED de D32 pasó a indicar el gas) tres en las herramientas de prueba y uno de conectividad (la placa 1 perdía la conexión a AWS con −75 dBm de señal; se resolvió con un hotspot junto a las placas). La respuesta automática en el Edge la domina el servo (400 ms); la de la Nube (591 ms) suma la regla, la Lambda, la consulta al índice y la entrega del `delta`; el tiempo total desde que llega el gas lo domina el sensor (1–3 s).
 
@@ -269,13 +268,13 @@ Tres flujos, como en el ejemplo del docente:
 **Divisor del MQ-2.** La AO del módulo llega a 5 V y el ADC del ESP32, con 11 dB, mide hasta ~3.1 V:
 
 - `V_D34 = V_AO × R2 / (R1 + R2) = V_AO × 15 kΩ / 25 kΩ = 0.6 × V_AO`
-- Con `V_AO = 5.0 V` → `V_D34 = 3.0 V` (< 3.3 V). Medido con la punta AO en +5 V, antes de conectar el sensor: ⟨valor⟩ V (A10).
-- El firmware reconstruye `gas_mv = V_D34 / 0.6` y calcula `gas_pct = gas_mv / SUPPLY_MV × 100`, con `SUPPLY_MV` = ⟨tensión del bus de 5 V medida con el servo y el MQ-2 conectados⟩ mV.
+- Con `V_AO = 5.0 V` → `V_D34 = 3.0 V` (< 3.3 V). No se midió con la punta AO en +5 V porque no hubo multímetro; la prueba de seguridad del divisor queda indirecta: el gas más alto registrado (86 %, A05) dio `gas_mv` = 4590 mV, es decir ≈ 2.75 V en D34, por debajo de 3.3 V.
+- El firmware reconstruye `gas_mv = V_D34 / 0.6` y calcula `gas_pct = gas_mv / SUPPLY_MV × 100`, con `SUPPLY_MV` = 5340 mV (fuente sin carga; ver abajo).
 - Con AO en unos 4 V (máximo real del módulo) → `V_D34 ≈ 2.4 V`.
 - Corriente del divisor: `5 V / 25 kΩ = 0.2 mA`, despreciable para la salida del módulo.
 - Filtro: el capacitor de 100 nF ve `10 kΩ ∥ 15 kΩ = 6 kΩ`, así que `f_c = 1 / (2π · 6 kΩ · 100 nF) ≈ 265 Hz`: deja pasar los cambios del gas (segundos) y atenúa el ruido.
 - El MQ-2 va al ADC1 (D34) porque el ADC2 no funciona con el WiFi activo; en la fila libre de la protoboard de la placa 1 no hay otro pin analógico del ADC1.
-- **Fuente:** 5.337 V sin carga en el jack (multímetro UNI-T UT890D) y ≈ 5.35 V en el SPL-62. El firmware y `mq2_probe` usan `SUPPLY_MV = 5340`, así los umbrales de la calibración significan lo mismo en los dos; falta medir el bus con el MQ-2 y el servo funcionando (⟨valor con carga⟩).
+- **Fuente:** 5.337 V sin carga en el jack (multímetro UNI-T UT890D) y ≈ 5.35 V en el SPL-62. El firmware y `mq2_probe` usan `SUPPLY_MV = 5340`, así los umbrales de la calibración significan lo mismo en los dos; el bus con el MQ-2 y el servo funcionando no se midió (no hubo multímetro el día de las pruebas); queda como recomendación (§7).
 
 **LED de cada zona.** `I = (3.3 V − V_LED) / 220 Ω`; con `V_LED ≈ 3.0 V` (blanco) → `I ≈ 1.4 mA`, muy por debajo del máximo de un GPIO. Se probó 220 Ω frente a 110 Ω sin diferencia visible de brillo, así que se eligió 220 Ω.
 
@@ -690,7 +689,7 @@ stateDiagram-v2
 | `gas_alarm` | reported | bool | Histéresis E1, en los dos modos | Placa |
 | `warming_up` | reported | bool | `true` durante E2 | Placa |
 | `window` | desired / reported | string | `open`, `closed`; en `desired` solo en `manual` y hasta que la placa lo aplica | Skill / placa |
-| `servo_angle` | reported | int | `CLOSED_ANGLE_DEG` = ⟨⟩, `OPEN_ANGLE_DEG` = ⟨⟩ (calibrados en la maqueta) | Placa |
+| `servo_angle` | reported | int | `CLOSED_ANGLE_DEG` = 0, `OPEN_ANGLE_DEG` = 90 (por defecto; se calibran al montar la ventana en la maqueta) | Placa |
 | `mode` | desired / reported | string | `auto`, `manual` | Skill o Lambda de control / placa |
 | `gas_high_pct`, `gas_low_pct` | desired / reported | int | 1–99, bajo < alto; por defecto 15 / 8 (calibración A10) | Skill / placa |
 | `cmd_origin` | desired | string | `voice` (skill) o `cloud` (Lambda de control); la placa lo borra al aplicar la orden | Skill / Lambda de control |
@@ -738,7 +737,7 @@ stateDiagram-v2
 - **Eventos simultáneos.** Los eventos distintos que ocurren dentro del mismo segundo se encolan y salen uno por segundo, primero el de mayor prioridad (alarma > ventana > modo > umbrales > `gas_changed`). Cuando la Nube pone `auto` y E1 abre la ventana, salen `mode_changed` (origen `cloud`) y, un segundo después, `window_changed` (origen `edge`): la Lambda de datos guarda los dos (§4.4, D-01).
 - **El mismo evento repetido se agrupa:** "apaga todas las luces" produce un solo `light_changed`.
 - **Muestreo del MQ-2:** cada 50 ms, promedio de 1 s (20 muestras); la histéresis usa el promedio.
-- **Justificación:** el gas cambia en segundos y un umbral de 3 puntos filtra el ruido del sensor (⟨desviación medida en A10⟩) sin perder una subida real; las luces y el PIR solo cambian por acciones de personas.
+- **Justificación:** el gas cambia en segundos y un umbral de 3 puntos filtra el ruido del sensor (en aire limpio, 720 muestras planas en 4.4 %, A10) sin perder una subida real; las luces y el PIR solo cambian por acciones de personas.
 - **Volumen en reposo:** 1 mensaje por minuto por placa ≈ 2 × 1440 = 2880 mensajes por día. El volumen real, con eventos, sale de A08 y alimenta el cálculo de costo (B04).
 
 ### 2.9 Modelo de datos de DynamoDB
@@ -1326,18 +1325,37 @@ Las placas, con el firmware real, conectadas a AWS IoT por un hotspot a 30–50 
 
 Los ≈ 411 ms son el movimiento del servo (`SETTLE_TIME_MS = 400`) más ≈ 11 ms del bucle y del log. Lo que más tarda, desde que llega el gas hasta que la ventana está abierta, es la química del sensor (1–3 s), no la decisión.
 
+#### A08. Integridad y latencia del almacenamiento
+
+- **Procedimiento:** las dos placas reiniciadas (`seq` desde 1) y conectadas 66 min sin tocar (08:19–09:25, Bolivia), mientras se hacían A01–A04, A06 y A07. Al final se exportó `smartloft-data` a CSV y se filtró a la ventana de la corrida. Para el descarte se publicó, desde el MQTT test client, un reporte inválido en el *Thing* de prueba `smartloft-518306-vent`.
+- **Medición:** `analyze_log.py --dynamo`. Integridad = `seq` distintos guardados / (`seq` máx − mín + 1); latencia = `storedTs − deviceTs` (dos relojes) y `storedTs − timestamp` (solo AWS). Evidencia: [docs/evidencias_p4/A08/](docs/evidencias_p4/A08/README.md).
+
+| Medida | Placa 1 | Placa 2 | Criterio | Veredicto |
+|---|---|---|---|---|
+| Reportes publicados / guardados | 96 / 96 | 80 / 80 | — | — |
+| **Integridad** | **100 %** | **100 %** | ≥ 99 % | PASS |
+| `REPORT_TX` del log ausentes en DynamoDB | 0 | 0 | 0 | PASS |
+| **Latencia** `storedTs − deviceTs` | mediana 325, p95 490, **máx. 655 ms** | mediana 320, p95 525, **máx. 642 ms** | ≤ 5000 ms | PASS |
+| Valores negativos (relojes desfasados) | 0 | 0 | 0 | PASS |
+| Regla → escritura (solo reloj de AWS) | mediana 80, máx. 214 ms | mediana 79, máx. 151 ms | — | INFO |
+| Lecturas / eventos | 81 / 15 | 67 / 13 | — | INFO |
+| `origin` guardados | `boot`, `voice`, `cloud`, `edge` | `boot`, `voice` | RF12 | PASS |
+| Inválidos descartados | 2 / 2 (`DATA_DISCARDED reason=missing_origin`) | | 100 % | PASS |
+
 #### A09. Operación sin conexión y reconexión
 
-- **Procedimiento:** con la placa 1 en `auto` y conectada, apagar el hotspot; aplicar gas y retirarlo; mientras tanto, cambiar un umbral por voz; encender el hotspot.
-- **Medición:** `analyze_log.py` (sección "RNF9 / RNF5") y comparación de los `seq` del log con los guardados en DynamoDB (`--dynamo`).
-
-La parte de la regla sin Internet ya quedó demostrada en A05, que se hizo con la placa sin conexión: 15 de 15 ciclos. ⟨La reconexión con una orden pendiente necesita AWS.⟩
+- **Procedimiento:** con las placas en el hotspot y la PC en otra red, (1) se apagó el hotspot y se aplicó gas a la placa 1 tres veces; (2) se volvió a apagar y, pasados 3 min, se consultó el gas y se dieron dos órdenes por voz (umbral alto 18, luz de la cocina); luego se encendió el hotspot. Evidencia: [docs/evidencias_p4/A09/](docs/evidencias_p4/A09/README.md) (logs, capturas y dos videos).
 
 | Medida | Valor | Criterio | Veredicto |
 |---|---|---|---|
-| Movimientos de E1 sin conexión | 15 de 15 ciclos (A05) | ≥ 1 por cambio de alarma | PASS |
-| `seq` perdidos (`REPORT_TX_FAILED`) | ⟨⟩ | Se declaran; no hay buffer | INFO |
-| `WIFI_CONNECTED` → orden pendiente aplicada | ⟨⟩ ms | ≤ 10 000 ms | ⟨⟩ |
+| E1 sin Internet | 3 ciclos: 6 movimientos para 6 cambios de alarma, 410–411 ms cada uno | La ventana se mueve igual | PASS |
+| Reportes perdidos sin conexión | Placa 1: 19 (`seq` 11–29) en 154 s; placa 2: 2 en 149 s; todos como `REPORT_TX_FAILED` | Se declaran (sin buffer) | INFO |
+| Al reconectar | `WIFI_CONNECTED` → `MQTT_CONNECTED` 2.0–3.9 s → `GET_RX` y reporte completo | — | INFO |
+| Aviso de la skill con la casa desconectada | "Ojo: tu casa no se reporta desde hace 3 minutos…" | Aviso tras > 150 s | PASS |
+| Órdenes por voz sin conexión | 2 / 2 encoladas ("Se aplicará apenas vuelva a conectarse") y aplicadas solas al reconectar, con `origin=voice` | Se aplican | PASS |
+| Reconexión → orden pendiente aplicada | Luz: **3.06 s** desde `WIFI_CONNECTED`; umbral: 1.19 s desde `MQTT_CONNECTED` (≈ 5.1 s estimado desde el WiFi) | ≤ 10 s | PASS |
+
+Lo que se pierde sin conexión es el **registro**: las alarmas de ese intervalo no llegaron a DynamoDB, así que C1 tampoco las cuenta. Las órdenes por voz no se pierden porque quedan en `desired` del Shadow.
 
 #### A10. Hardware y calibración del MQ-2
 
@@ -1360,21 +1378,21 @@ La parte de la regla sin Internet ya quedó demostrada en A05, que se hizo con l
 | Muestras por ventana de 1 s | 20 | `GAS_SAMPLE n=20` |
 | Movimiento del servo | 400 ms en todos los casos | B02 (V10, V11) y A05 |
 | PIR: salida activa sin movimiento / con movimiento | `PRESENCE_DETECTED` solo con movimiento; 0 en 5 min sin nadie | A12 |
-| Ángulos de la ventana | ⟨`CLOSED_ANGLE_DEG`, `OPEN_ANGLE_DEG` calibrados en la maqueta⟩ | — |
-| Bus de 5 V con carga | ⟨pendiente: requiere multímetro⟩ | — |
+| Ángulos de la ventana | 0° y 90° (valores por defecto: el prototipo se armó en protoboard y la ventana de la maqueta no se montó a tiempo; no se calibraron) | — |
+| Bus de 5 V con carga | No medido (no hubo multímetro el día de las pruebas); se usa el valor sin carga, 5.34 V | — |
 
 **Limitación del ADC.** El aire limpio da 142 mV en D34, por debajo de ~150 mV, donde el ADC del ESP32 con 11 dB es poco lineal; por eso la línea base queda plana en 4.4 % y no se puede medir una deriva menor que eso. No afecta la detección, porque el gas da tensiones mucho mayores (16–86 %).
 
 #### A11. Estabilidad
 
-Misma corrida que A08 (≥ 60 min, las dos placas conectadas, sin tocar). `analyze_log.py` sección "RNF1". ⟨Necesita AWS.⟩
+Misma corrida que A08 (66 min, las dos placas conectadas por el hotspot, con carga real de pruebas). `analyze_log.py` sección "RNF1". Evidencia: [docs/evidencias_p4/A11/](docs/evidencias_p4/A11/README.md).
 
-Mientras tanto, los logs sin conexión de esta sesión dan una referencia del bucle: `max_loop_ms` de 53–64 ms en la placa 1 (A05) con la placa intentando conectarse al WiFi cada 10 s, muy por debajo del límite de 500 ms.
+| Placa | Tiempo sin reinicio | Caídas WiFi / MQTT | `loop()` máx. en operación | `loop()` al conectarse | Heap perdido | Veredicto |
+|---|---|---|---|---|---|---|
+| 1 | 66.0 min | 0 / 0 | 71 ms | 2913 ms | 168 bytes | PASS |
+| 2 | 65.6 min | 0 / 0 | 82 ms | 2213 ms | 168 bytes | PASS |
 
-| Placa | Tiempo sin reinicio | Caídas | `loop()` máx. | Heap perdido | Veredicto |
-|---|---|---|---|---|---|
-| 1 | ⟨⟩ min | ⟨⟩ | ⟨⟩ ms | ⟨⟩ bytes | ⟨⟩ |
-| 2 | ⟨⟩ min | ⟨⟩ | ⟨⟩ ms | ⟨⟩ bytes | ⟨⟩ |
+El bucle largo ocurre una sola vez, al establecer la conexión MQTT sobre TLS (PubSubClient conecta de forma sincrónica), como en la P3; lo cubre el watchdog de 30 s.
 
 #### A12. Exactitud del PIR
 
@@ -1435,6 +1453,21 @@ Cada detección dura ≈ 13.7 s: unos 3.7 s de la salida del AM312 más los 10 s
 | Plantillas `secrets_*.example.h` publicadas | 2 / 2 | PASS |
 | Control positivo sobre los `secrets_*.h` reales (no publicados) | Detecta la clave, el certificado, el endpoint y la contraseña WiFi de cada placa | PASS |
 
+#### B04. Costo mensual
+
+Conteo real de A08 extrapolado a 30 días, con precios de lista de AWS para US East consultados el 24/11/2026 (estimación). Detalle: [docs/evidencias_p4/B04/](docs/evidencias_p4/B04/README.md).
+
+| Concepto mensual | Uso de la demo (160 reportes/h) | Reposo (120/h) | Capa gratuita |
+|---|---|---|---|
+| Mensajes / operaciones de Shadow | 115 200 / 120 000 | 86 400 / 91 200 | 500 000 / 225 000 (12 meses) |
+| Reglas disparadas | 230 400 (**92 %** del límite) | 172 800 | 250 000 (12 meses) |
+| Invocaciones de Lambda | 115 800 | 87 000 | 1 000 000 (permanente) |
+| Escrituras en DynamoDB (on-demand) | 133 527 WRU | 100 145 WRU | — |
+| **Costo sin capa gratuita** | **≈ 0.46 USD** | **≈ 0.35 USD** | |
+| **Costo con capa gratuita** | **≈ 0.10 USD** (solo DynamoDB on-demand) | **≈ 0.08 USD** | |
+
+El límite que primero se alcanzaría no es el costo sino la cuota gratuita de **reglas disparadas**: las dos reglas escuchan el mismo tema y AWS cuenta las dos por cada reporte. Con una tercera placa se superaría.
+
 ### 4.4 Defectos encontrados y corregidos
 
 | ID | Síntoma | Causa | Corrección | Commit |
@@ -1469,20 +1502,20 @@ Cada detección dura ≈ 13.7 s: unos 3.7 s de la salida del AM312 más los 10 s
 
 | ID | Atributo | Declarado | Medido | Prueba | Veredicto |
 |---|---|---|---|---|---|
-| RNF1 | Estabilidad | ≥ 60 min, 0 reinicios, `loop()` ≤ 500 ms | Referencia sin conexión: `max_loop_ms` 53–64 ms (placa 1, intentando conectarse cada 10 s); corrida larga ⟨A11⟩ | A11 | ⟨⟩ |
+| RNF1 | Estabilidad | ≥ 60 min, 0 reinicios, `loop()` ≤ 500 ms | 66.0 y 65.6 min, 0 reinicios, 0 caídas; `loop()` máx. 71 y 82 ms en operación (2.2–2.9 s una vez al conectarse) | A11 | Cumple |
 | RNF2 | Exactitud del PIR | 100 % de las pasadas; 0 falsos positivos en 5 min | 16/16 pasadas; 0 en 5 min | A12 | Cumple |
 | RNF2 | Exactitud del MQ-2 | Índice repetible; umbral elegido con datos | Aire limpio plano en 4.4 % (720 muestras); 11 + 15 ciclos de gas con picos de 9–86 % | A10, A05 | Cumple |
-| RNF2 | Servo | 400 ms por movimiento; ±5° | 400 ms en todos los movimientos (B02, A05); ángulo ⟨⟩ | B02, A05 | ⟨⟩ |
+| RNF2 | Servo | 400 ms por movimiento; ±5° | 400–411 ms en todos los movimientos (B02, A03, A05, A06, A09); ángulo no medido con transportador | B02, A05 | Cumple en tiempo; ángulo no verificado |
 | RNF3 | Respuesta por voz | ≤ 3 s Lambda → objeto confirmado | 10 / 10 comandos confirmados dentro de los 3 s de la skill; en la placa, orden aplicada en 10–41 ms (luces) y 410 ms (ventana) | A02, A03 | Cumple |
 | RNF4 | Frecuencia de reporte | ≥ 1 s entre reportes; heartbeat 60 s | Mínimo 999 ms (1 ms de registro); heartbeat 60 000 y 59 952 ms | B02 | Cumple |
-| RNF5 | Reconexión | Orden pendiente ≤ 10 s desde `WIFI_CONNECTED` | ⟨A09⟩ | A09 | ⟨⟩ |
+| RNF5 | Reconexión | Orden pendiente ≤ 10 s desde `WIFI_CONNECTED` | 3.06 s (luz) y ≈ 5.1 s (umbral) | A09 | Cumple |
 | RNF6 | Seguridad | 0 secretos publicados | 0 en 240 archivos y 68 commits | B03 | Cumple |
-| RNF7 | Integridad del almacenamiento | ≥ 99 % | ⟨A08⟩ | A08 | ⟨⟩ |
-| RNF8 | Latencia del almacenamiento | ≤ 5 s | ⟨A08⟩ | A08 | ⟨⟩ |
+| RNF7 | Integridad del almacenamiento | ≥ 99 % | 100 % (96/96 y 80/80); 2/2 inválidos descartados | A08 | Cumple |
+| RNF8 | Latencia del almacenamiento | ≤ 5 s | Mediana 320–325 ms, máx. 655 ms, sin valores negativos | A08 | Cumple |
 | RNF9 | Respuesta automática Edge | ≤ 1000 ms | 410–411 ms (15 ciclos con gas real); 411 ms con gas simulado | A05, B02 | Cumple |
 | RNF10 | Respuesta automática Nube | ≤ 5000 ms | 591 ms (`gas_alarm_on` → `MODE_APPLIED origin=cloud`); 1033 ms hasta la ventana abierta | A06 | Cumple |
-| RNF11 | Operación sin conexión | E1 sigue sin Internet; lo no enviado se declara | E1 sin Internet: 15/15 ciclos (A05 se hizo sin conexión); `seq` perdidos ⟨A09⟩ | A05, A09 | ⟨⟩ |
-| RNF12 | Costo | Dentro de la capa gratuita | ⟨B04⟩ | B04 | ⟨⟩ |
+| RNF11 | Operación sin conexión | E1 sigue sin Internet; lo no enviado se declara | E1 sin Internet: 15/15 (A05) y 3/3 (A09); 19 + 2 reportes perdidos, todos registrados como `REPORT_TX_FAILED` | A05, A09 | Cumple |
+| RNF12 | Costo | Dentro de la capa gratuita | ≈ 0.10 USD/mes con capa gratuita; ≈ 0.46 USD sin ella; reglas al 92 % de su cuota gratuita | B04 | Cumple |
 
 ### 5.2 Requisitos funcionales
 
@@ -1492,8 +1525,8 @@ Cada detección dura ≈ 13.7 s: unos 3.7 s de la salida del AM312 más los 10 s
 | RF2 reporte completo | V01 y L01 de B02: todos los atributos en cada reporte; reportes de 243–275 bytes | Cumple |
 | RF3 aplicar el `delta` | 5 zonas y ventana, en `local_test` (B02) y por voz con AWS (A02, A03): cada orden confirmada en `reported` | Cumple |
 | RF4–RF9 voz y vinculación | 39 pruebas unitarias de la skill (B01); con la skill real: vinculación 10/10 (A01), luces 11/11 (A02), gas y ventana 6/6 (A03) | Cumple |
-| RF10–RF11 reglas y validación | 34 pruebas unitarias de la Lambda de datos (B01); con los datos reales ⟨A08⟩ | ⟨⟩ |
-| RF12 eventos con origen | `origin` = `boot`, `voice`, `cloud` y `edge` en los reportes de B02 y A05 | Cumple en la placa; guardado en DynamoDB ⟨A08⟩ |
+| RF10–RF11 reglas y validación | 34 pruebas unitarias (B01); con datos reales: 176/176 reportes guardados y 2/2 inválidos descartados (A08) | Cumple |
+| RF12 eventos con origen | `origin` = `boot`, `voice`, `cloud` y `edge` guardados en DynamoDB (A08) | Cumple |
 | RF13 lógica Edge y Nube | E1: 15/15 con gas real (A05); E2, E3: B02 (V02, V22); C1: 13 pruebas unitarias (B01) y de punta a punta con AWS: actuó en la tercera alarma (A06) | Cumple |
 | RF14 modo y umbrales | Aplicar, rechazar inválidos y recordar tras un reinicio (B02); por voz 7/7 (A04) | Cumple |
 | RF15 mockups | 4 mockups, cada elemento con su consulta (§2.13) | Cumple |
@@ -1507,8 +1540,8 @@ Cada detección dura ≈ 13.7 s: unos 3.7 s de la salida del AM312 más los 10 s
 | Tiempo desde que llega el gas hasta la alarma | 1.0–3.0 s (promedio 1.5 s), dominado por el sensor | A05 |
 | Tiempo de la decisión del Edge hasta la ventana abierta | 410–411 ms | A05 |
 | Duración de una detección del PIR | 13.2–14.0 s | A12 |
-| Mensajes por día y por placa | ⟨A08⟩ (en reposo: 1440) | A08 |
-| Ítems guardados por tipo (`reading` / `event`) y por origen | ⟨A08⟩ | A08 |
+| Mensajes por hora (ambas placas) | 160 con actividad de pruebas; 120 en reposo | A08 |
+| Ítems guardados por tipo y origen | Placa 1: 81 lecturas y 15 eventos (`edge` 43, `boot` 28, `voice` 24, `cloud` 1); placa 2: 67 lecturas y 13 eventos (`voice` 54, `boot` 26) | A08 |
 
 ### 5.4 Análisis crítico
 
@@ -1532,7 +1565,7 @@ Cada detección dura ≈ 13.7 s: unos 3.7 s de la salida del AM312 más los 10 s
 7. **La regla de la Nube funcionó de punta a punta sin bucles.** C1 no actuó con 1 ni 2 alarmas y sí con la tercera; el reporte que produce su orden (`mode_changed`) no volvió a disparar la regla, y la placa aplicó la orden y E1 abrió la ventana en ≈ 1 s (A06).
 8. **La skill y la placa aplican las mismas reglas de convivencia.** Todas las órdenes inválidas o en conflicto se rechazaron en la skill con una explicación (A04, A07) y, si llegaran por otra vía, la placa también las rechaza (B02).
 
-⟨Conclusión sobre el almacenamiento (integridad y latencia, A08).⟩
+9. **El almacenamiento con validación no perdió datos mientras hubo conexión.** Los 176 reportes de 66 minutos se guardaron (100 %), en ≈ 0.3 s, y los inválidos se descartaron (A08). Las únicas pérdidas fueron las de los cortes de red provocados en A09, y quedaron contadas en el log: el sistema sabe qué no guardó.
 
 ---
 ## 7. Recomendaciones

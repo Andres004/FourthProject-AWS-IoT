@@ -1,0 +1,177 @@
+# 2026-11-24T13:50:58.773 logger start on COM5
+# 2026-11-24T13:50:58.831 port open
+[480138|2026-11-24T17:51:04.340Z] HEALTH uptime_s=480 heap=199328 min_heap=184260 rssi=-49 wifi_drops=0 mqtt_drops=0 max_loop_ms=27
+[485333|2026-11-24T17:51:09.534Z] REPORT_TX seq=10 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":10,"device_ts":1795542669529}}}
+[521854][E][ssl_client.cpp:37] _handle_error(): [data_to_read():361]: (-76) UNKNOWN ERROR CODE (004C)
+[521865|2026-11-24T17:51:46.067Z] MQTT_LOST state=-3 count=1
+[521865|2026-11-24T17:51:46.067Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[528117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[528127|2026-11-24T17:51:52.329Z] MQTT_CONNECT_FAILED state=-2
+[533127|2026-11-24T17:51:57.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[540117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[540127|2026-11-24T17:52:04.329Z] MQTT_CONNECT_FAILED state=-2
+[540138|2026-11-24T17:52:04.340Z] HEALTH uptime_s=540 heap=242940 min_heap=184260 rssi=0 wifi_drops=0 mqtt_drops=1 max_loop_ms=7000
+[545127|2026-11-24T17:52:09.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[552117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[552127|2026-11-24T17:52:16.329Z] MQTT_CONNECT_FAILED state=-2
+[552129|2026-11-24T17:52:16.330Z] REPORT_TX_FAILED seq=11 event=heartbeat
+[557127|2026-11-24T17:52:21.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[564117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[564127|2026-11-24T17:52:28.329Z] MQTT_CONNECT_FAILED state=-2
+[569127|2026-11-24T17:52:33.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[576117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[576127|2026-11-24T17:52:40.329Z] MQTT_CONNECT_FAILED state=-2
+[581127|2026-11-24T17:52:45.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[588117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[588127|2026-11-24T17:52:52.329Z] MQTT_CONNECT_FAILED state=-2
+[593127|2026-11-24T17:52:57.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[600117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[600127|2026-11-24T17:53:04.329Z] MQTT_CONNECT_FAILED state=-2
+[600138|2026-11-24T17:53:04.340Z] HEALTH uptime_s=600 heap=242940 min_heap=184260 rssi=0 wifi_drops=0 mqtt_drops=1 max_loop_ms=7000
+[605127|2026-11-24T17:53:09.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[612117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[612127|2026-11-24T17:53:16.329Z] MQTT_CONNECT_FAILED state=-2
+[612129|2026-11-24T17:53:16.330Z] REPORT_TX_FAILED seq=12 event=heartbeat
+[617127|2026-11-24T17:53:21.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[624117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[624127|2026-11-24T17:53:28.329Z] MQTT_CONNECT_FAILED state=-2
+[629127|2026-11-24T17:53:33.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[636117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[636127|2026-11-24T17:53:40.329Z] MQTT_CONNECT_FAILED state=-2
+[641127|2026-11-24T17:53:45.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[648117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[648127|2026-11-24T17:53:52.329Z] MQTT_CONNECT_FAILED state=-2
+[648128|2026-11-24T17:53:52.329Z] WIFI_LOST count=1
+[648128|2026-11-24T17:53:52.329Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[658127|2026-11-24T17:54:02.328Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[660138|2026-11-24T17:54:04.339Z] HEALTH uptime_s=660 heap=242924 min_heap=184260 rssi=0 wifi_drops=1 mqtt_drops=1 max_loop_ms=7000
+[668127|2026-11-24T17:54:12.328Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[669135|2026-11-24T17:54:13.337Z] WIFI_CONNECTED ip=172.20.10.3
+[669135|2026-11-24T17:54:13.337Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[671164|2026-11-24T17:54:15.365Z] MQTT_CONNECTED
+[671667|2026-11-24T17:54:15.868Z] GET_TX
+[671922|2026-11-24T17:54:16.123Z] GET_RX version=148
+[671930|2026-11-24T17:54:16.131Z] REPORT_TX seq=13 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":13,"device_ts":1795542856127},"desired":{"cmd_origin":null}}}
+[720138|2026-11-24T17:55:04.340Z] HEALTH uptime_s=720 heap=199316 min_heap=181416 rssi=-44 wifi_drops=1 mqtt_drops=1 max_loop_ms=2041
+[731918|2026-11-24T17:55:16.119Z] REPORT_TX seq=14 event=heartbeat origin=boot {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"boot","seq":14,"device_ts":1795542916114}}}
+[735692][E][ssl_client.cpp:37] _handle_error(): [data_to_read():361]: (-76) UNKNOWN ERROR CODE (004C)
+[735704|2026-11-24T17:55:19.905Z] MQTT_LOST state=-3 count=2
+[735704|2026-11-24T17:55:19.906Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[735716][E][ssl_client.cpp:99] start_ssl_client(): connect on fd 48, errno: 118, "Host is unreachable"
+[735726][E][WiFiClientSecure.cpp:144] connect(): start_ssl_client: -1
+[735732|2026-11-24T17:55:19.934Z] MQTT_CONNECT_FAILED state=-2
+[740732|2026-11-24T17:55:24.933Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[740733][E][ssl_client.cpp:99] start_ssl_client(): connect on fd 48, errno: 118, "Host is unreachable"
+[740748][E][WiFiClientSecure.cpp:144] connect(): start_ssl_client: -1
+[740755|2026-11-24T17:55:24.956Z] MQTT_CONNECT_FAILED state=-2
+[745755|2026-11-24T17:55:29.956Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[745756][E][ssl_client.cpp:99] start_ssl_client(): connect on fd 48, errno: 118, "Host is unreachable"
+[745771][E][WiFiClientSecure.cpp:144] connect(): start_ssl_client: -1
+[745778|2026-11-24T17:55:29.979Z] MQTT_CONNECT_FAILED state=-2
+[750778|2026-11-24T17:55:34.979Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[757117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[757127|2026-11-24T17:55:41.329Z] MQTT_CONNECT_FAILED state=-2
+[762127|2026-11-24T17:55:46.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[769117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[769127|2026-11-24T17:55:53.329Z] MQTT_CONNECT_FAILED state=-2
+[774127|2026-11-24T17:55:58.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[781117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[781127|2026-11-24T17:56:05.328Z] MQTT_CONNECT_FAILED state=-2
+[781128|2026-11-24T17:56:05.330Z] HEALTH uptime_s=781 heap=242932 min_heap=181416 rssi=0 wifi_drops=1 mqtt_drops=2 max_loop_ms=7000
+[786127|2026-11-24T17:56:10.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[793117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[793127|2026-11-24T17:56:17.329Z] MQTT_CONNECT_FAILED state=-2
+[793129|2026-11-24T17:56:17.330Z] REPORT_TX_FAILED seq=15 event=heartbeat
+[798127|2026-11-24T17:56:22.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[805117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[805127|2026-11-24T17:56:29.329Z] MQTT_CONNECT_FAILED state=-2
+[810127|2026-11-24T17:56:34.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[817117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[817127|2026-11-24T17:56:41.328Z] MQTT_CONNECT_FAILED state=-2
+[822127|2026-11-24T17:56:46.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[829117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[829127|2026-11-24T17:56:53.328Z] MQTT_CONNECT_FAILED state=-2
+[834127|2026-11-24T17:56:58.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[841117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[841127|2026-11-24T17:57:05.328Z] MQTT_CONNECT_FAILED state=-2
+[841128|2026-11-24T17:57:05.329Z] HEALTH uptime_s=841 heap=242932 min_heap=181416 rssi=0 wifi_drops=1 mqtt_drops=2 max_loop_ms=7000
+[846127|2026-11-24T17:57:10.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[853117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[853127|2026-11-24T17:57:17.329Z] MQTT_CONNECT_FAILED state=-2
+[853129|2026-11-24T17:57:17.330Z] REPORT_TX_FAILED seq=16 event=heartbeat
+[855692|2026-11-24T17:57:19.894Z] WIFI_LOST count=2
+[855693|2026-11-24T17:57:19.894Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[865692|2026-11-24T17:57:29.893Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[875692|2026-11-24T17:57:39.893Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[885692|2026-11-24T17:57:49.893Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[895692|2026-11-24T17:57:59.893Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[901127|2026-11-24T17:58:05.328Z] HEALTH uptime_s=901 heap=242972 min_heap=181416 rssi=0 wifi_drops=2 mqtt_drops=2 max_loop_ms=7000
+[905692|2026-11-24T17:58:09.893Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[913128|2026-11-24T17:58:17.329Z] REPORT_TX_FAILED seq=17 event=heartbeat
+[915692|2026-11-24T17:58:19.893Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[925692|2026-11-24T17:58:29.893Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[935692|2026-11-24T17:58:39.893Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[936108|2026-11-24T17:58:40.310Z] WIFI_CONNECTED ip=172.20.10.3
+[936109|2026-11-24T17:58:40.310Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[938407|2026-11-24T17:58:42.607Z] MQTT_CONNECTED
+[938909|2026-11-24T17:58:43.110Z] GET_TX
+[939166|2026-11-24T17:58:43.368Z] GET_RX version=151
+[939167|2026-11-24T17:58:43.368Z] LIGHT_APPLIED zone=kitchen state=on origin=voice
+[939185|2026-11-24T17:58:43.386Z] REPORT_TX seq=18 event=light_changed origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":18,"device_ts":1795543123382},"desired":{"cmd_origin":null}}}
+[940162|2026-11-24T17:58:44.363Z] REPORT_TX seq=19 event=heartbeat origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"voice","seq":19,"device_ts":1795543124358}}}
+[961128|2026-11-24T17:59:05.329Z] HEALTH uptime_s=961 heap=199332 min_heap=181416 rssi=-44 wifi_drops=2 mqtt_drops=2 max_loop_ms=2312
+[1000162|2026-11-24T17:59:44.364Z] REPORT_TX seq=20 event=heartbeat origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"voice","seq":20,"device_ts":1795543184359}}}
+[1021127|2026-11-24T18:00:05.329Z] HEALTH uptime_s=1021 heap=199332 min_heap=181416 rssi=-43 wifi_drops=2 mqtt_drops=2 max_loop_ms=26
+[1060162|2026-11-24T18:00:44.363Z] REPORT_TX seq=21 event=heartbeat origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"voice","seq":21,"device_ts":1795543244359}}}
+[1081127|2026-11-24T18:01:05.329Z] HEALTH uptime_s=1081 heap=199332 min_heap=181416 rssi=-44 wifi_drops=2 mqtt_drops=2 max_loop_ms=26
+[1120161|2026-11-24T18:01:44.362Z] REPORT_TX seq=22 event=heartbeat origin=voice {"state":{"reported":{"light_kitchen":"on","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"voice","seq":22,"device_ts":1795543304358}}}
+[1141127|2026-11-24T18:02:05.329Z] HEALTH uptime_s=1141 heap=199332 min_heap=181416 rssi=-53 wifi_drops=2 mqtt_drops=2 max_loop_ms=25
+[1153625][E][ssl_client.cpp:37] _handle_error(): [data_to_read():361]: (-76) UNKNOWN ERROR CODE (004C)
+[1153636|2026-11-24T18:02:17.838Z] MQTT_LOST state=-3 count=3
+[1153637|2026-11-24T18:02:17.838Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1160117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1160127|2026-11-24T18:02:24.329Z] MQTT_CONNECT_FAILED state=-2
+[1165127|2026-11-24T18:02:29.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1172117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1172127|2026-11-24T18:02:36.329Z] MQTT_CONNECT_FAILED state=-2
+[1177127|2026-11-24T18:02:41.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1184117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1184127|2026-11-24T18:02:48.329Z] MQTT_CONNECT_FAILED state=-2
+[1184129|2026-11-24T18:02:48.330Z] REPORT_TX_FAILED seq=23 event=heartbeat
+[1189127|2026-11-24T18:02:53.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1196117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1196127|2026-11-24T18:03:00.329Z] MQTT_CONNECT_FAILED state=-2
+[1201127|2026-11-24T18:03:05.329Z] HEALTH uptime_s=1201 heap=242932 min_heap=181416 rssi=0 wifi_drops=2 mqtt_drops=3 max_loop_ms=7000
+[1201138|2026-11-24T18:03:05.339Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1208117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1208127|2026-11-24T18:03:12.329Z] MQTT_CONNECT_FAILED state=-2
+[1213127|2026-11-24T18:03:17.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1220117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1220127|2026-11-24T18:03:24.329Z] MQTT_CONNECT_FAILED state=-2
+[1225127|2026-11-24T18:03:29.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1232117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1232127|2026-11-24T18:03:36.329Z] MQTT_CONNECT_FAILED state=-2
+[1237127|2026-11-24T18:03:41.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1244117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1244127|2026-11-24T18:03:48.329Z] MQTT_CONNECT_FAILED state=-2
+[1244129|2026-11-24T18:03:48.330Z] REPORT_TX_FAILED seq=24 event=heartbeat
+[1249127|2026-11-24T18:03:53.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1256117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1256127|2026-11-24T18:04:00.329Z] MQTT_CONNECT_FAILED state=-2
+[1261127|2026-11-24T18:04:05.329Z] HEALTH uptime_s=1261 heap=242932 min_heap=181416 rssi=0 wifi_drops=2 mqtt_drops=3 max_loop_ms=7000
+[1261138|2026-11-24T18:04:05.339Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1268117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1268127|2026-11-24T18:04:12.329Z] MQTT_CONNECT_FAILED state=-2
+[1273127|2026-11-24T18:04:17.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1280117][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1280127|2026-11-24T18:04:24.329Z] MQTT_CONNECT_FAILED state=-2
+[1280128|2026-11-24T18:04:24.329Z] WIFI_LOST count=3
+[1280128|2026-11-24T18:04:24.330Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[1280665|2026-11-24T18:04:24.866Z] WIFI_CONNECTED ip=172.20.10.3
+[1285127|2026-11-24T18:04:29.328Z] MQTT_CONNECTING client_id=smartloft-739264-lights
+[1287321|2026-11-24T18:04:31.522Z] MQTT_CONNECTED
+[1287825|2026-11-24T18:04:32.026Z] GET_TX
+[1288121|2026-11-24T18:04:32.322Z] GET_RX version=157
+[1288121|2026-11-24T18:04:32.323Z] LIGHT_APPLIED zone=kitchen state=off origin=voice
+[1288141|2026-11-24T18:04:32.342Z] REPORT_TX seq=25 event=light_changed origin=voice {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"light_changed","origin":"voice","seq":25,"device_ts":1795543472337},"desired":{"cmd_origin":null}}}
+[1289117|2026-11-24T18:04:33.318Z] REPORT_TX seq=26 event=heartbeat origin=voice {"state":{"reported":{"light_kitchen":"off","light_living":"off","light_dining":"off","light_bathroom":"off","light_bedroom":"off","presence":false,"event":"heartbeat","origin":"voice","seq":26,"device_ts":1795543473313}}}

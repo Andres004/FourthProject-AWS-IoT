@@ -16,8 +16,8 @@ Una frase por situación de la tabla de convivencia:
 | Umbral fuera de rango | `cambia el umbral alto a cien por ciento` | "El umbral tiene que ser un número entero entre 1 y 99 por ciento." | No | — | PASS ([A04](../A04/README.md)) |
 | Ventana en `manual` sin alarma | `abre la ventana` / `cierra la ventana` | "Listo, la ventana está abierta / cerrada." | Sí | Se movió (origen `voice`) | PASS ([A03](../A03/README.md)) |
 | La Nube vuelve a `auto` (C1) mientras el usuario estaba en `manual` | `en qué modo está la ventilación` | "La ventilación está en modo automático." | — | `MODE_APPLIED origin=cloud` | PASS ([A06](../A06/README.md)) |
-| Placa sin reportar > 150 s | ⟨A09⟩ | | | | ⟨⟩ |
+| Placa sin reportar > 150 s | `hay gas en la cocina`, `cambia el umbral alto a dieciocho por ciento`, `enciende la luz de la cocina` | "…Ojo: tu casa no se reporta desde hace 3 minutos…" / "Envié la orden, pero tu casa está desconectada. Se aplicará apenas vuelva a conectarse." | Sí (encolada) | Aplicadas al reconectar, `origin=voice` | PASS ([A09](../A09/README.md)) |
 
 **Prioridad.** La lógica automática tiene prioridad sobre la voz en `auto`; en `manual` la voz mueve la ventana, salvo para cerrarla con gas. La placa repite las mismas reglas aunque la orden llegue por `desired` (casos V08 y V13 de [B02](../B02/README.md)).
 
-**Veredicto: PASS** en las 7 situaciones probadas.
+**Veredicto: PASS** en las 8 situaciones probadas.

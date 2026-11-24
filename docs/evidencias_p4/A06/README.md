@@ -6,7 +6,7 @@
 - Requisitos: RF13 (lógica en la Nube, actúa solo por `desired`), RNF10 (respuesta de la lógica automática en la Nube)
 - Regla: C1, `GAS_EVENTS_LIMIT = 3` alarmas en `GAS_EVENTS_WINDOW_H = 24` h, solo en modo `manual`
 - Estímulo: gas de encendedor sin llama a 2–3 cm del MQ-2, con la ventilación en `manual` (puesta por voz en A04)
-- Archivos: [A06_extracto_log.txt](A06_extracto_log.txt), [A06_analisis.txt](A06_analisis.txt) (sección "C1 / RNF8" de [analyze_log.py](../../../tools/analyze_log.py)), [A06_02](A06_02_modo_automatico_tras_c1.png) (modo consultado por voz después de C1), [log completo](../A08/A08_vent_ESP32.log); ⟨video⟩
+- Archivos: [A06_extracto_log.txt](A06_extracto_log.txt), [A06_analisis.txt](A06_analisis.txt) (sección "C1 / RNF8" de [analyze_log.py](../../../tools/analyze_log.py)), [A06_02](A06_02_modo_automatico_tras_c1.png) (modo consultado por voz después de C1), [log completo](../A08/A08_vent_ESP32.log)
 - Reloj: `millis()` de la placa 1 para todas las medidas
 
 | Alarma | `GAS_ALARM_ON` (hora UTC) | Índice | Modo | Respuesta de la Nube | Ventana |

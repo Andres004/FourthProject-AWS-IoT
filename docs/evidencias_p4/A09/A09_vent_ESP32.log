@@ -1,0 +1,852 @@
+# 2026-11-24T13:50:58.798 logger start on COM7
+# 2026-11-24T13:50:58.799 port open
+[437990|2026-11-24T17:51:00.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[438990|2026-11-24T17:51:01.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[439990|2026-11-24T17:51:02.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[440990|2026-11-24T17:51:03.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[441990|2026-11-24T17:51:04.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[442990|2026-11-24T17:51:05.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[443990|2026-11-24T17:51:06.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[444990|2026-11-24T17:51:07.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[445990|2026-11-24T17:51:08.077Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[446990|2026-11-24T17:51:09.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[447990|2026-11-24T17:51:10.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[448990|2026-11-24T17:51:11.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[449990|2026-11-24T17:51:12.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+����������������������������������������������������������������] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[451990|2026-11-24T17:51:14.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[452990|2026-11-24T17:51:15.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[453990|2026-11-24T17:51:16.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[454990|2026-11-24T17:51:17.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[455990|2026-11-24T17:51:18.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[456956|2026-11-24T17:51:19.042Z] REPORT_TX seq=10 event=heartbeat origin=boot {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"heartbeat","origin":"boot","seq":10,"device_ts":1795542679036}}}
+[456991|2026-11-24T17:51:19.077Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[457990|2026-11-24T17:51:20.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[458990|2026-11-24T17:51:21.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[459990|2026-11-24T17:51:22.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[460990|2026-11-24T17:51:23.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[461990|2026-11-24T17:51:24.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[462991|2026-11-24T17:51:25.077Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[463990|2026-11-24T17:51:26.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[464990|2026-11-24T17:51:27.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[465990|2026-11-24T17:51:28.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[466990|2026-11-24T17:51:29.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[467990|2026-11-24T17:51:30.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[468990|2026-11-24T17:51:31.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[469990|2026-11-24T17:51:32.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[470990|2026-11-24T17:51:33.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[471990|2026-11-24T17:51:34.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[472990|2026-11-24T17:51:35.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[473990|2026-11-24T17:51:36.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[474990|2026-11-24T17:51:37.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[475990|2026-11-24T17:51:38.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[476990|2026-11-24T17:51:39.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[477990|2026-11-24T17:51:40.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[478990|2026-11-24T17:51:41.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[479990|2026-11-24T17:51:42.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[480148|2026-11-24T17:51:42.234Z] HEALTH uptime_s=480 heap=195972 min_heap=180768 rssi=-46 wifi_drops=0 mqtt_drops=0 max_loop_ms=27
+[480990|2026-11-24T17:51:43.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[481990|2026-11-24T17:51:44.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[482990|2026-11-24T17:51:45.076Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[483916][E][ssl_client.cpp:37] _handle_error(): [data_to_read():361]: (-76) UNKNOWN ERROR CODE (004C)
+[483927|2026-11-24T17:51:46.013Z] MQTT_LOST state=-3 count=1
+[483927|2026-11-24T17:51:46.014Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[490938][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[490948|2026-11-24T17:51:53.035Z] MQTT_CONNECT_FAILED state=-2
+[490950|2026-11-24T17:51:53.037Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[491948|2026-11-24T17:51:54.035Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[492948|2026-11-24T17:51:55.035Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[493948|2026-11-24T17:51:56.035Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[494948|2026-11-24T17:51:57.035Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[495948|2026-11-24T17:51:58.034Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+����������������������������������������������������������������] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[502958|2026-11-24T17:52:05.044Z] MQTT_CONNECT_FAILED state=-2
+[502960|2026-11-24T17:52:05.046Z] GAS_SAMPLE pin_mv=268 ao_mv=447 gas_pct=8.4 min_mv=237 max_mv=4443 n=20 warming_up=0 simulated=0
+[502972|2026-11-24T17:52:05.058Z] REPORT_TX_FAILED seq=11 event=gas_changed
+[502974|2026-11-24T17:52:05.060Z] GAS_SAMPLE pin_mv=2664 ao_mv=4440 gas_pct=83.1 min_mv=4440 max_mv=4440 n=1 warming_up=0 simulated=0
+[502985|2026-11-24T17:52:05.071Z] GAS_ALARM_ON gas_pct=83.1 gas_high_pct=15 mode=auto
+[502996|2026-11-24T17:52:05.082Z] ACTUATOR_START window=open origin=edge
+[503006|2026-11-24T17:52:05.093Z] EDGE_ACTION window=open gas_pct=83.1
+[503008|2026-11-24T17:52:05.094Z] REPORT_TX_FAILED seq=12 event=gas_alarm_on
+[503395|2026-11-24T17:52:05.481Z] ACTUATOR_DONE window=open angle=90
+[503973|2026-11-24T17:52:06.059Z] GAS_SAMPLE pin_mv=2360 ao_mv=3933 gas_pct=73.7 min_mv=2030 max_mv=4453 n=20 warming_up=0 simulated=0
+[503985|2026-11-24T17:52:06.071Z] REPORT_TX_FAILED seq=13 event=window_changed
+[504973|2026-11-24T17:52:07.059Z] GAS_SAMPLE pin_mv=421 ao_mv=702 gas_pct=13.1 min_mv=467 max_mv=1547 n=20 warming_up=0 simulated=0
+[504985|2026-11-24T17:52:07.071Z] REPORT_TX_FAILED seq=14 event=gas_changed
+[505973|2026-11-24T17:52:08.059Z] GAS_SAMPLE pin_mv=222 ao_mv=370 gas_pct=6.9 min_mv=302 max_mv=468 n=20 warming_up=0 simulated=0
+[505973|2026-11-24T17:52:08.060Z] GAS_ALARM_OFF gas_pct=6.9 gas_low_pct=8 mode=auto
+[505984|2026-11-24T17:52:08.070Z] ACTUATOR_START window=closed origin=edge
+[505995|2026-11-24T17:52:08.081Z] EDGE_ACTION window=closed gas_pct=6.9
+[505996|2026-11-24T17:52:08.083Z] REPORT_TX_FAILED seq=15 event=gas_alarm_off
+[506384|2026-11-24T17:52:08.470Z] ACTUATOR_DONE window=closed angle=0
+[506973|2026-11-24T17:52:09.059Z] GAS_SAMPLE pin_mv=152 ao_mv=253 gas_pct=4.7 min_mv=237 max_mv=278 n=20 warming_up=0 simulated=0
+[506974|2026-11-24T17:52:09.061Z] REPORT_TX_FAILED seq=16 event=window_changed
+[507958|2026-11-24T17:52:10.044Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[514959][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[514969|2026-11-24T17:52:17.056Z] MQTT_CONNECT_FAILED state=-2
+[514971|2026-11-24T17:52:17.057Z] GAS_SAMPLE pin_mv=254 ao_mv=423 gas_pct=7.9 min_mv=237 max_mv=3992 n=20 warming_up=0 simulated=0
+[515969|2026-11-24T17:52:18.056Z] GAS_SAMPLE pin_mv=1778 ao_mv=2963 gas_pct=55.5 min_mv=2217 max_mv=4238 n=20 warming_up=0 simulated=0
+[515980|2026-11-24T17:52:18.067Z] GAS_ALARM_ON gas_pct=55.5 gas_high_pct=15 mode=auto
+[515981|2026-11-24T17:52:18.067Z] ACTUATOR_START window=open origin=edge
+[515992|2026-11-24T17:52:18.078Z] EDGE_ACTION window=open gas_pct=55.5
+[515993|2026-11-24T17:52:18.080Z] REPORT_TX_FAILED seq=17 event=gas_alarm_on
+[516380|2026-11-24T17:52:18.466Z] ACTUATOR_DONE window=open angle=90
+[516970|2026-11-24T17:52:19.056Z] GAS_SAMPLE pin_mv=2743 ao_mv=4572 gas_pct=85.6 min_mv=4062 max_mv=4642 n=20 warming_up=0 simulated=0
+[516982|2026-11-24T17:52:19.068Z] REPORT_TX_FAILED seq=18 event=window_changed
+[517970|2026-11-24T17:52:20.056Z] GAS_SAMPLE pin_mv=2190 ao_mv=3650 gas_pct=68.4 min_mv=1622 max_mv=4602 n=20 warming_up=0 simulated=0
+[517982|2026-11-24T17:52:20.068Z] REPORT_TX_FAILED seq=19 event=gas_changed
+[518970|2026-11-24T17:52:21.056Z] GAS_SAMPLE pin_mv=691 ao_mv=1152 gas_pct=21.6 min_mv=927 max_mv=1497 n=20 warming_up=0 simulated=0
+[518982|2026-11-24T17:52:21.068Z] REPORT_TX_FAILED seq=20 event=gas_changed
+[519969|2026-11-24T17:52:22.055Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[526970][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[526980|2026-11-24T17:52:29.067Z] MQTT_CONNECT_FAILED state=-2
+[526982|2026-11-24T17:52:29.068Z] GAS_SAMPLE pin_mv=461 ao_mv=768 gas_pct=14.4 min_mv=237 max_mv=912 n=20 warming_up=0 simulated=0
+[526994|2026-11-24T17:52:29.080Z] REPORT_TX_FAILED seq=21 event=gas_changed
+[526996|2026-11-24T17:52:29.082Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=1 warming_up=0 simulated=0
+[527007|2026-11-24T17:52:29.093Z] GAS_ALARM_OFF gas_pct=4.4 gas_low_pct=8 mode=auto
+[527017|2026-11-24T17:52:29.104Z] ACTUATOR_START window=closed origin=edge
+[527018|2026-11-24T17:52:29.104Z] EDGE_ACTION window=closed gas_pct=4.4
+[527030|2026-11-24T17:52:29.116Z] REPORT_TX_FAILED seq=22 event=gas_alarm_off
+[527417|2026-11-24T17:52:29.503Z] ACTUATOR_DONE window=closed angle=0
+[527995|2026-11-24T17:52:30.081Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[527996|2026-11-24T17:52:30.083Z] REPORT_TX_FAILED seq=23 event=window_changed
+[528995|2026-11-24T17:52:31.081Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[529994|2026-11-24T17:52:32.081Z] GAS_SAMPLE pin_mv=1685 ao_mv=2808 gas_pct=52.6 min_mv=237 max_mv=4375 n=20 warming_up=0 simulated=0
+[530005|2026-11-24T17:52:32.092Z] GAS_ALARM_ON gas_pct=52.6 gas_high_pct=15 mode=auto
+[530006|2026-11-24T17:52:32.092Z] ACTUATOR_START window=open origin=edge
+[530016|2026-11-24T17:52:32.103Z] EDGE_ACTION window=open gas_pct=52.6
+[530018|2026-11-24T17:52:32.104Z] REPORT_TX_FAILED seq=24 event=gas_alarm_on
+[530405|2026-11-24T17:52:32.491Z] ACTUATOR_DONE window=open angle=90
+[530995|2026-11-24T17:52:33.081Z] GAS_SAMPLE pin_mv=2675 ao_mv=4458 gas_pct=83.5 min_mv=4140 max_mv=4523 n=20 warming_up=0 simulated=0
+[531007|2026-11-24T17:52:33.093Z] REPORT_TX_FAILED seq=25 event=window_changed
+[531980|2026-11-24T17:52:34.066Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[538981][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[538991|2026-11-24T17:52:41.078Z] MQTT_CONNECT_FAILED state=-2
+[538993|2026-11-24T17:52:41.079Z] GAS_SAMPLE pin_mv=2233 ao_mv=3722 gas_pct=69.7 min_mv=237 max_mv=4515 n=20 warming_up=0 simulated=0
+[539005|2026-11-24T17:52:41.092Z] REPORT_TX_FAILED seq=26 event=gas_changed
+[539992|2026-11-24T17:52:42.078Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[539992|2026-11-24T17:52:42.079Z] GAS_ALARM_OFF gas_pct=4.4 gas_low_pct=8 mode=auto
+[540003|2026-11-24T17:52:42.089Z] ACTUATOR_START window=closed origin=edge
+[540014|2026-11-24T17:52:42.100Z] EDGE_ACTION window=closed gas_pct=4.4
+[540015|2026-11-24T17:52:42.102Z] REPORT_TX_FAILED seq=27 event=gas_alarm_off
+[540147|2026-11-24T17:52:42.234Z] HEALTH uptime_s=540 heap=241328 min_heap=180768 rssi=0 wifi_drops=0 mqtt_drops=1 max_loop_ms=7025
+[540403|2026-11-24T17:52:42.489Z] ACTUATOR_DONE window=closed angle=0
+[540992|2026-11-24T17:52:43.078Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[540993|2026-11-24T17:52:43.080Z] REPORT_TX_FAILED seq=28 event=window_changed
+[541992|2026-11-24T17:52:44.078Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[542991|2026-11-24T17:52:45.078Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[543991|2026-11-24T17:52:46.077Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[550992][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[551002|2026-11-24T17:52:53.089Z] MQTT_CONNECT_FAILED state=-2
+[551004|2026-11-24T17:52:53.090Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=252 n=20 warming_up=0 simulated=0
+[551016|2026-11-24T17:52:53.102Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=1 warming_up=0 simulated=0
+[552014|2026-11-24T17:52:54.101Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[553014|2026-11-24T17:52:55.101Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[554014|2026-11-24T17:52:56.101Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[555014|2026-11-24T17:52:57.101Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[556002|2026-11-24T17:52:58.088Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[563002][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[563012|2026-11-24T17:53:05.098Z] MQTT_CONNECT_FAILED state=-2
+[563014|2026-11-24T17:53:05.100Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[564012|2026-11-24T17:53:06.099Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[565012|2026-11-24T17:53:07.099Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[566012|2026-11-24T17:53:08.099Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+����������������������������������������������������������������] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[568012|2026-11-24T17:53:10.098Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[575012][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[575022|2026-11-24T17:53:17.108Z] MQTT_CONNECT_FAILED state=-2
+[575024|2026-11-24T17:53:17.110Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[575036|2026-11-24T17:53:17.122Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=1 warming_up=0 simulated=0
+[576034|2026-11-24T17:53:18.121Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[577034|2026-11-24T17:53:19.121Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[578034|2026-11-24T17:53:20.121Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[579034|2026-11-24T17:53:21.121Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[580022|2026-11-24T17:53:22.108Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[587022][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[587032|2026-11-24T17:53:29.118Z] MQTT_CONNECT_FAILED state=-2
+[587034|2026-11-24T17:53:29.120Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[588032|2026-11-24T17:53:30.119Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[589032|2026-11-24T17:53:31.119Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[590032|2026-11-24T17:53:32.119Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[591032|2026-11-24T17:53:33.119Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[592032|2026-11-24T17:53:34.118Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[599032][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[599042|2026-11-24T17:53:41.128Z] MQTT_CONNECT_FAILED state=-2
+[599044|2026-11-24T17:53:41.130Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[599056|2026-11-24T17:53:41.142Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=1 warming_up=0 simulated=0
+[600054|2026-11-24T17:53:42.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[600147|2026-11-24T17:53:42.234Z] HEALTH uptime_s=600 heap=241328 min_heap=180768 rssi=0 wifi_drops=0 mqtt_drops=1 max_loop_ms=7023
+[600992|2026-11-24T17:53:43.079Z] REPORT_TX_FAILED seq=29 event=heartbeat
+[601054|2026-11-24T17:53:43.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[602054|2026-11-24T17:53:44.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[603054|2026-11-24T17:53:45.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[603916|2026-11-24T17:53:46.002Z] WIFI_LOST count=1
+[603916|2026-11-24T17:53:46.002Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[604054|2026-11-24T17:53:46.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[605054|2026-11-24T17:53:47.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[606054|2026-11-24T17:53:48.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[607054|2026-11-24T17:53:49.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[608054|2026-11-24T17:53:50.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[609054|2026-11-24T17:53:51.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[610054|2026-11-24T17:53:52.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[611054|2026-11-24T17:53:53.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[612054|2026-11-24T17:53:54.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[613054|2026-11-24T17:53:55.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[613915|2026-11-24T17:53:56.001Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[614054|2026-11-24T17:53:56.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[615054|2026-11-24T17:53:57.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[616054|2026-11-24T17:53:58.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[617054|2026-11-24T17:53:59.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[618054|2026-11-24T17:54:00.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[619054|2026-11-24T17:54:01.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[620054|2026-11-24T17:54:02.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[621054|2026-11-24T17:54:03.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[622054|2026-11-24T17:54:04.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[623054|2026-11-24T17:54:05.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[623915|2026-11-24T17:54:06.001Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[624054|2026-11-24T17:54:06.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[625054|2026-11-24T17:54:07.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[626054|2026-11-24T17:54:08.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[627054|2026-11-24T17:54:09.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[628054|2026-11-24T17:54:10.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[629054|2026-11-24T17:54:11.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[630054|2026-11-24T17:54:12.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[631054|2026-11-24T17:54:13.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[632054|2026-11-24T17:54:14.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[633054|2026-11-24T17:54:15.141Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[633915|2026-11-24T17:54:16.001Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[634050|2026-11-24T17:54:16.137Z] WIFI_CONNECTED ip=172.20.10.2
+[634051|2026-11-24T17:54:16.137Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[637979|2026-11-24T17:54:20.064Z] MQTT_CONNECTED
+[637989|2026-11-24T17:54:20.075Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=21 warming_up=0 simulated=0
+[638481|2026-11-24T17:54:20.567Z] GET_TX
+[638987|2026-11-24T17:54:21.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[639104|2026-11-24T17:54:21.190Z] GET_RX version=150
+[639111|2026-11-24T17:54:21.197Z] REPORT_TX seq=30 event=heartbeat origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"heartbeat","origin":"edge","seq":30,"device_ts":1795542861193},"desired":{"cmd_origin":null}}}
+[639987|2026-11-24T17:54:22.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[640987|2026-11-24T17:54:23.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[641987|2026-11-24T17:54:24.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[642987|2026-11-24T17:54:25.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[643987|2026-11-24T17:54:26.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[644987|2026-11-24T17:54:27.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[645987|2026-11-24T17:54:28.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[646987|2026-11-24T17:54:29.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+����������������������������������������������������������������] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[648987|2026-11-24T17:54:31.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[649987|2026-11-24T17:54:32.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[650987|2026-11-24T17:54:33.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[651987|2026-11-24T17:54:34.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[652987|2026-11-24T17:54:35.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[653987|2026-11-24T17:54:36.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[654987|2026-11-24T17:54:37.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[655987|2026-11-24T17:54:38.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[656987|2026-11-24T17:54:39.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[657987|2026-11-24T17:54:40.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[658987|2026-11-24T17:54:41.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[659987|2026-11-24T17:54:42.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[660148|2026-11-24T17:54:42.234Z] HEALTH uptime_s=660 heap=197504 min_heap=180768 rssi=-35 wifi_drops=1 mqtt_drops=1 max_loop_ms=3937
+[660987|2026-11-24T17:54:43.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[661987|2026-11-24T17:54:44.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[662987|2026-11-24T17:54:45.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[663987|2026-11-24T17:54:46.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[664987|2026-11-24T17:54:47.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[665987|2026-11-24T17:54:48.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[666987|2026-11-24T17:54:49.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[667987|2026-11-24T17:54:50.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[668987|2026-11-24T17:54:51.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[669987|2026-11-24T17:54:52.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[670987|2026-11-24T17:54:53.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[671987|2026-11-24T17:54:54.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[672987|2026-11-24T17:54:55.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[673987|2026-11-24T17:54:56.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[674987|2026-11-24T17:54:57.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[675987|2026-11-24T17:54:58.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[676987|2026-11-24T17:54:59.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[677987|2026-11-24T17:55:00.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[678987|2026-11-24T17:55:01.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[679987|2026-11-24T17:55:02.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[680987|2026-11-24T17:55:03.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[681987|2026-11-24T17:55:04.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[682987|2026-11-24T17:55:05.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[683987|2026-11-24T17:55:06.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[684987|2026-11-24T17:55:07.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[685987|2026-11-24T17:55:08.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[686987|2026-11-24T17:55:09.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[687987|2026-11-24T17:55:10.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[688987|2026-11-24T17:55:11.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[689987|2026-11-24T17:55:12.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[690987|2026-11-24T17:55:13.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[691987|2026-11-24T17:55:14.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[692987|2026-11-24T17:55:15.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[693987|2026-11-24T17:55:16.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[694987|2026-11-24T17:55:17.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[695987|2026-11-24T17:55:18.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[696987|2026-11-24T17:55:19.073Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[697754][E][ssl_client.cpp:37] _handle_error(): [data_to_read():361]: (-76) UNKNOWN ERROR CODE (004C)
+[707765|2026-11-24T17:55:29.852Z] MQTT_LOST state=-3 count=2
+[707766|2026-11-24T17:55:29.852Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[707777][E][ssl_client.cpp:99] start_ssl_client(): connect on fd 48, errno: 118, "Host is unreachable"
+[707787][E][WiFiClientSecure.cpp:144] connect(): start_ssl_client: -1
+[707794|2026-11-24T17:55:29.880Z] MQTT_CONNECT_FAILED state=-2
+[707796|2026-11-24T17:55:29.882Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=16 warming_up=0 simulated=0
+[707808|2026-11-24T17:55:29.894Z] REPORT_TX_FAILED seq=31 event=heartbeat
+[708766|2026-11-24T17:55:30.852Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[709765|2026-11-24T17:55:31.852Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[710765|2026-11-24T17:55:32.852Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[711765|2026-11-24T17:55:33.852Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[712765|2026-11-24T17:55:34.852Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[712794|2026-11-24T17:55:34.880Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[719794][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[719804|2026-11-24T17:55:41.891Z] MQTT_CONNECT_FAILED state=-2
+[719806|2026-11-24T17:55:41.892Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=1 warming_up=0 simulated=0
+[720147|2026-11-24T17:55:42.234Z] HEALTH uptime_s=720 heap=241328 min_heap=180768 rssi=0 wifi_drops=1 mqtt_drops=2 max_loop_ms=10012
+[720804|2026-11-24T17:55:42.891Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[721804|2026-11-24T17:55:43.891Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[722804|2026-11-24T17:55:44.891Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[723804|2026-11-24T17:55:45.891Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[724804|2026-11-24T17:55:46.890Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[731804][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[731814|2026-11-24T17:55:53.900Z] MQTT_CONNECT_FAILED state=-2
+[731815|2026-11-24T17:55:53.901Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[731827|2026-11-24T17:55:53.913Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=1 warming_up=0 simulated=0
+[732825|2026-11-24T17:55:54.912Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[733825|2026-11-24T17:55:55.912Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[734825|2026-11-24T17:55:56.912Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[735825|2026-11-24T17:55:57.912Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[736814|2026-11-24T17:55:58.900Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[743814][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[743824|2026-11-24T17:56:05.910Z] MQTT_CONNECT_FAILED state=-2
+[743826|2026-11-24T17:56:05.912Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[744824|2026-11-24T17:56:06.911Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[745824|2026-11-24T17:56:07.911Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[746824|2026-11-24T17:56:08.911Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[747824|2026-11-24T17:56:09.911Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[748824|2026-11-24T17:56:10.910Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[755824][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[755834|2026-11-24T17:56:17.920Z] MQTT_CONNECT_FAILED state=-2
+[755836|2026-11-24T17:56:17.922Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[755848|2026-11-24T17:56:17.934Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=1 warming_up=0 simulated=0
+[756846|2026-11-24T17:56:18.933Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[757846|2026-11-24T17:56:19.933Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[758846|2026-11-24T17:56:20.933Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[759846|2026-11-24T17:56:21.933Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[760834|2026-11-24T17:56:22.920Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[767834][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[767844|2026-11-24T17:56:29.930Z] MQTT_CONNECT_FAILED state=-2
+[767846|2026-11-24T17:56:29.932Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[767858|2026-11-24T17:56:29.944Z] REPORT_TX_FAILED seq=32 event=heartbeat
+[768845|2026-11-24T17:56:30.931Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[769844|2026-11-24T17:56:31.931Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[770844|2026-11-24T17:56:32.931Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[771844|2026-11-24T17:56:33.931Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[772844|2026-11-24T17:56:34.930Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[779844][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[779854|2026-11-24T17:56:41.941Z] MQTT_CONNECT_FAILED state=-2
+[779856|2026-11-24T17:56:41.942Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[779868|2026-11-24T17:56:41.954Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=1 warming_up=0 simulated=0
+[780147|2026-11-24T17:56:42.234Z] HEALTH uptime_s=780 heap=241328 min_heap=180768 rssi=0 wifi_drops=1 mqtt_drops=2 max_loop_ms=7022
+[780866|2026-11-24T17:56:42.953Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[781866|2026-11-24T17:56:43.953Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[782866|2026-11-24T17:56:44.953Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[783866|2026-11-24T17:56:45.953Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[784854|2026-11-24T17:56:46.940Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[791854][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[791864|2026-11-24T17:56:53.950Z] MQTT_CONNECT_FAILED state=-2
+[791866|2026-11-24T17:56:53.952Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[792864|2026-11-24T17:56:54.951Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[793864|2026-11-24T17:56:55.951Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[794864|2026-11-24T17:56:56.951Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[795864|2026-11-24T17:56:57.951Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[796864|2026-11-24T17:56:58.950Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[803864][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[803874|2026-11-24T17:57:05.960Z] MQTT_CONNECT_FAILED state=-2
+[803876|2026-11-24T17:57:05.962Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[803888|2026-11-24T17:57:05.974Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=1 warming_up=0 simulated=0
+[804886|2026-11-24T17:57:06.973Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[805886|2026-11-24T17:57:07.973Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[806886|2026-11-24T17:57:08.973Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[807886|2026-11-24T17:57:09.973Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[808874|2026-11-24T17:57:10.960Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[815874][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[815884|2026-11-24T17:57:17.970Z] MQTT_CONNECT_FAILED state=-2
+[815886|2026-11-24T17:57:17.972Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[816884|2026-11-24T17:57:18.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[817755|2026-11-24T17:57:19.841Z] WIFI_LOST count=2
+[817755|2026-11-24T17:57:19.841Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[817885|2026-11-24T17:57:19.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[818884|2026-11-24T17:57:20.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[819884|2026-11-24T17:57:21.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[820884|2026-11-24T17:57:22.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[821884|2026-11-24T17:57:23.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[822884|2026-11-24T17:57:24.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[823884|2026-11-24T17:57:25.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[824884|2026-11-24T17:57:26.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[825884|2026-11-24T17:57:27.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[826884|2026-11-24T17:57:28.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[827754|2026-11-24T17:57:29.840Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[827845|2026-11-24T17:57:29.932Z] REPORT_TX_FAILED seq=33 event=heartbeat
+[827885|2026-11-24T17:57:29.972Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[828884|2026-11-24T17:57:30.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[829884|2026-11-24T17:57:31.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[830884|2026-11-24T17:57:32.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[831884|2026-11-24T17:57:33.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[832884|2026-11-24T17:57:34.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[833884|2026-11-24T17:57:35.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[834884|2026-11-24T17:57:36.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[835884|2026-11-24T17:57:37.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[836884|2026-11-24T17:57:38.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[837754|2026-11-24T17:57:39.840Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[837885|2026-11-24T17:57:39.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[838884|2026-11-24T17:57:40.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[839884|2026-11-24T17:57:41.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[840147|2026-11-24T17:57:42.233Z] HEALTH uptime_s=840 heap=241304 min_heap=180768 rssi=0 wifi_drops=2 mqtt_drops=2 max_loop_ms=7022
+[840884|2026-11-24T17:57:42.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[841884|2026-11-24T17:57:43.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[842884|2026-11-24T17:57:44.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[843884|2026-11-24T17:57:45.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[844884|2026-11-24T17:57:46.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[845884|2026-11-24T17:57:47.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[846884|2026-11-24T17:57:48.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[847754|2026-11-24T17:57:49.840Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[847885|2026-11-24T17:57:49.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[848884|2026-11-24T17:57:50.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[849884|2026-11-24T17:57:51.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[850884|2026-11-24T17:57:52.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[851884|2026-11-24T17:57:53.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[852884|2026-11-24T17:57:54.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[853884|2026-11-24T17:57:55.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[854884|2026-11-24T17:57:56.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[855884|2026-11-24T17:57:57.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[856884|2026-11-24T17:57:58.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[857754|2026-11-24T17:57:59.840Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[857885|2026-11-24T17:57:59.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[858884|2026-11-24T17:58:00.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[859884|2026-11-24T17:58:01.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[860884|2026-11-24T17:58:02.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[861884|2026-11-24T17:58:03.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[862884|2026-11-24T17:58:04.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[863884|2026-11-24T17:58:05.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[864884|2026-11-24T17:58:06.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[865884|2026-11-24T17:58:07.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[866884|2026-11-24T17:58:08.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[867754|2026-11-24T17:58:09.840Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[867885|2026-11-24T17:58:09.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[868884|2026-11-24T17:58:10.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[869884|2026-11-24T17:58:11.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[870884|2026-11-24T17:58:12.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[871884|2026-11-24T17:58:13.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[872884|2026-11-24T17:58:14.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[873884|2026-11-24T17:58:15.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[874884|2026-11-24T17:58:16.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[875884|2026-11-24T17:58:17.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[876884|2026-11-24T17:58:18.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[877754|2026-11-24T17:58:19.840Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[877885|2026-11-24T17:58:19.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[878884|2026-11-24T17:58:20.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[879884|2026-11-24T17:58:21.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[880884|2026-11-24T17:58:22.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[881884|2026-11-24T17:58:23.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[882884|2026-11-24T17:58:24.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[883884|2026-11-24T17:58:25.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[884884|2026-11-24T17:58:26.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[885884|2026-11-24T17:58:27.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[886884|2026-11-24T17:58:28.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[887754|2026-11-24T17:58:29.840Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[887845|2026-11-24T17:58:29.932Z] REPORT_TX_FAILED seq=34 event=heartbeat
+[887885|2026-11-24T17:58:29.972Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[888884|2026-11-24T17:58:30.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[889884|2026-11-24T17:58:31.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[890884|2026-11-24T17:58:32.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[891884|2026-11-24T17:58:33.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[892884|2026-11-24T17:58:34.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[893884|2026-11-24T17:58:35.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[894884|2026-11-24T17:58:36.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+����������������������������������������������������������������] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[896884|2026-11-24T17:58:38.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[897754|2026-11-24T17:58:39.840Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[897885|2026-11-24T17:58:39.971Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+����������������������������������������������������������������] WIFI_CONNECTED ip=172.20.10.2
+[898168|2026-11-24T17:58:40.254Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[902074|2026-11-24T17:58:44.159Z] MQTT_CONNECTED
+[902082|2026-11-24T17:58:44.169Z] HEALTH uptime_s=902 heap=190284 min_heap=180768 rssi=-47 wifi_drops=2 mqtt_drops=2 max_loop_ms=3915
+[902095|2026-11-24T17:58:44.182Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=6 warming_up=0 simulated=0
+[902576|2026-11-24T17:58:44.662Z] GET_TX
+[903082|2026-11-24T17:58:45.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[903258|2026-11-24T17:58:45.344Z] GET_RX version=152
+[903265|2026-11-24T17:58:45.351Z] SETTINGS_SAVED mode=auto gas_high_pct=18 gas_low_pct=8
+[903265|2026-11-24T17:58:45.352Z] THRESHOLDS_APPLIED gas_high_pct=18 gas_low_pct=8 origin=voice
+[903283|2026-11-24T17:58:45.369Z] REPORT_TX seq=35 event=thresholds_changed origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":18,"gas_low_pct":8,"event":"thresholds_changed","origin":"voice","seq":35,"device_ts":1795543125365},"desired":{"cmd_origin":null}}}
+[904082|2026-11-24T17:58:46.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=19 warming_up=0 simulated=0
+[904252|2026-11-24T17:58:46.338Z] REPORT_TX seq=36 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":18,"gas_low_pct":8,"event":"heartbeat","origin":"voice","seq":36,"device_ts":1795543126333}}}
+[905082|2026-11-24T17:58:47.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[906082|2026-11-24T17:58:48.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[907082|2026-11-24T17:58:49.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[908082|2026-11-24T17:58:50.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[909082|2026-11-24T17:58:51.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[910082|2026-11-24T17:58:52.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[911082|2026-11-24T17:58:53.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[912082|2026-11-24T17:58:54.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[913082|2026-11-24T17:58:55.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[914082|2026-11-24T17:58:56.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[915082|2026-11-24T17:58:57.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[916082|2026-11-24T17:58:58.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[917082|2026-11-24T17:58:59.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[918082|2026-11-24T17:59:00.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[919082|2026-11-24T17:59:01.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[920082|2026-11-24T17:59:02.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[921082|2026-11-24T17:59:03.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[922082|2026-11-24T17:59:04.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[923082|2026-11-24T17:59:05.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[924082|2026-11-24T17:59:06.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[925082|2026-11-24T17:59:07.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[926082|2026-11-24T17:59:08.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[927082|2026-11-24T17:59:09.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[928082|2026-11-24T17:59:10.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[929082|2026-11-24T17:59:11.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[930082|2026-11-24T17:59:12.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[931082|2026-11-24T17:59:13.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[932082|2026-11-24T17:59:14.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[933082|2026-11-24T17:59:15.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[934082|2026-11-24T17:59:16.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[935082|2026-11-24T17:59:17.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[936082|2026-11-24T17:59:18.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[937082|2026-11-24T17:59:19.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[938082|2026-11-24T17:59:20.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[939082|2026-11-24T17:59:21.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[940082|2026-11-24T17:59:22.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[941082|2026-11-24T17:59:23.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[942082|2026-11-24T17:59:24.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[943082|2026-11-24T17:59:25.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[944082|2026-11-24T17:59:26.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[945082|2026-11-24T17:59:27.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[946082|2026-11-24T17:59:28.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[947082|2026-11-24T17:59:29.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[948082|2026-11-24T17:59:30.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[949082|2026-11-24T17:59:31.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[950082|2026-11-24T17:59:32.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[951082|2026-11-24T17:59:33.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[952082|2026-11-24T17:59:34.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[953082|2026-11-24T17:59:35.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[954082|2026-11-24T17:59:36.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[955082|2026-11-24T17:59:37.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[956082|2026-11-24T17:59:38.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[957082|2026-11-24T17:59:39.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[958082|2026-11-24T17:59:40.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[959082|2026-11-24T17:59:41.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[960082|2026-11-24T17:59:42.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[961082|2026-11-24T17:59:43.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[962082|2026-11-24T17:59:44.168Z] HEALTH uptime_s=962 heap=197668 min_heap=180768 rssi=-45 wifi_drops=2 mqtt_drops=2 max_loop_ms=68
+[962093|2026-11-24T17:59:44.180Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[963082|2026-11-24T17:59:45.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[964082|2026-11-24T17:59:46.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[964252|2026-11-24T17:59:46.338Z] REPORT_TX seq=37 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":18,"gas_low_pct":8,"event":"heartbeat","origin":"voice","seq":37,"device_ts":1795543186333}}}
+[965082|2026-11-24T17:59:47.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[966082|2026-11-24T17:59:48.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[967082|2026-11-24T17:59:49.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[968082|2026-11-24T17:59:50.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[969082|2026-11-24T17:59:51.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[970082|2026-11-24T17:59:52.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[971082|2026-11-24T17:59:53.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[972082|2026-11-24T17:59:54.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[973082|2026-11-24T17:59:55.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[974082|2026-11-24T17:59:56.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[975082|2026-11-24T17:59:57.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[976082|2026-11-24T17:59:58.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[977082|2026-11-24T17:59:59.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[978082|2026-11-24T18:00:00.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[979082|2026-11-24T18:00:01.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[980082|2026-11-24T18:00:02.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[981082|2026-11-24T18:00:03.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[982082|2026-11-24T18:00:04.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[983082|2026-11-24T18:00:05.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[984082|2026-11-24T18:00:06.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[985082|2026-11-24T18:00:07.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[986082|2026-11-24T18:00:08.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[987082|2026-11-24T18:00:09.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[988082|2026-11-24T18:00:10.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[989082|2026-11-24T18:00:11.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[990082|2026-11-24T18:00:12.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[991082|2026-11-24T18:00:13.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[992082|2026-11-24T18:00:14.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[993082|2026-11-24T18:00:15.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[994082|2026-11-24T18:00:16.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[995082|2026-11-24T18:00:17.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[996082|2026-11-24T18:00:18.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[997082|2026-11-24T18:00:19.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[998082|2026-11-24T18:00:20.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[999082|2026-11-24T18:00:21.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1000082|2026-11-24T18:00:22.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1001082|2026-11-24T18:00:23.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1002082|2026-11-24T18:00:24.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1003082|2026-11-24T18:00:25.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1004082|2026-11-24T18:00:26.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1005082|2026-11-24T18:00:27.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1006082|2026-11-24T18:00:28.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1007082|2026-11-24T18:00:29.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1008082|2026-11-24T18:00:30.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1009082|2026-11-24T18:00:31.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1010082|2026-11-24T18:00:32.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1011082|2026-11-24T18:00:33.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1012082|2026-11-24T18:00:34.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1013082|2026-11-24T18:00:35.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1014082|2026-11-24T18:00:36.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1015082|2026-11-24T18:00:37.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1016082|2026-11-24T18:00:38.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1017082|2026-11-24T18:00:39.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1018082|2026-11-24T18:00:40.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1019082|2026-11-24T18:00:41.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1020082|2026-11-24T18:00:42.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1021082|2026-11-24T18:00:43.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1022082|2026-11-24T18:00:44.168Z] HEALTH uptime_s=1022 heap=197844 min_heap=180768 rssi=-46 wifi_drops=2 mqtt_drops=2 max_loop_ms=27
+[1022093|2026-11-24T18:00:44.180Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1023082|2026-11-24T18:00:45.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1024082|2026-11-24T18:00:46.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1024252|2026-11-24T18:00:46.338Z] REPORT_TX seq=38 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":18,"gas_low_pct":8,"event":"heartbeat","origin":"voice","seq":38,"device_ts":1795543246332}}}
+[1025082|2026-11-24T18:00:47.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1026082|2026-11-24T18:00:48.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1027082|2026-11-24T18:00:49.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1028082|2026-11-24T18:00:50.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1029082|2026-11-24T18:00:51.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1030082|2026-11-24T18:00:52.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1031082|2026-11-24T18:00:53.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1032082|2026-11-24T18:00:54.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1033082|2026-11-24T18:00:55.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1034082|2026-11-24T18:00:56.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1035082|2026-11-24T18:00:57.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1036082|2026-11-24T18:00:58.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1037082|2026-11-24T18:00:59.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1038082|2026-11-24T18:01:00.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1039082|2026-11-24T18:01:01.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1040082|2026-11-24T18:01:02.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1041082|2026-11-24T18:01:03.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1042082|2026-11-24T18:01:04.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1043082|2026-11-24T18:01:05.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1044082|2026-11-24T18:01:06.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1045082|2026-11-24T18:01:07.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1046082|2026-11-24T18:01:08.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1047082|2026-11-24T18:01:09.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1048082|2026-11-24T18:01:10.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1049082|2026-11-24T18:01:11.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1050082|2026-11-24T18:01:12.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1051082|2026-11-24T18:01:13.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1052082|2026-11-24T18:01:14.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1053082|2026-11-24T18:01:15.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1054082|2026-11-24T18:01:16.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1055082|2026-11-24T18:01:17.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1056082|2026-11-24T18:01:18.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1057082|2026-11-24T18:01:19.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1058082|2026-11-24T18:01:20.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1059082|2026-11-24T18:01:21.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1060082|2026-11-24T18:01:22.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1061082|2026-11-24T18:01:23.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1062082|2026-11-24T18:01:24.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1063082|2026-11-24T18:01:25.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1064082|2026-11-24T18:01:26.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1065082|2026-11-24T18:01:27.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1066082|2026-11-24T18:01:28.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1067082|2026-11-24T18:01:29.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1068082|2026-11-24T18:01:30.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1069082|2026-11-24T18:01:31.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1070082|2026-11-24T18:01:32.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1071082|2026-11-24T18:01:33.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1072082|2026-11-24T18:01:34.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1073082|2026-11-24T18:01:35.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1074082|2026-11-24T18:01:36.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1075082|2026-11-24T18:01:37.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1076082|2026-11-24T18:01:38.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1077082|2026-11-24T18:01:39.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1078082|2026-11-24T18:01:40.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1079082|2026-11-24T18:01:41.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1080082|2026-11-24T18:01:42.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1081082|2026-11-24T18:01:43.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1082082|2026-11-24T18:01:44.168Z] HEALTH uptime_s=1082 heap=197708 min_heap=180768 rssi=-47 wifi_drops=2 mqtt_drops=2 max_loop_ms=27
+[1082093|2026-11-24T18:01:44.180Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1083082|2026-11-24T18:01:45.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1084082|2026-11-24T18:01:46.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1084251|2026-11-24T18:01:46.338Z] REPORT_TX seq=39 event=heartbeat origin=voice {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":18,"gas_low_pct":8,"event":"heartbeat","origin":"voice","seq":39,"device_ts":1795543306332}}}
+[1085082|2026-11-24T18:01:47.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1086082|2026-11-24T18:01:48.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1087082|2026-11-24T18:01:49.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1088082|2026-11-24T18:01:50.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1089082|2026-11-24T18:01:51.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1090082|2026-11-24T18:01:52.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1091082|2026-11-24T18:01:53.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1092082|2026-11-24T18:01:54.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1093082|2026-11-24T18:01:55.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1094082|2026-11-24T18:01:56.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1095082|2026-11-24T18:01:57.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1096082|2026-11-24T18:01:58.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1097082|2026-11-24T18:01:59.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1098082|2026-11-24T18:02:00.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1099082|2026-11-24T18:02:01.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1100082|2026-11-24T18:02:02.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1101082|2026-11-24T18:02:03.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1102082|2026-11-24T18:02:04.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1103082|2026-11-24T18:02:05.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1104082|2026-11-24T18:02:06.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1105082|2026-11-24T18:02:07.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1106082|2026-11-24T18:02:08.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1107082|2026-11-24T18:02:09.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1108082|2026-11-24T18:02:10.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1109082|2026-11-24T18:02:11.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1110082|2026-11-24T18:02:12.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1111082|2026-11-24T18:02:13.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1112082|2026-11-24T18:02:14.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1113082|2026-11-24T18:02:15.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1114082|2026-11-24T18:02:16.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1115082|2026-11-24T18:02:17.168Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1115688][E][ssl_client.cpp:37] _handle_error(): [data_to_read():361]: (-76) UNKNOWN ERROR CODE (004C)
+[1115700|2026-11-24T18:02:17.786Z] MQTT_LOST state=-3 count=3
+[1115700|2026-11-24T18:02:17.786Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1122711][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1122721|2026-11-24T18:02:24.808Z] MQTT_CONNECT_FAILED state=-2
+[1122723|2026-11-24T18:02:24.810Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=13 warming_up=0 simulated=0
+[1123722|2026-11-24T18:02:25.809Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1124722|2026-11-24T18:02:26.809Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1125722|2026-11-24T18:02:27.809Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1126722|2026-11-24T18:02:28.809Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1127721|2026-11-24T18:02:29.807Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1134721][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1134731|2026-11-24T18:02:36.818Z] MQTT_CONNECT_FAILED state=-2
+[1134733|2026-11-24T18:02:36.819Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1135732|2026-11-24T18:02:37.819Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1136732|2026-11-24T18:02:38.819Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1137732|2026-11-24T18:02:39.819Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1138732|2026-11-24T18:02:40.819Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1139731|2026-11-24T18:02:41.817Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1146731][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1146741|2026-11-24T18:02:48.828Z] MQTT_CONNECT_FAILED state=-2
+[1146742|2026-11-24T18:02:48.829Z] HEALTH uptime_s=1146 heap=241328 min_heap=180768 rssi=0 wifi_drops=2 mqtt_drops=3 max_loop_ms=7034
+[1146754|2026-11-24T18:02:48.841Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1146767|2026-11-24T18:02:48.853Z] REPORT_TX_FAILED seq=40 event=heartbeat
+[1147743|2026-11-24T18:02:49.829Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1148742|2026-11-24T18:02:50.829Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1149742|2026-11-24T18:02:51.829Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1150742|2026-11-24T18:02:52.829Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1151741|2026-11-24T18:02:53.827Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1158742][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1158752|2026-11-24T18:03:00.839Z] MQTT_CONNECT_FAILED state=-2
+[1158754|2026-11-24T18:03:00.841Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1159753|2026-11-24T18:03:01.840Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1160753|2026-11-24T18:03:02.840Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1161753|2026-11-24T18:03:03.840Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1162753|2026-11-24T18:03:04.840Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1163752|2026-11-24T18:03:05.838Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1170752][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1170762|2026-11-24T18:03:12.849Z] MQTT_CONNECT_FAILED state=-2
+[1170764|2026-11-24T18:03:12.850Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1171763|2026-11-24T18:03:13.850Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1172763|2026-11-24T18:03:14.850Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1173763|2026-11-24T18:03:15.850Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1174763|2026-11-24T18:03:16.850Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1175762|2026-11-24T18:03:17.848Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1182762][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1182772|2026-11-24T18:03:24.859Z] MQTT_CONNECT_FAILED state=-2
+[1182774|2026-11-24T18:03:24.860Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1183773|2026-11-24T18:03:25.860Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1184773|2026-11-24T18:03:26.860Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1185773|2026-11-24T18:03:27.860Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1186773|2026-11-24T18:03:28.860Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1187772|2026-11-24T18:03:29.858Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1194772][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1194782|2026-11-24T18:03:36.869Z] MQTT_CONNECT_FAILED state=-2
+[1194784|2026-11-24T18:03:36.870Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1195783|2026-11-24T18:03:37.870Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1196783|2026-11-24T18:03:38.870Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1197783|2026-11-24T18:03:39.870Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1198783|2026-11-24T18:03:40.870Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1199782|2026-11-24T18:03:41.868Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1206782][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1206792|2026-11-24T18:03:48.879Z] MQTT_CONNECT_FAILED state=-2
+[1206793|2026-11-24T18:03:48.880Z] HEALTH uptime_s=1206 heap=241328 min_heap=180768 rssi=0 wifi_drops=2 mqtt_drops=3 max_loop_ms=7012
+[1206805|2026-11-24T18:03:48.892Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1206817|2026-11-24T18:03:48.904Z] REPORT_TX_FAILED seq=41 event=heartbeat
+[1207794|2026-11-24T18:03:49.880Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1208793|2026-11-24T18:03:50.880Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1209793|2026-11-24T18:03:51.880Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1210793|2026-11-24T18:03:52.880Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1211792|2026-11-24T18:03:53.878Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1218793][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1218803|2026-11-24T18:04:00.890Z] MQTT_CONNECT_FAILED state=-2
+[1218805|2026-11-24T18:04:00.892Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1219804|2026-11-24T18:04:01.891Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1220804|2026-11-24T18:04:02.891Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1221804|2026-11-24T18:04:03.891Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1222804|2026-11-24T18:04:04.891Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1223803|2026-11-24T18:04:05.889Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1230803][E][WiFiGeneric.cpp:1583] hostByName(): DNS Failed for a1qshazpyyrzzm-ats.iot.us-east-2.amazonaws.com
+[1230813|2026-11-24T18:04:12.900Z] MQTT_CONNECT_FAILED state=-2
+[1230815|2026-11-24T18:04:12.901Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1231814|2026-11-24T18:04:13.901Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1232814|2026-11-24T18:04:14.901Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1233814|2026-11-24T18:04:15.901Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1234814|2026-11-24T18:04:16.901Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1235689|2026-11-24T18:04:17.775Z] WIFI_LOST count=3
+[1235689|2026-11-24T18:04:17.775Z] WIFI_CONNECTING ssid=iPhone de Dabner
+[1235815|2026-11-24T18:04:17.901Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1236814|2026-11-24T18:04:18.901Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1237061|2026-11-24T18:04:19.148Z] WIFI_CONNECTED ip=172.20.10.2
+[1237062|2026-11-24T18:04:19.148Z] MQTT_CONNECTING client_id=smartloft-739264-vent
+[1242185|2026-11-24T18:04:24.271Z] MQTT_CONNECTED
+[1242195|2026-11-24T18:04:24.281Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=5 warming_up=0 simulated=0
+[1242687|2026-11-24T18:04:24.773Z] GET_TX
+[1243193|2026-11-24T18:04:25.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1244193|2026-11-24T18:04:26.279Z] GAS_SAMPLE pin_mv=934 ao_mv=1557 gas_pct=29.2 min_mv=237 max_mv=3002 n=20 warming_up=0 simulated=0
+[1244204|2026-11-24T18:04:26.291Z] GAS_ALARM_ON gas_pct=29.2 gas_high_pct=18 mode=auto
+[1244205|2026-11-24T18:04:26.291Z] ACTUATOR_START window=open origin=edge
+[1244216|2026-11-24T18:04:26.302Z] EDGE_ACTION window=open gas_pct=29.2
+[1244222|2026-11-24T18:04:26.308Z] REPORT_TX seq=42 event=gas_alarm_on origin=edge {"state":{"reported":{"gas_pct":29.2,"gas_mv":1557,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":true,"mode":"auto","gas_high_pct":18,"gas_low_pct":8,"event":"gas_alarm_on","origin":"edge","seq":42,"device_ts":1795543466302}}}
+[1244516|2026-11-24T18:04:26.602Z] DELTA_RX version=159 {"version":159,"timestamp":1795543466,"state":{"gas_high_pct":15,"cmd_origin":"voice"},"metadata":{"gas_high_pct":{"timestamp":1795543401},"cmd_origin":{"timestamp":1795543401}}}
+[1244534|2026-11-24T18:04:26.620Z] SETTINGS_SAVED mode=auto gas_high_pct=15 gas_low_pct=8
+[1244534|2026-11-24T18:04:26.621Z] THRESHOLDS_APPLIED gas_high_pct=15 gas_low_pct=8 origin=voice
+[1244605|2026-11-24T18:04:26.691Z] ACTUATOR_DONE window=open angle=90
+[1245193|2026-11-24T18:04:27.279Z] GAS_SAMPLE pin_mv=1480 ao_mv=2467 gas_pct=46.2 min_mv=980 max_mv=3270 n=19 warming_up=0 simulated=0
+[1245209|2026-11-24T18:04:27.295Z] REPORT_TX seq=43 event=window_changed origin=edge {"state":{"reported":{"gas_pct":46.2,"gas_mv":2467,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":43,"device_ts":1795543467290},"desired":{"cmd_origin":null}}}
+[1246193|2026-11-24T18:04:28.279Z] GAS_SAMPLE pin_mv=685 ao_mv=1142 gas_pct=21.4 min_mv=702 max_mv=1930 n=20 warming_up=0 simulated=0
+[1246209|2026-11-24T18:04:28.296Z] REPORT_TX seq=44 event=thresholds_changed origin=voice {"state":{"reported":{"gas_pct":21.4,"gas_mv":1142,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"thresholds_changed","origin":"voice","seq":44,"device_ts":1795543468290}}}
+[1247193|2026-11-24T18:04:29.279Z] GAS_SAMPLE pin_mv=1335 ao_mv=2225 gas_pct=41.7 min_mv=1172 max_mv=2988 n=20 warming_up=0 simulated=0
+[1247210|2026-11-24T18:04:29.296Z] REPORT_TX seq=45 event=gas_changed origin=voice {"state":{"reported":{"gas_pct":41.7,"gas_mv":2225,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"voice","seq":45,"device_ts":1795543469290}}}
+[1247688|2026-11-24T18:04:29.774Z] GET_TX
+[1247996|2026-11-24T18:04:30.082Z] GET_RX version=162
+[1248193|2026-11-24T18:04:30.279Z] GAS_SAMPLE pin_mv=392 ao_mv=653 gas_pct=12.2 min_mv=468 max_mv=1065 n=20 warming_up=0 simulated=0
+[1248209|2026-11-24T18:04:30.295Z] REPORT_TX seq=46 event=gas_changed origin=voice {"state":{"reported":{"gas_pct":12.2,"gas_mv":653,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":true,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"voice","seq":46,"device_ts":1795543470290},"desired":{"cmd_origin":null}}}
+[1249193|2026-11-24T18:04:31.279Z] GAS_SAMPLE pin_mv=223 ao_mv=372 gas_pct=7.0 min_mv=308 max_mv=460 n=20 warming_up=0 simulated=0
+[1249204|2026-11-24T18:04:31.290Z] GAS_ALARM_OFF gas_pct=7.0 gas_low_pct=8 mode=auto
+[1249204|2026-11-24T18:04:31.291Z] ACTUATOR_START window=closed origin=edge
+[1249215|2026-11-24T18:04:31.301Z] EDGE_ACTION window=closed gas_pct=7.0
+[1249221|2026-11-24T18:04:31.307Z] REPORT_TX seq=47 event=gas_alarm_off origin=edge {"state":{"reported":{"gas_pct":7,"gas_mv":372,"warming_up":false,"window":"open","servo_angle":90,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_alarm_off","origin":"edge","seq":47,"device_ts":1795543471302}}}
+[1249604|2026-11-24T18:04:31.691Z] ACTUATOR_DONE window=closed angle=0
+[1250193|2026-11-24T18:04:32.279Z] GAS_SAMPLE pin_mv=156 ao_mv=260 gas_pct=4.9 min_mv=237 max_mv=298 n=19 warming_up=0 simulated=0
+[1250211|2026-11-24T18:04:32.297Z] REPORT_TX seq=48 event=window_changed origin=edge {"state":{"reported":{"gas_pct":4.9,"gas_mv":260,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"window_changed","origin":"edge","seq":48,"device_ts":1795543472290}}}
+[1251193|2026-11-24T18:04:33.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=245 n=20 warming_up=0 simulated=0
+[1251209|2026-11-24T18:04:33.295Z] REPORT_TX seq=49 event=gas_changed origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"gas_changed","origin":"edge","seq":49,"device_ts":1795543473290}}}
+[1252193|2026-11-24T18:04:34.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1252209|2026-11-24T18:04:34.295Z] REPORT_TX seq=50 event=heartbeat origin=edge {"state":{"reported":{"gas_pct":4.4,"gas_mv":237,"warming_up":false,"window":"closed","servo_angle":0,"gas_alarm":false,"mode":"auto","gas_high_pct":15,"gas_low_pct":8,"event":"heartbeat","origin":"edge","seq":50,"device_ts":1795543474290}}}
+[1253193|2026-11-24T18:04:35.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1254193|2026-11-24T18:04:36.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1255193|2026-11-24T18:04:37.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1256193|2026-11-24T18:04:38.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1257193|2026-11-24T18:04:39.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1258193|2026-11-24T18:04:40.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1259193|2026-11-24T18:04:41.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1260193|2026-11-24T18:04:42.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1261193|2026-11-24T18:04:43.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1262193|2026-11-24T18:04:44.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1263193|2026-11-24T18:04:45.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1264193|2026-11-24T18:04:46.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1265193|2026-11-24T18:04:47.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1266193|2026-11-24T18:04:48.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1266794|2026-11-24T18:04:48.880Z] HEALTH uptime_s=1266 heap=197696 min_heap=180768 rssi=-45 wifi_drops=3 mqtt_drops=3 max_loop_ms=7012
+[1267193|2026-11-24T18:04:49.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1268193|2026-11-24T18:04:50.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1269193|2026-11-24T18:04:51.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1270193|2026-11-24T18:04:52.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1271193|2026-11-24T18:04:53.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1272193|2026-11-24T18:04:54.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1273193|2026-11-24T18:04:55.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1274193|2026-11-24T18:04:56.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1275193|2026-11-24T18:04:57.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1276193|2026-11-24T18:04:58.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1277193|2026-11-24T18:04:59.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1278193|2026-11-24T18:05:00.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
+[1279193|2026-11-24T18:05:01.279Z] GAS_SAMPLE pin_mv=142 ao_mv=237 gas_pct=4.4 min_mv=237 max_mv=237 n=20 warming_up=0 simulated=0
